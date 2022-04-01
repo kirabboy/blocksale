@@ -1,3 +1,6 @@
+header .container-fluid{
+    max-width: 1400px;
+}
 header .header-top {
     background-color: #F7346F;
     height: 40px;
@@ -9,7 +12,6 @@ header .header-top {
 
 header .header-top .nav {
     height: 100%;
-    max-width: 1400px;
 }
 
 header .header-main {
@@ -19,16 +21,11 @@ header .header-main {
     z-index: 10;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: #fff;
-    visibility: hidden;
-    opacity: 0;
+    visibility: visible;
+    opacity: 1;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
-}
-
-header .header-main.stuck {
-    opacity: 1;
-    visibility: visible;
 }
 
 header .header-main-content {
@@ -49,7 +46,14 @@ header .header-main-content .logo {
 header .header-main-content .logo img {
     max-height: 50px;
 }
-
+header .sik-dropdown ul.dropdown-menu {
+    transform: initial !important;
+    top: 40px !important;
+    padding: 0;
+    border-radius: 1rem;
+    min-width: initial;
+    z-index: 9;
+}
 header .search-container {
     width: 360px;
     display: flex;
@@ -106,15 +110,41 @@ header .sik-dropdown .dropdown-toggle {
 header .sik-dropdown>.dropdown-toggle::after {
     display: none;
 }
+header .sik-dropdown::before {
+    content: "\f3c5";
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 900;
+    color: #F7346F;
+    margin-left: 15px;
+}
+header .sik-dropdown::after {
+    content: "\f107";
+    font-family: "Font Awesome 5 Pro";
+    margin-right: 15px;
+}
+header .sik-dropdown {
+    display: flex;
+}
 
 @media only screen and (max-width: 768px) {
     header .search-container {
         width: 100%;
     }
     header .header-main-content .logo img {
-        max-height: 30px;
+        max-height: 35px;
     }
     header .header-main-content .logo {
+        width: 150px;
+    }
+    header .form-dropdown{
+        flex-grow: 1;
+    }
+}
+@media only screen and (max-width: 443px){
+    header .header-main-content .logo {
         width: initial;
+    }
+    header .header-main-content .logo img {
+        max-width: 100%;
     }
 }

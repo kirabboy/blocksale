@@ -35,7 +35,7 @@
                         <div class="col col-lg-6 col-md-12 noidung">
                             <h3>Ứng dụng tìm kiếm phòng trọ miễn phí cho người đi thuê hàng đầu Việt Nam</h3>
                             <div class="form-dropdown">
-                                <div class="dropdown sik-dropdown" id="sik-select">
+                                <div onclick="dropdownBtn()" class="dropdown sik-dropdown" id="sik-select">
                                     <div class="btn dropdown-toggle" type="button">
                                         HCM
                                     </div>
@@ -77,48 +77,48 @@
                     <h3>Xu hướng tìm kiếm</h3>
                     <div class="row">
                         <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
+                            <div class="card img-fluid">
+                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" >
                                 <div class="card-img-overlay">
                                     <h4 class="card-title">Bình Thạnh</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
+                            <div class="card img-fluid" >
+                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" >
                                 <div class="card-img-overlay">
                                     <h4 class="card-title">Bình Thạnh</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
+                            <div class="card img-fluid" >
+                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" >
                                 <div class="card-img-overlay">
                                     <h4 class="card-title">Bình Thạnh</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
+                            <div class="card img-fluid" >
+                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" >
                                 <div class="card-img-overlay">
                                     <h4 class="card-title">Bình Thạnh</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
+                            <div class="card img-fluid" >
+                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" >
                                 <div class="card-img-overlay">
                                     <h4 class="card-title">Bình Thạnh</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
+                            <div class="card img-fluid" >
+                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" >
                                 <div class="card-img-overlay">
                                     <h4 class="card-title">Bình Thạnh</h4>
                                 </div>
@@ -142,7 +142,7 @@
                                     <!-- Bài 1 -->
                                     <div class="row">
                                         <div class="col col-lg-3 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
+                                            <img src="image/can-ho.jpg" alt="" >
                                         </div>
                                         <div class="col col-lg-9 col-md-8 col-12">
                                             <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
@@ -171,7 +171,7 @@
                                     <!-- Bài 2 -->
                                     <div class="row">
                                         <div class="col col-lg-3 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
+                                            <img src="image/can-ho.jpg" alt="">
                                         </div>
                                         <div class="col col-lg-9 col-md-8 col-12">
                                             <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
@@ -200,7 +200,7 @@
                                     <!-- Bài 3 -->
                                     <div class="row">
                                         <div class="col col-lg-3 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
+                                            <img src="image/can-ho.jpg" alt="" >
                                         </div>
                                         <div class="col col-lg-9 col-md-8 col-12">
                                             <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
@@ -242,7 +242,7 @@
                                     <!-- Bài 1 -->
                                     <div class="row">
                                         <div class="col col-lg-12 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
+                                            <img src="image/can-ho.jpg" alt="" >
                                         </div>
                                         <div class="col col-lg-12 col-md-8 col-12">
                                             <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
@@ -274,7 +274,7 @@
                                     <!-- Bài 2 -->
                                     <div class="row">
                                         <div class="col col-lg-12 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
+                                            <img src="image/can-ho.jpg" alt="" >
                                         </div>
                                         <div class="col col-lg-12 col-md-8 col-12">
                                             <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>

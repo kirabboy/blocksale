@@ -17,7 +17,7 @@
                         <img src="image/logo.png" alt="logo">
                     </div>
                     <div class="form-dropdown">
-                        <div class="dropdown sik-dropdown" id="sik-select">
+                        <div onclick="dropdownBtn()" class="dropdown sik-dropdown" id="sik-select">
                             <div class="btn dropdown-toggle" type="button">
                                 HCM
                             </div>
