@@ -1,4 +1,4 @@
-.detail-home{
+.detail-home {
     margin: 50px 0;
 }
 body {
@@ -11,7 +11,47 @@ body {
 
 @media (min-width: 1200px) {
     .container {
-        max-width: 1440px;a
+        max-width: 1440px;
+    }
+}
+@media (max-width: 1200px) {
+ 
+    .title-detail .name_home {
+        font-size: 25px;
+        color: #333333;
+        letter-spacing: 0;
+        -ms-flex-preferred-size: 800px;
+        flex-basis: 600px;
+    }
+    .room_info .room_owner {
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: column;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -ms-flex-align: center;
+        align-items: center;
+        margin-top: 24px;
+        align-content: center;
+    }
+    .room_info .room_owner .date_post {
+        margin-left: 0px;
+        -ms-flex-item-align: end;
+        align-self: center;
+        margin-bottom: 0px;
+    }
+    .room_info .room_owner .name_owner {
+        display: flex;
+        height: 100%;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        align-items: center;
+        border-right: 0;
+    }
+    .room_info .room_owner .name_owner span {
+        line-height: 1.5
     }
 }
 
@@ -248,42 +288,17 @@ body {
     margin-top: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .detail_item,
     .room_utilities .ultilities .item {
         width: calc(100% / 2);
     }
-    .name_home {
+    .title-detail .name_home {
         font-size: 18px;
         flex-basis: 220px;
     }
-    .room_owner .name_owner {
-        display: flex;
-        height: 100%;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        align-items: center;
-        border-right: 0;
-    }
-    .room_owner {
-        display: flex;
-        -ms-flex-direction: row;
-        flex-direction: column;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-        -ms-flex-align: center;
-        align-items: center;
-        margin-top: 24px;
-        align-content: center;
-    }
-    .room_owner .date_post {
-        margin-left: 0px;
-        -ms-flex-item-align: end;
-        align-self: center;
-        margin-bottom: 0px;
-    }
+   
+   
 }
 
 @media only screen and (max-width: 650px) {

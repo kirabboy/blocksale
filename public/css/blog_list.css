@@ -253,6 +253,16 @@ nav ul li ul li a:hover {
 }
 
 @media (max-width: 600px) {
+    .widget .text-center .pagination li {
+        list-style: none;
+
+        margin: 0 -16px;
+    }
+    .pageNavBtn {
+        padding: 0 8px !important;
+    }
+}
+@media (max-width: 1300px) {
     .box_filter {
         margin-right: 0px;
         padding-left: 0px;
@@ -362,86 +372,14 @@ nav ul li ul li a:hover {
     color: #ffffff;
     margin: 24px 1px 4px 1px;
 }
-
-.phong-moi .widget {
-    border-radius: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    background-color: #fff;
-    padding: 20px;
-    padding-bottom: 10px;
-    margin-top: 32px;
-}
-
-.phong-moi .widget > .text-center {
-    padding: 15px 0;
-}
-
-.phong-moi .widget-title {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.phong-moi .widget-title a {
-    border: 1px solid;
-    border-radius: 20px;
-    padding: 0 10px;
-    padding-top: 5px;
-}
-
-.phong-moi h3 {
-    font-size: 24px !important;
-}
-
-.phong-moi img {
-    border-radius: 10px;
-}
-
-.phong-moi .widget-content .row > .col:last-child h4 {
-    margin-bottom: 20px !important;
-    font-size: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 25px;
-    -webkit-line-clamp: 2;
-    height: 50px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-}
-
-.phong-moi .left div {
-    margin-bottom: 10px;
-}
-
-.phong-moi .widget-content .col > div {
-    display: flex;
-    justify-content: center;
-}
-
-.phong-moi .left {
-    flex-grow: 1;
-    margin-right: 20px;
-}
-
-/* Phòng mới */
-
 .phong-moi .widget-content > .row {
     margin-bottom: 15px;
 }
-
-.phong-moi img {
-    height: 100%;
+.str_add{
+    line-height:1.5;
 }
-
 .phong-moi .left div:last-child {
     margin: 0;
-}
-
-.phong-moi .left i {
-    width: 24px;
-    font-size: 18px;
-    text-align: center;
-    margin-right: 5px;
 }
 
 .phong-moi .amount {
@@ -460,7 +398,112 @@ nav ul li ul li a:hover {
     width: 100%;
     text-align: center;
 }
+.phong-moi img {
+    object-fit: cover;
+    border-radius: 1rem;
+    transition: 0.3s;
+    width: 100%;
+}
+.phong-moi img:hover {
+    -webkit-filter: saturate(1.5);
+    filter: saturate(1.5);
+    /* -webkit-filter: brightness(1.1);
+    filter: brightness(1.1); */
+}
+.phong-moi .widget {
+    border-radius: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background-color: #fff;
+    padding: 20px;
+    padding-bottom: 0;
+    margin-bottom: 15px;
+    margin-top: 32px ;
+}
 
+.phong-moi .widget > .text-center {
+    padding: 15px 0;
+}
+
+.phong-moi .widget-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.phong-moi .widget-title a {
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 0 10px;
+    padding-top: 2px;
+}
+
+.phong-moi h3 {
+    font-size: 24px !important;
+}
+
+.phong-moi img {
+    border-radius: 10px;
+    height: 150px;
+}
+
+.phong-moi .widget-content .row > .col:last-child h4 {
+    margin-bottom: 20px !important;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.phong-moi .left div {
+    margin-bottom: 10px;
+}
+
+.phong-moi .widget-content .col > div {
+    display: flex;
+    justify-content: center;
+}
+
+.phong-moi .left {
+    flex-grow: 1;
+    margin-right: 20px;
+    color: #666;
+}
+
+.phong-moi .fas.fa-shield-check {
+    color: #4678f8;
+}
+
+.phong-moi .left i {
+    width: 24px;
+    font-size: 18px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.phong-moi .widget-content > .row {
+    margin-top: 15px;
+}
+@media only screen and (min-width: 992px) {
+   
+    .phong-moi img {
+        height: 100%;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .phong-moi .widget-content .row > .col:last-child h4 {
+        margin-top: 10px !important;
+    }
+    .phong-moi img {
+        height: 400px;
+    }
+}
+@media only screen and (max-width: 443px) {
+    .phong-moi img {
+        height: 200px;
+    }
+}
 /* Đã xác thực */
 
 /* REPONSIVE một tý */
@@ -468,6 +511,12 @@ nav ul li ul li a:hover {
 @media only screen and (max-width: 768px) {
     .phong-moi .widget-content .row > .col:last-child h4 {
         margin-top: 10px !important;
+    }
+    #main-content {
+        width: 100%;
+    }
+    .pageNavBtn {
+        padding: 0 12px;
     }
 }
 
@@ -519,4 +568,81 @@ nav ul li ul li a:hover {
     margin-left: 30px;
     font-weight: 700;
     font-size: 20px;
+}
+#main-content {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    height: 50px;
+    margin-top: 32px;
+    padding: 0 25px;
+    border-radius: 35px;
+}
+
+#pressPageNav {
+    display: flex;
+    margin: 0 auto;
+
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+
+    background-color: #eee;
+    border-radius: 35px;
+}
+
+.pageNavBtn {
+    /*For IE7-8-9*/
+
+    float: left;
+
+    font-size: 16px;
+    font-weight: 100;
+    display: block;
+    height: 100%;
+    color: #595959;
+    line-height: 50px;
+
+    /* Good trick for vert centering single-line text in a div */
+
+    position: relative;
+    text-align: center;
+    padding: 0 25px;
+}
+
+.firstBtn,
+.lastBtn {
+    align-content: center;
+
+    text-align: center;
+}
+
+/* .firstBtn {
+    margin-left: 20px;
+} */
+
+.middleBtn {
+    align-content: center;
+    text-align: center;
+}
+
+.nextPrevBtn {
+    align-content: center;
+    text-align: center;
+}
+
+.pageNavBtn {
+    cursor: pointer;
+}
+
+.pageNavBtn.nextPrevBtn span:hover,
+.pageNavBtn.firstBtn span:hover,
+.pageNavBtn.lastBtn span:hover {
+    background-color: transparent;
+    color: #4877f8;
+}
+.pageNavBtn.middleBtn:hover {
+    background-color: #4877f8;
+    color: #fff;
+    transition: 400ms ease;
 }

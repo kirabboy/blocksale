@@ -175,13 +175,13 @@
 }
 
 .xu-huong img,
-.tong-hop img {
+.phong-moi img {
     border-radius: 1rem;
     transition: 0.3s;
 }
 
 .xu-huong img:hover,
-.tong-hop img:hover {
+.phong-moi img:hover {
     -webkit-filter: saturate(1.5);
     filter: saturate(1.5);
     /* -webkit-filter: brightness(1.1);
@@ -199,7 +199,7 @@
 
 /* Tổng hợp */
 
-.tong-hop .widget {
+.phong-moi .widget {
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: #fff;
@@ -208,33 +208,33 @@
     margin-bottom: 15px;
 }
 
-.tong-hop .widget>.text-center {
+.phong-moi .widget>.text-center {
     padding: 15px 0;
 }
 
-.tong-hop .widget-title {
+.phong-moi .widget-title {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.tong-hop .widget-title a {
+.phong-moi .widget-title a {
     border: 1px solid;
     border-radius: 20px;
     padding: 0 10px;
     padding-top: 2px;
 }
 
-.tong-hop h3 {
+.phong-moi h3 {
     font-size: 24px !important;
 }
 
-.tong-hop img {
+.phong-moi img {
     border-radius: 10px;
     height: 100%;
 }
 
-.tong-hop .widget-content .row>.col:last-child h4 {
+.phong-moi .widget-content .row>.col:last-child h4 {
     margin-bottom: 20px !important;
     font-size: 20px;
     overflow: hidden;
@@ -244,33 +244,33 @@
     -webkit-box-orient: vertical;
 }
 
-.tong-hop .left div {
+.phong-moi .left div {
     margin-bottom: 10px;
 }
 
-.tong-hop .widget-content .col>div {
+.phong-moi .widget-content .col>div {
     display: flex;
     justify-content: center;
 }
 
-.tong-hop .left {
+.phong-moi .left {
     flex-grow: 1;
     margin-right: 20px;
     color: #666;
 }
 
-.tong-hop .fas.fa-shield-check {
+.phong-moi .fas.fa-shield-check {
     color: #4678f8;
 }
 
-.tong-hop .left i {
+.phong-moi .left i {
     width: 24px;
     font-size: 18px;
     text-align: center;
     margin-right: 5px;
 }
 
-.tong-hop .widget-content>.row {
+.phong-moi .widget-content>.row {
     margin-top: 15px;
 }
 
@@ -376,7 +376,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .tong-hop .widget-content .row>.col:last-child h4 {
+    .phong-moi .widget-content .row>.col:last-child h4 {
         margin-top: 10px !important;
     }
     .footer-1>div>div {
