@@ -18,5 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::resources([
     '/' => HomeController::class,
     '/can-ho' => BlogController::class,
-
 ]);
