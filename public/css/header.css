@@ -79,6 +79,12 @@ header .search-icon i {
     color: #F7346F;
 }
 
+header a {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 header .form-dropdown {
     width: fit-content;
     display: flex;

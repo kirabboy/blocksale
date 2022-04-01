@@ -315,6 +315,15 @@
     color: #F7346F;
 }
 
+.blog-grid-home {
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0px;
+}
+
+.blog-grid-home:last-child {
+    border-bottom: none;
+}
+
 .da-xac-thuc .amount h2 {
     line-height: 24px;
     font-size: 16px;

@@ -8,7 +8,7 @@
 @section('content')
     <main id="homepage">
         <div id="noidungtrang">
-            <section class="banner-header" style="background-image: url({{asset('public/image/banner.png')}})">
+            <section class="banner-header" style="background-image: url({{ asset('public/image/banner.png') }})">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
@@ -19,10 +19,10 @@
                             <!-- Links -->
                             <ul class="nav">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="#">Trang chủ</a>
+                                    <a class="nav-link active" href="{{ route('index') }}">Trang chủ</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Blog</a>
+                                    <a class="nav-link" href="{{ route('can-ho.index') }}">Danh sách căn hộ</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Đăng phòng</a>
@@ -76,54 +76,21 @@
                 <div class="container-fluid">
                     <h3>Xu hướng tìm kiếm</h3>
                     <div class="row">
-                        <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
-                                <div class="card-img-overlay">
-                                    <h4 class="card-title">Bình Thạnh</h4>
+                        @for ($i = 0; $i < 6; $i++)
+                            <div class="col col-6 col-md-4 col-lg-2">
+                                <div class="card img-fluid" style="width:100%">
+                                    <a href="{{ route('can-ho.index') }}">
+                                        <img class="card-img-top" src="{{ asset('public/image/binhthanh.jpeg') }}"
+                                            alt="Card image" style="width:100%">
+                                        <div class="card-img-overlay">
+                                            <h4 class="card-title">Bình Thạnh</h4>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
-                                <div class="card-img-overlay">
-                                    <h4 class="card-title">Bình Thạnh</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
-                                <div class="card-img-overlay">
-                                    <h4 class="card-title">Bình Thạnh</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
-                                <div class="card-img-overlay">
-                                    <h4 class="card-title">Bình Thạnh</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
-                                <div class="card-img-overlay">
-                                    <h4 class="card-title">Bình Thạnh</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-6 col-md-4 col-lg-2">
-                            <div class="card img-fluid" style="width:100%">
-                                <img class="card-img-top" src="image/binhthanh.jpeg" alt="Card image" style="width:100%">
-                                <div class="card-img-overlay">
-                                    <h4 class="card-title">Bình Thạnh</h4>
-                                </div>
-                            </div>
-                        </div>
+                        @endfor
+
+
                     </div>
                 </div>
             </section>
@@ -136,95 +103,52 @@
                             <div class="widget">
                                 <div class="widget-title">
                                     <h3>Phòng mới nhất</h3>
-                                    <a href="#" class="">Xem tất cả</a>
+                                    <a href="{{ route('can-ho.index') }}" class="">Xem tất cả</a>
                                 </div>
                                 <div class="widget-content">
                                     <!-- Bài 1 -->
-                                    <div class="row">
-                                        <div class="col col-lg-3 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
-                                        </div>
-                                        <div class="col col-lg-9 col-md-8 col-12">
-                                            <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
-                                            <div>
-                                                <div class="left">
-                                                    <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho thuê</span>
+                                    @for ($i = 0; $i < 4; $i++)
+                                        <div class="blog-grid-home">
+
+                                            <a href="{{ route('can-ho.show', ['can_ho' => 'chi-tiet']) }}">
+                                                <div class="row">
+                                                    <div class="col col-lg-3 col-md-4 col-12">
+                                                        <img src="{{ asset('public/image/can-ho.jpg') }}" alt=""
+                                                            style="width: 100%;">
                                                     </div>
-                                                    <div>
-                                                        <i class="fal fa-user-friends"></i> <span
-                                                            style="margin-right: 30px;">Nam & Nữ</span>
-                                                        <i class="fal fa-ruler"></i> <span>29m<sup>2</sup></span>
+                                                    <div class="col col-lg-9 col-md-8 col-12">
+                                                        <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
+                                                        <div>
+                                                            <div class="left">
+                                                                <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho
+                                                                        thuê</span>
+                                                                </div>
+                                                                <div>
+                                                                    <i class="fal fa-user-friends"></i> <span
+                                                                        style="margin-right: 30px;">Nam & Nữ</span>
+                                                                    <i class="fal fa-ruler"></i>
+                                                                    <span>29m<sup>2</sup></span>
+                                                                </div>
+                                                                <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần
+                                                                        Văn
+                                                                        Dư,
+                                                                        Phường 13,
+                                                                        Quận Tân Bình, Hồ Chí Minh</span></div>
+                                                            </div>
+                                                            <div class="amount">
+                                                                <h2>5</h2>
+                                                                <p>tr/phòng</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần Văn Dư,
-                                                            Phường 13,
-                                                            Quận Tân Bình, Hồ Chí Minh</span></div>
                                                 </div>
-                                                <div class="amount">
-                                                    <h2>5</h2>
-                                                    <p>tr/phòng</p>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
-                                    </div>
-                                    <hr>
+                                    @endfor
+
 
                                     <!-- Bài 2 -->
-                                    <div class="row">
-                                        <div class="col col-lg-3 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
-                                        </div>
-                                        <div class="col col-lg-9 col-md-8 col-12">
-                                            <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
-                                            <div>
-                                                <div class="left">
-                                                    <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho thuê</span>
-                                                    </div>
-                                                    <div>
-                                                        <i class="fal fa-user-friends"></i> <span
-                                                            style="margin-right: 30px;">Nam & Nữ</span>
-                                                        <i class="fal fa-ruler"></i> <span>29m<sup>2</sup></span>
-                                                    </div>
-                                                    <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần Văn Dư,
-                                                            Phường 13,
-                                                            Quận Tân Bình, Hồ Chí Minh</span></div>
-                                                </div>
-                                                <div class="amount">
-                                                    <h2>5</h2>
-                                                    <p>tr/phòng</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
 
-                                    <!-- Bài 3 -->
-                                    <div class="row">
-                                        <div class="col col-lg-3 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
-                                        </div>
-                                        <div class="col col-lg-9 col-md-8 col-12">
-                                            <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
-                                            <div>
-                                                <div class="left">
-                                                    <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho thuê</span>
-                                                    </div>
-                                                    <div>
-                                                        <i class="fal fa-user-friends"></i> <span
-                                                            style="margin-right: 30px;">Nam & Nữ</span>
-                                                        <i class="fal fa-ruler"></i> <span>29m<sup>2</sup></span>
-                                                    </div>
-                                                    <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần Văn Dư,
-                                                            Phường 13,
-                                                            Quận Tân Bình, Hồ Chí Minh</span></div>
-                                                </div>
-                                                <div class="amount">
-                                                    <h2>5</h2>
-                                                    <p>tr/phòng</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
                                 </div>
                                 <div class="text-center">
                                     <a href="#">Xem tất cả</a>
@@ -240,68 +164,46 @@
                                 </div>
                                 <div class="widget-content">
                                     <!-- Bài 1 -->
-                                    <div class="row">
-                                        <div class="col col-lg-12 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
-                                        </div>
-                                        <div class="col col-lg-12 col-md-8 col-12">
-                                            <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
-                                            <div>
-                                                <div class="left d-xl-none d-lg-none">
-                                                    <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho thuê</span>
+                                    @for ($i = 0; $i < 2; $i++)
+                                        <div class="blog-grid-auth">
+                                            <a href="{{ route('can-ho.show', ['can_ho' => 'chi-tiet']) }}">
+                                                <div class="row">
+                                                    <div class="col col-lg-12 col-md-4 col-12">
+                                                        <img src="{{ asset('public/image/can-ho.jpg') }}" alt=""
+                                                            style="width: 100%;">
                                                     </div>
-                                                    <div>
-                                                        <i class="fal fa-user-friends"></i> <span
-                                                            style="margin-right: 30px;">Nam & Nữ</span>
-                                                        <i class="fal fa-ruler"></i> <span>29m<sup>2</sup></span>
+                                                    <div class="col col-lg-12 col-md-8 col-12">
+                                                        <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
+                                                        <div>
+                                                            <div class="left d-xl-none d-lg-none">
+                                                                <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho
+                                                                        thuê</span>
+                                                                </div>
+                                                                <div>
+                                                                    <i class="fal fa-user-friends"></i> <span
+                                                                        style="margin-right: 30px;">Nam & Nữ</span>
+                                                                    <i class="fal fa-ruler"></i>
+                                                                    <span>29m<sup>2</sup></span>
+                                                                </div>
+                                                                <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần
+                                                                        Văn Dư,
+                                                                        Phường 13,
+                                                                        Quận Tân Bình, Hồ Chí Minh</span></div>
+                                                            </div>
+                                                            <div class="left d-none d-xl-block d-lg-block">
+                                                                <div>Quận Tân Bình</div>
+                                                            </div>
+                                                            <div class="amount">
+                                                                <h2>5</h2>
+                                                                <p>tr/phòng</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần Văn Dư,
-                                                            Phường 13,
-                                                            Quận Tân Bình, Hồ Chí Minh</span></div>
                                                 </div>
-                                                <div class="left d-none d-xl-block d-lg-block">
-                                                    <div>Quận Tân Bình</div>
-                                                </div>
-                                                <div class="amount">
-                                                    <h2>5</h2>
-                                                    <p>tr/phòng</p>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
-                                    </div>
-                                    <hr>
+                                    @endfor
 
-                                    <!-- Bài 2 -->
-                                    <div class="row">
-                                        <div class="col col-lg-12 col-md-4 col-12">
-                                            <img src="image/can-ho.jpg" alt="" style="width: 100%;">
-                                        </div>
-                                        <div class="col col-lg-12 col-md-8 col-12">
-                                            <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
-                                            <div>
-                                                <div class="left d-xl-none d-lg-none">
-                                                    <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho thuê</span>
-                                                    </div>
-                                                    <div>
-                                                        <i class="fal fa-user-friends"></i> <span
-                                                            style="margin-right: 30px;">Nam & Nữ</span>
-                                                        <i class="fal fa-ruler"></i> <span>29m<sup>2</sup></span>
-                                                    </div>
-                                                    <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần Văn Dư,
-                                                            Phường 13,
-                                                            Quận Tân Bình, Hồ Chí Minh</span></div>
-                                                </div>
-                                                <div class="left d-none d-xl-block d-lg-block">
-                                                    <div>Quận Tân Bình</div>
-                                                </div>
-                                                <div class="amount">
-                                                    <h2>5</h2>
-                                                    <p>tr/phòng</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
                                 </div>
                                 <div class="text-center">
                                     <a href="#">Xem tất cả</a>
