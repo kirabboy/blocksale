@@ -54,6 +54,18 @@ header .sik-dropdown ul.dropdown-menu {
     min-width: initial;
     z-index: 9;
 }
+header .sik-dropdown ul.dropdown-menu.active {
+    display: block;
+}
+header .sik-dropdown ul.dropdown-menu li:first-child span {
+    border-radius: 1rem 1rem 0 0;
+}
+header .sik-dropdown ul.dropdown-menu li:last-child span {
+    border-radius: 0 0 1rem 1rem;
+}
+header .sik-dropdown .dropdown-item {
+    cursor: pointer;
+}
 header .search-container {
     width: 360px;
     display: flex;
