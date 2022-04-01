@@ -23,7 +23,7 @@
                                 </div>
                                 <ul class="menu_filter">
                                     <li class='sub-menu'><a href='#message'>Giá<div class='fa fa-caret-down right'></div>
-                                            </a>
+                                        </a>
                                         <ul>
                                             <div id="time-range">
                                                 <div class="d-flex justify-content-between mb-3">
@@ -170,61 +170,43 @@
 
                             </div>
                             <div class="widget-content">
-                                <div class="row">
-                                    <div class="col col-lg-4 col-md-4 col-12">
-                                        <img src="https://bayleaf.s3.amazonaws.com/property-images%2F1598331300474_IMG_20200825_115316.jpg"
-                                            alt="" style="width: 100%;">
-                                    </div>
-                                    <div class="col col-lg-8 col-md-8 col-12">
-                                        <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
-                                        <div>
-                                            <div class="left">
-                                                <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho thuê</span>
+                                @for ($i = 0; $i < 2; $i++)
+                                    <div class="blog-grid-list">
+                                        <a href="{{ route('can-ho.show', ['can_ho' => 'chi-tiet']) }}">
+
+                                            <div class="row">
+                                                <div class="col col-lg-4 col-md-4 col-12">
+                                                    <img src="https://bayleaf.s3.amazonaws.com/property-images%2F1598331300474_IMG_20200825_115316.jpg"
+                                                        alt="" style="width: 100%;">
                                                 </div>
-                                                <div>
-                                                    <i class="fal fa-user-friends"></i> <span
-                                                        style="margin-right: 30px;">Nam & Nữ</span>
-                                                    <i class="fal fa-ruler"></i> <span>29m<sup>2</sup></span>
+                                                <div class="col col-lg-8 col-md-8 col-12">
+                                                    <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
+                                                    <div>
+                                                        <div class="left">
+                                                            <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho
+                                                                    thuê</span>
+                                                            </div>
+                                                            <div>
+                                                                <i class="fal fa-user-friends"></i> <span
+                                                                    style="margin-right: 30px;">Nam & Nữ</span>
+                                                                <i class="fal fa-ruler"></i> <span>29m<sup>2</sup></span>
+                                                            </div>
+                                                            <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần Văn
+                                                                    Dư,
+                                                                    Phường 13,
+                                                                    Quận Tân Bình, Hồ Chí Minh</span></div>
+                                                        </div>
+                                                        <div class="amount">
+                                                            <h2>5</h2>
+                                                            <p>tr/phòng</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần Văn Dư,
-                                                        Phường 13,
-                                                        Quận Tân Bình, Hồ Chí Minh</span></div>
                                             </div>
-                                            <div class="amount">
-                                                <h2>5</h2>
-                                                <p>tr/phòng</p>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col col-lg-4 col-md-4 col-12">
-                                        <img src="https://bayleaf.s3.amazonaws.com/property-images%2F1598331300474_IMG_20200825_115316.jpg"
-                                            alt="" style="width: 100%;">
-                                    </div>
-                                    <div class="col col-lg-8 col-md-8 col-12">
-                                        <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
-                                        <div>
-                                            <div class="left">
-                                                <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho thuê</span>
-                                                </div>
-                                                <div>
-                                                    <i class="fal fa-user-friends"></i> <span
-                                                        style="margin-right: 30px;">Nam & Nữ</span>
-                                                    <i class="fal fa-ruler"></i> <span>29m<sup>2</sup></span>
-                                                </div>
-                                                <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần Văn Dư,
-                                                        Phường 13,
-                                                        Quận Tân Bình, Hồ Chí Minh</span></div>
-                                            </div>
-                                            <div class="amount">
-                                                <h2>5</h2>
-                                                <p>tr/phòng</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endfor
+
                             </div>
                             <div class="text-center mt-4">
                                 <ul class="pagination">

@@ -1,15 +1,19 @@
 body {
     background-color: #f6f5f2;
 }
+
 a:hover {
     text-decoration: none;
 }
+
 .container {
     max-width: 1400px;
 }
+
 nav {
     position: relative;
 }
+
 .detail-home {
     margin: 50px 0;
 }
@@ -36,7 +40,7 @@ nav ul li a {
     transition: 0.2s linear;
 }
 
-.menu_filter > li > a {
+.menu_filter>li>a {
     font-size: 20px;
     color: #333333;
     letter-spacing: 0;
@@ -57,8 +61,7 @@ nav ul li a .fa {
     float: right;
 }
 
-nav ul ul {
-}
+nav ul ul {}
 
 nav ul li ul li a {
     background: #f8f8f8;
@@ -146,7 +149,7 @@ nav ul li ul li a:hover {
     padding-right: 32px;
 }
 
-.menu_filter > li {
+.menu_filter>li {
     padding-bottom: 16px;
     padding-top: 16px;
     border-bottom: #ffffff 1px solid;
@@ -193,7 +196,7 @@ nav ul li ul li a:hover {
     background-color: #eee;
 }
 
-.box_list input:checked ~ .checkbox_list:after {
+.box_list input:checked~.checkbox_list:after {
     display: block;
 }
 
@@ -209,7 +212,7 @@ nav ul li ul li a:hover {
     transform: rotate(45deg);
 }
 
-.box_list input:checked ~ .checkbox_list {
+.box_list input:checked~.checkbox_list {
     background-color: #2196f3;
 }
 
@@ -219,7 +222,7 @@ nav ul li ul li a:hover {
     display: none;
 }
 
-.box_list input:checked ~ .radio_list:after {
+.box_list input:checked~.radio_list:after {
     display: block;
 }
 
@@ -238,7 +241,7 @@ nav ul li ul li a:hover {
     display: none;
 }
 
-.box_list input:checked ~ .radio_list {
+.box_list input:checked~.radio_list {
     background-color: #2196f3;
 }
 
@@ -372,7 +375,7 @@ nav ul li ul li a:hover {
     margin-top: 32px;
 }
 
-.phong-moi .widget > .text-center {
+.phong-moi .widget>.text-center {
     padding: 15px 0;
 }
 
@@ -397,7 +400,7 @@ nav ul li ul li a:hover {
     border-radius: 10px;
 }
 
-.phong-moi .widget-content .row > .col:last-child h4 {
+.phong-moi .widget-content .row>.col:last-child h4 {
     margin-bottom: 20px !important;
     font-size: 20px;
     overflow: hidden;
@@ -413,7 +416,7 @@ nav ul li ul li a:hover {
     margin-bottom: 10px;
 }
 
-.phong-moi .widget-content .col > div {
+.phong-moi .widget-content .col>div {
     display: flex;
     justify-content: center;
 }
@@ -423,9 +426,10 @@ nav ul li ul li a:hover {
     margin-right: 20px;
 }
 
+
 /* Phòng mới */
 
-.phong-moi .widget-content > .row {
+.phong-moi .widget-content>.row {
     margin-bottom: 15px;
 }
 
@@ -452,6 +456,15 @@ nav ul li ul li a:hover {
     color: #f7346f;
 }
 
+.blog-grid-list {
+    padding: 20px 0px;
+    border-bottom: 1px solid #ddd;
+}
+
+.blog-grid-list:last-child {
+    border-bottom: none;
+}
+
 .phong-moi .amount h2 {
     font-size: 48px;
 }
@@ -461,12 +474,14 @@ nav ul li ul li a:hover {
     text-align: center;
 }
 
+
 /* Đã xác thực */
+
 
 /* REPONSIVE một tý */
 
 @media only screen and (max-width: 768px) {
-    .phong-moi .widget-content .row > .col:last-child h4 {
+    .phong-moi .widget-content .row>.col:last-child h4 {
         margin-top: 10px !important;
     }
 }

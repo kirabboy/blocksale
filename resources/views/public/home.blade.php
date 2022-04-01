@@ -151,7 +151,7 @@
 
                                 </div>
                                 <div class="text-center">
-                                    <a href="#">Xem tất cả</a>
+                                    <a href="{{route('can-ho.index')}}">Xem tất cả</a>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                             <div class="widget">
                                 <div class="widget-title">
                                     <h3><i class="fas fa-shield-check"></i> Đã xác thực</h3>
-                                    <a href="#" class="">Xem tất cả</a>
+                                    <a href="{{route('can-ho.index')}}" class="">Xem tất cả</a>
                                 </div>
                                 <div class="widget-content">
                                     <!-- Bài 1 -->
@@ -206,7 +206,7 @@
 
                                 </div>
                                 <div class="text-center">
-                                    <a href="#">Xem tất cả</a>
+                                    <a href="{{route('can-ho.index')}}">Xem tất cả</a>
                                 </div>
                             </div>
                         </div>
