@@ -465,7 +465,7 @@ header .header-main.stuck {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .tong-hop .widget-content .row>.col:last-child h4 {
         margin-top: 10px !important;
     }
