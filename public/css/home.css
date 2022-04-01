@@ -257,7 +257,7 @@ header .header-main.stuck {
     height: 150px;
 }
 
-.tong-hop .widget-content .row>.col:last-child h4 {
+.tong-hop h4 {
     margin-bottom: 20px !important;
     font-size: 20px;
     overflow: hidden;
@@ -265,6 +265,7 @@ header .header-main.stuck {
     -webkit-line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    color: #000;
 }
 
 .tong-hop .left div {
@@ -297,6 +298,11 @@ header .header-main.stuck {
     margin-top: 15px;
 }
 
+.tong-hop .widget-content a{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
 
 /* Phòng mới */
 
@@ -343,7 +349,7 @@ header .header-main.stuck {
     font-size: 16px;
 }
 
-.da-xac-thuc .widget-content .row>.col:last-child h4 {
+.da-xac-thuc h4 {
     margin-top: 10px !important;
     margin-bottom: 5px !important;
 }
@@ -453,7 +459,7 @@ header .header-main.stuck {
     .da-xac-thuc .widget-content hr {
         display: block;
     }
-    .da-xac-thuc .widget-content .row>.col:last-child h4 {
+    .da-xac-thuc h4 {
         margin-top: 0 !important;
         margin-bottom: 20px !important;
     }
@@ -466,7 +472,7 @@ header .header-main.stuck {
 }
 
 @media only screen and (max-width: 767px) {
-    .tong-hop .widget-content .row>.col:last-child h4 {
+    .tong-hop h4 {
         margin-top: 10px !important;
     }
     #homepage .form-dropdown {

@@ -13,9 +13,9 @@
         <div class="container-fluid">
             <div class="header-main-content row">
                 <div class="col">
-                    <div class="logo">
+                    <a href="{{url('/')}}" class="logo">
                         <img src="image/logo.png" alt="logo">
-                    </div>
+                    </a>
                     <div class="form-dropdown">
                         <div onclick="dropdownBtn()" class="dropdown sik-dropdown" id="sik-select">
                             <div class="btn dropdown-toggle" type="button">
@@ -35,8 +35,7 @@
                             </ul>
                         </div>
                         <form action="" class="search-container">
-                            <input id="search-bar" type="text" name=""
-                                placeholder="Tìm kiếm theo địa điểm, quận, tên đường...">
+                            <input id="search-bar" type="text" name="" placeholder="Tìm kiếm theo địa điểm, quận, tên đường...">
                             <button type="" class="search-icon"><i class="fal fa-search"></i></button>
                         </form>
                     </div>
