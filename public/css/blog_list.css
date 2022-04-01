@@ -1,3 +1,6 @@
+body {
+    background-color: #f6f5f2;
+}
 a:hover {
     text-decoration: none;
 }
@@ -7,9 +10,8 @@ a:hover {
 nav {
     position: relative;
 }
-.detail-home{
+.detail-home {
     margin: 50px 0;
-    background-color: #f6f5f2;
 }
 
 nav ul {
