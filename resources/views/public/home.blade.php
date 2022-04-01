@@ -8,7 +8,7 @@
 @section('content')
     <main id="homepage">
         <div id="noidungtrang">
-            <section class="banner-header" style="background-image: url({{asset('public/image/banner.png')}})">
+            <section class="banner-header">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">

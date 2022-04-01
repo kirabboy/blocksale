@@ -9,7 +9,7 @@
             </li>
         </ul>
     </div>
-    <div class="header-main" style="width: 100%;">
+    <div class="header-main">
         <div class="container-fluid">
             <div class="header-main-content row">
                 <div class="col">

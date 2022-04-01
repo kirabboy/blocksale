@@ -13,6 +13,7 @@ header .header-top .nav {
 }
 
 header .header-main {
+    width: 100%;
     position: fixed;
     top: 40px;
     z-index: 10;
@@ -38,9 +39,6 @@ header .header-main-content {
 header .header-main-content>.col {
     display: flex;
 }
-
-
-/* Logo */
 
 header .header-main-content .logo {
     width: 250px;
@@ -86,4 +84,37 @@ header .form-dropdown {
     border-radius: 25px;
     padding: 10px 5px 10px 0;
     background-color: #fff;
+}
+header a.nav-link {
+    color: #fff;
+    padding: 0;
+}
+header .nav>li {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+header .nav>li:last-child {
+    margin-right: 0;
+}
+header .sik-dropdown .dropdown-toggle {
+    height: 100%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+header .sik-dropdown>.dropdown-toggle::after {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    header .search-container {
+        width: 100%;
+    }
+    header .header-main-content .logo img {
+        max-height: 30px;
+    }
+    header .header-main-content .logo {
+        width: initial;
+    }
 }
