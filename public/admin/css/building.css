@@ -1,0 +1,72 @@
+.card-building {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.icon-building {
+    height: 45px;
+    width: 45px;
+}
+
+.card-building-header-info {
+    padding-left: 10px;
+}
+
+.card-building p {
+    margin-bottom: 0;
+}
+
+.card-building-header-info p {
+    font-weight: 600;
+}
+
+.text-muted {
+    color: #b5b5c3;
+}
+
+.building-name i {
+    color: #009c7e;
+}
+
+.building-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-building-progress .progress-bar {
+    font-size: 10px;
+    font-weight: 300;
+    background-image: linear-gradient(90deg, #39aea9, #a2d5ab);
+}
+
+.card-building-progress {
+    padding: 10px 0px;
+}
+
+.icon-card-building-body {
+    height: 40px;
+    width: 40px;
+}
+
+.building-unit-info {
+    padding-left: 10px;
+}
+
+.building-unit-info .unit-number {
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 600;
+    color: #000;
+}
+
+.building-unit-info .unit-label {
+    font-size: 10px;
+    font-weight: 300 !important;
+}
+
+.line-info-building {
+    padding: 10px 0px;
+}

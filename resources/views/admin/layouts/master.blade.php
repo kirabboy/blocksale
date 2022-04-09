@@ -7,8 +7,9 @@
     <title>@yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;0,900;1,400;1,500&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('public/admin/css/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
@@ -18,6 +19,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css"/>
     <link rel="stylesheet" type="text/css" src="https://cdn.datatables.net/select/1.3.4/css/select.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('public/admin/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/admin/css/style.css') }}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     @stack('css')
 </head>
 
@@ -27,7 +31,9 @@
         @include('admin.layouts.header')
         @include('admin.layouts.sidebar')
         @yield('content')
-    
+        <div class="modal-area">
+        
+        </div>
         @include('admin.layouts.footer')
     </div>
     <script src="{{ asset('public/admin/js/jquery/jquery.min.js') }}"></script>

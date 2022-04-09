@@ -4,7 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\Building;
 class BuildingManagerController extends Controller
 {
     /**
@@ -14,8 +14,8 @@ class BuildingManagerController extends Controller
      */
     public function index()
     {
-        //
-        return view('admin.manager_building.index');
+        $buildings = Building::latest()->get();
+        return view('admin.manager_building.index', compact('buildings'));
 
     }
 
@@ -27,6 +27,7 @@ class BuildingManagerController extends Controller
     public function create()
     {
         //
+        return view('admin.manager_building.modal.create_building')->render();
     }
 
     /**
@@ -37,7 +38,18 @@ class BuildingManagerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $building = Building::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'number_floor' => $request->number_floor,
+            'owner' => $request->owner,
+            'owner_phone' => $request->owner_phone,
+            'owner_email' => $request->owner_email,
+            'address' => $request->address,
+            'note' => $request->note,
+            'introduce' => $request->introduce,
+        ]);
+        return view('admin.manager_building.card_building', ['building' => $building]);
     }
 
     /**

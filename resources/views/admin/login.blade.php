@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-12 carousel-login ">
+                <div class="col-md-6 col-12 d-md-flex d-none carousel-login ">
                     <div class="carousel-content">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
