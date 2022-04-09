@@ -5,6 +5,7 @@ use App\Admin\Controllers\AuthController;
 use App\Admin\Controllers\BuildingManagerController;
 use App\Admin\Controllers\ContractController;
 use App\Admin\Controllers\CustomerController;
+use App\Admin\Controllers\AccountController;
 use App\Admin\Controllers\WorkBoardController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::post('dang-nhap', [AuthController::class, 'postLogin'])->name('admin.post
 Route::group(['middleware' => ['admin']], function () {
     Route::resources([
         '/' => AdminHomeController::class,
+        '/quan-ly-admin' => AccountController::class,
         '/quan-tri-co-so' => BuildingManagerController::class,
         '/ban-lam-viec' => WorkBoardController::class,
         '/ho-so-khach-hang' => CustomerController::class,

@@ -33,4 +33,8 @@ class Admin extends Authenticatable
 		'username',
 		'password'
 	];
+
+	public function admin_info(){
+        return $this->hasOne(AdminInfo::class, 'admin_id', 'id');
+    }
 }

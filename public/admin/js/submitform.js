@@ -20,6 +20,6 @@ $('#main-form').submit(function(e) {
         .done(function(response) {
             console.log(response);
             $('#modal-form').modal('hide');
-            $('#after-submit').append(response);
+            $('#after-submit').prepend(response);
         });
 });
