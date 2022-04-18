@@ -115,7 +115,7 @@ class BuildingManagerController extends Controller
                 'booked' => $item->room->where('status', 1)->count(),
                 'empty' => $item->room->whereIn('status', 0)->count(),
                 'unactive' => $item->room->where('status', 3)->count(),
-                'ratio' => $hired/$total * 100
+                'ratio' => $total ?? $hired/$total * 100
             ]);
         });
         $building = collect($building->only('id', 'code', 'name', 'floor'))->merge([
@@ -124,7 +124,7 @@ class BuildingManagerController extends Controller
             'booked' => $marco->sum('booked'),
             'empty' => $marco->sum('empty'),
             'unactive' => $marco->sum('unactive'),
-            'ratio' => $marco->sum('hired') / $marco->sum('total') * 100,
+            'ratio' => $marco->sum('total') ?? $marco->sum('hired') / $marco->sum('total') * 100,
             'floor' => $marco
         ]);
         // dd($building);

@@ -15,7 +15,7 @@
             </a>
         </h3>
         <div class="page-header-tool">
-            <span class="mr-3 d-flex align-items-center font-weight-bold">Tỷ lệ lấp đầy ({{ $building['ratio'] }}%)</span>
+            <span class="mr-3 d-flex align-items-center font-weight-bold">Tỷ lệ lấp đầy ({{ round($building['ratio'], 2) }}%)</span>
             <span class="mr-3 d-flex align-items-center font-weight-bold"><i
                     class="fas fa-circle text-danger mr-2"></i>Trống ({{ $building['empty'] }})</span>
             <span class="mr-3 d-flex align-items-center font-weight-bold"><i
@@ -47,7 +47,7 @@
             </div>
             <div class="room d-flex justify-content-start align-items-center mt-2">
                 @foreach($item['room'] as $item)
-                <div class="item {{ bgStatus($item['status']) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $item['name'] }}"></div>
+                <div class="item {{ bgStatus($item['status']) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị thuê: {{ $item['name'] }}"></div>
                 @endforeach
             </div>
 
