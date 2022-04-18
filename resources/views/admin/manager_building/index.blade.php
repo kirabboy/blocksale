@@ -1,7 +1,6 @@
 @extends('admin.layouts.master')
-@section('title')
-    Quản trị cơ sở
-@endsection
+@section('title', 'Quản trị cơ sở')
+    
 @push('css')
     <link rel="stylesheet" href="{{ asset('public/admin/css/building.css') }}">
 @endpush
@@ -11,7 +10,7 @@
         <div class="page-header d-flex justify-content-between align-items-center">
             <h3 class="page-title"><i class="fas fa-laptop"></i>Quản trị cơ sở</h3>
             <div class="page-header-tool">
-                <button class="btn btn-cyan" id="btn-create-building" data-url="{{ route('quan-tri-co-so.create') }}">
+                <button class="btn btn-cyan" id="btn-create-building" data-url="{{ route('admin.building.create') }}">
                     <i class="fas fa-plus-circle"></i>
                     Thêm tòa nhà
                 </button>
@@ -26,6 +25,6 @@
   
 @endsection
 @push('script')
-    <script src="{{ asset('public/admin/js/index.js') }}"></script>
+    <!-- <script src="{{ asset('public/admin/js/home.js') }}"></script> -->
     <script src="{{ asset('public/admin/js/building.js') }}"></script>
 @endpush

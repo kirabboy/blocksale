@@ -9,7 +9,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="main-form" action="{{ route('quan-tri-co-so.store') }}" method="post">
+            <form id="main-form" action="{{ route('admin.building.store') }}" method="post">
                 <div class="modal-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -76,7 +76,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Ghi chú</label>
-                                        <textarea name="note" id="" width="100%" rows="10"></textarea>
+                                        <textarea class="form-control" name="note"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                         <div class="tab-pane fade" id="extend" role="tabpanel">
                             <div class="form-group">
                                 <label for="">Giới thiệu</label>
-                                <textarea name="introduce" id="" cols="30" rows="10"></textarea>
+                                <textarea name="introduce"></textarea>
                             </div>
                         </div>
                     </div>

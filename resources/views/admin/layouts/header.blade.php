@@ -1,24 +1,24 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
-    <ul class="navbar-nav">
+    <ul class="navbar-nav nav-check-current">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <div class="pr-2"></div>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="./index.html" class="nav-link btn btn-xam active">
+            <a href="{{ route('dashboard.index') }}" class="nav-link btn btn-xam">
                 <i class="nav-icon fas fa-tachometer-alt pr-1"></i>
                 Bảng quản trị</a>
         </li>
         <div class="pr-2"></div>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="./quantricoso.html" class="nav-link">
+            <a href="{{ route('admin.building.index') }}" class="nav-link btn btn-xam">
                 <i class="nav-icon fas fa-file pr-1"></i>
                 Quản trị cơ sở</a>
         </li>
         <div class="pr-2"></div>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="./banlamviec.html" class="nav-link">
+            <a href="{{ route('ban-lam-viec.index') }}" class="nav-link btn btn-xam">
                 <i class="nav-icon fas fa-edit pr-1"></i> Bàn làm việc</a>
         </li>
     </ul>
@@ -34,14 +34,14 @@
 
         <li class="nav-item dropdown" id="dropdown_user">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                Chào, <strong class="text-uppercase">Tom Riddler</strong>
-                <img src="{{ asset('public/admin/image/logo.png')}}" alt="User Avatar" class="img-size-25 img-circle">
+                Chào, <strong class="text-uppercase">{{ auth()->guard('admin')->user()->admin_info->fullname }}</strong>
+                <img src="{{ asset('public/admin/image/profile.svg')}}" alt="User Avatar" class="img-size-25 img-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-user dropdown-menu-right">
                 <a href="#" class="dropdown-item sidebar-green user_hover">
                     <!-- Message Start -->
                     <div class="media pt-2 pb-2">
-                        <img src="./image/logo.png" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <img src="{{ asset('public/admin/image/logo.png')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h1 class="dropdown-item-title text-white" style="font-size: 24px;">
                                 Tom Riddler

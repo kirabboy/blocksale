@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Floor extends Model
 {
-	protected $table = 'floor';
+	protected $table = 'floors';
 	public $incrementing = false;
 
 	protected $casts = [
@@ -31,7 +31,12 @@ class Floor extends Model
 
 	protected $fillable = [
 		'id',
+		'building_id',
 		'code',
 		'name'
 	];
+
+	public function room(){
+		return $this->hasMany(Room::class, 'floor_id');
+	}
 }

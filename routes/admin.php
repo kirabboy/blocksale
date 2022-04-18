@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\AdminHomeController;
 use App\Admin\Controllers\AuthController;
 use App\Admin\Controllers\BuildingManagerController;
@@ -7,7 +8,8 @@ use App\Admin\Controllers\ContractController;
 use App\Admin\Controllers\CustomerController;
 use App\Admin\Controllers\AccountController;
 use App\Admin\Controllers\WorkBoardController;
-use Illuminate\Support\Facades\Route;
+use App\Admin\Controllers\AdminBuildingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +27,17 @@ Route::post('dang-nhap', [AuthController::class, 'postLogin'])->name('admin.post
 
 Route::group(['middleware' => ['admin']], function () {
     Route::resources([
-        '/' => AdminHomeController::class,
+        '/dashboard' => AdminHomeController::class,
         '/quan-ly-admin' => AccountController::class,
-        '/quan-tri-co-so' => BuildingManagerController::class,
         '/ban-lam-viec' => WorkBoardController::class,
         '/ho-so-khach-hang' => CustomerController::class,
-        '/hop-dong' => ContractController::class,
-
+        '/hop-dong' => ContractController::class
     ]);
+
+    Route::prefix('co-so')->group(function(){
+        Route::get('/', [BuildingManagerController::class, 'index'])->name('admin.building.index');
+        Route::get('show/{building:id}', [BuildingManagerController::class, 'show'])->name('admin.building.show');
+        Route::get('create', [BuildingManagerController::class, 'create'])->name('admin.building.create');
+        Route::post('store', [BuildingManagerController::class, 'store'])->name('admin.building.store');
+    });
 });

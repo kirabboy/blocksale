@@ -1,12 +1,10 @@
 $('#btn-create-building').click(function() {
     $.ajax({
             url: $(this).data('url'),
-            type: 'GET',
-            data: {},
+            type: 'GET'
         })
         .fail(function(data) {
             console.log(data);
-
         })
         .done(function(response) {
             console.log(response);

@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Building;
+use App\Models\Admin;
 class BuildingManagerController extends Controller
 {
     /**
@@ -14,7 +15,32 @@ class BuildingManagerController extends Controller
      */
     public function index()
     {
-        $buildings = Building::latest()->get();
+        $buildings = Building::select('id', 'name', 'number_floor', 'address', 'owner')
+        ->with('room:building_id,purpose,status')->latest()->get();
+        // dd($buildings);
+        //marco dữ liệu
+        $buildings = $buildings->map(function($item){
+            //nhóm theo trạng thái
+            $room = $item->room->countBy('status');
+            //đếm phòng đã thuê
+            $hired_room = $room->has('2') ? $room->get('2') : 0;
+            //Tổng phòng đã thuê
+            $total_room = $room->sum();
+            //Giá trung bình
+            $avg_room = $item->room->avg('purpose') ?? 0;
+            
+            //trả dữ liệu
+            return (object) collect($item)->merge([
+                'total_room' => $total_room, 
+                'avg_room' => $avg_room,
+                'room' => [
+                    'hired' => $hired_room, 
+                    'empty' => $total_room - $hired_room, 
+                    'ratio' => $total_room != 0 ? $hired_room / $total_room * 100 : 0,
+                ]
+            ]);
+        });
+        // dd($buildings[0]['name']);
         return view('admin.manager_building.index', compact('buildings'));
 
     }
@@ -49,6 +75,16 @@ class BuildingManagerController extends Controller
             'note' => $request->note,
             'introduce' => $request->introduce,
         ]);
+        $building = collect($building)->merge([
+            'total_room' => 0,
+            'avg_room' => 0,
+            'room' => [
+                'hired' => 0,
+                'empty' => 0,
+                'ratio' => 0,
+            ]
+        ]);
+        // dd($building);
         return view('admin.manager_building.card_building', ['building' => $building]);
     }
 
@@ -58,9 +94,41 @@ class BuildingManagerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Building $building)
     {
         //
+        $building = $building->load(['floor' => function($query){
+            $query->select('id', 'name', 'building_id');
+            $query->with('room:id,name,code,floor_id,building_id,status');
+        }]);
+        // dd($building);
+        $marco = $building->floor->map(function($item) {
+
+            $total = $item->room->count();
+
+            $hired = $item->room->where('status', 2)->count();
+
+
+            return (object) collect($item)->merge([
+                'total' => $total,
+                'hired' => $hired,
+                'booked' => $item->room->where('status', 1)->count(),
+                'empty' => $item->room->whereIn('status', 0)->count(),
+                'unactive' => $item->room->where('status', 3)->count(),
+                'ratio' => $hired/$total * 100
+            ]);
+        });
+        $building = collect($building->only('id', 'code', 'name', 'floor'))->merge([
+            'total' => $marco->sum('total'),
+            'hired' => $marco->sum('hired'),
+            'booked' => $marco->sum('booked'),
+            'empty' => $marco->sum('empty'),
+            'unactive' => $marco->sum('unactive'),
+            'ratio' => $marco->sum('hired') / $marco->sum('total') * 100,
+            'floor' => $marco
+        ]);
+        // dd($building);
+        return view('admin.manager_building.show', compact('building'));
     }
 
     /**

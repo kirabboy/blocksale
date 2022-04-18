@@ -27,12 +27,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Room extends Model
 {
-	protected $table = 'room';
+	protected $table = 'rooms';
 	public $incrementing = false;
 
 	protected $casts = [
 		'id' => 'int',
-		'id_floor' => 'int',
+		'floor_id' => 'int',
 		'type' => 'int',
 		'purpose' => 'int',
 		'acreage' => 'int'
@@ -42,10 +42,11 @@ class Room extends Model
 		'id',
 		'code',
 		'name',
-		'id_floor',
+		'floor_id',
 		'type',
 		'purpose',
 		'acreage',
-		'note'
+		'note',
+		'status'
 	];
 }

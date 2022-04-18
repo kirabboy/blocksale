@@ -45,4 +45,11 @@ class Building extends Model
 		'note',
 		'introduce'
 	];
+
+	public function floor(){
+		return $this->hasMany(Floor::class, 'building_id');
+	}
+	public function room(){
+		return $this->hasMany(Room::class, 'building_id');
+	}
 }

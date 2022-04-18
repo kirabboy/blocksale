@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('public/admin/css/style.css') }}">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="url-home" content="{{ url('/quan-tri') }}" />
     @stack('css')
 </head>
 
@@ -53,7 +54,9 @@
     <script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
     <script src="{{ asset('public/admin/toastr/toastr.min.js') }}"></script>
     @if ((session('success')) || (session('error')))
-    @include('admin.layouts.include.toastr');
-@endif
+        @include('admin.layouts.include.toastr');
+    @endif
+    <script src="{{ asset('public/admin/js/all.js') }}"></script>
+
     @stack('script')
 </body>
