@@ -9,6 +9,7 @@ use App\Admin\Controllers\CustomerController;
 use App\Admin\Controllers\AccountController;
 use App\Admin\Controllers\WorkBoardController;
 use App\Admin\Controllers\AdminBuildingController;
+use App\Admin\Controllers\FloorManagerController;
 
 
 /*
@@ -38,6 +39,15 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/', [BuildingManagerController::class, 'index'])->name('admin.building.index');
         Route::get('show/{building:id}', [BuildingManagerController::class, 'show'])->name('admin.building.show');
         Route::get('create', [BuildingManagerController::class, 'create'])->name('admin.building.create');
+        Route::get('edit/{building:id}', [BuildingManagerController::class, 'edit'])->name('admin.building.edit');
         Route::post('store', [BuildingManagerController::class, 'store'])->name('admin.building.store');
+        Route::put('update', [BuildingManagerController::class, 'update'])->name('admin.building.update');
+        Route::delete('delete/{building:id}', [BuildingManagerController::class, 'delete'])->name('admin.building.delete');
+        Route::prefix('tang')->group(function(){
+            Route::get('edit/{floor:id}', [FloorManagerController::class, 'edit'])->name('admin.floor.edit');
+            Route::put('update', [FloorManagerController::class, 'update'])->name('admin.floor.update');
+            Route::delete('delete/{floor:id}', [FloorManagerController::class, 'delete'])->name('admin.floor.delete');
+        });
+
     });
 });
