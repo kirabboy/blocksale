@@ -4,37 +4,19 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Room;
 use App\Models\Building;
-use App\Models\Floor;
-class WorkBoardController extends Controller
+
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         //
-        if($request->has('building')){
-            $building = Building::whereId($request->building)->with('floor')->first();
-        }else{
-            $building = Building::with('floor')->first();
-        }
-        $buildings = Building::latest()->get();
-        $building->count = $building->room->countBy('status');
-        $building->ratio = $building->count->sum() != 0 ? $building->count['2'] / $building->count->sum() *100 : 0;
-        $building->floor = $building->floor->map(function($item) {
-            $total = $item->room->count();
-            $hired = $item->room->where('status', 2)->count();
-            return (object) collect($item)->merge([
-                'total' => $total,
-                'hired' => $hired,
-                'ratio' => $total != 0 ? $hired/$total * 100 : 0,
-                'room' => $item->room()->oldest()->get(),
-            ]);
-        });
-        return view('admin.workboard.index', compact('building', 'buildings'));
     }
 
     /**
@@ -42,9 +24,13 @@ class WorkBoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $building = Building::whereId($request->building_id)->first();
+        $floor_id = $request->floor_id;
+        $floors = $building->floor()->get();
+        return view('admin.room.modal.create_room', compact('building', 'floors', 'floor_id'))->render();
     }
 
     /**
@@ -56,6 +42,18 @@ class WorkBoardController extends Controller
     public function store(Request $request)
     {
         //
+        $room = Room::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'building_id' => $request->building_id,
+            'floor_id' => $request->floor_id,
+            'type' => $request->type,
+            'purpose' => $request->purpose,
+            'acreage' => $request->acreage,
+            'price' => $request->price,
+            'note' => $request->note,
+        ]);
+        return view('admin.room.include.room_unit', compact('room'));
     }
 
     /**
@@ -64,12 +62,9 @@ class WorkBoardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Request $request)
+    public function show($id)
     {
         //
-        $building = Building::whereId($id)->with('floor')->first();
-        $status = $request->status;
-        return view('admin.workboard.include.building_detail', compact('building','status'));
     }
 
     /**

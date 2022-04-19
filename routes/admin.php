@@ -9,7 +9,7 @@ use App\Admin\Controllers\CustomerController;
 use App\Admin\Controllers\AccountController;
 use App\Admin\Controllers\WorkBoardController;
 use App\Admin\Controllers\AdminBuildingController;
-
+use App\Admin\Controllers\RoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,8 @@ Route::group(['middleware' => ['admin']], function () {
         '/quan-ly-admin' => AccountController::class,
         '/ban-lam-viec' => WorkBoardController::class,
         '/ho-so-khach-hang' => CustomerController::class,
-        '/hop-dong' => ContractController::class
+        '/hop-dong' => ContractController::class,
+        '/phong' =>RoomController::class,
     ]);
 
     Route::prefix('co-so')->group(function(){

@@ -41,12 +41,20 @@ class Room extends Model
 	protected $fillable = [
 		'id',
 		'code',
+		'building_id',
 		'name',
 		'floor_id',
 		'type',
 		'purpose',
 		'acreage',
+		'price',
 		'note',
 		'status'
 	];
+
+	
+	public function contract()
+	{
+		return $this->hasMany(Contract::class,'id_room', 'id');
+	}
 }

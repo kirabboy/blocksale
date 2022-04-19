@@ -27,7 +27,7 @@ class BuildingManagerController extends Controller
             //Tổng phòng đã thuê
             $total_room = $room->sum();
             //Giá trung bình
-            $avg_room = $item->room->avg('purpose') ?? 0;
+            $avg_room = $item->room->avg('price') ?? 0;
             
             //trả dữ liệu
             return (object) collect($item)->merge([
