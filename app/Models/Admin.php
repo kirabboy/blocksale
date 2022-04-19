@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class Admin
@@ -23,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Admin extends Authenticatable
 {
+	use HasRoles;
 	protected $table = 'admins';
 
 	protected $hidden = [
@@ -33,7 +35,7 @@ class Admin extends Authenticatable
 		'username',
 		'password'
 	];
-
+	
 	public function admin_info(){
         return $this->hasOne(AdminInfo::class, 'admin_id', 'id');
     }

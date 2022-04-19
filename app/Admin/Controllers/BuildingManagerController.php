@@ -158,8 +158,24 @@ class BuildingManagerController extends Controller
     public function update(BuildingRequest $request)
     {
         $building = Building::find($request->id);
+        $number_floor = $building->number_floor;
+        
+        //dữ liệu cập nhật
         $data = $request->only('code', 'name', 'number_floor', 'owner', 'owner_phone', 'owner_email', 'address', 'note', 'introduce');
         $building->update($data);
+        
+        //kiểm tra số lượng tầng để tạo mới
+        if($data['number_floor'] > $number_floor){
+
+            for($i = $number_floor + 1; $i <= $data['number_floor']; $i++){
+                $building->floor()->create([
+                    'name' => 'Tầng '.$i,
+                    'code' => 'TA'.$i
+                ]);
+            }
+            
+        }
+
         $building->load('room:building_id,purpose,status');
         //marco dữ liệu
         //nhóm theo trạng thái

@@ -13,5 +13,22 @@ return [
             2 => 'Đã thuê',
             3 => 'Ngưng hoạt động',
         ],
-    ]
+    ],
+    'user' => [
+        'status' => [
+            0 => 'Chưa kích hoạt',
+            1 => 'Đã kích hoạt',
+            2 => 'Đã bị khóa',
+        ],
+        'role' => [
+            1 => 'Quản trị viên',
+            2 => 'Nhân viên',
+            3 => 'Khách hàng',
+        ],
+        'gender' => [
+            1 => 'Nam',
+            0 => 'Nữ',
+            2 => 'Khác'
+        ]
+    ],
 ];

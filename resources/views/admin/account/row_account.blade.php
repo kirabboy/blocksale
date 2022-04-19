@@ -1,27 +1,32 @@
-<tr>
+<tr class="item-{{ $admin->id }}">
     <td>
         {{ $admin->username }}
     </td>
     <td>
-        {{ $admin_info->fullname }}
+        {{ $admin->admin_info->fullname }}
+    </td>
+    <td>{!! showAdminWithRoles($admin->roles) !!}</td>
+    <td>
+        {{ $admin->admin_info->email }}
     </td>
     <td>
-        {{ $admin_info->email }}
+        {{ $admin->admin_info->phone }}
     </td>
     <td>
-        {{ $admin_info->phone }}
+        {{ config('custom.user.gender')[$admin->admin_info->gender] }}
     </td>
     <td>
-        @if ($admin_info->gender == 1)
-            Nam
-        @else
-            Nữ
-        @endif
+        {{ $admin->admin_info->birthday }}
     </td>
     <td>
-        {{ $admin_info->birthday }}
+        {{ $admin->admin_info->address }}
     </td>
     <td>
-        {{ $admin_info->address }}
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-warning admin-edit" data-route="{{ route('quan-ly-admin.edit', $admin->id) }}"><i
+                    class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger admin-delete"
+                data-route="{{ route('quan-ly-admin.destroy', $admin->id) }}"><i class="fa fa-trash"></i></button>
+        </div>
     </td>
 </tr>

@@ -11,6 +11,8 @@ use App\Admin\Controllers\WorkBoardController;
 use App\Admin\Controllers\AdminBuildingController;
 use App\Admin\Controllers\FloorManagerController;
 use App\Admin\Controllers\RoomManagerController;
+use App\Admin\Controllers\RoleManagerController;
+use App\Admin\Controllers\PermissionManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,15 @@ Route::group(['middleware' => ['admin']], function () {
     });
     Route::prefix('phong')->group(function(){
         Route::get('show-quickly/{room:id}', [RoomManagerController::class, 'showQuickly'])->name('admin.room.show.quickly');
+    });
+
+    Route::prefix('phan-quyen')->group(function () {
+        //
+        Route::resource('roles', RoleManagerController::class);
+        Route::resource('permissions', PermissionManagerController::class);
+        Route::post('xu-ly-nhieu-role', [RoleManagerController::class,'multiple'])->name('roles.multiple');
+        Route::post('xu-ly-nhieu-permission', [PermissionManagerController::class,'multiple'])->name('permissions.multiple');
+        
     });
     
 });
