@@ -10,7 +10,7 @@ use App\Admin\Controllers\AccountController;
 use App\Admin\Controllers\WorkBoardController;
 use App\Admin\Controllers\AdminBuildingController;
 use App\Admin\Controllers\FloorManagerController;
-
+use App\Admin\Controllers\RoomManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,11 +43,15 @@ Route::group(['middleware' => ['admin']], function () {
         Route::post('store', [BuildingManagerController::class, 'store'])->name('admin.building.store');
         Route::put('update', [BuildingManagerController::class, 'update'])->name('admin.building.update');
         Route::delete('delete/{building:id}', [BuildingManagerController::class, 'delete'])->name('admin.building.delete');
+
         Route::prefix('tang')->group(function(){
             Route::get('edit/{floor:id}', [FloorManagerController::class, 'edit'])->name('admin.floor.edit');
             Route::put('update', [FloorManagerController::class, 'update'])->name('admin.floor.update');
             Route::delete('delete/{floor:id}', [FloorManagerController::class, 'delete'])->name('admin.floor.delete');
         });
-
     });
+    Route::prefix('phong')->group(function(){
+        Route::get('show-quickly/{room:id}', [RoomManagerController::class, 'showQuickly'])->name('admin.room.show.quickly');
+    });
+    
 });

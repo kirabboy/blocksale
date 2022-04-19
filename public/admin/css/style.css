@@ -54,3 +54,6 @@ input {
 .font-size-h5 {
     font-size: 1.25rem!important;
 }
+.modal-md{
+    max-width: 500px;
+}

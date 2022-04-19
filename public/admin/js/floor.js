@@ -12,7 +12,6 @@ $('.floor-edit').click(function (e) {
             })
         })
         .done(function (response) {
-            console.log(response)
             $('.modal-area').append(response);
 
             $('#modalFormedit').modal('show');
@@ -70,4 +69,24 @@ $(document).on('click', '.floor-delete', function (e) {
         })
         $('.floor-item-' + response.id).remove();
     });
+});
+
+$('.show-quickly-room').click(function (e) {
+    e.preventDefault();
+    var that = $(this),
+        route = that.data('route');
+    $.ajax({
+            url: route,
+            type: 'GET'
+        })
+        .fail(function (data) {
+            toastr.error('Vui lòng tải lại trang', {
+                timeOut: 5000
+            })
+        })
+        .done(function (response) {
+            $('.modal-area').append(response);
+
+            $('#modalShowQuickly').modal('show');
+        });
 });

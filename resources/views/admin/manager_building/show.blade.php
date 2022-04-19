@@ -62,8 +62,7 @@
                 </div>
                 <div class="room d-flex justify-content-start align-items-center mt-2">
                     @forelse($item['room'] as $item)
-                    <div class="item {{ bgStatus($item['status']) }}" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Đơn vị thuê: {{ $item['name'] }}"></div>
+                    <div class="show-quickly-room item {{ bgStatus($item['status']) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị thuê: {{ $item['name'] }}" data-route="{{ route('admin.room.show.quickly', $item['id']) }}"></div>
                     @empty
                     <div class="d-flex justify-content-center align-items-center w-100">Tầng trống</div>
                     @endforelse
