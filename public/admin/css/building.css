@@ -117,3 +117,6 @@
   .tooltip.bs-tooltip-end .tooltip-arrow::before {
     border-right-color: #f8f9fa;
   }
+  .dropdown-toggle::after{
+      display: none;
+  }

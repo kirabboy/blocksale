@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-4 col-sm-4 col-12">
+<div class="col-lg-3 col-md-4 col-sm-4 col-12 building-item-{{ $building['id'] }}">
     <a href="{{ route('admin.building.show', $building['id']) }}">
         <div class="card-building">
             <div class="card-building-header d-flex justify-conent-left">
@@ -7,6 +7,16 @@
                     <h4 class="building-name">{{$building['name']}} <i class="fas fa-check-circle"></i></h4>
                     <p class="building-address" tabindex="0" data-bs-toggle="tooltip" title="{{$building['address']}}">
                         {{Str::limit($building['address'], 30)}}</p>
+                </div>
+                
+                <div class="dropdown ml-auto">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><span class="building-edit dropdown-item" data-route="{{ route('admin.building.edit', $building['id']) }}">Chỉnh sửa</span></li>
+                        <li><span class="building-delete dropdown-item" data-route="{{ route('admin.building.delete', $building['id']) }}" >Xóa</span></li>
+                    </ul>
                 </div>
             </div>
             <div class="card-building-progress">
@@ -78,3 +88,4 @@
         </div>
     </a>
 </div>
+

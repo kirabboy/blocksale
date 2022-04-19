@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 /**
  * Class Floor
@@ -35,7 +36,19 @@ class Floor extends Model
 		'code',
 		'name'
 	];
-
+	public static function boot()
+    {
+        parent::boot();
+        
+        static::deleting(function($model) { 
+            // before delete() method call this
+            $model->building()->update(['number_floor' => DB::raw('number_floor - 1')]);
+       });
+        
+    }
+	public function building(){
+		return $this->belongsTo(Building::class, 'building_id');
+	}
 	public function room(){
 		return $this->hasMany(Room::class, 'floor_id');
 	}

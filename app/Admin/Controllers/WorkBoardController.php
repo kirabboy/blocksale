@@ -23,7 +23,7 @@ class WorkBoardController extends Controller
         }
         $buildings = Building::latest()->get();
         $building->count = $building->room->countBy('status');
-        $building->ratio = $building->count->sum() != 0 ? $building->count['2'] / $building->count->sum() *100 : 0;
+        $building->ratio = $building->count->sum() != 0 ? ($building->count['2'] ?? 0) / $building->count->sum() *100 : 0;
         $building->floor = $building->floor->map(function($item) {
             $total = $item->room->count();
             $hired = $item->room->where('status', 2)->count();

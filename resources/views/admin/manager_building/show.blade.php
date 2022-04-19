@@ -15,7 +15,8 @@
             </a>
         </h3>
         <div class="page-header-tool">
-            <span class="mr-3 d-flex align-items-center font-weight-bold">Tỷ lệ lấp đầy ({{ round($building['ratio'], 2) }}%)</span>
+            <span class="mr-3 d-flex align-items-center font-weight-bold">Tỷ lệ lấp đầy
+                ({{ round($building['ratio'], 2) }}%)</span>
             <span class="mr-3 d-flex align-items-center font-weight-bold"><i
                     class="fas fa-circle text-danger mr-2"></i>Trống ({{ $building['empty'] }})</span>
             <span class="mr-3 d-flex align-items-center font-weight-bold"><i
@@ -29,29 +30,46 @@
     <div class="row p-4 bg-white" id="after-submit">
         <div class="floor col-12">
             @foreach($building['floor'] as $item)
-            <div class="d-flex justify-content-between">
-                <span class="name mr-5 d-flex align-items-center font-size-h5 font-weight-bold">
-                    <i class="fas fa-layer-group mr-2"></i> {{ $item['name'] }}
-                </span>
-                <div class="d-flex">
-                    <span class="mr-3 d-flex align-items-center font-weight-bold">Tỷ lệ lấp đầy ({{ round($item['ratio'], 2) }}%)</span>
-                    <span class="mr-3 d-flex align-items-center font-weight-bold"><i
-                            class="fas fa-circle text-danger mr-2"></i>{{ $item['empty'] }}/{{ $item['total'] }}</span>
-                    <span class="mr-3 d-flex align-items-center font-weight-bold"><i
-                            class="fas fa-circle text-success mr-2"></i>{{ $item['hired'] }}/{{ $item['total'] }}</span>
-                    <span class="mr-3 d-flex align-items-center font-weight-bold"><i
-                            class="fas fa-circle text-secondary mr-2"></i>{{ $item['unactive'] }}/{{ $item['total'] }}</span>
-                    <span class="mr-3 d-flex align-items-center font-weight-bold"><i
-                            class="fas fa-circle text-warning mr-2"></i>{{ $item['booked'] }}/{{ $item['total'] }}</span>
+            <div class="floor-item-{{ $item['id'] }}">
+                <div class="d-flex justify-content-between">
+                    <span class="name mr-5 d-flex align-items-center font-size-h5 font-weight-bold">
+                        <i class="fas fa-layer-group mr-2"></i> <span>{{ $item['name'] }}</span>
+                    </span>
+                    <div class="dropdown mr-auto">
+                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><span class="floor-edit dropdown-item"
+                                    data-route="{{ route('admin.floor.edit', $item['id']) }}">Chỉnh sửa</span></li>
+                            <li><span class="floor-delete dropdown-item"
+                                    data-route="{{ route('admin.floor.delete', $item['id']) }}">Xóa</span></li>
+                        </ul>
+                    </div>
+                    <div class="d-flex">
+                        <span class="mr-3 d-flex align-items-center font-weight-bold">Tỷ lệ lấp đầy
+                            ({{ round($item['ratio'], 2) }}%)</span>
+                        <span class="mr-3 d-flex align-items-center font-weight-bold"><i
+                                class="fas fa-circle text-danger mr-2"></i>{{ $item['empty'] }}/{{ $item['total'] }}</span>
+                        <span class="mr-3 d-flex align-items-center font-weight-bold"><i
+                                class="fas fa-circle text-success mr-2"></i>{{ $item['hired'] }}/{{ $item['total'] }}</span>
+                        <span class="mr-3 d-flex align-items-center font-weight-bold"><i
+                                class="fas fa-circle text-secondary mr-2"></i>{{ $item['unactive'] }}/{{ $item['total'] }}</span>
+                        <span class="mr-3 d-flex align-items-center font-weight-bold"><i
+                                class="fas fa-circle text-warning mr-2"></i>{{ $item['booked'] }}/{{ $item['total'] }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="room d-flex justify-content-start align-items-center mt-2">
-                @foreach($item['room'] as $item)
-                <div class="item {{ bgStatus($item['status']) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị thuê: {{ $item['name'] }}"></div>
-                @endforeach
-            </div>
+                <div class="room d-flex justify-content-start align-items-center mt-2">
+                    @forelse($item['room'] as $item)
+                    <div class="show-quickly-room item {{ bgStatus($item['status']) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="Đơn vị thuê: {{ $item['name'] }}" data-route="{{ route('admin.room.show.quickly', $item['id']) }}"></div>
+                    @empty
+                    <div class="d-flex justify-content-center align-items-center w-100">Tầng trống</div>
+                    @endforelse
+                </div>
 
-            <hr>
+                <hr>
+            </div>
             @endforeach
         </div>
     </div>
@@ -61,13 +79,14 @@
 
 @push('script')
 <!-- <script src="{{ asset('public/admin/js/home.js') }}"></script> -->
-<script src="{{ asset('public/admin/js/building.js') }}"></script>
+<!-- <script src="{{ asset('public/admin/js/building.js') }}"></script> -->
+<script src="{{ asset('public/admin/js/floor.js') }}"></script>
 <script>
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl, {
-    'customClass': 'custom-tooltip'
-  })
-})
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl, {
+            'customClass': 'custom-tooltip'
+        })
+    })
 </script>
 @endpush

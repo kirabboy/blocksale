@@ -26,6 +26,7 @@ class ContractController extends Controller
     public function create()
     {
         //
+        return view('admin.contract.modal.create_contract');
     }
 
     /**

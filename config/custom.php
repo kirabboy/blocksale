@@ -4,8 +4,8 @@ return [
     'room' => [
         'type' => [
             1 => 'Phòng trọ',
-            2 => 'Phòng Ký túc xá',
-            3 => 'Phòng học',
+            2 => 'Ký túc xá',
+            3 => 'Kho',
         ],
         'status' => [
             0 => 'Trống',

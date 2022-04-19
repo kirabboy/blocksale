@@ -65,6 +65,16 @@ class RoomController extends Controller
     public function show($id)
     {
         //
+        $room = Room::find($id);
+        $contracts = $room->contract();
+        $current_contract = $contracts->whereStatus(2)->first();
+        if($current_contract){
+            $html_contract = view('admin.contract.include.show_quickly')->render();
+        }else{
+            $html_contract = view('admin.contract.include.empty')->render();
+        }
+        $html_room =  view('admin.room.show', compact('room','current_contract'))->render();
+        return [$html_room, $html_contract];
     }
 
     /**

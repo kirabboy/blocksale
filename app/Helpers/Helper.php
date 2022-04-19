@@ -29,3 +29,51 @@ if (!function_exists('bgStatusOutline')) {
         }
     }
 }
+if (!function_exists('badgeStatus')) {
+    function badgeStatus($status = 0)
+    {
+        if($status == 0){
+            return 'danger';
+        }else if($status == 1){
+            return 'warning';
+        }else if($status == 2){
+            return 'success';
+        }else if($status == 3){
+            return 'secondary';
+        }
+    }
+}
+
+if (!function_exists('roomStatus')) {
+    function roomStatus($status = 0)
+    {
+        if($status == 0){
+            return 'Trống';
+        }else if($status == 1){
+            return 'Đã cọc';
+        }else if($status == 2){
+            return 'Đã thuê';
+        }else if($status == 3){
+            return 'Tạm ngưng';
+        }
+    }
+}
+if (!function_exists('formatPrice')) {
+    function formatPrice($price)
+    {
+        return number_format($price, 0, ',', '.');
+    }
+}
+
+if (!function_exists('formatTypeRoom')) {
+    function formatTypeRoom($type = 1)
+    {
+        if($type == 1){
+            return 'Phòng trọ';
+        }else if($type == 2){
+            return 'Chung cư';
+        }else if($type == 3){
+            return 'Căn hộ mini';
+        }
+    }
+}
