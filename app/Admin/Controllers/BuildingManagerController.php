@@ -28,7 +28,7 @@ class BuildingManagerController extends Controller
             //Tổng phòng đã thuê
             $total_room = $room->sum();
             //Giá trung bình
-            $avg_room = $item->room->avg('purpose') ?? 0;
+            $avg_room = $item->room->avg('price') ?? 0;
             
             //trả dữ liệu
             return (object) collect($item)->merge([
@@ -119,7 +119,7 @@ class BuildingManagerController extends Controller
                 'total' => $total,
                 'hired' => $hired,
                 'booked' => $item->room->where('status', 1)->count(),
-                'empty' => $item->room->whereIn('status', 0)->count(),
+                'empty' => $item->room->where('status', 0)->count(),
                 'unactive' => $item->room->where('status', 3)->count(),
                 'ratio' => $total !=0 ? $hired/$total * 100 : 0
             ]);

@@ -3,6 +3,7 @@
     Bàn làm việc
 @endsection
 @push('css')
+    <link rel="stylesheet" href="{{ asset('/public/admin/css/workboard.css') }}">
 @endpush
 @section('content')
     <div class="content-wrapper">
@@ -12,15 +13,19 @@
                 <div class="row">
                     <div class="col-sm-2">
                         <p class="m-0" style="line-height: 40px; font-size: 14px;">
-                            <i class="nav-icon fas fa-circle text-success"></i>
+                            <i class="fas fa-laptop text-success"></i>
                             Bàn làm việc
                         </p>
                     </div>
                     <div class="col-sm-2 text-right">
-                        <select id="select_homies" style="width: 170px">
-                            <option value="H1">Homies 1</option>
-                            <option value="H2">Homies 2</option>
-                        </select>
+                        <form id="form-select-building" action="" method="get">
+                            <select id="select-building" name="building" class="form-control" onchange="this.form.submit()"">
+                                                    @foreach ($buildings as $item)
+                                <option value="{{ $item->id }}" {{ $building->id == $item->id ? 'selected' : '' }}>
+                                    {{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </form>
                     </div>
                     <div class="col-sm-8 text-right">
                         <button class="btn btn-green btn-vien-trai">
@@ -67,138 +72,56 @@
                                     <div class="row">
                                         <div class="col-12 pb-2" style="border-bottom: 1px solid #d3d3d3;">
                                             <p class="text-muted m-0 text-14">
-                                                <i class="fa fa-map"></i> 193 Trần Hưng Đạo
+                                                <i class="fa fa-map"></i> {{ $building->address }}
                                             </p>
                                         </div>
                                         <div class="col-12 pt-2">
-                                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                                <li class="nav-item pr-2" role="presentation">
-                                                    <button class="btn btn-primary p-1 text-14" id="pills-home-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#tab_tat_ca" type="button"
-                                                        role="tab" aria-controls="tab_tat_ca" aria-selected="true">
-                                                        Tất cả (44)</button>
+                                            <ul class="nav mb-3 justify-content-between" id="pills-tab" role="tablist">
+                                                <li class="nav-item font-10 building-room-status-bar" role="presentation">
+                                                    <ul id="tool-filter-status-room" class="nav nav-pills mb-3"
+                                                        data-url="{{ route('ban-lam-viec.show', $building) }}">
+                                                        <li class="nav-item pr-2" role="presentation">
+                                                            <button class="btn btn-primary p-1">
+                                                                Tất cả ({{ $building->count->sum() }})</button>
+                                                        </li>
+                                                        <li class="nav-item pr-2" role="presentation">
+                                                            <button class="btn btn-danger p-1" data-status="0">
+                                                                Trống
+                                                                ({{ isset($building->count['0']) ? $building->count['0'] : 0 }})</button>
+                                                        </li>
+                                                        <li class="nav-item pr-2" role="presentation">
+                                                            <button class="btn btn-warning p-1" data-status="1">
+                                                                Đã cọc
+                                                                ({{ isset($building->count['1']) ? $building->count['1'] : 0 }})</button>
+                                                        </li>
+                                                        <li class="nav-item pr-2" role="presentation">
+                                                            <button class="btn btn-success p-1" data-status="2">
+                                                                Đã thuê
+                                                                ({{ isset($building->count['2']) ? $building->count['2'] : 0 }})</button>
+                                                        </li>
+                                                        <li class="nav-item" role="presentation">
+                                                            <button class="btn btn-secondary p-1" data-status="3">
+                                                                Tạm ngưng
+                                                                ({{ isset($building->count['3']) ? $building->count['3'] : 0 }})</button>
+                                                        </li>
+                                                    </ul>
                                                 </li>
-                                                <li class="nav-item pr-2" role="presentation">
-                                                    <button class="btn btn-warning p-1 text-14" id="pills-profile-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-profile" type="button"
-                                                        role="tab" aria-controls="pills-profile" aria-selected="false">
-                                                        Đã thuê (24)</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="btn btn-danger p-1 text-14" id="pills-contact-tab"
-                                                        data-bs-toggle="pill" data-bs-target="#pills-contact" type="button"
-                                                        role="tab" aria-controls="pills-contact" aria-selected="false">
-                                                        Trống (20)</button>
-                                                </li>
-                                                <li>
-                                                    <div class="progress d-none-mobile"
-                                                        style="width: 100%; margin-top: 10px; margin-left: 180px;">
+
+                                                <li class="d-none-mobile building-process-bar">
+                                                    <div class="progress " style="width: 100%; margin-top: 10px;">
                                                         <div class="progress-bar bg-success" role="progressbar"
-                                                            style="width: 20%" aria-valuenow="100" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
+                                                            style="width: {{ $building->ratio }}%" aria-valuenow="100"
+                                                            aria-valuemin="0" aria-valuemax="100">{{ round($building->ratio) }}%
+                                                        </div>
                                                     </div>
                                                 </li>
                                             </ul>
-                                            <!-- Tab content start here -->
-                                            <div class="tab-content" id="pills-tabContent">
-                                                <div class="tab-pane fade show active" id="tab_tat_ca">
-                                                    <div class="row pb-2">
-                                                        <div class="col-6 col-sm-3">
-                                                            <div class="card p-2">
-                                                                <h6>Tầng 1</h6>
-                                                                <button class="btn btn-success p-1 text-12"
-                                                                    style="width: 25% !important" data-toggle="modal"
-                                                                    data-target=".bd-example-modal-lg" id="pills-home"
-                                                                    role="tabpanel" aria-labelledby="pills-home-tab">
-                                                                    <i class="fa fa-plus"></i></button>
-                                                                <p class="border-bottom pt-2 m-0"></p>
-                                                                <div class="progress"
-                                                                    style="width: 100%; margin-top: 10px;">
-                                                                    <div class="progress-bar bg-success" role="progressbar"
-                                                                        style="width: 20%" aria-valuenow="100"
-                                                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-sm-9">
-                                                            <div class="row">
-                                                                <div class="col-6 col-sm-3">
-                                                                    <div class="card p-2">
-                                                                        <h6>Tầng 1</h6>
-                                                                        <p class="border-bottom m-0"></p>
-                                                                        <button class="btn btn-success p-1 text-12">P.
-                                                                            101</button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6 col-sm-3">
-                                                                    <div class="card p-2">
-                                                                        <h6>Tầng 1</h6>
-                                                                        <p class="border-bottom m-0"></p>
-                                                                        <button class="btn btn-success p-1 text-12">P.
-                                                                            102</button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6 col-sm-3">
-                                                                    <div class="card p-2">
-                                                                        <h6>Tầng 1</h6>
-                                                                        <p class="border-bottom m-0"></p>
-                                                                        <button class="btn btn-success p-1 text-12">P.
-                                                                            103</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row pb-2">
-                                                        <div class="col-6 col-sm-3">
-                                                            <div class="card p-2">
-                                                                <h6>Tầng 2</h6>
-
-                                                                <button class="btn btn-success p-1 text-12"
-                                                                    style="width: 25% !important" data-toggle="modal"
-                                                                    data-target=".bd-example-modal-lg" id="pills-home"
-                                                                    role="tabpanel" aria-labelledby="pills-home-tab">
-                                                                    <i class="fa fa-plus"></i></button>
-                                                                <p class="border-bottom pt-2 m-0"></p>
-                                                                <div class="progress"
-                                                                    style="width: 100%; margin-top: 10px;">
-                                                                    <div class="progress-bar bg-success" role="progressbar"
-                                                                        style="width: 20%" aria-valuenow="100"
-                                                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-sm-9">
-                                                            <div class="row">
-                                                                <div class="col-6 col-sm-3">
-                                                                    <div class="card p-2">
-                                                                        <h6>Tầng 2</h6>
-                                                                        <p class="border-bottom m-0"></p>
-                                                                        <button class="btn btn-success p-1 text-12">P.
-                                                                            201</button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-6 col-sm-3">
-                                                                    <div class="card p-2">
-                                                                        <h6>Tầng 2</h6>
-                                                                        <p class="border-bottom m-0"></p>
-                                                                        <button class="btn btn-success p-1 text-12">P.
-                                                                            202</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                                    aria-labelledby="pills-profile-tab">1</div>
-                                                <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                                                    aria-labelledby="pills-contact-tab">.2</div>
+                                            <div class="tab-content" id="building-detail">
+                                                @include(
+                                                    'admin.workboard.include.building_detail',
+                                                    compact('building')
+                                                )
                                             </div>
-                                            <!-- Tab content End here -->
                                         </div>
                                     </div>
                                 </div>
@@ -229,45 +152,7 @@
                                 </nav>
                                 <div class="tab_thong_tin_dv" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="nav_thong_tin_don_vi_thue">
-                                        <div class="row pt-2">
-                                            <div class="col-6 col-sm-3">
-                                                <p class="m-0 mb-2 text-14">Tên đơn vị thuê</p>
-                                                <p class="m-0 mb-2 text-14">Giá</p>
-                                                <p class="m-0 mb-2 text-14">Trạng thái</p>
-                                                <p class="m-0 mb-2 pt-1 text-14">Mục đích thuê</p>
-                                            </div>
-                                            <div class="col-6 col-sm-3">
-                                                <p class="m-0 mb-2 text-14"><strong>P.102</strong></p>
-                                                <p class="m-0 mb-2 text-14 text-success">3,500,000</p>
-                                                <p class="m-0 mb-2 text-14 label label-light-success">Đã thuê</p>
-                                                <p class="m-0 mb-2 text-14 label label-light-success">Cho thuê</p>
-                                            </div>
-                                            <div class="col-6 col-sm-3">
-                                                <p class="m-0 mb-2 text-14">Mã</p>
-                                                <p class="m-0 mb-2 text-14">Tiền cọc</p>
-                                                <p class="m-0 mb-2 text-14">Trạng thái hợp đồng</p>
-                                            </div>
-                                            <div class="col-6 col-sm-3">
-                                                <p class="m-0 mb-2 text-14"><strong>CH000002</strong></p>
-                                                <p class="m-0 mb-2 text-14 text-success">3,000,000</p>
-                                                <p class="m-0 mb-2 text-14 label label-light-success">Hiệu lực</p>
-                                            </div>
-                                            <div class="col-12 pb-2">
-                                                <button class="btn btn-white text-12 text-dark">
-                                                    <i class="fa fa-search"></i> Giường
-                                                </button>
-                                                <button class="btn btn-white text-12 text-dark">
-                                                    <i class="fa fa-search"></i> Tủ sách
-                                                </button>
-                                                <button class="btn btn-white text-12 text-dark">
-                                                    <i class="fa fa-search"></i> Tủ
-                                                </button>
-                                                <p class="m-1 d-sm-none"> </p>
-                                                <button class="btn btn-white text-12 text-dark">
-                                                    <i class="fa fa-search"></i> Thang máy
-                                                </button>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <!-- End tab thông tin đơn vị thuê-->
@@ -287,35 +172,7 @@
                                 </nav>
                                 <div class="tab-content" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="nav_hop_dong_thue">
-                                        <div class="row pt-2">
-                                            <div class="col-6 col-sm-3">
-                                                <p class="m-0 mb-2 text-14">Tên hợp đồng</p>
-                                                <p class="m-0 mb-2 text-14">Loại hợp đồng</p>
-                                                <p class="m-0 mb-2 text-14">Thời gian bắt đầu</p>
-                                                <p class="m-0 mb-2 pt-1 text-14">Đặt cọc</p>
-                                            </div>
-                                            <div class="col-6 col-sm-3">
-                                                <p class="m-0 mb-2 text-14"><strong>Hợp đồng thuê 102</strong></p>
-                                                <p class="m-0 mb-2 text-14 label label-light-success">Thuê</p>
-                                                <p class="m-0 mb-2 text-14 text-success">21:38:00 01-07-2021</p>
-                                                <p class="m-0 mb-2 text-14 label label-light-success">Đang cọc</p>
-                                            </div>
-                                            <div class="col-6 col-sm-3">
-                                                <p class="m-0 mb-2 text-14">Mã</p>
-                                                <p class="m-0 mb-2 text-14 text-white">_</p>
-                                                <p class="m-0 mb-2 text-14">Thời gian kết thúc</p>
-                                                <p class="m-0 mb-2 text-14">Trạng thái</p>
-                                                <p class="m-0 mb-2 text-14 pt-1">Số tiền</p>
-                                            </div>
-                                            <div class="col-6 col-sm-3">
-                                                <p class="m-0 mb-2 text-14 text-success">
-                                                    <strong>HDG000003/202112/FHSR/HĐT</strong>
-                                                </p>
-                                                <p class="m-0 mb-2 text-14 text-success pt-2">21:38:00 01-07-2021</p>
-                                                <p class="m-0 mb-2 text-14 label label-light-success">Hiệu lực</p>
-                                                <p class="m-0 mb-2 text-14 text-success">3,000,000</p>
-                                            </div>
-                                        </div>
+                                        
 
                                     </div>
                                     <div class="tab-pane fade" id="nav_dat_coc_giu_cho">

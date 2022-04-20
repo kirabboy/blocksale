@@ -18,11 +18,11 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Tên tài khoản <sup class="text-danger">*</sup></label>
-                                <input type="text" name="username" class="form-control" placeholder="Tên tài khoản" value="{{ $admin->username }}">
+                                <input type="text" name="username" class="form-control" placeholder="Tên tài khoản" value="{{ $admin->username }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="">Họ và tên</label>
-                                <input type="text" name="fullname" class="form-control" placeholder="Họ và tên" value="{{ $admin->admin_info->fullname }}">
+                                <label for="">Họ và tên <sup class="text-danger">*</sup></label>
+                                <input type="text" name="fullname" class="form-control" placeholder="Họ và tên" value="{{ $admin->admin_info->fullname }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Email</label>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="">Mật khẩu <sup class="text-danger">*</sup></label>
+                                <label for="">Mật khẩu mới</label>
                                 <input type="text" name="password" class="form-control" placeholder="Mật khẩu">
                             </div>
                             <div class="form-group">

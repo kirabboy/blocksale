@@ -9,10 +9,12 @@ use App\Admin\Controllers\CustomerController;
 use App\Admin\Controllers\AccountController;
 use App\Admin\Controllers\WorkBoardController;
 use App\Admin\Controllers\AdminBuildingController;
+use App\Admin\Controllers\RoomController;
 use App\Admin\Controllers\FloorManagerController;
 use App\Admin\Controllers\RoomManagerController;
 use App\Admin\Controllers\RoleManagerController;
 use App\Admin\Controllers\PermissionManagerController;
+use App\Admin\Controllers\CustomerManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +36,8 @@ Route::group(['middleware' => ['admin']], function () {
         '/quan-ly-admin' => AccountController::class,
         '/ban-lam-viec' => WorkBoardController::class,
         '/ho-so-khach-hang' => CustomerController::class,
-        '/hop-dong' => ContractController::class
+        '/hop-dong' => ContractController::class,
+        '/phong' =>RoomController::class,
     ]);
 
     Route::prefix('co-so')->group(function(){
@@ -62,7 +65,17 @@ Route::group(['middleware' => ['admin']], function () {
         Route::resource('permissions', PermissionManagerController::class);
         Route::post('xu-ly-nhieu-role', [RoleManagerController::class,'multiple'])->name('roles.multiple');
         Route::post('xu-ly-nhieu-permission', [PermissionManagerController::class,'multiple'])->name('permissions.multiple');
-        
+    });
+    Route::prefix('khach-hang')->group(function(){
+        Route::get('/', [CustomerManagerController::class, 'index'])->name('admin.customer.index');
+        Route::get('create', [CustomerManagerController::class, 'create'])->name('admin.customer.create');
+        Route::post('store', [CustomerManagerController::class, 'store'])->name('admin.customer.store');
+
+        Route::get('edit/{customer:id}', [CustomerManagerController::class, 'edit'])->name('admin.customer.edit');
+        Route::put('update', [CustomerManagerController::class, 'update'])->name('admin.customer.update');
+        Route::delete('delete/{customer:id}', [CustomerManagerController::class, 'delete'])->name('admin.customer.delete');
+        Route::delete('xu-ly-nhieu-khach-hang', [CustomerManagerController::class,'multiple'])->name('admin.customer.multiple');
+
     });
     
 });

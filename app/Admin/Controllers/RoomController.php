@@ -4,8 +4,10 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Room;
+use App\Models\Building;
 
-class ContractController extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,6 @@ class ContractController extends Controller
     public function index()
     {
         //
-        return view('admin.contract.index');
     }
 
     /**
@@ -23,10 +24,13 @@ class ContractController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
-        return view('admin.contract.modal.create_contract');
+        $building = Building::whereId($request->building_id)->first();
+        $floor_id = $request->floor_id;
+        $floors = $building->floor()->get();
+        return view('admin.room.modal.create_room', compact('building', 'floors', 'floor_id'))->render();
     }
 
     /**
@@ -38,6 +42,18 @@ class ContractController extends Controller
     public function store(Request $request)
     {
         //
+        $room = Room::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'building_id' => $request->building_id,
+            'floor_id' => $request->floor_id,
+            'type' => $request->type,
+            'purpose' => $request->purpose,
+            'acreage' => $request->acreage,
+            'price' => $request->price,
+            'note' => $request->note,
+        ]);
+        return view('admin.room.include.room_unit', compact('room'));
     }
 
     /**
@@ -49,6 +65,16 @@ class ContractController extends Controller
     public function show($id)
     {
         //
+        $room = Room::find($id);
+        $contracts = $room->contract();
+        $current_contract = $contracts->whereStatus(2)->first();
+        if($current_contract){
+            $html_contract = view('admin.contract.include.show_quickly')->render();
+        }else{
+            $html_contract = view('admin.contract.include.empty')->render();
+        }
+        $html_room =  view('admin.room.show', compact('room','current_contract'))->render();
+        return [$html_room, $html_contract];
     }
 
     /**

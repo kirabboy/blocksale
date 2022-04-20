@@ -9,14 +9,22 @@ $(document).on('change', 'input[name="checkAll"]', function(event) {
 		else{
 			$('input[name="checkAll"]').prop('checked', false);
 			$(".action-multiple").css('display', 'none');
+
+		}
+		if($('input[name="id[]"]:checked').length > 0){
+			$("#deleteCustomer").attr('disabled', false);
+		}else{
+			$("#deleteCustomer").attr('disabled', true);
 		}
 });
 $(document).on('change', 'input[name="id[]"]', function(event) {
 	event.preventDefault();
 	if($('input[name="id[]"]:checked').length > 0){
         $(".action-multiple").removeAttr('style');
+        $("#deleteCustomer").attr('disabled', false);
     }else{
         $(".action-multiple").css('display', 'none');
+		$("#deleteCustomer").attr('disabled', true);
     }
 	if($(this).prop('checked') == false){
 		$('input[name="checkAll"]').prop('checked', false);

@@ -36,7 +36,7 @@ $(document).on('submit', '#mainFormEdit', function (e) {
         toastr.success(response.message, {
             timeOut: 5000
         })
-        $('#modalFormedit').modal('hide');
+        $('#modalFormEdit').modal('hide');
         closeModalRender();
         $(replace).text(response.data);
     });

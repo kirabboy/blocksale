@@ -10,10 +10,10 @@
                 </div>
                 
                 <div class="dropdown ml-auto">
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton{{$building['id']}}" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-ellipsis-h"></i>
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{$building['id']}}">
                         <li><span class="building-edit dropdown-item" data-route="{{ route('admin.building.edit', $building['id']) }}">Chỉnh sửa</span></li>
                         <li><span class="building-delete dropdown-item" data-route="{{ route('admin.building.delete', $building['id']) }}" >Xóa</span></li>
                     </ul>

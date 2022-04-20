@@ -10,7 +10,6 @@ $('#btn-create-building').click(function() {
             })
         })
         .done(function(response) {
-            console.log(response);
             $('.modal-area').append(response);
             $('#modalFormCreate').modal('show');
         });

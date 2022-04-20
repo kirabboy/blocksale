@@ -2,9 +2,17 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 13px;
 }
-h1, h2, h3, h4, h5, h6, p{
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     color: #212529;
 }
+
 a {
     text-decoration: none;
 }
@@ -30,7 +38,10 @@ a {
     border-color: #009c7e;
     font-size: 13px;
 }
-
+.btn-cyan.danger{
+    background-color: #f64e60;
+    border-color: #f64e60;
+}
 .modal-primary .modal-header {
     background-color: #009c7e;
 }
@@ -51,9 +62,14 @@ input::placeholder {
 input {
     font-size: 13px;
 }
+
 .font-size-h5 {
     font-size: 1.25rem!important;
 }
-.modal-md{
-    max-width: 500px;
+
+.font-10,
+.font-10 * {
+    font-size: 10px !important;
 }
+
+.modal-md {}

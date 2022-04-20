@@ -31,4 +31,15 @@ return [
             2 => 'Khác'
         ]
     ],
+    'customer' => [
+        'gender' => [
+            1 => 'Nam',
+            0 => 'Nữ',
+            2 => 'Khác'
+        ],
+        'type' => [
+            1 => 'Cá nhân', 
+            2 => 'Tổ chức'
+        ]
+    ],
 ];

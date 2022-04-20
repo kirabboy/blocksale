@@ -18,5 +18,9 @@ function closeModalRender() {
     $('.model-render').remove();
 
 }
-
+$(".form-delete").submit(function(e){
+    if(!confirm('Bạn có muốn thực hiện')){
+        e.preventDefault();
+    }
+})
 

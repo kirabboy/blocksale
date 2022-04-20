@@ -43,7 +43,7 @@
                 <li class="nav-header text-uppercase">Quản lý khách hàng</li>
 
                 <li class="nav-item">
-                    <a href="{{ route('ho-so-khach-hang.index') }}" class="nav-link">
+                    <a href="{{ route('admin.customer.index') }}" class="nav-link">
                         <i class="nav-icon far fa-user"></i>
                         <p>
                             Hồ sơ khách hàng

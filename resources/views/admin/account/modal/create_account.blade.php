@@ -16,11 +16,11 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Tên tài khoản <sup class="text-danger">*</sup></label>
-                                <input type="text" name="username" class="form-control" placeholder="Tên tài khoản">
+                                <input type="text" name="username" class="form-control" placeholder="Tên tài khoản" required>
                             </div>
                             <div class="form-group">
-                                <label for="">Họ và tên</label>
-                                <input type="text" name="fullname" class="form-control" placeholder="Họ và tên">
+                                <label for="">Họ và tên <sup class="text-danger">*</sup></label>
+                                <input type="text" name="fullname" class="form-control" placeholder="Họ và tên" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Email</label>
@@ -34,7 +34,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">Mật khẩu <sup class="text-danger">*</sup></label>
-                                <input type="text" name="password" class="form-control" placeholder="Mật khẩu">
+                                <input type="text" name="password" class="form-control" placeholder="Mật khẩu" required>
                             </div>
                             <div class="form-group">
                                 <label for="">Giới tính</label>
