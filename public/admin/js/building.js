@@ -14,8 +14,7 @@ $('#btn-create-building').click(function() {
             $('#modalFormCreate').modal('show');
         });
 });
-
-$('.building-edit').click(function(e) {
+$(document).on('click', '.building-edit', function(e) {
     e.preventDefault();
     var that = $(this), route = that.data('route');
     $.ajax({
@@ -49,9 +48,13 @@ $(document).on('submit', '#mainFormCreate', function(e) {
             data: form.serialize(),
         })
         .fail(function(data) {
-            toastr.error('Vui lòng tải lại trang', {
-                timeOut: 5000
-            })
+            $.map(data.responseJSON, function(value) {
+                value.forEach(element => {
+                    toastr.error(element, {
+                        timeOut: 5000
+                    })
+                });
+            });
         })
         .done(function(response) {
             toastr.success('Thực hiện thành công', {
@@ -73,9 +76,13 @@ $(document).on('submit', '#mainFormEdit', function(e) {
             data: form.serialize(),
         })
         .fail(function(data) {
-            toastr.error('Vui lòng tải lại trang', {
-                timeOut: 5000
-            })
+            $.map(data.responseJSON, function(value) {
+                value.forEach(element => {
+                    toastr.error(element, {
+                        timeOut: 5000
+                    })
+                });
+            });
         })
         .done(function(response) {
             toastr.success('Thực hiện thành công', {

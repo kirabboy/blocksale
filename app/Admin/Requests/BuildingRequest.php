@@ -27,7 +27,18 @@ class BuildingRequest extends FormRequest
      */
     public function rules()
     {
-        if($this->method() == 'PUT'){
+        if($this->method() == 'POST'){
+            return [
+                'code' => ['required', 'string', 'max:255'],
+                'name' => ['required', 'string', 'max:255'],
+                'number_floor' => ['required', 'integer', 'min:1'],
+                'address' => ['required', 'string', 'max:255'],
+                'owner' => ['required', 'string', 'max:255'],
+                'owner_phone' => ['required', 'string', 'max:255'],
+                'owner_email' => ['required', 'email', 'string', 'max:255'],
+            ];
+        }
+        elseif($this->method() == 'PUT'){
             return [
                 'id' => ['required', 'exists:App\Models\Building,id'],
                 'code' => ['required', 'string', 'max:255'],

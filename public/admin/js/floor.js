@@ -28,9 +28,13 @@ $(document).on('submit', '#mainFormEdit', function (e) {
         data: form.serialize(),
     })
     .fail(function (data) {
-        toastr.error('Vui lòng tải lại trang', {
-            timeOut: 5000
-        })
+        $.map(data.responseJSON, function(value) {
+            value.forEach(element => {
+                toastr.error(element, {
+                    timeOut: 5000
+                })
+            });
+        });
     })
     .done(function (response) {
         toastr.success(response.message, {
