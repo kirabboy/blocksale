@@ -176,7 +176,7 @@ class BuildingManagerController extends Controller
             
         }
 
-        $building->load('room:building_id,purpose,status');
+        $building->load('room:building_id,price,status');
         //marco dữ liệu
         //nhóm theo trạng thái
         $room = $building->room->countBy('status');
@@ -185,7 +185,7 @@ class BuildingManagerController extends Controller
         //Tổng phòng đã thuê
         $total_room = $room->sum();
         //Giá trung bình
-        $avg_room = $building->room->avg('purpose') ?? 0;
+        $avg_room = $building->room->avg('price') ?? 0;
         
         //trả dữ liệu
         $building = (object) collect($building->only('id', 'name', 'number_floor', 'address', 'owner'))->merge([
