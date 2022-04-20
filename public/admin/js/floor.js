@@ -14,7 +14,7 @@ $('.floor-edit').click(function (e) {
         .done(function (response) {
             $('.modal-area').append(response);
 
-            $('#modalFormedit').modal('show');
+            $('#modalFormEdit').modal('show');
         });
 });
 $(document).on('submit', '#mainFormEdit', function (e) {

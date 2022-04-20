@@ -17,7 +17,7 @@ class BuildingManagerController extends Controller
     public function index()
     {
         $buildings = Building::select('id', 'name', 'number_floor', 'address', 'owner')
-        ->with('room:building_id,purpose,status')->latest()->get();
+        ->with('room:building_id,price,status')->latest()->get();
         // dd($buildings);
         //marco dữ liệu
         $buildings = $buildings->map(function($item){
@@ -25,7 +25,7 @@ class BuildingManagerController extends Controller
             $room = $item->room->countBy('status');
             //đếm phòng đã thuê
             $hired_room = $room->has('2') ? $room->get('2') : 0;
-            //Tổng phòng đã thuê
+            //Tổng phòng của tầng
             $total_room = $room->sum();
             //Giá trung bình
             $avg_room = $item->room->avg('price') ?? 0;
@@ -41,7 +41,7 @@ class BuildingManagerController extends Controller
                 ]
             ]);
         });
-        // dd($buildings[0]['name']);
+        // dd($buildings[2]);
         return view('admin.manager_building.index', compact('buildings'));
 
     }

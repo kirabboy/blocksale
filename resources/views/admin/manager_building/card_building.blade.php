@@ -21,8 +21,8 @@
             </div>
             <div class="card-building-progress">
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: {{ $building['room']['ratio'] }}%;">
-                        {{ $building['room']['ratio'] }}%</div>
+                    <div class="progress-bar" role="progressbar" style="width: {{ round($building['room']['ratio'], 2) }}%;">
+                        {{ round($building['room']['ratio'], 2) }}%</div>
                 </div>
             </div>
             <div class="card-building-body">
@@ -49,7 +49,7 @@
                         <div class="d-flex justify-content-left align-items-top line-info-building">
                             <img class="icon-card-building-body" src="{{ asset('public/admin/image/occupancy.svg') }}">
                             <div class="building-unit-info">
-                                <p><b class="unit-number">{{ $building['room']['ratio'] }}%</b></p>
+                                <p><b class="unit-number">{{ round($building['room']['ratio'], 2) }}%</b></p>
                                 <p><span class="unit-label text-muted">Lấp đầy</span></p>
                             </div>
                         </div>
