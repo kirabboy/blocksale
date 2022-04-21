@@ -44,7 +44,8 @@ $(document).on('submit', '#mainFormCreate', function(e) {
             data: form.serialize(),
         })
         .fail(function(data) {
-            $.map(data.responseJSON, function(value) {
+            console.log(data);
+            $.map(data.responseJSON.message, function(value) {
                 value.forEach(element => {
                     toastr.error(element, {
                         timeOut: 5000
@@ -57,7 +58,7 @@ $(document).on('submit', '#mainFormCreate', function(e) {
                 timeOut: 5000
             })
             $('#modalFormCreate').modal('hide');
-            closeModalRender();
+            // closeModalRender();
             $('#tableCustomer tbody').prepend(response.data);
         });
 });
@@ -73,7 +74,7 @@ $(document).on('submit', '#mainFormEdit', function (e) {
         data: form.serialize(),
     })
     .fail(function (data) {
-        $.map(data.responseJSON, function(value) {
+        $.map(data.responseJSON.message, function(value) {
             value.forEach(element => {
                 toastr.error(element, {
                     timeOut: 5000
@@ -86,7 +87,7 @@ $(document).on('submit', '#mainFormEdit', function (e) {
             timeOut: 5000
         })
         $('#modalFormEdit').modal('hide');
-        closeModalRender();
+        // closeModalRender();
         $(replace).replaceWith(response.data);
     });
 });
@@ -164,11 +165,11 @@ $(document).ready(function() {
         columnDefs: [
             { targets: 'no-sort', orderable: false }
         ],
-        // columnDefs: [{
-        //     orderable: false,
-        //     className: 'select-checkbox',
-        //     targets: 0
-        // }],
+        columnDefs: [{
+            orderable: false,
+            // className: 'select-checkbox',
+            targets: [0,1]
+        }],
         select: {
             selector: 'td:first-child',
             style: 'multi'

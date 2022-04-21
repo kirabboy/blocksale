@@ -74,8 +74,8 @@ if (!function_exists('checkRoleHasPermissions')) {
         }
     }
 }
-if (!function_exists('showAdminWithRoles')) {
-    function showAdminWithRoles($data){
+if (!function_exists('showAdminWithRolesHtml')) {
+    function showAdminWithRolesHtml($data){
         $str = '';
         foreach ($data as $value){
             $str .= '<span class="badge bg-primary me-1">'.$value->name.'</span>';
@@ -83,6 +83,12 @@ if (!function_exists('showAdminWithRoles')) {
         return $str;
     }
 }
+if (!function_exists('showAdminWithRoles')) {
+    function showAdminWithRoles($data){
+        return $data[0]->name;
+    }
+}
+
 if (!function_exists('selected')) {
     function selected($value1, $value2){
         if($value1 == $value2){

@@ -28,7 +28,7 @@ $(document).on('submit', '#mainFormEdit', function (e) {
         data: form.serialize(),
     })
     .fail(function (data) {
-        $.map(data.responseJSON, function(value) {
+        $.map(data.responseJSON.message, function(value) {
             value.forEach(element => {
                 toastr.error(element, {
                     timeOut: 5000
