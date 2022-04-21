@@ -17,7 +17,7 @@ class BuildingManagerController extends Controller
     public function index()
     {
         $buildings = Building::select('id', 'name', 'number_floor', 'address', 'owner')
-        ->with('room:building_id,purpose,status')->latest()->get();
+        ->with('room:building_id,price,status')->latest()->get();
         // dd($buildings);
         //marco dữ liệu
         $buildings = $buildings->map(function($item){
@@ -25,7 +25,7 @@ class BuildingManagerController extends Controller
             $room = $item->room->countBy('status');
             //đếm phòng đã thuê
             $hired_room = $room->has('2') ? $room->get('2') : 0;
-            //Tổng phòng đã thuê
+            //Tổng phòng của tầng
             $total_room = $room->sum();
             //Giá trung bình
             $avg_room = $item->room->avg('price') ?? 0;
@@ -41,7 +41,7 @@ class BuildingManagerController extends Controller
                 ]
             ]);
         });
-        // dd($buildings[0]['name']);
+        // dd($buildings[2]);
         return view('admin.manager_building.index', compact('buildings'));
 
     }
@@ -63,7 +63,7 @@ class BuildingManagerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BuildingRequest $request)
     {
         $building = Building::create([
             'code' => $request->code,
@@ -119,7 +119,7 @@ class BuildingManagerController extends Controller
                 'total' => $total,
                 'hired' => $hired,
                 'booked' => $item->room->where('status', 1)->count(),
-                'empty' => $item->room->whereIn('status', 0)->count(),
+                'empty' => $item->room->where('status', 0)->count(),
                 'unactive' => $item->room->where('status', 3)->count(),
                 'ratio' => $total !=0 ? $hired/$total * 100 : 0
             ]);
@@ -158,9 +158,25 @@ class BuildingManagerController extends Controller
     public function update(BuildingRequest $request)
     {
         $building = Building::find($request->id);
+        $number_floor = $building->number_floor;
+        
+        //dữ liệu cập nhật
         $data = $request->only('code', 'name', 'number_floor', 'owner', 'owner_phone', 'owner_email', 'address', 'note', 'introduce');
         $building->update($data);
-        $building->load('room:building_id,purpose,status');
+        
+        //kiểm tra số lượng tầng để tạo mới
+        if($data['number_floor'] > $number_floor){
+
+            for($i = $number_floor + 1; $i <= $data['number_floor']; $i++){
+                $building->floor()->create([
+                    'name' => 'Tầng '.$i,
+                    'code' => 'TA'.$i
+                ]);
+            }
+            
+        }
+
+        $building->load('room:building_id,price,status');
         //marco dữ liệu
         //nhóm theo trạng thái
         $room = $building->room->countBy('status');
@@ -169,7 +185,7 @@ class BuildingManagerController extends Controller
         //Tổng phòng đã thuê
         $total_room = $room->sum();
         //Giá trung bình
-        $avg_room = $building->room->avg('purpose') ?? 0;
+        $avg_room = $building->room->avg('price') ?? 0;
         
         //trả dữ liệu
         $building = (object) collect($building->only('id', 'name', 'number_floor', 'address', 'owner'))->merge([

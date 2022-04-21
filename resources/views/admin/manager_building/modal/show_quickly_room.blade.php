@@ -31,4 +31,10 @@
             @endif
         </div>
     </div>
+    <script>
+        var myModalEl = document.getElementById('modalShowQuickly');
+        myModalEl.addEventListener('hidden.bs.modal', function (event) {
+            $(this).remove();
+        })
+    </script>
 </div>

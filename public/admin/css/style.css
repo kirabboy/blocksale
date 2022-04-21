@@ -38,7 +38,10 @@ a {
     border-color: #009c7e;
     font-size: 13px;
 }
-
+.btn-cyan.danger{
+    background-color: #f64e60;
+    border-color: #f64e60;
+}
 .modal-primary .modal-header {
     background-color: #009c7e;
 }

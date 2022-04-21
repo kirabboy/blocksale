@@ -58,6 +58,55 @@ if (!function_exists('roomStatus')) {
         }
     }
 }
+if (!function_exists('permissionOfRole')) {
+    function permissionOfRole($data){
+        $str = '';
+        foreach ($data as $value){
+            $str .= '<span class="badge bg-primary me-1">'.$value->name.'</span>';
+        }
+        return $str;
+    }
+}
+if (!function_exists('checkRoleHasPermissions')) {
+    function checkRoleHasPermissions($role, $permissionName){
+        if($role->hasPermissionTo($permissionName)){
+            return 'selected';
+        }
+    }
+}
+if (!function_exists('showAdminWithRoles')) {
+    function showAdminWithRoles($data){
+        $str = '';
+        foreach ($data as $value){
+            $str .= '<span class="badge bg-primary me-1">'.$value->name.'</span>';
+        }
+        return $str;
+    }
+}
+if (!function_exists('selected')) {
+    function selected($value1, $value2){
+        if($value1 == $value2){
+            return 'selected';
+        }
+        return;
+    }
+}
+
+if (!function_exists('checked')) {
+    function checked($value1, $value2){
+        if($value1 == $value2){
+            return 'checked';
+        }
+        return;
+    }
+}
+if (!function_exists('checkAdminHasRole')) {
+    function checkAdminHasRole($admin, $RoleName){
+        if($admin->hasRole($RoleName)){
+            return 'selected';
+        }
+    }
+}
 if (!function_exists('formatPrice')) {
     function formatPrice($price)
     {

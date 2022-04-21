@@ -1,10 +1,11 @@
-<div class="model-render modal fade modal-primary" id="modalFormedit" tabindex="-1" role="dialog"
+<div class="model-render modal fade modal-primary" id="modalFormEdit" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="form-title">Sửa Tầng</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModalRender()">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
+                    onclick="closeModalRender()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -25,8 +26,8 @@
                             value="{{ $floor->name }}" required>
                     </div>
                     <div class="modal-footer">
-                    <button class="btn btn-cyan bg-secondary" type="button" data-bs-dismiss="modal" 
-                    onclick="closeModalRender()" >Hủy</button>
+                        <button class="btn btn-cyan bg-secondary" type="button" data-bs-dismiss="modal"
+                            onclick="closeModalRender()">Hủy</button>
                         <button class="btn btn-cyan" type="submit">Lưu lại</button>
                     </div>
                 </div>
@@ -34,4 +35,10 @@
             @endif
         </div>
     </div>
+    <script>
+        var myModalEl = document.getElementById('modalFormEdit');
+        myModalEl.addEventListener('hidden.bs.modal', function (event) {
+            $(this).remove();
+        })
+    </script>
 </div>

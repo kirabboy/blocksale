@@ -49,8 +49,16 @@ class Customer extends Model
 		'identification_time',
 		'birthday'
 	];
-
+	public function getBirthdayAttribute($value)
+    {
+        return date('Y-m-d', strtotime($value));
+    }
+	public function getIdentificationTimeAttribute($value)
+    {
+        return date('Y-m-d', strtotime($value));
+    }
 	protected $fillable = [
+		'code',
 		'fullname',
 		'type',
 		'phone',
@@ -59,6 +67,7 @@ class Customer extends Model
 		'identification_number',
 		'identification_place',
 		'identification_time',
+		'identification_address',
 		'gender',
 		'birthday',
 		'country',
@@ -68,6 +77,7 @@ class Customer extends Model
 		'bank_number',
 		'bank_account',
 		'bank_name',
+		'bank_branch',
 		'note'
 	];
 }

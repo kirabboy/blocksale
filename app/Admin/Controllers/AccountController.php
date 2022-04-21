@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\AdminInfo;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use App\Admin\Requests\AccountRequest;
 
 class AccountController extends Controller
 {
@@ -18,7 +20,8 @@ class AccountController extends Controller
     public function index()
     {
         //
-        $admins = Admin::with('admin_info')->latest()->get();
+        $admins = Admin::with(['admin_info', 'roles:id,name'])->latest()->get();
+
         return view('admin.account.index', compact('admins'));
     }
 
@@ -30,7 +33,9 @@ class AccountController extends Controller
     public function create()
     {
         //
-        return view('admin.account.modal.create_account')->render();
+        $roles = Role::all();
+        $gender = config('custom.user.gender');
+        return view('admin.account.modal.create_account', ['roles' => $roles, 'gender' => $gender])->render();
     }
 
     /**
@@ -39,25 +44,22 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
         //
-        $admin = Admin::create([
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-        ]);
+        $data_admin = $request->only('username', 'password');
+        $data_admin['password'] = Hash::make($data_admin['password']);
+        $admin = Admin::create($data_admin);
 
-        $admin_info = AdminInfo::create([
-            'admin_id' => $admin->id,
-            'fullname' => $request->fullname,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'birthday' => $request->birthday,
-            'gender' => $request->gender,
-            'address' => $request->address,
-        ]);
+        $data_admin_info = $request->only('fullname', 'email', 'phone', 'birthday', 'gender', 'address');
 
-        return view('admin.account.row_account', ['admin' => $admin, 'admin_info' => $admin_info])->render();
+        $admin_info = $admin->admin_info()->create($data_admin_info);
+        
+        $admin->assignRole($request->role);
+
+        $admin = $admin->load(['admin_info', 'roles:id,name']);
+
+        return view('admin.account.row_account', ['admin' => $admin])->render();
     }
 
     /**
@@ -77,9 +79,12 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id) {
+
+        $admin = Admin::with(['admin_info', 'roles:id,name'])->findOrFail($id);
+        $roles = Role::all();
+        $gender = config('custom.user.gender');
+        return view('admin.account.modal.edit_account', ['admin' => $admin, 'roles' => $roles, 'gender' => $gender])->render();
     }
 
     /**
@@ -89,9 +94,29 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AccountRequest $request, $id)
     {
         //
+        $data_admin = $request->only('username');
+        if($request->filled('password')){
+            $data_admin['password'] = Hash::make($request->password);
+        }
+        $admin = Admin::findOrFail($id);
+
+        $admin->update($data_admin);
+
+        $data_admin_info = $request->only('fullname', 'email', 'phone', 'birthday', 'gender', 'address');
+
+        $admin_info = $admin->admin_info()->update($data_admin_info);
+        
+        $admin->syncRoles($request->role);
+        $admin = $admin->load(['admin_info', 'roles:id,name']);
+
+        $result = view('admin.account.row_account', ['admin' => $admin])->render();
+        return response()->json([
+            'message' => 'Thực hiện thành công',
+            'data' => $result
+        ]);
     }
 
     /**
@@ -100,8 +125,13 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
+        $admin = Admin::findOrFail($id);
+        $admin->delete();
+        if($request->ajax()){
+            return response()->json(['status' => 'success', 'id' => $admin->id]);
+        }
     }
 }

@@ -7,8 +7,10 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
-class BuildingRequest extends FormRequest
+class AccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,29 +31,27 @@ class BuildingRequest extends FormRequest
     {
         if($this->method() == 'POST'){
             return [
-                'code' => ['required', 'string', 'max:255'],
-                'name' => ['required', 'string', 'max:255'],
-                'number_floor' => ['required', 'integer', 'min:1'],
-                'address' => ['required', 'string', 'max:255'],
-                'owner' => ['required', 'string', 'max:255'],
-                'owner_phone' => ['required', 'string', 'max:255'],
-                'owner_email' => ['required', 'email', 'string', 'max:255'],
+                'username' => ['required', 'max:255', 'unique:App\Models\Admin,username'],
+                'password' => ['required', 'max:255'],
+                'gender' => ['required', Rule::in(collect(config('custom.user.gender'))->keys()->all())],
+                'role' => ['required']
             ];
-        }
-        elseif($this->method() == 'PUT'){
+        }elseif($this->method() == 'PUT'){
             return [
-                'id' => ['required', 'exists:App\Models\Building,id'],
-                'code' => ['required', 'string', 'max:255'],
-                'name' => ['required', 'string', 'max:255'],
-                'number_floor' => ['required', 'integer', 'min:1'],
-                'address' => ['required', 'string', 'max:255'],
-                'owner' => ['required', 'string', 'max:255'],
-                'owner_phone' => ['required', 'string', 'max:255'],
-                'owner_email' => ['required', 'email', 'string', 'max:255'],
+                'id' => ['required', 'exists:App\Models\Admin,id'],
+                'username' => ['required', 'max:255', 'unique:App\Models\Admin,username,'.$this->id],
+                'gender' => ['required', Rule::in(collect(config('custom.user.gender'))->keys()->all())],
+                'role' => ['required']
             ];
         }
     }
-
+    public function withValidator($validator){
+        $validator->after(function ($validator) {
+            if (!Str::of($this->username)->isAscii() || strpos($this->username, ' ')) {
+                $validator->errors()->add('username', 'Không chứ các ký tự đặc biệt');
+            }
+        });
+    }
     protected function failedValidation(Validator $validator)
     {
         $errors = (new ValidationException($validator))->errors();

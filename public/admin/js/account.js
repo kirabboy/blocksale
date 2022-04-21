@@ -5,21 +5,123 @@ $('#btn-create-account').click(function() {
             data: {},
         })
         .fail(function(data) {
-            console.log(data);
-
+            toastr.error('Vui lòng tải lại trang', {
+                timeOut: 5000
+            })
         })
         .done(function(response) {
-            console.log(response);
             $('.modal-area').append(response);
-            $('#modal-form').modal('show');
+            $('#modalFormCreate').modal('show');
         });
 });
 
+$(document).on('submit', '#mainFormCreate', function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var actionUrl = form.attr('action');
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
+    $.ajax({
+            url: actionUrl,
+            type: 'POST',
+            data: form.serialize(),
+        })
+        .fail(function(data) {
+            $.map(data.responseJSON.message, function(value, index) {
+                $.each(value, function(key, value) {
+                    toastr.error(value, {
+                        timeOut: 5000
+                    });
+                });
+            });
+        })
+        .done(function(response) {
+            toastr.success('Thực hiện thành công', {
+                timeOut: 5000
+            })
+            $('#modalFormCreate').modal('hide');
+            closeModalRender();
+            $('#afterSubmit').prepend(response);
+        });
+});
+$(document).on('click', '.admin-edit', function (e) {
+    e.preventDefault();
+    var that = $(this),
+        route = that.data('route');
+    $.ajax({
+            url: route,
+            type: 'GET'
+        })
+        .fail(function (data) {
+            toastr.error('Vui lòng tải lại trang', {
+                timeOut: 5000
+            })
+        })
+        .done(function (response) {
+            $('.modal-area').append(response);
+
+            $('#modalFormEdit').modal('show');
+        });
+});
+$(document).on('submit', '#mainFormEdit', function (e) {
+    e.preventDefault();
+    var form = $(this),
+        replace = 'table tbody tr.item-' + form.find('input[name="id"]').val();
+    var actionUrl = form.attr('action');
+    $.ajax({
+        url: actionUrl,
+        type: 'PUT',
+        data: form.serialize(),
+    })
+    .fail(function (data) {
+        $.map(data.responseJSON.message, function(value, index) {
+            $.each(value, function(key, value) {
+                toastr.error(value, {
+                    timeOut: 5000
+                });
+            });
+        });
+    })
+    .done(function (response) {
+        toastr.success(response.message, {
+            timeOut: 5000
+        })
+        $('#modalFormEdit').modal('hide');
+        closeModalRender();
+        $(replace).replaceWith(response.data);
+    });
+});
+$(document).on('click', '.admin-delete', function (e) {
+    e.preventDefault();
+    if (!confirm('Bạn có chắc là muốn thực hiện ? ')) {
+        return;
+    }
+    var that = $(this),
+        route = that.data('route');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: route,
+        type: 'DELETE'
+    })
+    .fail(function (data) {
+        toastr.error('Vui lòng tải lại trang', {
+            timeOut: 5000
+        })
+    })
+    .done(function (response) {
+        toastr.success('Thực hiện thành công', {
+            timeOut: 5000
+        })
+        $('tr.item-' + response.id).remove();
+    });
+});
 $(document).ready( function () {
     $('#table-account').DataTable();
 } );
-
-function closeModal() {
-    $('#modal-form').modal('hide');
-
-}

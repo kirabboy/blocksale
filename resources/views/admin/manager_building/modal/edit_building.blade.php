@@ -52,8 +52,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="">Số tầng <sup class="text-danger">*</sup></label>
-                                        <input type="number" class="form-control" name="number_floor" min="{{ $building->number_floor }}"
-                                            placeholder="Số tầng" value="{{ $building->number_floor }}" required>
+                                        <input type="number" class="form-control" name="number_floor"
+                                            min="{{ $building->number_floor }}" placeholder="Số tầng"
+                                            value="{{ $building->number_floor }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -94,63 +95,70 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button class="btn btn-cyan bg-secondary" data-bs-dismiss="modal" type="button"
-                    onclick="closeModalRender()" >Hủy</button>
+                    <button class="btn btn-cyan bg-secondary" data-bs-dismiss="modal" type="button"
+                        onclick="closeModalRender()">Hủy</button>
                     <button class="btn btn-cyan" type="submit">Lưu lại</button>
                 </div>
             </form>
             @endif
         </div>
     </div>
-</div>
-<script src={{ asset('/public/packages/ckeditor/ckeditor.js') }}></script>
-<script src={{ asset('/public/packages/ckfinder/ckfinder.js') }}></script>
+    <script src="{{ asset('/public/packages/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('/public/packages/ckfinder/ckfinder.js') }}"></script>
 
-<script>
-    CKEDITOR.replace('introduce', {
-        toolbar: [{
-                name: 'clipboard',
-                items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
-            },
-            {
-                name: 'editing',
-                items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt']
-            },
-            {
-                name: 'basicstyles',
-                items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-',
-                    'RemoveFormat'
-                ]
-            },
-            {
-                name: 'paragraph',
-                items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
-                    'CreateDiv',
-                    '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr',
-                    'BidiRtl'
-                ]
-            },
-            {
-                name: 'links',
-                items: ['Link', 'Unlink', 'Anchor']
-            },
-            {
-                name: 'insert',
-                items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']
-            },
-            '/',
-            {
-                name: 'styles',
-                items: ['Styles', 'Format', 'Font', 'FontSize']
-            },
-            {
-                name: 'colors',
-                items: ['TextColor', 'BGColor']
-            },
-            {
-                name: 'tools',
-                items: ['Maximize', 'ShowBlocks', '-', 'About']
-            }
-        ]
-    });
-</script>
+    <script>
+        CKEDITOR.replace('introduce', {
+            toolbar: [{
+                    name: 'clipboard',
+                    items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
+                },
+                {
+                    name: 'editing',
+                    items: ['Find', 'Replace', '-', 'SelectAll', '-', 'SpellChecker', 'Scayt']
+                },
+                {
+                    name: 'basicstyles',
+                    items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-',
+                        'RemoveFormat'
+                    ]
+                },
+                {
+                    name: 'paragraph',
+                    items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote',
+                        'CreateDiv',
+                        '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-',
+                        'BidiLtr',
+                        'BidiRtl'
+                    ]
+                },
+                {
+                    name: 'links',
+                    items: ['Link', 'Unlink', 'Anchor']
+                },
+                {
+                    name: 'insert',
+                    items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak',
+                        'Iframe'
+                    ]
+                },
+                '/',
+                {
+                    name: 'styles',
+                    items: ['Styles', 'Format', 'Font', 'FontSize']
+                },
+                {
+                    name: 'colors',
+                    items: ['TextColor', 'BGColor']
+                },
+                {
+                    name: 'tools',
+                    items: ['Maximize', 'ShowBlocks', '-', 'About']
+                }
+            ]
+        });
+        var myModalEl = document.getElementById('modalFormEdit');
+        myModalEl.addEventListener('hidden.bs.modal', function (event) {
+            $(this).remove();
+        })
+    </script>
+</div>

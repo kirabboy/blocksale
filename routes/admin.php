@@ -12,6 +12,9 @@ use App\Admin\Controllers\AdminBuildingController;
 use App\Admin\Controllers\RoomController;
 use App\Admin\Controllers\FloorManagerController;
 use App\Admin\Controllers\RoomManagerController;
+use App\Admin\Controllers\RoleManagerController;
+use App\Admin\Controllers\PermissionManagerController;
+use App\Admin\Controllers\CustomerManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +64,25 @@ Route::group(['middleware' => ['admin']], function () {
     });
     Route::prefix('phong')->group(function(){
         Route::get('show-quickly/{room:id}', [RoomManagerController::class, 'showQuickly'])->name('admin.room.show.quickly');
+    });
+
+    Route::prefix('phan-quyen')->group(function () {
+        //
+        Route::resource('roles', RoleManagerController::class);
+        Route::resource('permissions', PermissionManagerController::class);
+        Route::post('xu-ly-nhieu-role', [RoleManagerController::class,'multiple'])->name('roles.multiple');
+        Route::post('xu-ly-nhieu-permission', [PermissionManagerController::class,'multiple'])->name('permissions.multiple');
+    });
+    Route::prefix('khach-hang')->group(function(){
+        Route::get('/', [CustomerManagerController::class, 'index'])->name('admin.customer.index');
+        Route::get('create', [CustomerManagerController::class, 'create'])->name('admin.customer.create');
+        Route::post('store', [CustomerManagerController::class, 'store'])->name('admin.customer.store');
+
+        Route::get('edit/{customer:id}', [CustomerManagerController::class, 'edit'])->name('admin.customer.edit');
+        Route::put('update', [CustomerManagerController::class, 'update'])->name('admin.customer.update');
+        Route::delete('delete/{customer:id}', [CustomerManagerController::class, 'delete'])->name('admin.customer.delete');
+        Route::delete('xu-ly-nhieu-khach-hang', [CustomerManagerController::class,'multiple'])->name('admin.customer.multiple');
+
     });
     
 });

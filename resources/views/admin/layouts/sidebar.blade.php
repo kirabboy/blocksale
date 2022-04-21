@@ -14,14 +14,6 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="{{ route('quan-ly-admin.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
-                        <p>
-                            Quản lý tài khoản Admin
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item menu-open">
                     <a href="{{ route('dashboard.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -51,7 +43,7 @@
                 <li class="nav-header text-uppercase">Quản lý khách hàng</li>
 
                 <li class="nav-item">
-                    <a href="{{ route('ho-so-khach-hang.index') }}" class="nav-link">
+                    <a href="{{ route('admin.customer.index') }}" class="nav-link">
                         <i class="nav-icon far fa-user"></i>
                         <p>
                             Hồ sơ khách hàng
@@ -65,6 +57,24 @@
                     <a href="{{ route('hop-dong.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>Hợp đồng</p>
+                    </a>
+                </li>
+                <li class="nav-header text-uppercase">Quản lý tổ chức</li>
+
+                <li class="nav-item">
+                    <a href="{{ route('roles.index') }}" class="nav-link">
+                        <i class="nav-icon far fa-user"></i>
+                        <p>
+                            Vai trò
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('quan-ly-admin.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>
+                            Người dùng
+                        </p>
                     </a>
                 </li>
             </ul>

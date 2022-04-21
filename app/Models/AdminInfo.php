@@ -47,4 +47,8 @@ class AdminInfo extends Model
 		'gender',
 		'address'
 	];
+	public function getBirthdayAttribute($value)
+    {
+        return date('d-m-Y', strtotime($value));
+    }
 }

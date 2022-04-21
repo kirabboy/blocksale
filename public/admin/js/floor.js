@@ -14,7 +14,7 @@ $('.floor-edit').click(function (e) {
         .done(function (response) {
             $('.modal-area').append(response);
 
-            $('#modalFormedit').modal('show');
+            $('#modalFormEdit').modal('show');
         });
 });
 $(document).on('submit', '#mainFormEdit', function (e) {
@@ -28,15 +28,19 @@ $(document).on('submit', '#mainFormEdit', function (e) {
         data: form.serialize(),
     })
     .fail(function (data) {
-        toastr.error('Vui lòng tải lại trang', {
-            timeOut: 5000
-        })
+        $.map(data.responseJSON, function(value) {
+            value.forEach(element => {
+                toastr.error(element, {
+                    timeOut: 5000
+                })
+            });
+        });
     })
     .done(function (response) {
         toastr.success(response.message, {
             timeOut: 5000
         })
-        $('#modalFormedit').modal('hide');
+        $('#modalFormEdit').modal('hide');
         closeModalRender();
         $(replace).text(response.data);
     });
