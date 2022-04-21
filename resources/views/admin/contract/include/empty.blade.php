@@ -9,7 +9,8 @@
             </div>
             <div class="col-12 col-sm-4 text-center">
                 <p class="m-2"> </p>
-                <button class="btn btn-success text-12" onclick="createContract(this)" data-url="{{ route('hop-dong.create') }}">
+                <button class="btn btn-success text-12" data-room_id="{{ $room->id }}" onclick="createContract(this)"
+                    data-url="{{ route('hop-dong.create') }}">
                     <i class="fa fa-plus-circle"></i> Tạo hợp đồng
                 </button>
             </div>

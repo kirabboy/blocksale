@@ -28,6 +28,11 @@ Route::get('dang-nhap', [AuthController::class, 'getLogin'])->name('admin.getLog
 Route::post('dang-nhap', [AuthController::class, 'postLogin'])->name('admin.postLogin');
 
 Route::group(['middleware' => ['admin']], function () {
+    Route::prefix('ho-so-khach-hang')->group(function(){
+        Route::get('show-select', [CustomerController::class, 'showSelectCustomer'])->name('customer.showSelect');
+        Route::get('get-datatable', [CustomerController::class, 'indexDatatable'])->name('customer.indexDatatable');
+
+    });
     Route::resources([
         '/dashboard' => AdminHomeController::class,
         '/quan-ly-admin' => AccountController::class,
@@ -36,6 +41,8 @@ Route::group(['middleware' => ['admin']], function () {
         '/hop-dong' => ContractController::class,
         '/phong' =>RoomController::class,
     ]);
+
+ 
 
     Route::prefix('co-so')->group(function(){
         Route::get('/', [BuildingManagerController::class, 'index'])->name('admin.building.index');

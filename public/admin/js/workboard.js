@@ -36,6 +36,7 @@ function createContract(e) {
 }
 
 
+
 $('#tool-filter-status-room button').click(function() {
     $.ajax({
             url: $('#tool-filter-status-room').data('url'),

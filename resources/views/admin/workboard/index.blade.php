@@ -176,7 +176,6 @@
 
                                     </div>
                                     <div class="tab-pane fade" id="nav_dat_coc_giu_cho">
-                                        <p> </p>
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row">

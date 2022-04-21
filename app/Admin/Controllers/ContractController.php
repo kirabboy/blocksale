@@ -4,6 +4,8 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Contract;
+use App\Models\Room;
 
 class ContractController extends Controller
 {
@@ -23,10 +25,11 @@ class ContractController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
-        return view('admin.contract.modal.create_contract');
+        $room = Room::whereId($request->room_id)->first();
+        return view('admin.contract.modal.create_contract', compact('room'));
     }
 
     /**
@@ -38,6 +41,10 @@ class ContractController extends Controller
     public function store(Request $request)
     {
         //
+
+        $contract = Contract::create([
+
+        ]);
     }
 
     /**
