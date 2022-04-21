@@ -4,6 +4,8 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Customer;
+use Datatables;
 
 class CustomerController extends Controller
 {
@@ -82,5 +84,14 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showSelectCustomer(){
+        return view('admin.customer.modal.select_customer')->render();
+    }
+
+    public function indexDatatable(){
+        $customers = Customer::latest()->get();
+        return datatables()->of($customers)->toJson();
     }
 }

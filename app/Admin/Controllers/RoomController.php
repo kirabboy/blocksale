@@ -71,7 +71,7 @@ class RoomController extends Controller
         if($current_contract){
             $html_contract = view('admin.contract.include.show_quickly')->render();
         }else{
-            $html_contract = view('admin.contract.include.empty')->render();
+            $html_contract = view('admin.contract.include.empty', compact('room'))->render();
         }
         $html_room =  view('admin.room.show', compact('room','current_contract'))->render();
         return [$html_room, $html_contract];
