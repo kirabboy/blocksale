@@ -4,8 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="form-title">Sửa Tầng</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                    onclick="closeModalRender()">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -26,8 +25,7 @@
                             value="{{ $floor->name }}" required>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-cyan bg-secondary" type="button" data-bs-dismiss="modal"
-                            onclick="closeModalRender()">Hủy</button>
+                        <button class="btn btn-cyan bg-secondary" type="button" data-bs-dismiss="modal">Hủy</button>
                         <button class="btn btn-cyan" type="submit">Lưu lại</button>
                     </div>
                 </div>

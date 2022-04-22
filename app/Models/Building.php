@@ -8,6 +8,8 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Slug;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class Building
@@ -28,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Building extends Model
 {
+	use Slug;
 	protected $table = 'buildings';
 
 	protected $casts = [
@@ -37,6 +40,8 @@ class Building extends Model
 	protected $fillable = [
 		'code',
 		'name',
+		'slug',
+		'avatar',
 		'address',
 		'owner',
 		'owner_phone',
@@ -45,7 +50,22 @@ class Building extends Model
 		'note',
 		'introduce'
 	];
+	protected $attributes = [
+        'avatar' => 'public/image/default-image.png'
+    ];
 
+	public static function boot()
+    {
+        parent::boot();
+        
+        static::saving(function ($model) {
+            $model->slug = $model->createSlug($model->name, $model->id ? $model->id : 0);
+        });
+		static::saved(function () {
+			Cache::flush();
+		 });
+        
+    }
 	public function floor(){
 		return $this->hasMany(Floor::class, 'building_id');
 	}

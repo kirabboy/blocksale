@@ -4,8 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Tạo tài khoản Admin</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                    onclick="closeModalRender()">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -70,8 +69,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-cyan bg-secondary" data-bs-dismiss="modal" type="button"
-                        onclick="closeModalRender()">Hủy</button>
+                    <button class="btn btn-cyan bg-secondary" data-bs-dismiss="modal" type="button">Hủy</button>
                     <button type="submit" class="btn btn-cyan">Lưu lại</button>
                 </div>
             </form>

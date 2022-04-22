@@ -1,11 +1,10 @@
-<div class="modal model-render fade modal-primary" id="modalFormedit" tabindex="-1" role="dialog"
+<div class="modal model-render fade modal-primary" id="modalFormEdit" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="form-title">Sửa tòa nhà</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"
-                    onclick="closeModalRender()">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -19,6 +18,10 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="main-tab" data-toggle="tab" href="#main" role="tab"
                                 aria-selected="true">Tòa nhà</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="image-tab" data-toggle="tab" href="#imageTab" role="tab"
+                                aria-selected="false">Hình ảnh</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="extend-tab" data-toggle="tab" href="#extend" role="tab"
@@ -92,11 +95,22 @@
                                 <textarea name="introduce">{{ $building->introduce }}</textarea>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="imageTab" role="tabpanel">
+                            <div class="form-group">
+                                <label for="">Hình đại diện</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control d-none" name="avatar"
+                                        value="{{ $building->avatar }}">
+                                    <img id="avatar" class="add-image-ckfinder pointer" data-preview="#avatar"
+                                        data-input="input[name='avatar']" data-type=""
+                                        src="{{asset($building->avatar)}}" alt="" style="width: 100%">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-cyan bg-secondary" data-bs-dismiss="modal" type="button"
-                        onclick="closeModalRender()">Hủy</button>
+                    <button class="btn btn-cyan bg-secondary" data-bs-dismiss="modal" type="button">Hủy</button>
                     <button class="btn btn-cyan" type="submit">Lưu lại</button>
                 </div>
             </form>

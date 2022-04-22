@@ -1,3 +1,7 @@
+function formatNumber(n) {
+    // format number 1000000 to 1,234,567
+    return n.toString().replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
 $(document).ready(function() {
     $(".next").click(function() {
         $(".pagination")
@@ -20,40 +24,33 @@ $(document).ready(function() {
             .removeClass("active");
     });
 });
-$("#slider-range").slider({
-    range: true,
-    min: 0,
-    max: 15,
-    step: 0.1,
-    values: [0, 15],
-    slide: function(e, ui) {
-        var min = Math.floor(ui.values[0]);
-        $('.slider-time').html(min + ' tr');
 
-        var max = Math.floor(ui.values[1]);
 
-        $('.slider-time2').html(max + ' tr');
+$(function() {
+    var slide_range = $("#sliderRange"), 
+    price_min = parseInt(slide_range.data("min")), 
+    price_max = parseInt(slide_range.data("max")), 
+    price_min_current = parseInt(slide_range.data("min_current")), 
+    price_max_current = parseInt(slide_range.data("max_current")), 
+    price_step = parseInt(slide_range.data("step"));
+    slide_range.slider({
+      step: price_step,
+      range: true, 
+      min: price_min, 
+      max: price_max, 
+      values: [price_min_current, price_max_current], 
+      slide: function(event, ui){
+        $('input[name="price_min"]').val(ui.values[0]);
+        $('input[name="price_max"]').val(ui.values[1]);
+        $('.slider-time').html(formatNumber(ui.values[0]) + 'đ');
+        $('.slider-time2').html(formatNumber(ui.values[1]) + 'đ');
 
-        $('.box').each(function() {
-            var startTime = (min);
-            var endTime = (max);
-            //console.log('.box[data-start-time="' + startTime + '"]');
 
-            var value = $(this).data('start-time');
-            //console.log('Selecting all events between ' + startTime + ' and ' + endTime);
-            // skeleton key
-            //console.log(value + '<=' + endTime);
-            if ((parseInt(endTime) >= parseInt(value) && (parseInt(startTime) <= parseInt(value)))) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-            //
-        });
+      }
+    });
 
-    }
-});
-$('.sub-menu ul').hide();
+  });
+
 $(".sub-menu a").click(function() {
     $(this).parent(".sub-menu").children("ul").slideToggle("100");
     $(this).find(".right").toggleClass("fa-caret-up fa-caret-down");

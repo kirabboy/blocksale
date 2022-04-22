@@ -8,6 +8,8 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\Slug;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class Room
@@ -27,6 +29,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Room extends Model
 {
+	use Slug;
+
 	protected $table = 'rooms';
 	public $incrementing = false;
 
@@ -40,21 +44,44 @@ class Room extends Model
 
 	protected $fillable = [
 		'id',
-		'code',
 		'building_id',
-		'name',
 		'floor_id',
+		'code',
+		'name',
+		'name_blog',
+		'slug',
+		'avatar',
 		'type',
 		'purpose',
 		'acreage',
 		'price',
 		'note',
-		'status'
+		'status',
+		'description'
 	];
 
-	
+	protected $attributes = [
+        'avatar' => 'public/image/default-image.png'
+    ];
+
+	public static function boot()
+    {
+        parent::boot();
+        
+        static::saving(function ($model) {
+            $model->slug = $model->createSlug($model->name_blog, $model->id ? $model->id : 0);
+        }); 
+        // static::saved(function () {
+		// 	Cache::flush();
+		//  });
+    }
+
 	public function contract()
 	{
 		return $this->hasMany(Contract::class,'id_room', 'id');
+	}
+
+	public function building(){
+		return $this->belongsTo(Building::class,'building_id', 'id');
 	}
 }

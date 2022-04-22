@@ -29,7 +29,7 @@ $(document).on('click', '.building-edit', function(e) {
         .done(function(response) {
             $('.modal-area').append(response);
             
-            $('#modalFormedit').modal('show');
+            $('#modalFormEdit').modal('show');
         });
 });
 $(document).on('submit', '#mainFormCreate', function(e) {
@@ -88,7 +88,7 @@ $(document).on('submit', '#mainFormEdit', function(e) {
             toastr.success('Thực hiện thành công', {
                 timeOut: 5000
             })
-            $('#modalFormedit').modal('hide');
+            $('#modalFormEdit').modal('hide');
             closeModalRender();
             $(replace).replaceWith(response);
         });

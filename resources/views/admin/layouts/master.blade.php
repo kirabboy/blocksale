@@ -24,7 +24,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="url-home" content="{{ url('/quan-tri') }}" />
+    <meta name="url-home" content="{{ url('/') }}" />
     @stack('css')
 </head>
 
@@ -56,6 +56,8 @@
     @if ((session('success')) || (session('error')))
         @include('admin.layouts.include.toastr');
     @endif
+    @stack('script-plugin')
+
     <script src="{{ asset('public/admin/js/all.js') }}"></script>
 
     @stack('script')

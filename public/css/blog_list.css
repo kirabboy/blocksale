@@ -366,7 +366,7 @@ nav ul li ul li a:hover {
     margin: 24px 1px 4px 1px;
 }
 
-.phong-moi .widget {
+.room .widget {
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: #fff;
@@ -375,32 +375,32 @@ nav ul li ul li a:hover {
     margin-top: 32px;
 }
 
-.phong-moi .widget>.text-center {
+.room .widget>.text-center {
     padding: 15px 0;
 }
 
-.phong-moi .widget-title {
+.room .widget-title {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.phong-moi .widget-title a {
+.room .widget-title a {
     border: 1px solid;
     border-radius: 20px;
     padding: 0 10px;
     padding-top: 5px;
 }
 
-.phong-moi h3 {
+.room h3 {
     font-size: 24px !important;
 }
 
-.phong-moi img {
+.room img {
     border-radius: 10px;
 }
 
-.phong-moi .widget-content .row>.col:last-child h4 {
+.room .widget-content .row>.col:last-child h4 {
     margin-bottom: 20px !important;
     font-size: 20px;
     overflow: hidden;
@@ -412,16 +412,16 @@ nav ul li ul li a:hover {
     -webkit-box-orient: vertical;
 }
 
-.phong-moi .left div {
+.room .left div {
     margin-bottom: 10px;
 }
 
-.phong-moi .widget-content .col>div {
+.room .widget-content .col>div {
     display: flex;
     justify-content: center;
 }
 
-.phong-moi .left {
+.room .left {
     flex-grow: 1;
     margin-right: 20px;
 }
@@ -429,26 +429,26 @@ nav ul li ul li a:hover {
 
 /* Phòng mới */
 
-.phong-moi .widget-content>.row {
+.room .widget-content>.row {
     margin-bottom: 15px;
 }
 
-.phong-moi img {
+.room img {
     height: 100%;
 }
 
-.phong-moi .left div:last-child {
+.room .left div:last-child {
     margin: 0;
 }
 
-.phong-moi .left i {
+.room .left i {
     width: 24px;
     font-size: 18px;
     text-align: center;
     margin-right: 5px;
 }
 
-.phong-moi .amount {
+.room .amount {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -465,11 +465,11 @@ nav ul li ul li a:hover {
     border-bottom: none;
 }
 
-.phong-moi .amount h2 {
+.room .amount h2 {
     font-size: 48px;
 }
 
-.phong-moi .amount p {
+.room .amount p {
     width: 100%;
     text-align: center;
 }
@@ -481,7 +481,7 @@ nav ul li ul li a:hover {
 /* REPONSIVE một tý */
 
 @media only screen and (max-width: 768px) {
-    .phong-moi .widget-content .row>.col:last-child h4 {
+    .room .widget-content .row>.col:last-child h4 {
         margin-top: 10px !important;
     }
 }
