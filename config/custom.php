@@ -42,4 +42,6 @@ return [
             2 => 'Tổ chức'
         ]
     ],
+    'currency' => 'đ',
+    'shortcut-icon' => 'public/image/logo.png',
 ];

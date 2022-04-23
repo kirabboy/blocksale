@@ -134,6 +134,14 @@ if (!function_exists('checked')) {
         return;
     }
 }
+if (!function_exists('checkedArray')) {
+    function checkedArray($value, $array){
+        if(in_array($value, $array)){
+            return 'checked';
+        }
+        return;
+    }
+}
 if (!function_exists('checkAdminHasRole')) {
     function checkAdminHasRole($admin, $RoleName){
         if($admin->hasRole($RoleName)){

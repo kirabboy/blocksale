@@ -4,6 +4,7 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Room;
 
 class AdminHomeController extends Controller
 {
@@ -15,7 +16,12 @@ class AdminHomeController extends Controller
     public function index()
     {
         //
-        return view('admin.home');
+        $room = Room::select('status')->get();
+        
+        $room = $room->countBy('status');
+        $marco = [$room[0] ?? 0, $room[2] ?? 0, $room[1] ?? 0, $room[3] ?? 0];
+
+        return view('admin.home', compact('marco'));
     }
 
     /**

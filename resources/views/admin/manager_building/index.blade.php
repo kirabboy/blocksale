@@ -24,6 +24,9 @@
     </div>
   
 @endsection
+@push('script-plugin')
+<script src="{{ asset('public/packages/ckfinder/ckfinder.js') }}"></script>
+@endpush
 @push('script')
     <!-- <script src="{{ asset('public/admin/js/home.js') }}"></script> -->
     <script src="{{ asset('public/admin/js/building.js') }}"></script>

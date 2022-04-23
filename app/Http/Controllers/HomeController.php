@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use App\Models\Room;
+use App\Models\Building;
 
 class HomeController extends Controller
 {
@@ -14,7 +17,16 @@ class HomeController extends Controller
     public function index()
     {
         //
-        return view('public.home');
+        $rooms = Cache::remember('room_home', now()->minutes(60), function(){
+            return Room::select('id', 'building_id', 'name_blog', 'acreage', 'status', 'type', 'price', 'slug', 'avatar')->whereNotIn('status', [3])->with('building:id,address')->orderBy('id', 'desc')->limit(4)->get();
+        });
+        $buildings = Cache::remember('building_home', now()->minutes(60), function(){
+            return Building::select('id', 'slug', 'name', 'avatar', 'address')->orderBy('id', 'desc')->get();
+        });
+
+        $rooms_empty = $rooms->where('status', 0);
+        
+        return view('public.home', compact('rooms', 'rooms_empty', 'buildings'));
     }
 
     /**

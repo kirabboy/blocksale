@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
-@section('title')
-@endsection
+@section('title', 'Dashboard')
 @push('css')
 @endpush
 @section('content')
@@ -11,7 +10,7 @@
                     BÁO CÁO TỶ LỆ LẤP ĐẦY</a>
             </div>
             <div class="col-12 col-sm-6 text-center">
-                <canvas id="pieChart"
+                <canvas id="pieChart" data-statistic="{{ implode(',', $marco) }}"
                     style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 <div class="pt-3"></div>
                 <a class="btn btn-white">Tỷ lệ lấp đầy</a>

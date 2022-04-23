@@ -15,7 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resources([
-    '/' => HomeController::class,
-    '/can-ho' => BlogController::class,
-]);
+
+Route::get('/', [HomeController::class, 'index'])->name('index');
+
+Route::group(['prefix' => 'can-ho', 'as' => 'blog.'], function () {
+    Route::get('{slug}', [BlogController::class, 'show'])->name('show');
+    Route::get('/', [BlogController::class, 'index'])->name('index');
+});
+Route::get('toa-nha/{slug}', [BlogController::class, 'building'])->name('blog.building');
+

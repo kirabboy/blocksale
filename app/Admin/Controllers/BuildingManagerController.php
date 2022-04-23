@@ -65,17 +65,10 @@ class BuildingManagerController extends Controller
      */
     public function store(BuildingRequest $request)
     {
-        $building = Building::create([
-            'code' => $request->code,
-            'name' => $request->name,
-            'number_floor' => $request->number_floor,
-            'owner' => $request->owner,
-            'owner_phone' => $request->owner_phone,
-            'owner_email' => $request->owner_email,
-            'address' => $request->address,
-            'note' => $request->note,
-            'introduce' => $request->introduce,
-        ]);
+        $data = $request->only('code', 'name', 'avatar', 'number_floor', 'owner', 'owner_phone', 'owner_email', 'address', 'note', 'introduce');
+
+        $building = Building::create($data);
+
         for($i = 1; $i <= $building['number_floor']; $i++){
             $building->floor()->create([
                 'name' => 'Tầng '.$i,
@@ -161,7 +154,7 @@ class BuildingManagerController extends Controller
         $number_floor = $building->number_floor;
         
         //dữ liệu cập nhật
-        $data = $request->only('code', 'name', 'number_floor', 'owner', 'owner_phone', 'owner_email', 'address', 'note', 'introduce');
+        $data = $request->only('code', 'name', 'avatar', 'number_floor', 'owner', 'owner_phone', 'owner_email', 'address', 'note', 'introduce');
         $building->update($data);
         
         //kiểm tra số lượng tầng để tạo mới

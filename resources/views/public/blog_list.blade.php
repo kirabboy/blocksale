@@ -1,221 +1,118 @@
 @extends('public.layouts.master')
 @section('title')
-    Danh sách căn hộ
+Danh sách căn hộ
 @endsection
 @push('css')
-    <link rel="stylesheet" href="{{ asset('public/css/blog_list.css') }}">
+<link rel="stylesheet" href="{{ asset('public/css/home.css') }}">
+<link rel="stylesheet" href="{{ asset('public/css/blog_list.css') }}">
 @endpush
 @section('content')
-    <main>
-        <section class="detail-home">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-lg-4">
-                        <div class="box_filter">
+<main>
+    <section class="detail-home">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="box_filter">
+                        <form action="{{ url()->current() }}" method="get">
                             <nav class='animated bounceInDown'>
                                 <div class="title_filter">
                                     <span class="tit">Bộ lọc</span>
-                                    <div class="btn_fil">
-                                        <div class="btn_">
-                                            <span>Áp dụng</span>
-                                        </div>
-                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-outline-primary rounded-pill">
+                                        Áp dụng
+                                    </button>
                                 </div>
                                 <ul class="menu_filter">
-                                    <li class='sub-menu'><a href='#message'>Giá<div class='fa fa-caret-down right'></div>
-                                        </a>
-                                        <ul>
-                                            <div id="time-range">
-                                                <div class="d-flex justify-content-between mb-3">
-                                                    <span class="slider-time">0 tr</span> <span class="slider-time2">15
-                                                        tr</span>
-                                                </div>
-
-                                                <div class="sliders_step1">
-                                                    <div class="flat-slider" id="slider-range"></div>
-                                                </div>
-                                                <div class="d-flex justify-content-between mt-3">
-                                                    <span class="">0 tr</span> <span class="">15
-                                                        tr</span>
-                                                </div>
+                                    <li class='sub-menu'><a href='#message'>Giá<div class='fa fa-caret-down right'>
                                             </div>
-                                        </ul>
-                                    </li>
+                                        </a>
+                                        <div id="time-range">
+                                            <div class="sliders_step1">
 
-                                    <li class='sub-menu'><a href='#settings'>Tiện ích <div class='fa fa-caret-down right'>
-                                            </div></a>
-                                        <ul>
-                                            <li>
-                                                <label class="box_list" id="room_bathroom">
-                                                    <span class="title_lis">
-                                                        <span class="icon-toilet"
-                                                            style="color: rgb(51, 51, 51); font-size: 20px;"></span>
-                                                        <span class="name_lis">WC riêng
-                                                        </span>
-                                                    </span>
-                                                    <input type="checkbox" name="utilitiesCheckbox">
-                                                    <span class="checkbox_list">
-                                                    </span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="box_list" id="room_bathroom">
-                                                    <span class="title_lis">
-                                                        <span class="icon-toilet"
-                                                            style="color: rgb(51, 51, 51); font-size: 20px;"></span>
-                                                        <span class="name_lis">WC riêng
-                                                        </span>
-                                                    </span>
-                                                    <input type="checkbox" name="utilitiesCheckbox">
-                                                    <span class="checkbox_list">
-                                                    </span>
-                                                </label>
-                                            </li>
+                                                <input type="hidden" name="price_min"
+                                                    value="{{ request()->get('price_min') ?? $price_min }}">
 
+                                                <div class="flat-slider" id="sliderRange" data-min="{{$price_min}}"
+                                                    data-max="{{$price_max}}" data-step="100"
+                                                    data-min_current="{{ request()->get('price_min') ?? $price_min }}"
+                                                    data-max_current="{{ request()->get('price_max') ?? $price_max }}">
+                                                </div>
 
-                                        </ul>
-                                    </li>
-                                    <li class='sub-menu'><a href='#settings'>Loại phòng<div class='fa fa-caret-down right'>
-                                            </div></a>
-                                        <ul>
-                                            <li>
-                                                <label class="box_list" id="room_bathroom">
-                                                    <span class="title_lis">
-                                                        <span class="icon-toilet"
-                                                            style="color: rgb(51, 51, 51); font-size: 20px;"></span>
-                                                        <span class="name_lis">WC riêng
-                                                        </span>
-                                                    </span>
-                                                    <input type="checkbox" name="utilitiesCheckbox">
-                                                    <span class="checkbox_list">
-                                                    </span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="box_list" id="room_bathroom">
-                                                    <span class="title_lis">
-                                                        <span class="icon-toilet"
-                                                            style="color: rgb(51, 51, 51); font-size: 20px;"></span>
-                                                        <span class="name_lis">WC riêng
-                                                        </span>
-                                                    </span>
-                                                    <input type="checkbox" name="utilitiesCheckbox">
-                                                    <span class="checkbox_list">
-                                                    </span>
-                                                </label>
-                                            </li>
-                                            <!-- <li><a href='#settings'>Notification</a></li> -->
-                                        </ul>
-                                    </li>
-                                    <li class='sub-menu'><a href='#message'>Giới tính<div class='fa fa-caret-down right'>
-                                            </div></a>
-                                        <ul>
-                                            <li>
-                                                <label class="box_list" id="room_bathroom">
-                                                    <span class="title_lis">
-                                                        <span class="icon-toilet"
-                                                            style="color: rgb(51, 51, 51); font-size: 20px;"></span>
-                                                        <span class="name_lis">Tất cả
-                                                        </span>
-                                                    </span>
-                                                    <input type="radio" name="utilitiesCheckbox">
-                                                    <span class="radio_list">
-                                                    </span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="box_list" id="room_bathroom">
-                                                    <span class="title_lis">
-                                                        <span class="icon-toilet"
-                                                            style="color: rgb(51, 51, 51); font-size: 20px;"></span>
-                                                        <span class="name_lis">Nam
-                                                        </span>
-                                                    </span>
-                                                    <input type="radio" name="utilitiesCheckbox">
-                                                    <span class="radio_list">
-                                                    </span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="box_list" id="room_bathroom">
-                                                    <span class="title_lis">
-                                                        <span class="icon-toilet"
-                                                            style="color: rgb(51, 51, 51); font-size: 20px;"></span>
-                                                        <span class="name_lis">Nữ
-                                                        </span>
-                                                    </span>
-                                                    <input type="radio" name="utilitiesCheckbox">
-                                                    <span class="radio_list">
-                                                    </span>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                                <input type="hidden" name="price_max"
+                                                    value="{{ request()->get('price_max') ?? $price_max }}">
 
-                                </ul>
-                                <div class="title_filter bottom">
-                                    <div class="btn_fil">
-                                        <div class="btn_">
-                                            <span>Áp dụng</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-3">
+                                                <span class="slider-time">
+                                                    {{ number_format(request()->get('price_min') ?? $price_min) }}
+                                                    {{ config('custom.currency') }}
+                                                </span>
+                                                <span class="slider-time2">
+                                                    {{ number_format(request()->get('price_max') ?? $price_max) }}
+                                                    {{ config('custom.currency') }}
+                                                </span>
+
+                                            </div>
                                         </div>
-                                    </div>
+                                    </li>
+
+                                    <li class='sub-menu'><a href='#settings'>Loại phòng <div
+                                                class='fa fa-caret-down right'>
+                                            </div></a>
+                                        <ul>
+                                            @foreach($type as $value)
+                                            <li>
+                                                <label class="box_list" id="room_bathroom">
+                                                    <span class="title_lis">
+                                                        <span class="icon-toilet"
+                                                            style="color: rgb(51, 51, 51); font-size: 20px;"></span>
+                                                        <span class="name_lis">{{ config('custom.room.type')[$value] }}
+                                                        </span>
+                                                    </span>
+                                                    <input type="checkbox"
+                                                        {{ checkedArray($value, request()->get('type') ?? []) }}
+                                                        name="type[]" value="{{ $value }}">
+                                                    <span class="checkbox_list">
+                                                    </span>
+                                                </label>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <div class="title_filter bottom mt-3">
+                                    <button type="submit" class="btn btn-block btn-outline-primary rounded-pill">
+                                        Áp dụng
+                                    </button>
                                 </div>
                             </nav>
-                        </div>
+                        </form>
                     </div>
-                    <div class="col col-lg-8 col-12 phong-moi">
-                        <div class="widget">
-                            <div class="widget-title">
-                                <h3>Kết quả</h3>
+                </div>
+                <div class="col-12 col-md-8 room tong-hop">
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h3>Danh sách phòng</h3>
 
-                            </div>
-                            <div class="widget-content">
-                                @for ($i = 0; $i < 2; $i++)
-                                    <div class="blog-grid-list">
-                                        <a href="{{ route('can-ho.show', ['can_ho' => 'chi-tiet']) }}">
-
-                                            <div class="row">
-                                                <div class="col col-lg-4 col-md-4 col-12">
-                                                    <img src="https://bayleaf.s3.amazonaws.com/property-images%2F1598331300474_IMG_20200825_115316.jpg"
-                                                        alt="" style="width: 100%;">
-                                                </div>
-                                                <div class="col col-lg-8 col-md-8 col-12">
-                                                    <h4>Phòng dịch vụ sáng đẹp giá mềm Trần Văn Dư, Quận Tân Bình</h4>
-                                                    <div>
-                                                        <div class="left">
-                                                            <div><i class="fal fa-home-lg-alt"></i> <span>Phòng cho
-                                                                    thuê</span>
-                                                            </div>
-                                                            <div>
-                                                                <i class="fal fa-user-friends"></i> <span
-                                                                    style="margin-right: 30px;">Nam & Nữ</span>
-                                                                <i class="fal fa-ruler"></i> <span>29m<sup>2</sup></span>
-                                                            </div>
-                                                            <div><i class="fal fa-map-marked-alt"></i> <span>65/7/8 Trần Văn
-                                                                    Dư,
-                                                                    Phường 13,
-                                                                    Quận Tân Bình, Hồ Chí Minh</span></div>
-                                                        </div>
-                                                        <div class="amount">
-                                                            <h2>5</h2>
-                                                            <p>tr/phòng</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                @endfor
-
-                            </div>
-                            {{ $rooms->appends(request()->all())->links() }}
                         </div>
+                        <div class="widget-content">
+                            @forelse ($rooms as $room)
+                            @include('public.include.room', ['room' => $room])
+                            @empty
+                            <div class="d-flex justify-content-center align-items-center text-muted">
+                                Hiện tại chưa có vui lòng truy cập lại sau.
+                            </div>
+                            @endforelse
+                        </div>
+                        {{ $rooms->appends(request()->all())->links() }}
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+</main>
 @endsection
 @push('script')
-    <script src="{{ asset('public/js/blog_list.js') }}"></script>
+<script src="{{ asset('public/js/home.js') }}"></script>
+<script src="{{ asset('public/js/blog_list.js') }}"></script>
+
 @endpush

@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="form-title">Thêm tòa nhà</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" onclick="closeModalRender()">
+                <button type="button" class="close" data-bs-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -15,6 +15,10 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="main-tab" data-toggle="tab" href="#main" role="tab"
                                 aria-selected="true">Tòa nhà</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="image-tab" data-toggle="tab" href="#imageTab" role="tab"
+                                aria-selected="false">Hình ảnh</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="extend-tab" data-toggle="tab" href="#extend" role="tab"
@@ -87,19 +91,31 @@
                                 <textarea name="introduce"></textarea>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="imageTab" role="tabpanel">
+                            <div class="form-group">
+                                <label for="">Hình đại diện</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control d-none" name="avatar"
+                                        value="/public/image/default-image.png">
+                                    <img id="avatar" class="add-image-ckfinder pointer" data-preview="#avatar"
+                                        data-input="input[name='avatar']" data-type=""
+                                        src="{{asset('/public/image/default-image.png')}}" alt="" style="width: 100%">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-cyan bg-secondary" type="button" data-bs-dismiss="modal"
-                        onclick="closeModalRender()">Hủy</button>
+                    <button class="btn btn-cyan bg-secondary" type="button" data-bs-dismiss="modal">Hủy</button>
                     <button class="btn btn-cyan" type="submit">Lưu lại</button>
                 </div>
             </form>
         </div>
     </div>
+    
     <script src="{{ asset('/public/packages/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('/public/packages/ckfinder/ckfinder.js') }}"></script>
-
+    
     <script>
         CKEDITOR.replace('introduce', {
             toolbar: [{

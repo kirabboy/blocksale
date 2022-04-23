@@ -1,5 +1,5 @@
 .detail-home{
-    margin: 50px 0;
+    margin: 80px 0;
 }
 body {
     margin: 0px auto;
@@ -11,7 +11,7 @@ body {
 
 @media (min-width: 1200px) {
     .container {
-        max-width: 1440px;a
+        max-width: 1440px;
     }
 }
 
@@ -310,4 +310,22 @@ body {
     .slider-section {
         margin-bottom: 20px;
     }
+}
+.banner-header .noidung {
+    display: none;
+}
+.banner-header .container-fluid .row:first-child .col{
+    margin-bottom: 0 !important;
+}
+.banner-header .container-fluid{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+header .header-main{
+    top: 0;
+    visibility: visible;
+    opacity: 1;
+}
+.banner-header{
+    display: none;
 }

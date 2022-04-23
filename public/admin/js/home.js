@@ -1,17 +1,19 @@
 $(function() {
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var elm = $('#pieChart'), pieChartCanvas = elm.get(0).getContext('2d'), 
+    data = elm.data('statistic').split(',');
+    data = data.map(function(item) {
+        return parseInt(item);
+    })
     var pieData = {
         labels: [
-            'Chrome',
-            'IE',
-            'FireFox',
-            'Safari',
-            'Opera',
-            'Navigator',
+            'Trống',
+            'Đã thuê',
+            'Ngưng hoạt động',
+            'Đã cọc',
         ],
         datasets: [{
-            data: [700, 500, 400, 600, 300, 100],
-            backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+            data: data,
+            backgroundColor: ['#dc3545', '#198754', '#6c757d', '#ffc107'],
         }]
     };
     var pieOptions = {

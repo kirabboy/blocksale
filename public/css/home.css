@@ -44,7 +44,7 @@
 #homepage .nav>li {
     display: flex;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 30px;
 }
 
 #homepage .nav>li:last-child {
@@ -148,9 +148,9 @@
 
 /* Nội dung */
 
-#noidungtrang {
+/* #noidungtrang {
     padding-top: 40px;
-}
+} */
 
 
 /* banner header */

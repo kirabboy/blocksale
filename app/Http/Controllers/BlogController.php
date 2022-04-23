@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Room;
+use App\Models\Building;
 
 class BlogController extends Controller
 {
@@ -12,13 +14,35 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $rooms = Room::paginate(2);
+        $query = Room::select('id', 'building_id', 'name_blog', 'acreage', 'status', 'type', 'price', 'slug', 'avatar')->whereNotIn('status', [3])->with('building:id,address')->orderBy('id', 'desc');
 
-        return view('public.blog_list', compact('rooms'));
+        $result = $this->filter('blog_index', $query, $request);
+        
+        $rooms = $result['rooms'];
+        $price_min = $result['price_min'];
+        $price_max = $result['price_max'];
+        $type = $result['type'];
 
+        return view('public.blog_list', compact('rooms', 'price_min', 'price_max', 'type'));
+
+    }
+
+    public function building(Request $request, $slug){
+        $building = Building::select('id')->whereSlug($slug)->first()->id;
+
+        $query = Room::select('id', 'building_id', 'name_blog', 'acreage', 'status', 'type', 'price', 'slug', 'avatar')->whereNotIn('status', [3])->whereBuildingId($building)->with('building:id,address')->orderBy('id', 'desc');
+
+        $result = $this->filter('blog_building'.$slug, $query, $request);
+        // dd($result);
+        $rooms = $result['rooms'];
+        $price_min = $result['price_min'] ?? 0;
+        $price_max = $result['price_max'] ?? 0;
+        $type = $result['type'];
+
+        return view('public.blog_list', compact('rooms', 'price_min', 'price_max', 'type'));
     }
 
     /**
@@ -48,10 +72,17 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         //
-        return view('public.blog_detail');
+        $room =  Cache::remember('blog_detail'.$slug, now()->minutes(60), function () use ($slug){
+            return Room::select('id', 'building_id', 'name_blog', 'avatar', 'price', 'acreage', 'type', 'description', 'created_at')->whereSlug($slug)->with('building:id,name,slug,owner,owner_phone')->first();
+        });
+        if($room){
+
+            return view('public.blog_detail', compact('room'));
+        }
+        return abort(404);
     }
 
     /**
@@ -86,5 +117,37 @@ class BlogController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function filter($remember_name, $query, $request){
+
+        $cache = Cache::remember($remember_name, now()->minutes(60), function () use ($query){
+            return $query->get();
+        });
+
+        $type = $cache->pluck('type')->unique();
+        $price_min = $cache->min('price');
+        $price_max = $cache->max('price');
+
+        if ($request->filled('type')) {
+            $query = $query->whereIn('type', $request->type);
+            
+        }
+
+        if ($request->filled('price_min')) {
+            $query = $query->where('price', '>=', $request->price_min);
+            
+        }
+        if ($request->filled('price_max')) {
+            $query = $query->where('price', '<=', $request->price_max);
+        }
+
+        $rooms = $query->paginate(4);
+        return [
+            'rooms' => $rooms,
+            'price_min' => $price_min,
+            'price_max' => $price_max,
+            'type' => $type
+        ];
     }
 }
