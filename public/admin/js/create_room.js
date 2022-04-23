@@ -1,6 +1,5 @@
-$('#create-room-form').submit(function(e) {
+$(document).on('submit', '#create-room-form', function (e) {
     e.preventDefault();
-
     var form = $(this);
     var actionUrl = form.attr('action');
     $.ajaxSetup({

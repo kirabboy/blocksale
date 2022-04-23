@@ -70,9 +70,9 @@ class Room extends Model
         static::saving(function ($model) {
             $model->slug = $model->createSlug($model->name_blog, $model->id ? $model->id : 0);
         }); 
-        // static::saved(function () {
-		// 	Cache::flush();
-		//  });
+        static::saved(function () {
+			Cache::flush();
+		 });
     }
 
 	public function contract()

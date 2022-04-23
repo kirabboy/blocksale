@@ -45,12 +45,15 @@ class RoomController extends Controller
         $room = Room::create([
             'code' => $request->code,
             'name' => $request->name,
+            'name_blog' => $request->name_blog,
             'building_id' => $request->building_id,
             'floor_id' => $request->floor_id,
             'type' => $request->type,
             'acreage' => $request->acreage,
             'price' => $request->price,
             'note' => $request->note,
+            'avatar' => $request->avatar,
+            'description' => $request->description,
         ]);
         return view('admin.room.include.room_unit', compact('room'));
     }

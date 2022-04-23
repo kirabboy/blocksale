@@ -87,7 +87,7 @@
                         </div>
                         <div class="tab-pane fade" id="extend" role="tabpanel">
                             <div class="form-group">
-                                <label for="">Giới thiệu</label>
+                                <label for="">Mô tả</label>
                                 <textarea name="introduce"></textarea>
                             </div>
                         </div>
