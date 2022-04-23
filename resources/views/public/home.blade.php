@@ -101,9 +101,9 @@
                         <!-- TRÁI -->
                         <div class="col col-lg-9 col-12 phong-moi">
                             <div class="widget">
-                                <div class="widget-title">
+                                <div class="d-flex justify-content-between align-items-center">
                                     <h3>Phòng mới nhất</h3>
-                                    <a href="{{ route('can-ho.index') }}" class="">Xem tất cả</a>
+                                    <a href="{{ route('can-ho.index') }}" class="btn btn-outline-primary rounded-pill">Xem tất cả</a>
                                 </div>
                                 <div class="widget-content">
                                     <!-- Bài 1 -->
@@ -151,16 +151,16 @@
 
                                 </div>
                                 <div class="text-center">
-                                    <a href="{{route('can-ho.index')}}">Xem tất cả</a>
+                                <a href="{{ route('can-ho.index') }}" class="btn btn-outline-primary rounded-pill">Xem tất cả</a>
                                 </div>
                             </div>
                         </div>
                         <!-- PHẢI -->
                         <div class="col col-lg-3 col-12 da-xac-thuc">
                             <div class="widget">
-                                <div class="widget-title">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h3><i class="fas fa-shield-check"></i> Đã xác thực</h3>
-                                    <a href="{{route('can-ho.index')}}" class="">Xem tất cả</a>
+                                    <a href="{{ route('can-ho.index') }}" class="btn btn-outline-primary rounded-pill">Xem tất cả</a>
                                 </div>
                                 <div class="widget-content">
                                     <!-- Bài 1 -->

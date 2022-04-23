@@ -134,9 +134,7 @@
                                 <button class="nav-link active text-14" id="don_vi_thue" data-bs-toggle="tab"
                                     data-bs-target="#nav_don_vi_thue" type="button" role="tab">
                                     Đơn vị thuê</button>
-                                <button class="nav-link text-14" id="tai_san" data-bs-toggle="tab"
-                                    data-bs-target="#nav_tai_san" type="button" role="tab">
-                                    Tài sản</button>
+                               
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -172,137 +170,18 @@
                                 </nav>
                                 <div class="tab-content" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="nav_hop_dong_thue">
-                                        
-
                                     </div>
                                     <div class="tab-pane fade" id="nav_dat_coc_giu_cho">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-12 col-sm-8">
-                                                        <h5>Đơn vị thuê trống</h5>
-                                                        <p class="text-muted text-14 m-0">
-                                                            Đơn vị thuê không có cọc giữ chỗ, bạn có thể nhận cọc mới
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-12 col-sm-4 text-center">
-                                                        <p class="m-2"> </p>
-                                                        <button class="btn btn-success text-12">
-                                                            <i class="fa fa-plus-circle"></i> Nhận cọc giữ chỗ
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <div class="tab-pane fade show" id="nav_lich_su_hop_dong">
-                                        <p> </p>
-                                        <div class="table-responsive table-scrollable">
-                                            <table class="table table-head-custom" style="width: 1000px;">
-                                                <thread>
-                                                    <tr class="header-table-height" kt-hidden-height="27">
-                                                        <th class="text-12 text-uppercase">#</th>
-                                                        <th class="text-12 text-uppercase">Mã</th>
-                                                        <th class="text-12 text-uppercase">Loại hợp đồng</th>
-                                                        <th class="text-12 text-uppercase">Số hợp đồng</th>
-                                                        <th class="text-12 text-uppercase">Thời gian bắt đầu</th>
-                                                        <th class="text-12 text-uppercase">Thời gian kết thúc</th>
-                                                        <th class="text-12 text-uppercase">Trạng thái</th>
-                                                    </tr>
-                                                </thread>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>HDG000001</td>
-                                                        <td>Thuê</td>
-                                                        <td>HDG000003/202112/FHSR/HĐT</td>
-                                                        <td>01-07-2021 21:38:00</td>
-                                                        <td>01-07-2021 21:38:00</td>
-                                                        <td>
-                                                            <p class="m-0 text-12 label label-light-success"
-                                                                style="width:100%">Hiệu lực</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>HDG000002</td>
-                                                        <td>Thuê</td>
-                                                        <td>HDG000003/202112/FHSR/HĐT</td>
-                                                        <td>01-07-2021 21:38:00</td>
-                                                        <td>01-07-2021 21:38:00</td>
-                                                        <td>
-                                                            <p class="m-0 text-12 label label-light-success"
-                                                                style="width:100%">Hiệu lực</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>HDG000003</td>
-                                                        <td>Thuê</td>
-                                                        <td>HDG000003/202112/FHSR/HĐT</td>
-                                                        <td>01-07-2021 21:38:00</td>
-                                                        <td>01-07-2021 21:38:00</td>
-                                                        <td>
-                                                            <p class="m-0 text-12 label label-light-success"
-                                                                style="width:100%">Hiệu lực</p>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- End tab đơn vị thuê -->
 
 
-                            <!-- Tab tài sản -->
-                            <div class="tab-pane fade" id="nav_tai_san">
-                                <div class="row pt-2">
-                                    <div class="col-12 text-center">
-                                        <h5 class="text-success">DANH SÁCH TÀI SẢN ĐƯỢC CẤP</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="table-responsive table-scrollable p-2">
-                                            <table class="table table-head-custom">
-                                                <thread>
-                                                    <tr class="header-table-height" kt-hidden-height="27">
-                                                        <th class="text-12 text-uppercase">#</th>
-                                                        <th class="text-12 text-uppercase">TÊN</th>
-                                                        <th class="text-12 text-uppercase">MÃ</th>
-                                                        <th class="text-12 text-uppercase">NGUỒN</th>
-                                                        <th class="text-12 text-uppercase">SỐ LƯỢNG</th>
-                                                    </tr>
-                                                </thread>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Bàn ăn Verona</td>
-                                                        <td>TS000001</td>
-                                                        <td>Kho Thanh Xuân</td>
-                                                        <td>2</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>Bàn ăn Verona</td>
-                                                        <td>TS000002</td>
-                                                        <td>Kho Thanh Xuân</td>
-                                                        <td>2</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>Bàn ăn Verona</td>
-                                                        <td>TS000003</td>
-                                                        <td>Kho Thanh Xuân</td>
-                                                        <td>2</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Tab tài sản -->
+                           
                         </div>
                     </div>
                 </div>

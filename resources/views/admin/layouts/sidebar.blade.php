@@ -13,6 +13,7 @@
             <ul class="nav nav-pills nav-sidebar nav-check-current flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+               @if(auth()->guard('admin')->user()->can('Bảng quản trị'))
                 <li class="nav-item menu-open">
                     <a href="{{ route('dashboard.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -21,6 +22,8 @@
                         </p>
                     </a>
                 </li>
+                @endif
+               @if(auth()->guard('admin')->user()->can('Quản trị cơ sở'))
 
                 <li class="nav-item">
                     <a href="{{ route('admin.building.index') }}" class="nav-link">
@@ -30,6 +33,8 @@
                         </p>
                     </a>
                 </li>
+                @endif
+                @if(auth()->guard('admin')->user()->can('Bàn làm việc'))
 
                 <li class="nav-item">
                     <a href="{{ route('ban-lam-viec.index') }}" class="nav-link">
@@ -39,6 +44,8 @@
                         </p>
                     </a>
                 </li>
+                @endif
+                @if(auth()->guard('admin')->user()->can('Hồ sơ khách hàng'))
 
                 <li class="nav-header text-uppercase">Quản lý khách hàng</li>
 
@@ -50,6 +57,8 @@
                         </p>
                     </a>
                 </li>
+                @endif
+                @if(auth()->guard('admin')->user()->can('Hợp đồng'))
 
                 <li class="nav-header text-uppercase">Hợp đồng</li>
 
@@ -59,7 +68,11 @@
                         <p>Hợp đồng</p>
                     </a>
                 </li>
+                @endif
+                @if(auth()->guard('admin')->user()->can('Vai trò') || auth()->guard('admin')->user()->can('Người dùng'))
+
                 <li class="nav-header text-uppercase">Quản lý tổ chức</li>
+                @if(auth()->guard('admin')->user()->can('Vai trò'))
 
                 <li class="nav-item">
                     <a href="{{ route('roles.index') }}" class="nav-link">
@@ -69,6 +82,10 @@
                         </p>
                     </a>
                 </li>
+                @endif
+
+                @if(auth()->guard('admin')->user()->can('Người dùng'))
+
                 <li class="nav-item">
                     <a href="{{ route('quan-ly-admin.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-user-friends"></i>
@@ -77,6 +94,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
+                @endif
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

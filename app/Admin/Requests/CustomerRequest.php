@@ -33,7 +33,7 @@ class CustomerRequest extends FormRequest
             return [
                 'code' => ['required'],
                 'fullname' => ['required', 'max:255'],
-                'phone' => ['required', 'max:255'],
+                'phone' => ['required', 'regex:/((09|03|07|08|05)+([0-9]{8})\b)/'],
                 'email' => ['max:255'],
                 'gender' => ['required', Rule::in(collect(config('custom.customer.gender'))->keys()->all())],
                 'identification_number' => ['required', 'max:255'],
@@ -46,7 +46,7 @@ class CustomerRequest extends FormRequest
                 'id' => ['required', 'exists:App\Models\Customer,id'],
                 'code' => ['required'],
                 'fullname' => ['required', 'max:255'],
-                'phone' => ['required', 'max:255'],
+                'phone' => ['required', 'regex:/((09|03|07|08|05)+([0-9]{8})\b)/'],
                 'email' => ['max:255'],
                 'gender' => ['required', Rule::in(collect(config('custom.customer.gender'))->keys()->all())],
                 'identification_number' => ['required', 'max:255'],
@@ -56,7 +56,12 @@ class CustomerRequest extends FormRequest
             ];
         }
     }
-
+    public function attributes()
+    {
+        return [
+            'phone' => 'Số điện thoại'
+        ];
+    }
     protected function failedValidation(Validator $validator)
     {
         $errors = (new ValidationException($validator))->errors();

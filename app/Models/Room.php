@@ -28,10 +28,8 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends Model
 {
 	protected $table = 'rooms';
-	public $incrementing = false;
 
 	protected $casts = [
-		'id' => 'int',
 		'floor_id' => 'int',
 		'type' => 'int',
 		'purpose' => 'int',
@@ -39,7 +37,6 @@ class Room extends Model
 	];
 
 	protected $fillable = [
-		'id',
 		'code',
 		'building_id',
 		'name',
@@ -57,4 +54,5 @@ class Room extends Model
 	{
 		return $this->hasMany(Contract::class,'id_room', 'id');
 	}
+
 }

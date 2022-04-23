@@ -4,10 +4,10 @@ namespace App\Admin\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Room;
 use App\Models\Customer;
-use Datatables;
 
-class CustomerController extends Controller
+class ContractEarnestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,6 @@ class CustomerController extends Controller
     public function index()
     {
         //
-        return view('admin.customer.index');
     }
 
     /**
@@ -25,9 +24,15 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $room = Room::find($request->room_id);
+        if($room->contract()->whereType(2)->whereStatus(1)->first()){
+            return false;
+        }
+        $customers = Customer::get();
+        return view('admin.contract_earnest.modal.create_contract_earnest', compact('room','customers'));
     }
 
     /**
@@ -85,24 +90,4 @@ class CustomerController extends Controller
     {
         //
     }
-
-    public function getCustomerInfo(Request $request){
-        $customer = Customer::find($request->customer_id);
-        $customer->identification_date = date('Y/m/d', strtotime($customer->identification_date));
-        return response()->json($customer);
-    }
-
-    public function dataAjax(Request $request){
-        $search = $request->search;
-
-        $data = Customer::where('fullname','LIKE',"%".$search."%")->limit(25)->get();
-        return $data;
-    }
-
-    public function indexDatatable(){
-        $customers = Customer::latest()->get();
-        return datatables()->of($customers)->toJson();
-    }
-
-
 }

@@ -9,6 +9,7 @@ use App\Admin\Controllers\CustomerController;
 use App\Admin\Controllers\AccountController;
 use App\Admin\Controllers\WorkBoardController;
 use App\Admin\Controllers\AdminBuildingController;
+use App\Admin\Controllers\ContractEarnestController;
 use App\Admin\Controllers\RoomController;
 use App\Admin\Controllers\FloorManagerController;
 use App\Admin\Controllers\RoomManagerController;
@@ -34,6 +35,8 @@ Route::group(['middleware' => ['admin']], function () {
     Route::prefix('ho-so-khach-hang')->group(function(){
         Route::get('show-select', [CustomerController::class, 'showSelectCustomer'])->name('customer.showSelect');
         Route::get('get-datatable', [CustomerController::class, 'indexDatatable'])->name('customer.indexDatatable');
+        Route::get('get-select-ajax', [CustomerController::class, 'dataAjax'])->name('customer.selectAjax');
+        Route::get('get-customer-info', [CustomerController::class, 'getCustomerInfo'])->name('customer.getInfo');
 
     });
     Route::resources([
@@ -43,11 +46,10 @@ Route::group(['middleware' => ['admin']], function () {
         '/ho-so-khach-hang' => CustomerController::class,
         '/hop-dong' => ContractController::class,
         '/phong' =>RoomController::class,
+        '/hop-dong-coc' => ContractEarnestController::class,
     ]);
 
- 
-
-    Route::prefix('co-so')->group(function(){
+    Route::group(['prefix' => 'co-so', 'middleware' => ['permission:Quản trị cơ sở,admin']], function(){
         Route::get('/', [BuildingManagerController::class, 'index'])->name('admin.building.index');
         Route::get('show/{building:id}', [BuildingManagerController::class, 'show'])->name('admin.building.show');
         Route::get('create', [BuildingManagerController::class, 'create'])->name('admin.building.create');
@@ -62,18 +64,18 @@ Route::group(['middleware' => ['admin']], function () {
             Route::delete('delete/{floor:id}', [FloorManagerController::class, 'delete'])->name('admin.floor.delete');
         });
     });
-    Route::prefix('phong')->group(function(){
+    Route::group(['prefix' => 'phong', 'middleware' => ['permission:Quản trị cơ sở|Bàn làm việc,admin']], function(){
         Route::get('show-quickly/{room:id}', [RoomManagerController::class, 'showQuickly'])->name('admin.room.show.quickly');
     });
 
-    Route::prefix('phan-quyen')->group(function () {
+    Route::group(['prefix' => 'phan-quyen', 'middleware' => ['permission:Vai trò|Người dùng,admin']], function () {
         //
         Route::resource('roles', RoleManagerController::class);
         Route::resource('permissions', PermissionManagerController::class);
         Route::post('xu-ly-nhieu-role', [RoleManagerController::class,'multiple'])->name('roles.multiple');
         Route::post('xu-ly-nhieu-permission', [PermissionManagerController::class,'multiple'])->name('permissions.multiple');
     });
-    Route::prefix('khach-hang')->group(function(){
+    Route::group(['prefix' => 'khach-hang', 'middleware' => ['permission:Hồ sơ khách hàng,admin']], function(){
         Route::get('/', [CustomerManagerController::class, 'index'])->name('admin.customer.index');
         Route::get('create', [CustomerManagerController::class, 'create'])->name('admin.customer.create');
         Route::post('store', [CustomerManagerController::class, 'store'])->name('admin.customer.store');

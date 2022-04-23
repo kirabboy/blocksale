@@ -29,12 +29,43 @@ function createContract(e) {
             console.log(data);
         })
         .done(function(response) {
-            console.log(response);
-            $('.modal-area').append(response);
-            $('#modalFormCreate').modal('show');
+            if (response) {
+                console.log(response);
+                $('.modal-area').append(response);
+                $('#modalFormCreate').modal('show');
+            } else {
+                toastr.error('Hợp đồng đã tồn tại', {
+                    timeOut: 5000
+                })
+            }
+
         });
 }
 
+function createContractEarnest(e) {
+    $.ajax({
+            url: $(e).data('url'),
+            data: {
+                'room_id': $(e).data('room_id'),
+            },
+            type: 'GET'
+        })
+        .fail(function(data) {
+            console.log(data);
+        })
+        .done(function(response) {
+            if (response) {
+                console.log(response);
+                $('.modal-area').append(response);
+                $('#modalFormCreate').modal('show');
+            } else {
+                toastr.error('Hợp đồng đã tồn tại', {
+                    timeOut: 5000
+                })
+            }
+
+        });
+}
 
 
 $('#tool-filter-status-room button').click(function() {
@@ -58,11 +89,11 @@ function closeModal() {
     $('#modal-form').modal('hide');
 }
 
-$('.btn-room').click(function() {
+function getRoomInfo(e) {
     $('.btn-room').removeClass('selected');
-    $(this).addClass('selected');
+    $(e).addClass('selected');
     $.ajax({
-            url: $(this).data('url'),
+            url: $(e).data('url'),
             data: {},
             type: 'GET'
         })
@@ -70,10 +101,11 @@ $('.btn-room').click(function() {
             console.log(data);
         })
         .done(function(response) {
-            $('#nav_thong_tin_don_vi_thue').empty().append(response[0]);
-            $('#nav_hop_dong_thue').empty().append(response[1]);
-
+            $('#nav_thong_tin_don_vi_thue').empty().append(response['html_room']);
+            $('#nav_hop_dong_thue').empty().append(response['html_contract']);
+            $('#nav_lich_su_hop_dong').empty().append(response['html_room_contract_history']);
+            $('#nav_dat_coc_giu_cho').empty().append(response['html_contract_earnest']);
             console.log(response);
         });
-});
+}
 $(".btn-room").first().trigger('click');

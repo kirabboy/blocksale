@@ -21,5 +21,8 @@ $('#create-room-form').submit(function(e) {
             console.log(response);
             $('#modal-form').modal('hide');
             $('.list-room-' + form.find('select[name="floor_id"]').val()).append(response);
+            toastr.success('Thêm phòng thành công', {
+                timeOut: 5000
+            })
         });
 });

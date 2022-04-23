@@ -34,6 +34,7 @@ class ContractCustomer extends Model
 	protected $fillable = [
 		'id_contract',
 		'id_customer',
-		'is_representative'
+		'is_representative',
+		'note',
 	];
 }

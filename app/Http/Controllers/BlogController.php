@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Room;
 
 class BlogController extends Controller
 {
@@ -14,7 +15,9 @@ class BlogController extends Controller
     public function index()
     {
         //
-        return view('public.blog_list');
+        $rooms = Room::paginate(2);
+
+        return view('public.blog_list', compact('rooms'));
 
     }
 

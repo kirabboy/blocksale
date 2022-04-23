@@ -18,8 +18,8 @@
     </div>
     <div class="col-6 col-sm-3">
         <p class="m-0 mb-2 text-14"><strong>{{ $room->code }}</strong></p>
-        <p class="m-0 mb-2 text-14 text-success">{{$current_contract->code??''}}</p>
-        <p class="m-0 mb-2 ">@if($current_contract) <span class="text-14 label label-light-success"></span> @endif</p>
+        <p class="m-0 mb-2 text-14 text-success">{{ isset($current_contract)?formatPrice($current_contract->contractinfo->amount_earnest): '' }}</p>
+        <p class="m-0 mb-2 ">@if($current_contract) <span class="text-14 label label-light-success">{{ isset($current_contract)?getContractStatus($current_contract->status):'' }}</span> @endif</p>
     </div>
     
 </div>

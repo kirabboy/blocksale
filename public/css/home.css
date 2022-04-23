@@ -27,7 +27,15 @@
     font-size: 32px;
 }
 
-
+.btn-outline-primary{
+    color: #F7346F;
+    border-color: #F7346F;
+}
+.btn-outline-primary:not(:disabled):not(.disabled).active, .btn-outline-primary:not(:disabled):not(.disabled):active, .show>.btn-outline-primary.dropdown-toggle, .btn-outline-primary:hover{
+    color: #fff;
+    border-color: #F7346F;
+    background-color: #F7346F;
+}
 /* HEADER */
 
 

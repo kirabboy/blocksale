@@ -1,5 +1,33 @@
 <?php
+if (!function_exists('getContractType')) {
+    function getContractType($type = 0)
+    {
+        if($type == 1){
+            return 'Hợp đồng thuê';
+        }
+    }
+}
+if (!function_exists('getEarnestStatus')) {
+    function getEarnestStatus($status = 0)
+    {
+        if($status == 1){
+            return 'Đang cọc';
+        }else{
+            return 'Không cọc';
+        }
+    }
+}
 
+if (!function_exists('getContractStatus')) {
+    function getContractStatus($status = 0)
+    {
+        if($status == 1){
+            return 'Hiệu lực';
+        }else{
+            return 'Hết hạn';
+        }
+    }
+}
 if (!function_exists('bgStatus')) {
     function bgStatus($status = 0)
     {
@@ -74,8 +102,8 @@ if (!function_exists('checkRoleHasPermissions')) {
         }
     }
 }
-if (!function_exists('showAdminWithRoles')) {
-    function showAdminWithRoles($data){
+if (!function_exists('showAdminWithRolesHtml')) {
+    function showAdminWithRolesHtml($data){
         $str = '';
         foreach ($data as $value){
             $str .= '<span class="badge bg-primary me-1">'.$value->name.'</span>';
@@ -83,6 +111,12 @@ if (!function_exists('showAdminWithRoles')) {
         return $str;
     }
 }
+if (!function_exists('showAdminWithRoles')) {
+    function showAdminWithRoles($data){
+        return $data[0]->name;
+    }
+}
+
 if (!function_exists('selected')) {
     function selected($value1, $value2){
         if($value1 == $value2){

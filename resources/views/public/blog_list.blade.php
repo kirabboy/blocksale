@@ -208,20 +208,7 @@
                                 @endfor
 
                             </div>
-                            <div class="text-center mt-4">
-                                <ul class="pagination">
-                                    <li><a href="#" class="prev">
-                                            < Prev</a>
-                                    </li>
-                                    <li class="pageNumber active"><a href="#">1</a></li>
-                                    <li class="pageNumber"><a href="#">2</a></li>
-                                    <li class="pageNumber"><a href="#">3</a></li>
-                                    <li class="pageNumber"><a href="#">4</a></li>
-                                    <li class="pageNumber"><a href="#">5</a></li>
-                                    <li class="pageNumber"><a href="#">6</a></li>
-                                    <li><a href="#" class="next">Next ></a></li>
-                                </ul>
-                            </div>
+                            {{ $rooms->appends(request()->all())->links() }}
                         </div>
                     </div>
                 </div>

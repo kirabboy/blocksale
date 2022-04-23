@@ -48,9 +48,22 @@ Quản lý tài khoản Admin
                 </th>
                 <th>Thao tác</th>
             </thead>
+            <tfoot style="display: table-header-group">
+                <tr>
+                    <th class="yes">Tên tài khoản</th>
+                    <th class="yes">Họ và tên</th>
+                    <th>Vai trò</th>
+                    <th class="yes">Email</th>
+                    <th class="yes">Số điện thoại</th>
+                    <th>Giới tính</th>
+                    <th class="yes">Ngày sinh</th>
+                    <th class="yes">Địa chỉ</th>
+                    <th></th>
+                </tr>
+            </tfoot>
             <tbody id="afterSubmit">
                 @foreach ($admins as $admin)
-                    @include('admin.account.row_account', ['admin' => $admin])
+                @include('admin.account.row_account', ['admin' => $admin])
                 @endforeach
             </tbody>
         </table>

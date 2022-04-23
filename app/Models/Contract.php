@@ -50,6 +50,7 @@ class Contract extends Model
 	protected $fillable = [
 		'id_room',
 		'name',
+		'code',
 		'type',
 		'time_start',
 		'time_end',
@@ -59,4 +60,13 @@ class Contract extends Model
 		'note',
 		'status'
 	];
+
+	public function contractinfo(){
+        return $this->hasOne(ContractInfo::class, 'id_contract', 'id');
+    }
+	
+
+	public function customers(){
+        return $this->belongsToMany(Customer::class, 'contract_customer', 'id_contract', 'id_customer')->withPivot(['is_representative','note']);
+    }
 }
