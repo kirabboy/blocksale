@@ -87,6 +87,16 @@
                         </div>
                         <div class="tab-pane fade" id="extend" role="tabpanel">
                             <div class="form-group">
+                                <label for="">ID messenger</label>
+                                <input type="text" class="form-control" name="messgenger" placeholder="ID messgenger"
+                                    value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Google map</label>
+                                <textarea class="form-control" name="google_map"></textarea>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="">Mô tả</label>
                                 <textarea name="introduce"></textarea>
                             </div>

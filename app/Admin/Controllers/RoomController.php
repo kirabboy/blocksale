@@ -53,6 +53,7 @@ class RoomController extends Controller
             'price' => $request->price,
             'note' => $request->note,
             'avatar' => $request->avatar,
+            'asset' => $request->asset,
             'description' => $request->description,
         ]);
         return view('admin.room.include.room_unit', compact('room'));

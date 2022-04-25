@@ -11,7 +11,6 @@ function createRoom(e) {
             console.log(data);
         })
         .done(function(response) {
-            console.log(response);
             $('.modal-area').append(response);
             $('#modal-form').modal('show');
         });

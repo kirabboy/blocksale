@@ -91,6 +91,15 @@
                         </div>
                         <div class="tab-pane fade" id="extend" role="tabpanel">
                             <div class="form-group">
+                                <label for="">ID messenger</label>
+                                <input type="text" class="form-control" name="messgenger" placeholder="ID messgenger"
+                                    value="{{ $building->messenger }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Google map</label>
+                                <textarea class="form-control" name="google_map">{{ $building->google_map }}</textarea>
+                            </div>
+                            <div class="form-group">
                                 <label for="">Giới thiệu</label>
                                 <textarea name="introduce">{{ $building->introduce }}</textarea>
                             </div>

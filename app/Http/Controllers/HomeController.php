@@ -23,7 +23,7 @@ class HomeController extends Controller
         $buildings = Cache::remember('building_home', now()->minutes(60), function(){
             return Building::select('id', 'slug', 'name', 'avatar', 'address')->orderBy('id', 'desc')->get();
         });
-
+        // dd($buildings);
         $rooms_empty = $rooms->where('status', 0);
         
         return view('public.home', compact('rooms', 'rooms_empty', 'buildings'));

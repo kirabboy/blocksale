@@ -56,6 +56,7 @@ class Room extends Model
 		'price',
 		'note',
 		'status',
+		'asset',
 		'description'
 	];
 

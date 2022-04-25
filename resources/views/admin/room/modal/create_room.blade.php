@@ -16,6 +16,10 @@
                                 aria-selected="true">Phòng</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" id="asset-tab" data-toggle="tab" href="#asset" role="tab"
+                                aria-selected="true">Tài sản</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" id="image-tab" data-toggle="tab" href="#imageTab" role="tab"
                                 aria-selected="false">Hình ảnh</a>
                         </li>
@@ -89,6 +93,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade show" id="asset" role="tabpanel">
+                            <div class="form-group">
+                                <label for="">Tài sản</label>
+                                <textarea class="editor" name="asset"></textarea>
+                            </div>
+                        </div>
                         <div class="tab-pane fade show" id="extend" role="tabpanel">
                             <div class="form-group">
                                 <label for="">Tên Hiển thị blog <sup class="text-danger">*</sup></label>
@@ -97,7 +107,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Mô tả</label>
-                                <textarea name="description"></textarea>
+                                <textarea class="editor" name="description"></textarea>
                             </div>
                         </div>
                     </div>
@@ -111,10 +121,11 @@
         </div>
     </div>
     <script src="{{ asset('/public/packages/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('/public/packages/ckeditor/adapters/jquery.js') }}"></script>
     <script src="{{ asset('/public/packages/ckfinder/ckfinder.js') }}"></script>
 
     <script>
-        CKEDITOR.replace('description', {
+        $( 'textarea.editor' ).ckeditor({
             toolbar: [{
                     name: 'clipboard',
                     items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']

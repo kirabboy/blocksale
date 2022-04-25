@@ -76,7 +76,7 @@ class BlogController extends Controller
     {
         //
         $room =  Cache::remember('blog_detail'.$slug, now()->minutes(60), function () use ($slug){
-            return Room::select('id', 'building_id', 'name_blog', 'avatar', 'price', 'acreage', 'type', 'description', 'created_at')->whereSlug($slug)->with('building:id,name,slug,owner,owner_phone')->first();
+            return Room::select('id', 'building_id', 'name_blog', 'avatar', 'price', 'acreage', 'type', 'asset', 'description', 'created_at')->whereSlug($slug)->with('building:id,name,slug,owner,owner_phone,address,messenger,google_map')->first();
         });
         if($room){
 

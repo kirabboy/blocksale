@@ -95,6 +95,30 @@
                                 <div class="title_info">
                                     <div class="_2-dFY"><span class="icon-nav-home-fill"
                                             style="color: rgb(247, 52, 134); font-size: 32px;"></span></div>
+                                    <span class="title">Google map</span>
+                                </div>
+                                <div class="room_des">
+                                    {!! optional($room->building)->google_map !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="room_info">
+                                <div class="title_info">
+                                    <div class="_2-dFY"><span class="icon-nav-home-fill"
+                                            style="color: rgb(247, 52, 134); font-size: 32px;"></span></div>
+                                    <span class="title">Tài sản</span>
+                                </div>
+                                <div class="room_des">
+                                        {!! $room->asset !!}
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="room_info">
+                                <div class="title_info">
+                                    <div class="_2-dFY"><span class="icon-nav-home-fill"
+                                            style="color: rgb(247, 52, 134); font-size: 32px;"></span></div>
                                     <span class="title">Mô tả chi tiết</span>
                                 </div>
                                 <div class="room_des">
@@ -107,6 +131,8 @@
             </div>
         </section>
     </main>
+
+    @include('public.include.float-contact-button')
 @endsection
 @push('script')
 <script src="{{ asset('public/js/home.js') }}"></script>

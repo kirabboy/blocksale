@@ -34,7 +34,7 @@ class Building extends Model
 	protected $table = 'buildings';
 
 	protected $casts = [
-		'note' => 'int'
+
 	];
 
 	protected $fillable = [
@@ -48,6 +48,8 @@ class Building extends Model
 		'number_floor',
 		'owner_email',
 		'note',
+		'messenger',
+		'google_map',
 		'introduce'
 	];
 	protected $attributes = [
