@@ -138,10 +138,10 @@ class BuildingManagerController extends Controller
      */
     public function edit(Building $building)
     {
-        $room = \App\Models\Room::all();
-        foreach($room as $key => $value){
-            $value->update(['avatar' => 'public/image/default-image.png']);
-        }
+        // $room = \App\Models\Room::all();
+        // foreach($room as $key => $value){
+        //     $value->update(['avatar' => 'public/image/default-image.png']);
+        // }
         return view('admin.manager_building.modal.edit_building', compact('building'));
     }
 
