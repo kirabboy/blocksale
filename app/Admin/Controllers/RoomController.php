@@ -2,10 +2,11 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Building;
+use Illuminate\Http\Request;
+use App\Admin\Requests\RoomRequest;
+use App\Http\Controllers\Controller;
 
 class RoomController extends Controller
 {
@@ -39,23 +40,10 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoomRequest $request)
     {
         //
-        $room = Room::create([
-            'code' => $request->code,
-            'name' => $request->name,
-            'name_blog' => $request->name_blog,
-            'building_id' => $request->building_id,
-            'floor_id' => $request->floor_id,
-            'type' => $request->type,
-            'acreage' => $request->acreage,
-            'price' => $request->price,
-            'note' => $request->note,
-            'avatar' => $request->avatar,
-            'asset' => $request->asset,
-            'description' => $request->description,
-        ]);
+        $room = Room::create($request->all());
         return view('admin.room.include.room_unit', compact('room'));
     }
 
@@ -78,9 +66,10 @@ class RoomController extends Controller
         }else{
             $html_contract = view('admin.contract.include.empty', compact('room'))->render();
         }
-        $current_contract_earnest = $contracts->whereType(2)->whereStatus(1)->with('contractinfo')->first();
+        $contracts = $room->contract();
+        $current_contract_earnest = $contracts->whereType(2)->whereStatus(1)->with('contractinfo')->with('customers')->first();
         if($current_contract_earnest){
-            $html_contract_earnest = view('admin.contract.include.show_quickly', compact('current_contract'))->render();
+            $html_contract_earnest = view('admin.contract_earnest.include.show_quickly', compact('current_contract_earnest','contracts'))->render();
         }else{
             $html_contract_earnest = view('admin.contract_earnest.include.empty', compact('room'))->render();
         }

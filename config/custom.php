@@ -42,6 +42,12 @@ return [
             2 => 'Tổ chức'
         ]
     ],
+    'contract' => [
+        'type' =>[
+            1 => 'Hợp đồng thuê',
+            2 => 'Hợp đồng cọc',
+        ]
+    ],
     'currency' => 'đ',
     'shortcut-icon' => 'public/image/logo.png',
 ];

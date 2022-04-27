@@ -2,10 +2,14 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Customer;
+use Illuminate\Http\Request;
+use App\Models\Contract;
+use App\Models\ContractInfo;
+use App\Models\ContractCustomer;
+use App\Http\Controllers\Controller;
+use App\Admin\Requests\ContractEarnestRequest;
 
 class ContractEarnestController extends Controller
 {
@@ -41,9 +45,24 @@ class ContractEarnestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContractEarnestRequest $request)
     {
-        //
+        $request->is_earnest = 1;
+        $contract_earnest = Contract::create($request->all());
+        ContractInfo::create([
+            'id_contract' => $contract_earnest->id,
+            'amount_earnest' => $request->amount_earnest,
+        ]);
+        ContractCustomer::create([
+            'id_customer' => $request->id_customer,
+            'id_contract' => $contract_earnest->id,
+        ]);
+        $room = Room::whereId($request->id_room)->update(['status' => 1]);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Thêm khách hàng thành công',
+            'data' => '',
+        ]);
     }
 
     /**

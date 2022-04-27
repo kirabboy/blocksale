@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form-create-contract" action="{{ route('hop-dong-coc.store') }}" method="post">
+            <form id="mainFormCreate" action="{{ route('hop-dong-coc.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="border border-1 p-2">
@@ -19,7 +19,7 @@
                                     <label for="">Tên phòng thuê <sup class="text-danger">*</sup></label>
                                     <input type="text" name="" class="form-control" value="{{ $room->name }}"
                                         placeholder="Tên phòng thuê" readonly>
-                                    <input type="hidden" name="room_id" value="{{ $room->id }}" readonly>
+                                    <input type="hidden" name="id_room" value="{{ $room->id }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Loại hợp đồng<sup class="text-danger">*</sup></label>
@@ -67,9 +67,11 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Chọn khách hàng <sup class="text-danger">*</sup></label>
-                                    <select id="customer" data-url="{{route('customer.getInfo')}}" class="customer form-control" name="customer">
-                                        @foreach($customers as $item)
-                                            <option value="{{$item->id }}">{{$item->fullname}}</option>
+                                    <select id="customer" data-url="{{ route('customer.getInfo') }}"
+                                        class="customer form-control" name="id_customer">
+                                        <option value="">--Chọn khách hàng--</option>
+                                        @foreach ($customers as $item)
+                                            <option value="{{ $item->id }}">{{ $item->fullname }}</option>
                                         @endforeach
                                     </select>
                                     <div id="result-select2"></div>
@@ -110,5 +112,3 @@
     </div>
 </div>
 <script src="{{ asset('/public/admin/js/create_contract_earnest.js') }}"></script>
-
-

@@ -94,6 +94,10 @@ button.btn.btn-green.btn-vien-phai {
     padding: 8px !important;
 }
 
+.sidebar p {
+    color: #fff;
+}
+
 .text-14 {
     font-size: 14px !important;
 }

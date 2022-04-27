@@ -34,7 +34,6 @@ class Contract extends Model
 
 	protected $casts = [
 		'id_room' => 'int',
-		'name' => 'int',
 		'type' => 'int',
 		'is_earnest' => 'int',
 		'amount_is_earnest' => 'float',
@@ -68,5 +67,9 @@ class Contract extends Model
 
 	public function customers(){
         return $this->belongsToMany(Customer::class, 'contract_customer', 'id_contract', 'id_customer')->withPivot(['is_representative','note']);
+    }
+
+	public function customer(){
+        return $this->belongsToOne(Customer::class, 'contract_customer', 'id_contract', 'id_customer')->withPivot(['is_representative','note']);
     }
 }

@@ -44,6 +44,7 @@ class ContractEarnest extends Model
 	protected $fillable = [
 		'id_room',
 		'id_customer',
+		'type',
 		'code',
 		'name',
 		'price',

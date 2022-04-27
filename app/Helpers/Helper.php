@@ -4,6 +4,8 @@ if (!function_exists('getContractType')) {
     {
         if($type == 1){
             return 'Hợp đồng thuê';
+        }else{
+            return 'Hợp đồng cọc';
         }
     }
 }

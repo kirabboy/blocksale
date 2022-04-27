@@ -192,4 +192,6 @@
 @endsection
 @push('script')
     <script src="{{ asset('public/admin/js/workboard.js') }}"></script>
+    <script src="{{ asset('public/admin/js/contract_earnest.js') }}"></script>
+
 @endpush
