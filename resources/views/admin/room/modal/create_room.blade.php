@@ -180,6 +180,5 @@
             $(this).remove();
         })
     </script>
-    <script src="{{ asset('/public/admin/js/create_room.js') }}"></script>
 </div>
 

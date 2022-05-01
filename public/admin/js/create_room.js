@@ -1,4 +1,4 @@
-$(document).on('submit', '#create-room-form', function (e) {
+$(document).on('submit', '#create-room-form', function(e) {
     e.preventDefault();
     var form = $(this);
     var actionUrl = form.attr('action');
@@ -14,7 +14,11 @@ $(document).on('submit', '#create-room-form', function (e) {
         })
         .fail(function(data) {
             console.log(data);
-
+            $.each(data.responseJSON.message, function(key, value) {
+                toastr.error(value, {
+                    timeOut: 5000
+                })
+            });
         })
         .done(function(response) {
             console.log(response);

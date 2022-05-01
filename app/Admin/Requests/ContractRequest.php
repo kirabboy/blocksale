@@ -10,8 +10,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class RoomRequest extends FormRequest
-
+class ContractRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,34 +30,30 @@ class RoomRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => ['required','unique:App\Models\Room,code','max:255'],
+            'code' => ['required', 'unique:App\Models\Contract,code'],
             'name' => ['required'],
-            'name_blog' => ['required', 'unique:App\Models\Room,name_blog'],
-            'building_id' => ['required'],
-            'floor_id' => ['required'],
-            'type' => ['required'],
-            'acreage' => ['required'],
+            'time_start' => ['required'],
+            'time_end' => ['required'],
+            'time_charge' => ['required'],
+            'price_room' => ['required'],
+            'price_electric' => ['required'],
+            'price_water' => ['required'],
+            'type_water' => ['required'],
+            'price_service' => ['required'],
+            'number_room' => ['required'],
+            'number_electric' => ['required'],
+            'number_water' => ['required'],
+            'number_service' => ['required'],
+            'customer_ids' => ['required'],
         ];
     }
-
     public function withValidator($validator){
         $validator->after(function ($validator) {
-            if (!Str::of($this->code)->isAscii() || strpos($this->code, ' ')) {
-                $validator->errors()->add('code', 'Mã phòng không chứ các ký tự đặc biệt');
+            if (!Str::of($this->username)->isAscii() || strpos($this->username, ' ')) {
+                $validator->errors()->add('code', 'Không chứ các ký tự đặc biệt');
             }
         });
     }
-
-    public function messages()
-    {
-        return [
-            'code.unique' => 'Mã phòng đã tồn tại',
-            'code.required' => 'Mã phòng không được bỏ trống',
-            'name.required' => 'Tên phòng không được bỏ trống',
-            'price.required' => 'Giá phòng không được bỏ trống',
-        ];
-    }
-
     protected function failedValidation(Validator $validator)
     {
         $errors = (new ValidationException($validator))->errors();

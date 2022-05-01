@@ -19,7 +19,7 @@
                                     <label for="">Tên phòng thuê <sup class="text-danger">*</sup></label>
                                     <input type="text" name="" class="form-control" value="{{ $room->name }}"
                                         placeholder="Tên phòng thuê" readonly>
-                                    <input type="hidden" name="room_id" value="{{ $room->id }}" readonly>
+                                    <input type="hidden" name="id_room" value="{{ $room->id }}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Loại hợp đồng<sup class="text-danger">*</sup></label>
@@ -179,7 +179,6 @@
         </div>
     </div>
 </div>
-<script src={{ asset('/public/admin/js/create_contract.js') }}></script>
 <script>
     $('#table-customer').DataTable({
 

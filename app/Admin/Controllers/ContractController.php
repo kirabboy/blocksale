@@ -2,12 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Contract;
 use App\Models\Room;
+use App\Models\Contract;
 use App\Models\ContractInfo;
+use Illuminate\Http\Request;
 use App\Models\ContractCustomer;
+use App\Http\Controllers\Controller;
+use App\Admin\Requests\ContractRequest;
 
 class ContractController extends Controller
 {
@@ -31,7 +32,7 @@ class ContractController extends Controller
     {
         //
         $room = Room::whereId($request->room_id)->first();
-        if($room->contract()->whereStatus(1)->first()){
+        if($room->contract()->whereType(1)->whereStatus(1)->first()){
             return false;
         }
         return view('admin.contract.modal.create_contract', compact('room'));
@@ -43,44 +44,16 @@ class ContractController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContractRequest $request)
     {
         //
         $room = Room::whereId($request->room_id)->first();
-        if(!$request->customer_ids){
-            return response()->json(['status' => false, 'message' => 'Vui lòng chọn khách hàng đại diện' ]);
-        } 
-        if($room->status == 2){
-            return response()->json(['status' => false, 'message' => 'Hợp đồng còn hiệu lực' ]);
-        }
-        $contract = Contract::create([
-            'id_room' => $request->room_id,
-            'code' => $request->code,
-            'name' => $request->name,
-            'type' => $request->type,
-            'time_start' => $request->time_start,
-            'time_end' => $request->time_end,
-            'time_charge' =>$request->time_charge,
-            'is_earnest' => $request->is_earnest,
-            'note' => $request->note, 
-        ]);
-        $contract_info = ContractInfo::create([
-            'id_contract' => $contract->id,
-            'amount_earnest' => ($request->is_earnest == 1 ) ? $request->amount_earnest : 0,
-            'price_room' => $request->price_room,
-            'price_electric' => $request->price_electric,
-            'price_water' => $request->price_water,
-            'type_water' => $request->type_water,//1: tháng, 2: m3
-            'price_service' => $request->price_service,
-            'number_room' => $request->number_room,
-            'number_electric' => $request->number_electric,
-            'number_water' => $request->number_water,
-            'number_service' => $request->number_service,
-            'note_room' => $request->note_room,
-            'note_electric' => $request->note_electric,
-            'note_water' => $request->note_water,
-            'note_service' => $request->note_service,
-        ]);
+        $contract = Contract::create( $request->all());
+        $request->id_contract = $contract->id;
+        $request->amount_earnest = ($request->is_earnest == 1 ) ? $request->amount_earnest : 0;
+        $contract_info = ContractInfo::create(
+            $request->all()
+        );
         foreach($request->customer_ids as $id){
             ContractCustomer::create([
                 'id_contract' =>$contract->id,
@@ -95,7 +68,7 @@ class ContractController extends Controller
         $html_contract = view('admin.contract.include.show_quickly', compact('current_contract'))->render();
         $html_room =  view('admin.room.show', compact('room','current_contract'))->render();
         $html_room_contract_history = view('admin.room.include.room_contract_history', compact('contracts'))->render();
-        return response()->json(['status' => true, 'message' => 'Thêm hợp đồng thành công','html_room' => $html_room, 'html_contract' => $html_contract, 'html_contract_history' => $html_room_contract_history]);
+        return response()->json(['message' => 'Thêm hợp đồng thành công','html_room' => $html_room, 'html_contract' => $html_contract, 'html_contract_history' => $html_room_contract_history]);
     }
 
     /**

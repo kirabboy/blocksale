@@ -193,5 +193,7 @@
 @push('script')
     <script src="{{ asset('public/admin/js/workboard.js') }}"></script>
     <script src="{{ asset('public/admin/js/contract_earnest.js') }}"></script>
+    <script src="{{ asset('/public/admin/js/create_room.js') }}"></script>
+    <script src={{ asset('/public/admin/js/create_contract.js') }}></script>
 
 @endpush
