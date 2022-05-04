@@ -66,6 +66,39 @@ function createContractEarnest(e) {
         });
 }
 
+function createContractService(e) {
+    $.ajax({
+            url: $(e).data('url'),
+            data: {
+                'id_contract': $(e).data('id_contract'),
+            },
+            type: 'GET'
+        })
+        .fail(function(data) {
+            console.log(data);
+        })
+        .done(function(response) {
+            console.log(response);
+            $('.modal-area').append(response);
+            $('#modalFormCreate').modal('show');
+        });
+}
+
+function editContractService(e) {
+    $.ajax({
+            url: $(e).data('url'),
+            data: {},
+            type: 'GET'
+        })
+        .fail(function(data) {
+            console.log(data);
+        })
+        .done(function(response) {
+            console.log(response);
+            $('.modal-area').append(response);
+            $('#modalFormCreate').modal('show');
+        });
+}
 
 $('#tool-filter-status-room button').click(function() {
     $.ajax({
@@ -104,6 +137,7 @@ function getRoomInfo(e) {
             $('#nav_hop_dong_thue').empty().append(response['html_contract']);
             $('#nav_lich_su_hop_dong').empty().append(response['html_room_contract_history']);
             $('#nav_dat_coc_giu_cho').empty().append(response['html_contract_earnest']);
+            $('#service-detail-area').empty().append(response['html_service_detail']);
             console.log(response);
         });
 }

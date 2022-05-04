@@ -142,3 +142,7 @@
 .panel-group .panel-default {
     margin-top: 20px;
 }
+
+.btn-edit-service-detail {
+    cursor: pointer;
+}

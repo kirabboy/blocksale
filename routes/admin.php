@@ -1,21 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Admin\Controllers\AdminHomeController;
 use App\Admin\Controllers\AuthController;
-use App\Admin\Controllers\BuildingManagerController;
+use App\Admin\Controllers\RoomController;
+use App\Admin\Controllers\AccountController;
 use App\Admin\Controllers\ContractController;
 use App\Admin\Controllers\CustomerController;
-use App\Admin\Controllers\AccountController;
+use App\Admin\Controllers\AdminHomeController;
 use App\Admin\Controllers\WorkBoardController;
-use App\Admin\Controllers\AdminBuildingController;
-use App\Admin\Controllers\ContractEarnestController;
-use App\Admin\Controllers\RoomController;
-use App\Admin\Controllers\FloorManagerController;
-use App\Admin\Controllers\RoomManagerController;
 use App\Admin\Controllers\RoleManagerController;
-use App\Admin\Controllers\PermissionManagerController;
+use App\Admin\Controllers\RoomManagerController;
+use App\Admin\Controllers\FloorManagerController;
+use App\Admin\Controllers\AdminBuildingController;
+use App\Admin\Controllers\BuildingManagerController;
+use App\Admin\Controllers\ContractEarnestController;
 use App\Admin\Controllers\CustomerManagerController;
+use App\Admin\Controllers\PermissionManagerController;
+use App\Admin\Controllers\ContractServiceDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::group(['middleware' => ['admin']], function () {
         '/hop-dong' => ContractController::class,
         '/phong' =>RoomController::class,
         '/hop-dong-coc' => ContractEarnestController::class,
+        '/chi-so-dich-vu' => ContractServiceDetailController::class,
     ]);
 
     Route::group(['prefix' => 'co-so', 'middleware' => ['permission:Quản trị cơ sở,admin']], function(){

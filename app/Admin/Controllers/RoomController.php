@@ -59,10 +59,11 @@ class RoomController extends Controller
         $room = Room::find($id);
         $contracts = $room->contract();
         $html_room_contract_history = view('admin.room.include.room_contract_history', compact('contracts'))->render();
-
+        $html_service_detail = '';
         $current_contract = $contracts->whereType(1)->whereStatus(1)->with('contractinfo')->first();
         if($current_contract){
             $html_contract = view('admin.contract.include.show_quickly', compact('current_contract'))->render();
+            $html_service_detail = view('admin.service_detail.show', compact('current_contract'))->render();
         }else{
             $html_contract = view('admin.contract.include.empty', compact('room'))->render();
         }
@@ -75,7 +76,8 @@ class RoomController extends Controller
         }
         $html_room =  view('admin.room.show', compact('room','current_contract'))->render();
         return response()->json(['html_room'=>$html_room, 'html_contract'=>$html_contract,
-        'html_room_contract_history' => $html_room_contract_history, 'html_contract_earnest'=>$html_contract_earnest]);
+        'html_room_contract_history' => $html_room_contract_history, 'html_contract_earnest'=>$html_contract_earnest,
+        'html_service_detail' => $html_service_detail]);
     }
 
     /**

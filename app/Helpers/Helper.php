@@ -170,3 +170,25 @@ if (!function_exists('formatTypeRoom')) {
         }
     }
 }
+
+if (!function_exists('formatContractService')) {
+    function formatContractService($type = 1)
+    {
+        if($type == 1){
+            return 'Công tơ điện';
+        }else if($type == 2){
+            return 'Công tơ nước';
+        }
+    }
+}
+
+if (!function_exists('formatStatusContractService')) {
+    function formatStatusContractService($status = 1)
+    {
+        if($status == 0){
+            return 'Chưa chốt';
+        }else if($status == 1){
+            return 'Đã chốt';
+        }
+    }
+}

@@ -72,4 +72,8 @@ class Contract extends Model
 	public function customer(){
         return $this->belongsToOne(Customer::class, 'contract_customer', 'id_contract', 'id_customer')->withPivot(['is_representative','note']);
     }
+
+	public function service_detail(){
+		return $this->hasMany(ContractServiceDetail::class, 'id_contract', 'id');
+	}
 }

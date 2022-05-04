@@ -20,7 +20,7 @@
                     <div class="col-sm-2 text-right">
                         <form id="form-select-building" action="" method="get">
                             <select id="select-building" name="building" class="form-control" onchange="this.form.submit()"">
-                                                    @foreach ($buildings as $item)
+                                                         @foreach ($buildings as $item)
                                 <option value="{{ $item->id }}" {{ $building->id == $item->id ? 'selected' : '' }}>
                                     {{ $item->name }}</option>
                                 @endforeach
@@ -111,7 +111,8 @@
                                                     <div class="progress " style="width: 100%; margin-top: 10px;">
                                                         <div class="progress-bar bg-success" role="progressbar"
                                                             style="width: {{ $building->ratio }}%" aria-valuenow="100"
-                                                            aria-valuemin="0" aria-valuemax="100">{{ round($building->ratio) }}%
+                                                            aria-valuemin="0" aria-valuemax="100">
+                                                            {{ round($building->ratio) }}%
                                                         </div>
                                                     </div>
                                                 </li>
@@ -134,7 +135,7 @@
                                 <button class="nav-link active text-14" id="don_vi_thue" data-bs-toggle="tab"
                                     data-bs-target="#nav_don_vi_thue" type="button" role="tab">
                                     Đơn vị thuê</button>
-                               
+
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -150,7 +151,7 @@
                                 </nav>
                                 <div class="tab_thong_tin_dv" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="nav_thong_tin_don_vi_thue">
-                                        
+
                                     </div>
                                 </div>
                                 <!-- End tab thông tin đơn vị thuê-->
@@ -172,16 +173,16 @@
                                     <div class="tab-pane fade show active" id="nav_hop_dong_thue">
                                     </div>
                                     <div class="tab-pane fade" id="nav_dat_coc_giu_cho">
-                                        
+
                                     </div>
                                     <div class="tab-pane fade show" id="nav_lich_su_hop_dong">
                                     </div>
                                 </div>
                             </div>
                             <!-- End tab đơn vị thuê -->
-
-
-                           
+                        </div>
+                        <div id="service-detail-area" class="p-2">
+                            
                         </div>
                     </div>
                 </div>
@@ -195,5 +196,6 @@
     <script src="{{ asset('public/admin/js/contract_earnest.js') }}"></script>
     <script src="{{ asset('/public/admin/js/create_room.js') }}"></script>
     <script src={{ asset('/public/admin/js/create_contract.js') }}></script>
+    <script src={{ asset('/public/admin/js/create_contract_service.js') }}></script>
 
 @endpush
