@@ -11,7 +11,9 @@ class CustomerManagerController extends Controller
 {
     //
     public function index(){
-        $customers = Customer::select('id', 'code', 'fullname', 'phone', 'email', 'identification_number')->get();
+        $admin_id = auth()->guard('admin')->user()->id;
+        $customers = Customer::select('id', 'code', 'fullname', 'phone', 'email', 'identification_number')
+        ->whereAdminId($admin_id)->get();
         return view('admin.customer.index', compact('customers'));
     }
 
@@ -22,9 +24,14 @@ class CustomerManagerController extends Controller
     }
 
     public function store(CustomerRequest $request){
+        
         $data = $request->except('_token');
+        $admin_id = auth()->guard('admin')->user()->id;
+        $data['admin_id'] = $admin_id;
+        
         $customer = Customer::create($data);
         $customer = (object) $customer->only('id', 'code', 'fullname', 'phone', 'email', 'identification_number');
+        
         $result = view('admin.customer.row', ['customer' => $customer])->render();
         return response()->json([
             'message' => 'Thêm khách hàng thành công',

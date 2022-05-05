@@ -38,6 +38,7 @@ class Building extends Model
 	];
 
 	protected $fillable = [
+		'admin_id',
 		'code',
 		'name',
 		'slug',
