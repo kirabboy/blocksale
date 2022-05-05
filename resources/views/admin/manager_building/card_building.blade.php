@@ -6,7 +6,7 @@
                 <div class="card-building-header-info">
                     <h4 class="building-name">{{$building['name']}} <i class="fas fa-check-circle"></i></h4>
                     <p class="building-address" tabindex="0" data-bs-toggle="tooltip" title="{{$building['address']}}">
-                        {{Str::limit($building['address'], 30)}}</p>
+                        {{Str::limit($building['address'], 25)}}</p>
                 </div>
                 
                 <div class="dropdown ml-auto">

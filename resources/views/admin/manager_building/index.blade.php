@@ -16,7 +16,7 @@
                 </button>
             </div>
         </div>
-        <div class="row p-2" id="afterSubmit">
+        <div class="row building p-2" id="afterSubmit">
             @foreach($buildings as $building)
                 @include('admin.manager_building.card_building', ['building' => $building])
             @endforeach

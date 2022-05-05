@@ -88,5 +88,5 @@ Route::group(['middleware' => ['admin']], function () {
         Route::delete('xu-ly-nhieu-khach-hang', [CustomerManagerController::class,'multiple'])->name('admin.customer.multiple');
 
     });
-    
+    Route::post('dang-xuat', [AuthController::class, 'logout'])->name('admin.logout');
 });

@@ -34,25 +34,25 @@
 
         <li class="nav-item dropdown" id="dropdown_user">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                Chào, <strong class="text-uppercase">{{ auth()->guard('admin')->user()->admin_info->fullname }}</strong>
+                Chào, <strong class="text-uppercase">{{ auth()->guard('admin')->user()->username }}</strong>
                 <img src="{{ asset('public/admin/image/profile.svg')}}" alt="User Avatar" class="img-size-25 img-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-user dropdown-menu-right">
                 <a href="#" class="dropdown-item sidebar-green user_hover">
                     <!-- Message Start -->
                     <div class="media pt-2 pb-2">
-                        <img src="{{ asset('public/admin/image/logo.png')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <img src="{{ asset('public/admin/image/profile.svg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
-                            <h1 class="dropdown-item-title text-white" style="font-size: 24px;">
-                                Tom Riddler
+                            <h1 class="dropdown-item-title" style="font-size: 24px;">
+                                {{ auth()->guard('admin')->user()->admin_info->fullname }}
                             </h1>
-                            <p class="text-sm text-white">0123.456.789</p>
+                            <p class="text-sm">{{ auth()->guard('admin')->user()->admin_info->phone }}</p>
                         </div>
                     </div>
                 </a>
                 <div class="dropdown-divider"></div>
 
-                <a href="#" class="dropdown-item ic_of_user">
+                <!-- <a href="#" class="dropdown-item ic_of_user">
                     <div class="media">
                         <i class="fas fa-user text-success pr-4"></i>
                         <div class="media-body">
@@ -75,11 +75,14 @@
                             <p class="text-sm">Danh sách dự án công việc</p>
                         </div>
                     </div>
-                </a>
+                </a> -->
 
                 <div class="p-3">
-                    <i class="fas fa-logout text-danger pr-2"></i>
-                    <a href="#" class="btn btn-success sidebar-green">Đăng xuất</a>
+                    <form action="{{ route('admin.logout') }}" method="post">
+                        @csrf
+                        <i class="fas fa-logout text-danger pr-2"></i>
+                        <button type="submit" class="btn btn-success sidebar-green">Đăng xuất</button>
+                    </form>
                 </div>
             </div>
         </li>

@@ -16,12 +16,13 @@ class WorkBoardController extends Controller
     public function index(Request $request)
     {
         //
+        $admin_id = auth()->guard('admin')->user()->id;
         if($request->has('building')){
-            $building = Building::whereId($request->building)->with('floor')->first();
+            $building = Building::whereAdminId($admin_id)->whereId($request->building)->with('floor')->first();
         }else{
-            $building = Building::with('floor')->first();
+            $building = Building::whereAdminId($admin_id)->with('floor')->first();
         }
-        $buildings = Building::latest()->get();
+        $buildings = Building::whereAdminId($admin_id)->latest()->get();
         $building->count = $building->room->countBy('status');
         $building->ratio = $building->count->sum() != 0 ? ($building->count['2'] ?? 0) / $building->count->sum() *100 : 0;
         $building->floor = $building->floor->map(function($item) {

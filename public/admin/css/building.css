@@ -120,3 +120,6 @@
   .dropdown-toggle::after{
       display: none;
   }
+  .building>div{
+      padding-inline: 8px;
+  }

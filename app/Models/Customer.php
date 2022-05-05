@@ -58,6 +58,7 @@ class Customer extends Model
         return date('Y-m-d', strtotime($value));
     }
 	protected $fillable = [
+		'admin_id',
 		'code',
 		'fullname',
 		'type',

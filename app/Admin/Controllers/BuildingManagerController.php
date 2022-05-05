@@ -16,7 +16,9 @@ class BuildingManagerController extends Controller
      */
     public function index()
     {
+        $admin_id = auth()->guard('admin')->user()->id;
         $buildings = Building::select('id', 'name', 'number_floor', 'address', 'owner')
+        ->whereAdminId($admin_id)
         ->with('room:building_id,price,status')->latest()->get();
         // dd($buildings);
         //marco dữ liệu
@@ -66,6 +68,9 @@ class BuildingManagerController extends Controller
     public function store(BuildingRequest $request)
     {
         $data = $request->only('code', 'name', 'avatar', 'number_floor', 'owner', 'owner_phone', 'owner_email', 'address', 'note', 'messenger', 'google_map', 'introduce');
+        
+        $admin_id = auth()->guard('admin')->user()->id;
+        $data['admin_id'] = $admin_id;
 
         $building = Building::create($data);
 

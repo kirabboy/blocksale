@@ -18,6 +18,9 @@ class AdminAuthenticate
     public function handle(Request $request, Closure $next)
     {
         if (Auth::guard('admin')->guest()) {
+            if (request()->isMethod('get')) {
+                session()->put('url-redirect', $request->fullUrl());    
+            }
             return redirect('quan-tri/dang-nhap');
         }
         return $next($request);
