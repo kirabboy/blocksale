@@ -19,4 +19,5 @@
     <td>{{ $customer->fullname }}</td>
     <td>{{ $customer->phone }}</td>
     <td>{{ $customer->email }}</td>
+    <td>{{ $customer->contracts()->whereStatus(1)->value('name')}}</td>
 </tr>

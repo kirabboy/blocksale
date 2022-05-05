@@ -13,11 +13,11 @@
                     <div class="col-sm-2">
                         <p class="m-0" style="line-height: 40px; font-size: 14px;">
                             <i class="nav-icon fas fa-paper-plane text-success"></i>
-                            Công việc
+                            Danh sách hợp đồng
                         </p>
                     </div>
                     <div class="col-sm-10 text-right">
-                        <button class="btn btn-green btn-vien-trai">
+                        {{-- <button class="btn btn-green btn-vien-trai">
                             <i class="fa fa-search"></i> Tải lại</button>
                         <button class="btn btn-green btn-vien-trai btn-vien-phai">
                             <i class="fa fa-search"></i> Thêm mới</button>
@@ -33,14 +33,14 @@
                         <button class="btn btn-green btn-vien-trai btn-vien-phai">
                             <i class="fa fa-search"></i> Trạng thái</button>
                         <button class="btn btn-green btn-vien-phai" style="background:rgb(255, 94, 94) !important">
-                            <i class="fa fa-trash"></i> Xóa</button>
+                            <i class="fa fa-trash"></i> Xóa</button> --}}
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="content-main">
-            <ul class="nav mb-1 nav_congviec" id="pills-tab" role="tablist" style="border-bottom: dotted 1px #d3d3d3;">
+            {{-- <ul class="nav mb-1 nav_congviec" id="pills-tab" role="tablist" style="border-bottom: dotted 1px #d3d3d3;">
                 <li class="nav-item">
                     <a class="nav-link text-14 active" id="pills-tat_ca-tab" data-toggle="pill" href="#pills-tat_ca">
                         Tất cả (6)</a>
@@ -54,9 +54,9 @@
                         href="#pills-dang_tien_hanh">
                         Đang tiến hành (0)</a>
                 </li>
-            </ul>
+            </ul> --}}
 
-            <div class="tab-content" id="pills-tabContent">
+            <div class="tab-content  p-2" id="pills-tabContent">
                 <!-- Tab tất cả table -->
                 <div class="tab-pane fade show active" id="pills-tat_ca" role="tabpanel" aria-labelledby="pills-tat_ca-tab">
                     <div class="table-responsive table-scrollable">
@@ -67,28 +67,24 @@
                                     <table class="table table-head-custom" id="table_hop_dong" style="width: 2150px;">
                                         <thead>
                                             <tr class="header-table-height">
-                                                <th class="no-sort text-12 text-uppercase"
-                                                    style="background-image: none !important;">
-                                                    <input type="checkbox" name="select-all" id="select-all" />
-                                                </th>
+
                                                 <th class="text-12 text-uppercase" style="width: 10px">#</th>
                                                 <th class="text-12 text-uppercase" style="width: 10px">Mã</th>
                                                 <th class="text-12 text-uppercase" style="width: 80px">TÊN</th>
-                                                <th class="text-12 text-uppercase" style="width: 120px">CÔNG VIỆC CHA</th>
-                                                <th class="text-12 text-uppercase" style="width: 120px">DỰ ÁN</th>
-                                                <th class="text-12 text-uppercase" style="width: 110px">ĐỘ ƯU TIÊN</th>
-                                                <th class="text-12 text-uppercase" style="width: 120px">Trạng thái</th>
-                                                <th class="text-12 text-uppercase" style="width: 80px">TIẾN ĐỘ</th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">NGƯỜI THEO DÕI</th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">NGÀY BẮT ĐẦU</th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">NGÀY HẾT HẠN</th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">THỜI GIAN CÒN LẠI
+                                                <th class="text-12 text-uppercase" style="width: 120px">Mã phòng thuê</th>
+                                                <th class="text-12 text-uppercase" style="width: 120px">Tên phòng thuê</th>
+                                                <th class="text-12 text-uppercase" style="width: 110px">Loại phòng thuê</th>
+                                                <th class="text-12 text-uppercase" style="width: 120px">Ngày bắt đầu</th>
+                                                <th class="text-12 text-uppercase" style="width: 80px">Ngày kết thúc</th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Ngày tính phí</th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Đặt cọc</th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Phí thuê nhà</th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Người đại diện
                                                 </th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">NGÀY HOÀN THÀNH</th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">NGƯỜI THỰC HIỆN</th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Trạng thái</th>
                                             </tr>
                                         </thead>
-                                        <tfoot style="display: table-header-group">
+                                        {{-- <tfoot style="display: table-header-group">
                                             <tr>
                                                 <th></th>
                                                 <th></th>
@@ -111,50 +107,34 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
-                                                <th></th>
                                             </tr>
-                                        </tfoot>
+                                        </tfoot> --}}
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td>...</td>
-                                                <td>CV000001</td>
-                                                <td>Thuê công nhân</td>
-                                                <td>Do sth</td>
-                                                <td>Đốt nhà</td>
-                                                <td>Bình thường</td>
-                                                <td>
-                                                    <p class="m-0 text-12 label label-light-success" style="width:100%">Đã
-                                                        được giải quyết</p>
-                                                </td>
-                                                <td>100%</td>
-                                                <td></td>
-                                                <td>11:31:00 01-11-2021</td>
-                                                <td>11:32:00 02-11-2021</td>
-                                                <td></td>
-                                                <td>11:36:00 02-11-2021</td>
-                                                <td>TRƯƠNG THỊ QUẾ ANH</td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>...</td>
-                                                <td>CV000002</td>
-                                                <td>Thuê thợ</td>
-                                                <td>Do sth</td>
-                                                <td>Phủ sơn tòa nhà</td>
-                                                <td>Bình thường</td>
-                                                <td>
-                                                    <p class="m-0 text-12 label label-light-success" style="width:100%">Đã
-                                                        được giải quyết</p>
-                                                </td>
-                                                <td>100%</td>
-                                                <td></td>
-                                                <td>11:31:00 01-11-2021</td>
-                                                <td>11:32:00 02-11-2021</td>
-                                                <td></td>
-                                                <td>11:36:00 02-11-2021</td>
-                                                <td>TRƯƠNG THỊ QUẾ ANH</td>
-                                            </tr>
+                                            @foreach ($contracts as $contract)
+                                                <tr>
+                                                    <td></td>
+                                                    <td>{{ $contract->code }}</td>
+                                                    <td>{{ $contract->name }}</td>
+                                                    <td> {{ $contract->room->code }} </td>
+                                                    <td>{{ $contract->room->name }}</td>
+                                                    <td>{{ formatTypeRoom($contract->room->type) }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($contract->time_start)) }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($contract->time_end)) }}</td>
+                                                    <td>{{ date('d/m/Y', strtotime($contract->time_charge)) }}</td>
+                                                    <td>{{ formatPrice($contract->contractinfo->amount_earnest) }}</td>
+                                                    <td>{{ formatPrice($contract->contractinfo->price_room) }}</td>
+
+                                                    <td>
+                                                        @foreach ($contract->customers()->get() as $item)
+                                                            @if ($item->pivot->is_representative == 1)
+                                                                {{ $item->fullname }}
+                                                            @endif
+                                                        @endforeach
+                                                    </td>
+                                                    <td>{{getContractStatus($contract->status)}}</td>
+
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

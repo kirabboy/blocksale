@@ -55,6 +55,7 @@ Hồ sơ khách hàng
                             <th class="text-12 text-uppercase" style="width: 150px">HỌ VÀ TÊN</th>
                             <th class="text-12 text-uppercase" style="width: 150px">SỐ ĐIỆN THOẠI</th>
                             <th class="text-12 text-uppercase" style="width: 160px">EMAIL</th>
+                            <th class="text-12 text-uppercase" style="width: 160px">Hợp đồng hiện tại</th>
                         </tr>
                     </thead>
                     <tfoot style="display: table-header-group">
@@ -66,6 +67,7 @@ Hồ sơ khách hàng
                             <th class="yes">Họ và tên</th>
                             <th class="yes">Sđt</th>
                             <th class="yes">Email</th>
+                            <th class="yes">Hợp đồng hiện tại</th>
                         </tr>
                     </tfoot>
                     <tbody>

@@ -80,4 +80,8 @@ class Customer extends Model
 		'bank_branch',
 		'note'
 	];
+	public function contracts(){
+        return $this->belongsToMany(Contract::class, 'contract_customer', 'id_customer', 'id_contract')->withPivot(['is_representative','note']);
+    }
+
 }

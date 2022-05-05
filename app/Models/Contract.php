@@ -63,7 +63,9 @@ class Contract extends Model
 	public function contractinfo(){
         return $this->hasOne(ContractInfo::class, 'id_contract', 'id');
     }
-	
+	public function room(){
+        return $this->hasOne(Room::class, 'id', 'id_room');
+    }
 
 	public function customers(){
         return $this->belongsToMany(Customer::class, 'contract_customer', 'id_contract', 'id_customer')->withPivot(['is_representative','note']);
@@ -76,4 +78,5 @@ class Contract extends Model
 	public function service_detail(){
 		return $this->hasMany(ContractServiceDetail::class, 'id_contract', 'id');
 	}
+
 }

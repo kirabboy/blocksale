@@ -21,7 +21,8 @@ class ContractController extends Controller
     public function index()
     {
         //
-        return view('admin.contract.index');
+        $contracts = Contract::with('contractinfo')->with('room')->latest()->get();
+        return view('admin.contract.index', compact('contracts'));
     }
 
     /**
