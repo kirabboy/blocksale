@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use Datatables;
+use Illuminate\Support\Arr;
 
 class CustomerController extends Controller
 {
@@ -98,7 +99,19 @@ class CustomerController extends Controller
         $data = Customer::where('fullname','LIKE',"%".$search."%")->limit(25)->get();
         return $data;
     }
+    public function indexDatatableEdit(){
+        $customers_contract = Customer::join('contract_customer', function ($join) {
+            $join->on( 'customer.id' , '=', 'contract_customer.id_customer')
+                 ->where('contract_customer.id_contract', '=', 1);
+        })->with('contract_customer')
+        ->get()->toArray();
+        $ids = Arr::pluck($customers_contract, 'id_customer');
+        $customers =  Customer::whereNotIn('id', $ids)->get()->toArray();
+        $customers = array_merge($customers_contract,$customers);
+        
+        return datatables()->of($customers)->toJson();
 
+    }
     public function indexDatatable(){
         $customers = Customer::latest()->get();
         return datatables()->of($customers)->toJson();

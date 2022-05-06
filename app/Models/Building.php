@@ -51,7 +51,9 @@ class Building extends Model
 		'note',
 		'messenger',
 		'google_map',
-		'introduce'
+		'introduce',
+		'price_room',
+		'type_water'
 	];
 	protected $attributes = [
         'avatar' => 'public/image/default-image.png'

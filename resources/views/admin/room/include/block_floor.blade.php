@@ -15,17 +15,23 @@
     </div>
     <div class="col-12 col-sm-9">
         <div class="row list-room-{{ $floor['id'] }}">
-            @if (isset($status))
+            {{-- @if (isset($status))
 
                 @foreach ($floor->room()->whereStatus($status)->get()
     as $item)
                     @include('admin.room.include.room_unit', ['room' => $item])
                 @endforeach
-            @else
+            @else --}}
                 @foreach ($floor['room'] as $item)
-                    @include('admin.room.include.room_unit', ['room' => $item])
+                    @if (isset($status))
+                        @if($item->status == $status)
+                            @include('admin.room.include.room_unit', ['room' => $item])
+                        @endif
+                    @else
+                        @include('admin.room.include.room_unit', ['room' => $item])
+                    @endif
                 @endforeach
-            @endif
+            {{-- @endif --}}
         </div>
 
     </div>

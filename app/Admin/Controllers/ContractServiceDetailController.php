@@ -39,7 +39,7 @@ class ContractServiceDetailController extends Controller
     public function store(Request $request)
     {
         $contract = Contract::whereId($request->id_contract)->first();
-        if($contract->service_detail()->where('month', $request->month)->where('year', $request->year)->first()){
+        if($contract->service_detail()->whereType($request->type)->where('month', $request->month)->where('year', $request->year)->first()){
             return response()->json(['status' => false, 'message' => 'Chỉ số tháng này đã tồn tại']);
         }else{
             ContractServiceDetail::create([
@@ -94,7 +94,7 @@ class ContractServiceDetailController extends Controller
             'end_number' => $request->end_number,
         ]);
         if($request->confirm == 1){
-            $contract_service->status = 1;
+            $contract_service->is_confirm = 1;
             $contract_service->confirm_date = date('Y-m-d');
             $contract_service->save();
         }

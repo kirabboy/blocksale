@@ -78,5 +78,12 @@ class Contract extends Model
 	public function service_detail(){
 		return $this->hasMany(ContractServiceDetail::class, 'id_contract', 'id');
 	}
+	public function contract_customer(){
+		return $this->hasMany(ContractCustomer::class, 'id_contract', 'id');
+	}
 
+	public function invoices(){
+		return $this->hasMany(Invoice::class, 'id_contract', 'id');
+
+	}
 }

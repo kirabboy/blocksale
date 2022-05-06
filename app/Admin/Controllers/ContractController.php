@@ -35,9 +35,11 @@ class ContractController extends Controller
         //
         $room = Room::whereId($request->room_id)->first();
         if($room->contract()->whereType(1)->whereStatus(1)->first()){
-            return false;
+            return response()->json(['status' => false, 'message'=> 'Phòng đã có hợp đồng đang còn hiệu lực']);
+        }elseif($room->status == 3){
+            return response()->json(['status' => false, 'message'=> 'Phòng đã ngưng sử dụng']);
         }
-        return view('admin.contract.modal.create_contract', compact('room'));
+        return response()->json(['status' => true, 'message'=> view('admin.contract.modal.create_contract', compact('room'))->render()]);
     }
 
     /**
@@ -110,7 +112,9 @@ class ContractController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contract = Contract::whereId($id)->with('contractinfo')->with('room')->first();
+        
+        return view('admin.contract.modal.edit_contract', compact('contract'));
     }
 
     /**
@@ -120,9 +124,32 @@ class ContractController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ContractRequest $request, $id)
     {
-        //
+        $contract = Contract::whereId($id)->first();
+        $contract->update($request->only('code', 'name', 'time_start', 'time_end', 'time_charge', 'is_earnest', 'note'));
+        $contract_info = $contract->contractinfo()->first();
+        $contract_info->update($request->only('number_room', 'price_room', 'note_room', 'number_electric',
+         'price_electric', 'note_electric', 'number_water', 'price_water','note_water', 
+         'number_service', 'price_service', 'note_service'));
+        $contract->contract_customer()->delete();
+        foreach($request->customer_ids as $id_customer){
+
+            ContractCustomer::create([
+                'id_contract' =>$contract->id,
+                'is_representative' => ($id_customer == $request->is_representative) ? 1:0,
+                'id_customer' => $id_customer,
+                'note' => $request->get('note'.$id_customer),
+            ]);
+        }
+        $room = $contract->room()->first();
+        $contracts = $room->contract();
+        $current_contract = Contract::whereId($id)->first();
+        $html_contract = view('admin.contract.include.show_quickly', compact('current_contract'))->render();
+        $html_room =  view('admin.room.show', compact('room','current_contract'))->render();
+        $html_room_contract_history = view('admin.room.include.room_contract_history', compact('contracts'))->render();
+        $html_service_detail = view('admin.service_detail.show', ['current_contract' => $contract])->render();
+        return response()->json(['message' => 'Sửa hợp đồng thành công','html_room' => $html_room, 'html_service_detail'=>$html_service_detail, 'html_contract' => $html_contract, 'html_contract_history' => $html_room_contract_history]);
     }
 
     /**

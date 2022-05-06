@@ -1,4 +1,4 @@
-<div class="modal model-render fade modal-primary" id="modalFormCreate" tabindex="-1" role="dialog"
+<div class="modal model-render fade modal-primary" id="modal-form" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form-create-contract" action="{{ route('hop-dong.store') }}" method="post">
+            <form id="form-edit-contract" action="{{ route('hop-dong.update',1) }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="border border-1 p-2">
@@ -17,9 +17,9 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Tên phòng thuê <sup class="text-danger">*</sup></label>
-                                    <input type="text" name="" class="form-control" value="{{ $room->name }}"
+                                    <input type="text" name="" class="form-control" value="{{$contract->room->name}}"
                                         placeholder="Tên phòng thuê" readonly>
-                                    <input type="hidden" name="id_room" value="{{ $room->id }}" readonly>
+                                    <input type="hidden" name="id_room" value="{{$contract->room->id}}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Loại hợp đồng<sup class="text-danger">*</sup></label>
@@ -30,39 +30,39 @@
                                 <div class="form-group">
                                     <label for="">Ngày bắt đầu<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_start" class="form-control"
-                                        placeholder="Ngày bắt đầu" required>
+                                        placeholder="Ngày bắt đầu" value="{{date('Y-m-d',strtotime($contract->time_start))}}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ngày tính phí<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_charge" class="form-control"
-                                        placeholder="Ngày tính phí" required>
+                                        placeholder="Ngày tính phí" value="{{date('Y-m-d',strtotime($contract->time_charge))}}" required>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Mã hợp đồng<sup class="text-danger">*</sup></label>
                                     <input type="text" name="code" class="form-control" placeholder="Mã hợp đồng"
-                                        required>
+                                        value="{{$contract->code}}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tên hợp đồng<sup class="text-danger">*</sup></label>
                                     <input type="text" name="name" class="form-control" placeholder="Tên hợp đồng"
-                                        required>
+                                        value="{{$contract->name}}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ngày kết thúc<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_end" class="form-control"
-                                        placeholder="Ngày kết thúc" required>
+                                        placeholder="Ngày kết thúc"  value="{{date('Y-m-d',strtotime($contract->time_end))}}"required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Đặt cọc</label>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-2 justify-content-center d-flex">
-                                            <input type="checkbox" class="input-group-text" name="is_earnest" value="1">
+                                            <input type="checkbox" class="input-group-text" name="is_earnest" @if($contract->is_earnest == 1) checked @endif value="1">
                                         </div>
                                         <div class="col-10">
                                             <input type="number" class="form-control" name="amount_earnest"
-                                                placeholder="Tiền đặt cọc" value="0">
+                                                placeholder="Tiền đặt cọc" value="{{$contract->contractinfo->amount_earnest}}">
                                         </div>
                                     </div>
                                 </div>
@@ -124,53 +124,43 @@
                                             <tr>
                                                 <td>Phí thuê nhà</td>
                                                 <td><input type="number" class="form-control" name="number_room"
-                                                        value="1"></td>
+                                                        value="{{$contract->contractinfo->number_room}}"></td>
                                                 <td><input type="number" class="form-control" name="price_room"
-                                                        value="{{ $room->price }}" placeholder="Đơn giá"></td>
+                                                        value="{{$contract->contractinfo->price_room}}" placeholder="Đơn giá"></td>
                                                 <td>tháng</td>
-                                                <td><input type="text" class="form-control" name="note_room"
-                                                        placeholder="Ghi chú">
+                                                <td><input type="text" class="form-control" name="note_room" value="{{$contract->contractinfo->note_room}}" placeholder="Ghi chú">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Phí điện</td>
                                                 <td><input type="number" class="form-control" name="number_electric"
-                                                        value="1"></td>
+                                                        value="{{$contract->contractinfo->number_electric}}"></td>
                                                 <td><input type="number" class="form-control" name="price_electric"
-                                                        value="3500" placeholder="Đơn giá"></td>
+                                                        value="{{$contract->contractinfo->price_electric}}" placeholder="Đơn giá"></td>
                                                 <td>kWh</td>
                                                 <td><input type="text" class="form-control" name="note_electric"
-                                                        value="" placeholder="Ghi chú">
+                                                        value="{{$contract->contractinfo->note_electric}}" placeholder="Ghi chú">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Phí nước</td>
-                                                <td><input type="number" class="form-control" name="number_water"
-                                                        value="1"></td>
-                                                <td><input type="number" class="form-control" name="price_water"
-                                                        value="25000" placeholder="Đơn giá"></td>
-                                                <td>
-                                                    @if ($room->building()->value('type_water') == 1)
-                                                        tháng
-                                                    @else
-                                                        m3
-                                                    @endif
-                                                    <input type="hidden" name="type_water" value="{{$room->building()->value('type_water')}}">
-
-                                                </td>
-                                                <td><input type="text" class="form-control" name="note_water"
-                                                        placeholder="Ghi chú">
+                                                <td><input type="number" class="form-control" name="number_water" value="{{$contract->contractinfo->number_water}}"></td>
+                                                <td><input type="number" class="form-control" name="price_water" value="{{$contract->contractinfo->price_water}}"
+                                                        placeholder="Đơn giá"></td>
+                                                <td><select name="type_water" class="form-control" id="">
+                                                        <option value="1" @if($contract->contractinfo->type_water == 1) selected @endif>tháng</option>
+                                                        <option value="2" @if($contract->contractinfo->type_water == 2) selected @endif>m3</option>
+                                                    </select></td>
+                                                <td><input type="text" class="form-control" name="note_water value="{{$contract->contractinfo->note_water}} placeholder="Ghi chú">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>Phí dịch vụ</td>
-                                                <td><input type="number" class="form-control" name="number_service"
-                                                        value="1"></td>
-                                                <td><input type="number" class="form-control" name="price_service"
-                                                        value="100000" placeholder="Đơn giá"></td>
+                                                <td><input type="number" class="form-control" name="number_service" value="{{$contract->contractinfo->number_service}}"></td>
+                                                <td><input type="number" class="form-control" name="price_service" value="{{$contract->contractinfo->price_service}}"
+                                                        placeholder="Đơn giá"></td>
                                                 <td>tháng</td>
-                                                <td><input type="text" class="form-control" name="note_service"
-                                                        placeholder="Ghi chú">
+                                                <td><input type="text" class="form-control" name="note_service" value="{{$contract->contractinfo->note_service}}" placeholder="Ghi chú">
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -200,12 +190,18 @@
             [25, 50, -1],
             [25, 50, "All"]
         ],
-        ajax: "{{ route('customer.indexDatatable') }}",
+        ajax: "{{ route('customer.indexDatatableEdit') }}",
         columnDefs: [{
                 targets: 0,
                 type: "html",
                 render: function(data, id, row) {
-                    return `<input type="checkbox" onclick="selectCustomer(this)" name="customer_ids[]" value="${row.id}" />`
+                    if(row.id_contract){
+                        return `<input type="checkbox" onclick="selectCustomer(this)" name="customer_ids[]" value="${row.id_customer}" checked />`
+                    }
+                    else{
+                        return `<input type="checkbox" onclick="selectCustomer(this)" name="customer_ids[]" value="${row.id}" />`
+
+                    }
                 }
 
             },
@@ -237,15 +233,31 @@
                 targets: 4,
                 type: "html",
                 render: function(data, id, row) {
-                    return `<input type="radio" id="representative${row.id}" name="is_representative" disabled value="${row.id}">`
-                }
+                    if(row.is_representative == 1){
+                        return `<input type="radio" id="representative${row.id_customer}" name="is_representative"  value="${row.id_customer}" checked>`
+                    }else if(row.id_contract){
+                        return `<input type="radio" id="representative${row.id_customer}" name="is_representative"  value="${row.id_customer}">`
+                    }else{
+                        return `<input type="radio" id="representative${row.id}" name="is_representative" disabled value="${row.id}" >`
 
+                    }
+                }
             },
             {
                 targets: 5,
                 type: "html",
                 render: function(data, id, row) {
-                    return `<input type="text" class="form-control" name="note${row.id}" value="">`
+                    if(row.id_contract){
+                        if(row.note != null){
+                            return `<input type="text" class="form-control" name="note${row.id_customer}" value="${row.note}">`
+                        }else{
+                            return `<input type="text" class="form-control" name="note${row.id}" value="">`
+                        }
+
+                    }else{
+                        return `<input type="text" class="form-control" name="note${row.id}" value="">`
+
+                    }
                 }
 
             },
@@ -254,6 +266,9 @@
     });
 
     function selectCustomer(e) {
+        if($(e).attr("checked")){
+            $(e).removeAttr("checked");
+        }
         if ($(e).is(":checked")) {
             $('#representative' + $(e).val()).removeAttr('disabled');
         } else {

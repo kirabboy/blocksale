@@ -57,6 +57,26 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Giá phòng <sup class="text-danger">*</sup></label>
+                                                <input type="number" class="form-control" name="price_room"
+                                                    placeholder="Giá phòng" value="" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="">Cách tính nước <sup class="text-danger">*</sup></label>
+                                                <select name="type_water" class="form-control" id="">
+                                                    <option value="1">Theo tháng</option>
+                                                    <option value="2">Theo m3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Địa chỉ <sup class="text-danger">*</sup></label>
                                         <input type="text" class="form-control" name="address" placeholder="Địa chỉ"

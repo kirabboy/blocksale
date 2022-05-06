@@ -10,7 +10,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ContractRequest extends FormRequest
+class InvoiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,42 +32,39 @@ class ContractRequest extends FormRequest
         if($this->method() == 'POST'){
 
             return [
+                'id_contract' => ['required'],
                 'code' => ['required'],
                 'name' => ['required'],
-                'time_start' => ['required'],
-                'time_end' => ['required'],
-                'time_charge' => ['required'],
-                'price_room' => ['required'],
-                'price_electric' => ['required'],
-                'price_water' => ['required'],
-                'type_water' => ['required'],
-                'price_service' => ['required'],
-                'number_room' => ['required'],
-                'number_electric' => ['required'],
-                'number_water' => ['required'],
-                'number_service' => ['required'],
-                'customer_ids' => ['required'],
+                'date_create' => ['required'],
+                'date_expired' => ['required'],
+                'amount_room' => ['required'],
+                'amount_electric' => ['required'],
+                'amount_water' => ['required'],
+                'amount_service' => ['required'],
+                'total' => ['required'],
+                'amount_paid' => ['required'],
+                'amount_rest' =>['required'],
+                'code' => ['required'],
             ];
         }elseif($this->method() == 'PUT'){
             return [
-            'name' => ['required'],
-            'time_start' => ['required'],
-            'time_end' => ['required'],
-            'time_charge' => ['required'],
-            'price_room' => ['required'],
-            'price_electric' => ['required'],
-            'price_water' => ['required'],
-            'type_water' => ['required'],
-            'price_service' => ['required'],
-            'number_room' => ['required'],
-            'number_electric' => ['required'],
-            'number_water' => ['required'],
-            'number_service' => ['required'],
-            'customer_ids' => ['required'],
+                'id_contract' => ['required'],
+                'code' => ['required'],
+                'name' => ['required'],
+                'date_create' => ['required'],
+                'date_expired' => ['required'],
+                'amount_room' => ['required'],
+                'amount_electric' => ['required'],
+                'amount_water' => ['required'],
+                'amount_service' => ['required'],
+                'total' => ['required'],
+                'amount_paid' => ['required'],
+                'amount_rest' =>['required'],
+                'code' => ['required'],
             ];
         }
-
     }
+
     public function withValidator($validator){
         $validator->after(function ($validator) {
             if (!Str::of($this->username)->isAscii() || strpos($this->username, ' ')) {

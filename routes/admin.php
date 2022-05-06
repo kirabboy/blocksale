@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\AuthController;
 use App\Admin\Controllers\RoomController;
 use App\Admin\Controllers\AccountController;
+use App\Admin\Controllers\InvoiceController;
 use App\Admin\Controllers\ContractController;
 use App\Admin\Controllers\CustomerController;
 use App\Admin\Controllers\AdminHomeController;
@@ -36,8 +37,14 @@ Route::group(['middleware' => ['admin']], function () {
     Route::prefix('ho-so-khach-hang')->group(function(){
         Route::get('show-select', [CustomerController::class, 'showSelectCustomer'])->name('customer.showSelect');
         Route::get('get-datatable', [CustomerController::class, 'indexDatatable'])->name('customer.indexDatatable');
+        Route::get('get-datatable-edit', [CustomerController::class, 'indexDatatableEdit'])->name('customer.indexDatatableEdit');
         Route::get('get-select-ajax', [CustomerController::class, 'dataAjax'])->name('customer.selectAjax');
         Route::get('get-customer-info', [CustomerController::class, 'getCustomerInfo'])->name('customer.getInfo');
+
+    });
+    Route::prefix('phong')->group(function(){
+        Route::get('/get-change-status', [RoomController::class, 'getChangeStatus'])->name('phong.getChangeStatus');
+        Route::post('/post-change-status', [RoomController::class, 'postChangeStatus'])->name('phong.postChangeStatus');
 
     });
     Route::resources([
@@ -49,7 +56,11 @@ Route::group(['middleware' => ['admin']], function () {
         '/phong' =>RoomController::class,
         '/hop-dong-coc' => ContractEarnestController::class,
         '/chi-so-dich-vu' => ContractServiceDetailController::class,
+        '/hoa-don' => InvoiceController::class,
     ]);
+  
+
+
 
     Route::group(['prefix' => 'co-so', 'middleware' => ['permission:Quản trị cơ sở,admin']], function(){
         Route::get('/', [BuildingManagerController::class, 'index'])->name('admin.building.index');

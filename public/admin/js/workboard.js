@@ -16,6 +16,32 @@ function createRoom(e) {
         });
 }
 
+function createInvoice(e) {
+    $.ajax({
+            url: $(e).data('url'),
+            data: {
+                'id_room': $(e).data('id_room'),
+            },
+            type: 'GET'
+        })
+        .fail(function(data) {
+            console.log(data);
+        })
+        .done(function(response) {
+            console.log(response);
+
+            if (response['status']) {
+                $('.modal-area').append(response['message']);
+                $('#modal-form').modal('show');
+            } else {
+                toastr.error(response['message'], {
+                    timeOut: 5000
+                })
+            }
+
+        });
+}
+
 function createContract(e) {
     $.ajax({
             url: $(e).data('url'),
@@ -28,12 +54,11 @@ function createContract(e) {
             console.log(data);
         })
         .done(function(response) {
-            if (response) {
-                console.log(response);
-                $('.modal-area').append(response);
+            if (response['status']) {
+                $('.modal-area').append(response['message']);
                 $('#modalFormCreate').modal('show');
             } else {
-                toastr.error('Hợp đồng đã tồn tại', {
+                toastr.error(response['message'], {
                     timeOut: 5000
                 })
             }
@@ -65,12 +90,29 @@ function createContractEarnest(e) {
 
         });
 }
-
-function createContractService(e) {
+$(document).on('click', '.btn-change-status-room', function() {
+    id_room = $(this).data('room_id');
     $.ajax({
-            url: $(e).data('url'),
+            url: $(this).data('url'),
             data: {
-                'id_contract': $(e).data('id_contract'),
+                'id_room': $(this).data('room_id'),
+            },
+            type: 'GET'
+        })
+        .fail(function(data) {
+            console.log(data);
+        })
+        .done(function(response) {
+            $('#room-' + id_room).trigger('click');
+            $('.modal-area').empty().append(response);
+            $('#modal-form').modal('show');
+        });
+});
+$(document).on('click', '.btn-create-room', function() {
+    $.ajax({
+            url: $(this).data('url'),
+            data: {
+                'id_contract': $(this).data('id_contract'),
             },
             type: 'GET'
         })
@@ -79,12 +121,14 @@ function createContractService(e) {
         })
         .done(function(response) {
             console.log(response);
-            $('.modal-area').append(response);
+
+            $('.modal-area').empty().append(response);
             $('#modalFormCreate').modal('show');
         });
-}
+});
 
 function editContractService(e) {
+
     $.ajax({
             url: $(e).data('url'),
             data: {},
@@ -95,8 +139,25 @@ function editContractService(e) {
         })
         .done(function(response) {
             console.log(response);
-            $('.modal-area').append(response);
+            $('.modal-area').empty().append(response);
             $('#modalFormCreate').modal('show');
+        });
+}
+
+function editInvoice(e) {
+
+    $.ajax({
+            url: $(e).data('url'),
+            data: {},
+            type: 'GET'
+        })
+        .fail(function(data) {
+            console.log(data);
+        })
+        .done(function(response) {
+            console.log(response);
+            $('.modal-area').empty().append(response['message']);
+            $('#modal-form').modal('show');
         });
 }
 
@@ -113,6 +174,8 @@ $('#tool-filter-status-room button').click(function() {
         })
         .done(function(response) {
             $('#building-detail').empty().append(response);
+            $(".btn-room").first().trigger('click');
+
             console.log(response);
         });
 });
@@ -142,3 +205,62 @@ function getRoomInfo(e) {
         });
 }
 $(".btn-room").first().trigger('click');
+
+$(document).on('submit', '#form-change-status-room', function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var actionUrl = form.attr('action');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+            url: actionUrl,
+            type: 'POST',
+            data: form.serialize(),
+        })
+        .fail(function(data) {
+            console.log(data);
+            $.each(data.responseJSON.message, function(key, value) {
+                toastr.error(value, {
+                    timeOut: 5000
+                })
+            });
+        })
+        .done(function(response) {
+            console.log(response);
+            $('#modal-form').modal('hide');
+            if (response['status']) {
+                toastr.success(response['message'], {
+                    timeOut: 5000
+                })
+                if (response['room_status'] == 3) {
+                    $('#building-detail button.selected').removeClass('border-danger').addClass('border-secondary');
+                } else {
+                    $('#building-detail button.selected').removeClass('border-secondary').addClass('border-danger');
+
+                }
+            } else {
+                toastr.error(response['message'], {
+                    timeOut: 5000
+                })
+            }
+        });
+});
+
+$(document).on('click', '.btn-edit-contract', function() {
+    $.ajax({
+            url: $(this).data('url'),
+            data: {},
+            type: 'GET'
+        })
+        .fail(function(data) {
+            console.log(data);
+        })
+        .done(function(response) {
+            console.log(response);
+            $('.modal-area').empty().append(response);
+            $('#modal-form').modal('show');
+        });
+});

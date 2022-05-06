@@ -38,6 +38,7 @@ class RoomRequest extends FormRequest
             'floor_id' => ['required'],
             'type' => ['required'],
             'acreage' => ['required'],
+            ''
         ];
     }
 

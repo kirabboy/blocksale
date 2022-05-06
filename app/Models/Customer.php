@@ -85,4 +85,8 @@ class Customer extends Model
         return $this->belongsToMany(Contract::class, 'contract_customer', 'id_customer', 'id_contract')->withPivot(['is_representative','note']);
     }
 
+	public function contract_customer(){
+		return $this->hasOne(ContractCustomer::class, 'id_customer', 'id');
+	}
+
 }

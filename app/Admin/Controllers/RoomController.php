@@ -113,4 +113,25 @@ class RoomController extends Controller
     {
         //
     }
+    
+    public function getChangeStatus(Request $request){
+        $room = Room::whereId($request->id_room)->first();
+        return view('admin.room.modal.change_status', compact('room'));
+    }
+
+    public function postChangeStatus(Request $request){
+        $room = Room::whereId($request->room_id)->first();
+        if($room->contract()->whereStatus(1)->first()){
+            return response()->json(['status' => false, 'message' => 'Phòng đang có hợp đồng còn hiệu lực, không thể thay đổi trạng thái']);
+        } 
+        if($room->status != 3 ){
+            $room->status = 3;
+            $room->save();
+            return response()->json(['status' => true, 'room_status' => 3, 'message' => 'Thay đổi trạng thái thành công']);
+        }else{
+            $room->status = 0;
+            $room->save();
+            return response()->json(['status' => true, 'room_status' => 0, 'message' => 'Thay đổi trạng thái thành công']);
+        }
+    }
 }

@@ -20,7 +20,7 @@ class WorkBoardController extends Controller
         if($request->has('building')){
             $building = Building::whereAdminId($admin_id)->whereId($request->building)->with('floor')->first();
         }else{
-            $building = Building::whereAdminId($admin_id)->with('floor')->first();
+            $building = Building::whereAdminId($admin_id)->latest()->with('floor')->first();
         }
         $buildings = Building::whereAdminId($admin_id)->latest()->get();
         $building->count = $building->room->countBy('status');
@@ -69,6 +69,18 @@ class WorkBoardController extends Controller
     {
         //
         $building = Building::whereId($id)->with('floor')->first();
+        $building->count = $building->room->countBy('status');
+        $building->ratio = $building->count->sum() != 0 ? ($building->count['2'] ?? 0) / $building->count->sum() *100 : 0;
+        $building->floor = $building->floor->map(function($item) {
+            $total = $item->room->count();
+            $hired = $item->room->where('status', 2)->count();
+            return (object) collect($item)->merge([
+                'total' => $total,
+                'hired' => $hired,
+                'ratio' => $total != 0 ? $hired/$total * 100 : 0,
+                'room' => $item->room()->oldest()->get(),
+            ]);
+        });
         $status = $request->status;
         return view('admin.workboard.include.building_detail', compact('building','status'));
     }

@@ -67,7 +67,7 @@ class BuildingManagerController extends Controller
      */
     public function store(BuildingRequest $request)
     {
-        $data = $request->only('code', 'name', 'avatar', 'number_floor', 'owner', 'owner_phone', 'owner_email', 'address', 'note', 'messenger', 'google_map', 'introduce');
+        $data = $request->only('code', 'name', 'avatar', 'number_floor','price_room', 'type_water', 'owner', 'owner_phone', 'owner_email', 'address', 'note', 'messenger', 'google_map', 'introduce');
         
         $admin_id = auth()->guard('admin')->user()->id;
         $data['admin_id'] = $admin_id;
@@ -163,7 +163,7 @@ class BuildingManagerController extends Controller
         $number_floor = $building->number_floor;
         
         //dữ liệu cập nhật
-        $data = $request->only('code', 'name', 'avatar', 'number_floor', 'owner', 'owner_phone', 'owner_email', 'address', 'note', 'messenger', 'google_map', 'introduce');
+        $data = $request->only('code', 'name', 'avatar', 'number_floor', 'owner', 'price_room','owner_phone', 'owner_email', 'address', 'note', 'messenger', 'google_map', 'introduce');
         $building->update($data);
         
         //kiểm tra số lượng tầng để tạo mới

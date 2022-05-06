@@ -5,7 +5,9 @@
                 <p class="m-0 mb-2 text-14">Tên hợp đồng</p>
             </div>
             <div class="col-6 col-sm-6">
-                <p class="m-0 mb-2 text-14"><strong>{{ $current_contract->name }} <i class="fas fa-edit text-success"></i></strong></p>
+                <p class="m-0 mb-2 text-14"><strong>{{ $current_contract->name }} <i
+                            class="fas fa-edit text-success btn-edit-contract" role="button"
+                            data-url="{{ route('hop-dong.edit', $current_contract->id) }}"></i></strong></p>
             </div>
         </div>
         <div class="row">

@@ -32,7 +32,7 @@
                         <div class="tab-pane fade show active" id="main" role="tabpanel">
                             <div class="row">
                                 <div class="col-12 col-sm-6">
-                                    <input type="hidden" name="building_id" value="{{$building->id}}">
+                                    <input type="hidden" name="building_id" value="{{ $building->id }}">
                                     <div class="form-group">
                                         <label for="">Mã <sup class="text-danger">*</sup></label>
                                         <input type="text" name="code" class="form-control" placeholder="Mã phòng"
@@ -48,7 +48,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="">Giá/tháng <sup class="text-danger">*</sup></label>
-                                        <input type="number" class="form-control" name="price" placeholder="Giá phòng">
+                                        <input type="number" class="form-control" name="price" value="{{$building->price_room}}"
+                                            placeholder="Giá phòng">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
@@ -60,10 +61,11 @@
                                     <div class="form-group">
                                         <label for="">Tầng <sup class="text-danger">*</sup></label>
                                         <select name="floor_id" class="form-control" required>
-                                            @foreach($floors as $floor)
-                                            <option value="{{ $floor->id }}"
-                                                {{$floor_id == $floor->id ? ' selected' : '' }}>{{ $floor->name }}
-                                            </option>
+                                            @foreach ($floors as $floor)
+                                                <option value="{{ $floor->id }}"
+                                                    {{ $floor_id == $floor->id ? ' selected' : '' }}>
+                                                    {{ $floor->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -89,7 +91,7 @@
                                         value="/public/image/default-image.png">
                                     <img id="avatar" class="add-image-ckfinder pointer" data-preview="#avatar"
                                         data-input="input[name='avatar']" data-type=""
-                                        src="{{asset('/public/image/default-image.png')}}" alt="" style="width: 100%">
+                                        src="{{ asset('/public/image/default-image.png') }}" alt="" style="width: 100%">
                                 </div>
                             </div>
                         </div>
@@ -102,8 +104,8 @@
                         <div class="tab-pane fade show" id="extend" role="tabpanel">
                             <div class="form-group">
                                 <label for="">Tên Hiển thị blog <sup class="text-danger">*</sup></label>
-                                <input type="text" class="form-control" name="name_blog" placeholder="Tên hiển thị blog"
-                                    required>
+                                <input type="text" class="form-control" name="name_blog"
+                                    placeholder="Tên hiển thị bài viết khách hàng">
                             </div>
                             <div class="form-group">
                                 <label for="">Mô tả</label>
@@ -125,7 +127,7 @@
     <script src="{{ asset('/public/packages/ckfinder/ckfinder.js') }}"></script>
 
     <script>
-        $( 'textarea.editor' ).ckeditor({
+        $('textarea.editor').ckeditor({
             toolbar: [{
                     name: 'clipboard',
                     items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']
@@ -176,9 +178,8 @@
         });
 
         var myModalEl = document.getElementById('modal-form');
-        myModalEl.addEventListener('hidden.bs.modal', function (event) {
+        myModalEl.addEventListener('hidden.bs.modal', function(event) {
             $(this).remove();
         })
     </script>
 </div>
-

@@ -197,5 +197,6 @@
     <script src="{{ asset('/public/admin/js/create_room.js') }}"></script>
     <script src={{ asset('/public/admin/js/create_contract.js') }}></script>
     <script src={{ asset('/public/admin/js/create_contract_service.js') }}></script>
+    <script src={{ asset('/public/admin/js/invoice.js') }}></script>
 
 @endpush
