@@ -25,7 +25,33 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-
+        <li class="nav-item dropdown mr-3" id="dropdown_notice">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <img src="{{ asset('public/admin/image/notice.jpg')}}" alt="User Avatar"
+                    class="img-size-25 img-circle">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{count($notify)}}
+                </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-notice dropdown-menu-right">
+                @foreach($notify as $item)
+                <a href="#" class="dropdown-item sidebar-green user_hover">
+                    <!-- Message Start -->
+                    <div class="media pt-2 pb-2">
+                        <div class="media-body">
+                            <h5 class="font-weight-bold">
+                                Hợp đồng sắp hết hạn
+                            </h5>
+                            <p class="text-sm">Mã HĐ: {{ $item->data['notify']['code'] }}.</p>
+                            <p class="text-sm">Tên HĐ: {{ $item->data['notify']['name'] }}.</p>
+                            <p class="text-sm">Thời gian hết: {{ date('d/m/Y', strtotime($item->data['notify']['time_end'])) }}.</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                @endforeach
+            </div>
+        </li>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>
@@ -35,13 +61,15 @@
         <li class="nav-item dropdown" id="dropdown_user">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 Chào, <strong class="text-uppercase">{{ auth()->guard('admin')->user()->username }}</strong>
-                <img src="{{ asset('public/admin/image/profile.svg')}}" alt="User Avatar" class="img-size-25 img-circle">
+                <img src="{{ asset('public/admin/image/profile.svg')}}" alt="User Avatar"
+                    class="img-size-25 img-circle">
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-user dropdown-menu-right">
                 <a href="#" class="dropdown-item sidebar-green user_hover">
                     <!-- Message Start -->
                     <div class="media pt-2 pb-2">
-                        <img src="{{ asset('public/admin/image/profile.svg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <img src="{{ asset('public/admin/image/profile.svg')}}" alt="User Avatar"
+                            class="img-size-50 mr-3 img-circle">
                         <div class="media-body">
                             <h1 class="dropdown-item-title" style="font-size: 24px;">
                                 {{ auth()->guard('admin')->user()->admin_info->fullname }}

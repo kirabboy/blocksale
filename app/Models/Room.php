@@ -84,4 +84,7 @@ class Room extends Model
 	public function building(){
 		return $this->belongsTo(Building::class,'building_id', 'id');
 	}
+	public function floor(){
+		return $this->belongsTo(Floor::class,'floor_id', 'id');
+	}
 }

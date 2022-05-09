@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -24,7 +25,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class Admin extends Authenticatable
 {
-	use HasRoles;
+	use HasRoles, Notifiable;
 	protected $table = 'admins';
 
 	protected $hidden = [

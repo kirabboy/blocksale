@@ -5,6 +5,9 @@ namespace App\Admin\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Models\Building;
+use App\Models\Contract;
+use Illuminate\Support\Facades\Artisan;
 
 class AdminHomeController extends Controller
 {
@@ -15,13 +18,87 @@ class AdminHomeController extends Controller
      */
     public function index()
     {
-        //
-        $room = Room::select('status')->get();
-        
-        $room = $room->countBy('status');
+        // Artisan::call('schedule:run');
+        //thực hiện truy vấn dữ liệu
+        $building = Building::select('id', 'name')->whereAdminId(auth()->guard('admin')->user()->id)->with(['room' => function($query) {
+            $query->select('id', 'building_id', 'status');
+            $query->with(['contract' => function($query) {
+                $query->select('id', 'id_room');
+                $query->with(['invoices' => function($query) {
+                    $query->select('id', 'id_contract', 'date_create', 'total');
+                }]);
+            }]);
+        }])->get();
+
+        //thống kê tình trạng phòng
+        $room = $building->map(function ($item){
+            return $item->room->map(function ($item){
+                return $item->status;
+            })->flatten();
+        })->flatten()->countBy();
         $marco = [$room[0] ?? 0, $room[2] ?? 0, $room[1] ?? 0, $room[3] ?? 0];
 
-        return view('admin.home', compact('marco'));
+        //marco dữ liệu
+        $building = $building->map(function($item) {
+            $invoices = $item->room->map(function($item){
+                return $item->contract->map(function($item){
+                    return $item->invoices->flatten();
+                });
+            })->flatten();
+            return collect($item->only('id', 'name'))->merge(['invoices' => $invoices]);
+        });
+        
+        //Thống kê doanh thu từng tòa nhà theo tháng
+        $statistic_building = $building->map(function ($item) {
+            $invoices = collect($item['invoices'])->map(function ($item){
+                return collect($item)->merge(['date_create' => $item->date_create->month]);
+            })->groupBy('date_create')->map(function ($item){
+                return $item->sum('total');
+            });
+
+            //Lấy tháng hiện tại
+            $key_max = now()->format('m');
+            $collect = collect();
+            for ($i = 1; $i <= $key_max; $i++) {
+                $collect->put($i, $invoices->get($i, 0));
+            }
+            return collect($item->only('id', 'name'))->merge(['invoices' => $collect->values()->all()]);
+        });
+
+        // return $building[5]; 
+        // return $building[5]['invoices'];
+        // $room = Room::select('status')->get();
+        // $room = $room->countBy('status');
+        
+        //Thống kê theo tháng
+        $statistic_all = collect()->range(0, now()->format('m') - 1);
+        $statistics_quarterly = collect()->range(0, 11);
+        $statistics_quarterly = $statistics_quarterly->map(function ($item) {
+            return 0;
+        });
+
+        foreach($statistic_building as $key => $item){
+            foreach($item['invoices'] as $key1 => $value){
+                if($key == 0){
+                    $statistic_all[$key1] = $value;
+                    $statistics_quarterly[$key1] = $value;
+                }
+                else{
+                    $statistic_all[$key1] += $value;
+                    $statistics_quarterly[$key1] += $value;
+                }
+            }
+        }
+        $statistic_all = $statistic_all->all();
+        $statistics_quarterly = $statistics_quarterly->chunk(3);
+        $statistics_quarterly = $statistics_quarterly->map(function ($item) {
+            return $item->sum();
+        });
+        $statistics_quarterly = $statistics_quarterly->all();
+
+        //Thống kê theo quý        
+
+        return view('admin.home', compact('marco', 'statistic_building', 'statistic_all', 'statistics_quarterly'));
     }
 
     /**

@@ -193,6 +193,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-cyan bg-secondary" type="button" data-bs-dismiss="modal">Hủy</button>
+                    <a href="{{ route('pdf.invoice', $invoice->id) }}" target="_blank" class="btn btn-cyan">In PDF</a>
                     <button class="btn btn-cyan" type="submit">Lưu lại</button>
                 </div>
             </form>

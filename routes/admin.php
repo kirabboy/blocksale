@@ -18,6 +18,7 @@ use App\Admin\Controllers\ContractEarnestController;
 use App\Admin\Controllers\CustomerManagerController;
 use App\Admin\Controllers\PermissionManagerController;
 use App\Admin\Controllers\ContractServiceDetailController;
+use App\Admin\Controllers\ExportPDF;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,10 @@ use App\Admin\Controllers\ContractServiceDetailController;
 
 Route::get('dang-nhap', [AuthController::class, 'getLogin'])->name('admin.getLogin');
 Route::post('dang-nhap', [AuthController::class, 'postLogin'])->name('admin.postLogin');
+
+Route::get('/', function(){
+    return redirect()->route('dashboard.index');
+});
 
 Route::group(['middleware' => ['admin']], function () {
     Route::prefix('ho-so-khach-hang')->group(function(){
@@ -98,6 +103,10 @@ Route::group(['middleware' => ['admin']], function () {
         Route::delete('delete/{customer:id}', [CustomerManagerController::class, 'delete'])->name('admin.customer.delete');
         Route::delete('xu-ly-nhieu-khach-hang', [CustomerManagerController::class,'multiple'])->name('admin.customer.multiple');
 
+    });
+
+    Route::group(['prefix' => 'pdf', 'as' => 'pdf.', 'middleware' => ['permission:Hồ sơ khách hàng,admin']], function(){
+        Route::get('invoice/{invoice:id}', [ExportPDF::class, 'invoice'])->name('invoice');
     });
     Route::post('dang-xuat', [AuthController::class, 'logout'])->name('admin.logout');
 });

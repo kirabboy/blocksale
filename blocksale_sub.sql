@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 05, 2022 lúc 08:27 AM
--- Phiên bản máy phục vụ: 10.4.14-MariaDB
--- Phiên bản PHP: 7.4.10
+-- Host: localhost:8889
+-- Generation Time: May 06, 2022 at 10:23 AM
+-- Server version: 5.7.30
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -18,25 +17,25 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `blocksale`
+-- Database: `blocksale_sub`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `admins`
+-- Table structure for table `admins`
 --
 
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `admins`
+-- Dumping data for table `admins`
 --
 
 INSERT INTO `admins` (`id`, `username`, `password`, `updated_at`, `created_at`) VALUES
@@ -44,13 +43,13 @@ INSERT INTO `admins` (`id`, `username`, `password`, `updated_at`, `created_at`) 
 (3, 'mevivu1', '$2y$10$AWgjhIdBoofpd9Ng4UFy6uAidmp6B.O3ygweAGk4MiGpZcOdRjHoG', '2022-04-19 03:21:00', '2022-04-09 23:36:46'),
 (4, 'kira', '$2y$10$RTnI8E4YrYsHlo5jLbcijOrAfsHhus0QNtpIgd6HHxUwQ0Wf7UOiq', '2022-04-19 03:26:23', '2022-04-09 23:42:26'),
 (5, 'truong', '$2y$10$nwBLIcNKaIma7HltEy3X1et0w.7UFXObNnHsuFyKJVaZZgPhhil6y', '2022-04-20 20:17:19', '2022-04-19 02:17:23'),
-(6, 'bingo', '$2y$10$EPcpDMedM8H4QtLvKIrsb.EsqQgkf/zbXx5kkj8VrA2vxTDDVY3t6', '2022-04-25 21:26:46', '2022-04-19 03:26:51'),
+(6, 'bingo', '$2y$10$mfKUvjTtRWdqjesOuHQvduexPClaZDZRIESveW4czP3x8pgJm0mLO', '2022-04-19 03:26:51', '2022-04-19 03:26:51'),
 (7, 'admin2', '$2y$10$ur6DEXYVzdBWA7XqJU2wsOr0N0ADzhC0o9SI5crmJ4NY9fcMqskyC', '2022-04-23 02:51:52', '2022-04-23 02:51:52');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `admin_info`
+-- Table structure for table `admin_info`
 --
 
 CREATE TABLE `admin_info` (
@@ -60,66 +59,69 @@ CREATE TABLE `admin_info` (
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `birthday` date DEFAULT NULL,
-  `gender` int(11) DEFAULT 1,
+  `gender` int(11) DEFAULT '1',
   `address` varchar(255) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `admin_info`
+-- Dumping data for table `admin_info`
 --
 
 INSERT INTO `admin_info` (`id`, `admin_id`, `fullname`, `email`, `phone`, `birthday`, `gender`, `address`, `updated_at`, `created_at`) VALUES
-(1, 1, 'Kyosima', NULL, '0335828494', '1970-01-01', 1, NULL, '2022-04-26 04:25:19', '2022-04-10 06:35:59'),
+(1, 1, 'Kyosima', NULL, NULL, '1970-01-01', 1, NULL, '2022-04-23 02:42:38', '2022-04-10 06:35:59'),
 (3, 3, 'Bùi Thế Vũ', 'btvu282@gmail.com', '0335828494', '1970-01-01', 1, '998/52/15 Quang Trung, Gò vấp', '2022-04-19 03:21:01', '2022-04-09 23:36:46'),
 (4, 4, 'Kira', 'btvu282@gmail.com', '0335828494', '1970-01-01', 1, '998/52/15 Quang Trung, Gò vấp', '2022-04-19 03:26:23', '2022-04-09 23:42:26'),
 (5, 5, 'Trần Văn Trường', 'trantruong1797@gmail.com', '0342909557', '1997-07-01', 1, '954, quang trung', '2022-04-20 20:17:51', '2022-04-19 02:17:23'),
-(6, 6, 'Trần Trường', 'trantruong1797@gmail.com', '0342909557', '1970-01-01', 1, '954, quang trung', '2022-04-25 21:26:46', '2022-04-19 03:26:51'),
+(6, 6, 'Bí ngô', NULL, NULL, NULL, 1, NULL, '2022-04-19 03:26:51', '2022-04-19 03:26:51'),
 (7, 7, 'Nguyễn Chính Hưng', 'nc.hung0806@gmail.com', '0338927456', '2022-04-01', 1, '28, đường số 27, phường Tân Quy', '2022-04-23 02:51:52', '2022-04-23 02:51:52');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `buildings`
+-- Table structure for table `buildings`
 --
 
 CREATE TABLE `buildings` (
   `id` int(11) NOT NULL,
-  `admin_id` int(11) DEFAULT NULL,
+  `admin_id` int(11) NOT NULL,
   `code` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `number_floor` int(11) NOT NULL,
+  `price_room` double NOT NULL,
+  `type_water` int(11) NOT NULL DEFAULT '1',
   `address` varchar(255) NOT NULL,
   `owner` varchar(255) NOT NULL,
   `owner_phone` varchar(255) NOT NULL,
   `owner_email` varchar(255) NOT NULL,
-  `note` text CHARACTER SET utf8mb4 DEFAULT NULL,
-  `introduce` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `note` text CHARACTER SET utf8mb4,
+  `introduce` text CHARACTER SET utf8mb4,
   `messenger` varchar(255) DEFAULT NULL,
-  `google_map` longtext DEFAULT NULL,
-  `sort` tinyint(4) NOT NULL DEFAULT 0,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `google_map` longtext,
+  `sort` tinyint(4) NOT NULL DEFAULT '0',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `buildings`
+-- Dumping data for table `buildings`
 --
 
-INSERT INTO `buildings` (`id`, `admin_id`, `code`, `name`, `avatar`, `slug`, `number_floor`, `address`, `owner`, `owner_phone`, `owner_email`, `note`, `introduce`, `messenger`, `google_map`, `sort`, `updated_at`, `created_at`) VALUES
-(1, 1, 'peal', 'Peal plaza', '/public/uploads/images/tttmai_jnqb.jpg', 'peal-plaza', 10, '28, đường số 27, phường Tân Quy', 'Nguyễn Chính Hưng', '0338927456', 'nc.hung0806@gmail.com', NULL, NULL, NULL, NULL, 0, '2022-04-25 21:15:32', '2022-04-23 01:29:25'),
-(2, 1, 'etown', 'Etown', '/public/uploads/images/tttmai_jnqb.jpg', 'etown', 15, 'Quang trung', 'Bùi Thế Vũ', '0978172312', 'btv@gmail.com', 'Tòa nhà', '<p><span style=\"color:#e74c3c\">T&ograve;a nh&agrave; to lắm</span></p>', NULL, NULL, 0, '2022-04-25 21:15:32', '2022-04-23 02:29:18'),
-(3, 1, 'Vincom', 'Vincom quận 9', '/public/uploads/images/Landmark81banner.jpeg', 'vincom-quan-9', 10, '998/42/15 quang trung, phường 8, Gò Vấp', 'Nguyễn Chính Hưng', '0934177422', 'anhtuan199590@gmail.com', NULL, NULL, NULL, NULL, 0, '2022-04-25 21:15:32', '2022-04-23 02:46:37'),
-(4, 1, 'Vinhome', 'Vinhome Smart City', '/public/image/default-image.png', 'vinhome-smart-city', 20, 'Đường 19/5, P. Văn Quán, Hà Đông, Hà Nội, Việt Nam', 'Vương Duy Định', '0877726453', 'nguyenvantoan@gmail.com', NULL, NULL, NULL, NULL, 0, '2022-04-25 21:15:32', '2022-04-23 06:55:21'),
-(5, 6, 'Vinhome Ocean Park', 'Vinhome Ocean Park', '/public/image/default-image.png', 'vinhome-ocean-park', 30, 'Gia Lâm', 'Vương Duy Định', '0961157432', 'vuongduydinh999@gmail.com', NULL, NULL, NULL, NULL, 0, '2022-04-26 04:28:15', '2022-04-23 07:56:47');
+INSERT INTO `buildings` (`id`, `admin_id`, `code`, `name`, `avatar`, `slug`, `number_floor`, `price_room`, `type_water`, `address`, `owner`, `owner_phone`, `owner_email`, `note`, `introduce`, `messenger`, `google_map`, `sort`, `updated_at`, `created_at`) VALUES
+(1, 1, 'peal', 'Peal plaza', '/public/uploads/files/tttmai_jnqb.jpg', 'peal-plaza', 10, 5000000, 1, '28, đường số 27, phường Tân Quy', 'Nguyễn Chính Hưng', '0338927456', 'nc.hung0806@gmail.com', NULL, NULL, NULL, NULL, 0, '2022-05-06 04:16:50', '2022-04-23 01:29:25'),
+(2, 1, 'etown', 'Etown', '/public/uploads/files/tttmai_jnqb.jpg', 'etown', 15, 5000000, 1, 'Quang trung', 'Bùi Thế Vũ', '0978172312', 'btv@gmail.com', 'Tòa nhà', '<p><span style=\"color:#e74c3c\">T&ograve;a nh&agrave; to lắm</span></p>', NULL, NULL, 0, '2022-05-06 04:16:50', '2022-04-23 02:29:18'),
+(3, 1, 'Vincom', 'Vincom quận 9', '/public/uploads/files/Landmark81banner.jpeg', 'vincom-quan-9', 10, 5000000, 1, '998/42/15 quang trung, phường 8, Gò Vấp', 'Nguyễn Chính Hưng', '0934177422', 'anhtuan199590@gmail.com', NULL, NULL, NULL, NULL, 0, '2022-05-06 04:16:50', '2022-04-23 02:46:37'),
+(4, 1, 'Vinhome', 'Vinhome Smart City', '/public/image/default-image.png', 'vinhome-smart-city', 20, 5000000, 1, 'Đường 19/5, P. Văn Quán, Hà Đông, Hà Nội, Việt Nam', 'Vương Duy Định', '0877726453', 'nguyenvantoan@gmail.com', NULL, NULL, NULL, NULL, 0, '2022-05-06 04:16:50', '2022-04-23 06:55:21'),
+(5, 1, 'Vinhome Ocean Park', 'Vinhome Ocean Park', '/public/image/default-image.png', 'vinhome-ocean-park', 30, 5000000, 1, 'Gia Lâm', 'Vương Duy Định', '0961157432', 'vuongduydinh999@gmail.com', NULL, NULL, NULL, NULL, 0, '2022-05-06 04:16:50', '2022-04-23 07:56:47'),
+(6, 1, 'vcctrpark', 'Vincom Central Park', '/public/uploads/files/DJI_0030-fixed2-mini-20190727T100030844048.jpeg', 'vincom-central-park', 15, 2500000, 2, '998/42/15 quang trung, phường 8, Gò Vấp', 'Nguyễn Chính Hưng', '0934177422', 'anhtuan199590@gmail.com', NULL, NULL, NULL, NULL, 0, '2022-05-05 21:43:32', '2022-05-05 21:21:35');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `contract`
+-- Table structure for table `contract`
 --
 
 CREATE TABLE `contract` (
@@ -131,25 +133,26 @@ CREATE TABLE `contract` (
   `time_start` date NOT NULL,
   `time_end` date NOT NULL,
   `time_charge` date NOT NULL,
-  `is_earnest` int(11) DEFAULT 0,
-  `note` text DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `is_earnest` int(11) DEFAULT '0',
+  `note` text,
+  `status` int(11) NOT NULL DEFAULT '1',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `contract`
+-- Dumping data for table `contract`
 --
 
 INSERT INTO `contract` (`id`, `id_room`, `code`, `name`, `type`, `time_start`, `time_end`, `time_charge`, `is_earnest`, `note`, `status`, `updated_at`, `created_at`) VALUES
-(1, 1, 'HD-p01', 'Hợp đồng thuê p01', 1, '2022-04-23', '2022-11-04', '2022-04-14', 1, 'hợp đồng thuê', 1, '2022-04-23 02:34:05', '2022-04-23 02:34:05'),
-(2, 4, 'HuTHzY', 'HD cho thuê', 1, '2022-04-23', '2022-04-29', '2022-04-23', 1, NULL, 1, '2022-04-23 02:49:07', '2022-04-23 02:49:07');
+(1, 6, 'HuTHzY', 'CÔNG TY TNHH MEVIVU', 1, '2022-05-06', '2022-05-06', '2022-05-06', 1, NULL, 1, '2022-05-05 20:37:22', '2022-05-04 23:35:27'),
+(2, 8, 'HuTHzY', 'CÔNG TY TNHH MEVIVU', 1, '2022-05-06', '2022-05-06', '2022-05-06', 1, NULL, 1, '2022-05-05 20:36:48', '2022-05-05 20:36:48'),
+(3, 9, 'hd001', 'Hợp đồng thuê 001', 1, '2022-05-06', '2022-05-06', '2022-05-06', 0, NULL, 1, '2022-05-05 22:23:16', '2022-05-05 22:23:16');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `contract_customer`
+-- Table structure for table `contract_customer`
 --
 
 CREATE TABLE `contract_customer` (
@@ -158,25 +161,25 @@ CREATE TABLE `contract_customer` (
   `id_customer` int(11) NOT NULL,
   `is_representative` int(11) DEFAULT NULL,
   `note` varchar(255) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `contract_customer`
+-- Dumping data for table `contract_customer`
 --
 
 INSERT INTO `contract_customer` (`id`, `id_contract`, `id_customer`, `is_representative`, `note`, `updated_at`, `created_at`) VALUES
-(1, 1, 1, 1, '', '2022-04-23 02:34:05', '2022-04-23 02:34:05'),
-(2, 1, 2, 0, '', '2022-04-23 02:34:05', '2022-04-23 02:34:05'),
-(3, 1, 3, 0, '', '2022-04-23 02:34:05', '2022-04-23 02:34:05'),
-(4, 2, 5, 1, '', '2022-04-23 02:49:07', '2022-04-23 02:49:07'),
-(5, 2, 1, 0, '', '2022-04-23 02:49:07', '2022-04-23 02:49:07');
+(56, 2, 6, 1, 'ở dơ', '2022-05-05 20:36:48', '2022-05-05 20:36:48'),
+(57, 2, 5, 0, 'sạch sẽ', '2022-05-05 20:36:48', '2022-05-05 20:36:48'),
+(67, 1, 6, 1, 'bồ ngu vl', '2022-05-05 20:38:21', '2022-05-05 20:38:21'),
+(68, 1, 5, 0, NULL, '2022-05-05 20:38:21', '2022-05-05 20:38:21'),
+(69, 3, 6, 1, '', '2022-05-05 22:23:16', '2022-05-05 22:23:16');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `contract_earnest`
+-- Table structure for table `contract_earnest`
 --
 
 CREATE TABLE `contract_earnest` (
@@ -189,59 +192,90 @@ CREATE TABLE `contract_earnest` (
   `price` double NOT NULL,
   `time_start` date NOT NULL,
   `time_end` date NOT NULL,
-  `note` text DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `note` text,
+  `status` int(11) NOT NULL DEFAULT '1',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `contract_info`
+-- Table structure for table `contract_info`
 --
 
 CREATE TABLE `contract_info` (
   `id` int(11) NOT NULL,
-  `id_contract` int(11) NOT NULL,
-  `amount_earnest` int(11) DEFAULT 0,
+  `id_contract` int(11) DEFAULT NULL,
+  `amount_earnest` int(11) DEFAULT '0',
   `price_room` int(11) NOT NULL,
-  `price_electric` double NOT NULL DEFAULT 0,
-  `price_water` double NOT NULL DEFAULT 0,
-  `type_water` int(11) NOT NULL DEFAULT 1,
-  `price_service` double NOT NULL DEFAULT 0,
-  `number_room` int(11) DEFAULT 1,
-  `number_electric` int(11) DEFAULT 1,
-  `number_water` int(11) DEFAULT 1,
-  `number_service` int(11) DEFAULT 1,
+  `price_electric` double NOT NULL DEFAULT '0',
+  `price_water` double NOT NULL DEFAULT '0',
+  `type_water` int(11) NOT NULL DEFAULT '1',
+  `price_service` double NOT NULL DEFAULT '0',
+  `number_room` int(11) DEFAULT '1',
+  `number_electric` int(11) DEFAULT '1',
+  `number_water` int(11) DEFAULT '1',
+  `number_service` int(11) DEFAULT '1',
   `note_room` varchar(255) DEFAULT NULL,
   `note_electric` varchar(255) DEFAULT NULL,
   `note_water` varchar(255) DEFAULT NULL,
   `note_service` varchar(255) DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `contract_info`
+-- Dumping data for table `contract_info`
 --
 
 INSERT INTO `contract_info` (`id`, `id_contract`, `amount_earnest`, `price_room`, `price_electric`, `price_water`, `type_water`, `price_service`, `number_room`, `number_electric`, `number_water`, `number_service`, `note_room`, `note_electric`, `note_water`, `note_service`, `updated_at`, `created_at`) VALUES
-(1, 1, 10000000, 10000000, 3500, 25000, 2, 100000, 1, 1, 2, 1, NULL, NULL, NULL, NULL, '2022-04-23 02:34:05', '2022-04-23 02:34:05'),
-(2, 2, 10000000, 10000000, 3500, 25000, 1, 100000, 1, 1, 1, 1, NULL, NULL, NULL, NULL, '2022-04-23 02:49:07', '2022-04-23 02:49:07');
+(1, 1, 0, 10000000, 3500, 25000, 1, 100000, 1, 1, 1, 1, 'Phí chung', 'cọc', NULL, 'giữ xe', '2022-05-05 20:37:22', '2022-05-04 23:35:27'),
+(2, 2, 150000, 10000000, 3500, 25000, 1, 100000, 1, 1, 1, 1, 'Phí chung', 'cọc', NULL, 'giữ xe', '2022-05-05 20:36:48', '2022-05-05 20:36:48'),
+(3, 3, 0, 2500000, 3500, 25000, 2, 100000, 1, 1, 1, 1, NULL, NULL, NULL, NULL, '2022-05-05 22:23:16', '2022-05-05 22:23:16');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `customer`
+-- Table structure for table `contract_service_detail`
+--
+
+CREATE TABLE `contract_service_detail` (
+  `id` int(11) NOT NULL,
+  `id_contract` int(11) NOT NULL,
+  `type` int(11) DEFAULT NULL,
+  `start_number` double DEFAULT '0',
+  `end_number` double DEFAULT '0',
+  `month` int(11) DEFAULT NULL,
+  `year` int(11) DEFAULT NULL,
+  `input_date` date DEFAULT NULL,
+  `status` int(11) DEFAULT '0',
+  `is_confirm` int(11) NOT NULL DEFAULT '0',
+  `confirm_date` date DEFAULT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `contract_service_detail`
+--
+
+INSERT INTO `contract_service_detail` (`id`, `id_contract`, `type`, `start_number`, `end_number`, `month`, `year`, `input_date`, `status`, `is_confirm`, `confirm_date`, `updated_at`, `created_at`) VALUES
+(5, 3, 1, 2000, 30000, 5, 2022, NULL, 1, 0, NULL, '2022-05-06 01:59:20', '2022-05-06 01:48:51'),
+(6, 3, 2, 200, 300, 5, 2022, NULL, 1, 0, NULL, '2022-05-06 01:59:20', '2022-05-06 01:49:53'),
+(7, 1, 1, 1000, 10000, 5, 2022, NULL, 1, 1, '2022-05-06', '2022-05-06 02:23:43', '2022-05-06 02:17:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
 --
 
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
-  `admin_id` int(11) DEFAULT NULL,
   `code` varchar(255) NOT NULL,
   `fullname` varchar(255) NOT NULL,
-  `type` int(11) NOT NULL DEFAULT 1,
+  `type` int(11) NOT NULL DEFAULT '1',
   `phone` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `job` varchar(255) NOT NULL,
@@ -259,27 +293,28 @@ CREATE TABLE `customer` (
   `bank_number` varchar(255) DEFAULT NULL,
   `bank_account` varchar(255) DEFAULT NULL,
   `bank_name` varchar(255) DEFAULT NULL,
-  `note` text DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `note` text,
+  `admin_id` int(11) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `customer`
+-- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`id`, `admin_id`, `code`, `fullname`, `type`, `phone`, `email`, `job`, `identification_number`, `identification_place`, `identification_time`, `identification_address`, `bank_branch`, `gender`, `birthday`, `country`, `nationality`, `address`, `home_town`, `bank_number`, `bank_account`, `bank_name`, `note`, `updated_at`, `created_at`) VALUES
-(1, 1, 'kyosyma', 'Vương Duy Định', 1, '0961157432', 'vuongduydinh999@gmail.com', 'IT', '123123123', 'Gia Lai', '2022-03-07', 'HN', NULL, 1, '1994-02-28', 'Việt Nam', 'Việt Nam', '998/42/15 Quang Trung', 'Gia Lai', NULL, NULL, NULL, NULL, '2022-04-25 22:32:03', '2022-04-20 05:04:08'),
-(2, 1, 'kyosyma1', 'Vương Duy Định', 1, '0961157432', 'vuongduydinh999@gmail.com', 'IT', '123123123', 'Gia Lai', '2022-03-07', 'hn', NULL, 1, '1994-02-28', 'Việt Nam', 'Việt Nam', '998/42/15 Quang Trung', 'Gia Lai', NULL, NULL, NULL, NULL, '2022-04-25 22:32:03', '2022-04-20 05:04:08'),
-(3, 6, 'kyosyma2', 'Vương Duy Định', 1, '0961157432', 'vuongduydinh999@gmail.com', 'IT', '123123123', 'Gia Lai', '2022-03-07', 'hn', NULL, 1, '1994-02-28', 'Việt Nam', 'Việt Nam', '998/42/15 Quang Trung', 'Gia Lai', NULL, NULL, NULL, NULL, '2022-04-26 05:32:19', '2022-04-20 05:04:08'),
-(4, 1, 'kyosyma3', 'Vương Duy Định', 1, '0961157432', 'vuongduydinh999@gmail.com', 'IT', '123123123', 'Gia Lai', '2022-03-07', 'hn', NULL, 1, '1994-02-28', 'Việt Nam', 'Việt Nam', '998/42/15 Quang Trung', 'Gia Lai', NULL, NULL, NULL, NULL, '2022-04-25 22:32:03', '2022-04-20 05:04:08'),
-(5, 1, 'nch', 'Nguyễn Chính Hưng', 1, '0338927456', 'nc.hung0806@gmail.com', 'Nhân viên', '1123123', 'Gia Lai', '2022-02-11', 'Gia Lai', 'gialai', 1, '1998-07-08', NULL, NULL, NULL, NULL, '123', 'hung', 'agribank', NULL, '2022-04-25 22:32:03', '2022-04-23 02:42:10'),
-(6, 1, 'HuTHzY', 'Kim Anh Tuấn Trần', 1, '0934177422', 'anhtuan199590@gmail.com', 'Nhân viên', '1123123', 'Gia Lai', '2022-04-21', 'Gia Lai', NULL, 1, '2022-04-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-04-25 22:32:03', '2022-04-23 02:51:04');
+INSERT INTO `customer` (`id`, `code`, `fullname`, `type`, `phone`, `email`, `job`, `identification_number`, `identification_place`, `identification_time`, `identification_address`, `bank_branch`, `gender`, `birthday`, `country`, `nationality`, `address`, `home_town`, `bank_number`, `bank_account`, `bank_name`, `note`, `admin_id`, `updated_at`, `created_at`) VALUES
+(1, 'kyosyma', 'Vương Duy Định', 1, '0961157432', 'vuongduydinh999@gmail.com', 'IT', '123123123', 'Gia Lai', '2022-03-07', 'HN', NULL, 1, '1994-02-28', 'Việt Nam', 'Việt Nam', '998/42/15 Quang Trung', 'Gia Lai', NULL, NULL, NULL, NULL, 1, '2022-05-05 09:08:53', '2022-04-20 05:04:08'),
+(2, 'kyosyma1', 'Vương Duy Định', 1, '0961157432', 'vuongduydinh999@gmail.com', 'IT', '123123123', 'Gia Lai', '2022-03-07', 'hn', NULL, 1, '1994-02-28', 'Việt Nam', 'Việt Nam', '998/42/15 Quang Trung', 'Gia Lai', NULL, NULL, NULL, NULL, 1, '2022-05-05 09:08:53', '2022-04-20 05:04:08'),
+(3, 'kyosyma2', 'Vương Duy Định', 1, '0961157432', 'vuongduydinh999@gmail.com', 'IT', '123123123', 'Gia Lai', '2022-03-07', 'hn', NULL, 1, '1994-02-28', 'Việt Nam', 'Việt Nam', '998/42/15 Quang Trung', 'Gia Lai', NULL, NULL, NULL, NULL, 1, '2022-05-05 09:08:53', '2022-04-20 05:04:08'),
+(4, 'kyosyma3', 'Vương Duy Định', 1, '0961157432', 'vuongduydinh999@gmail.com', 'IT', '123123123', 'Gia Lai', '2022-03-07', 'hn', NULL, 1, '1994-02-28', 'Việt Nam', 'Việt Nam', '998/42/15 Quang Trung', 'Gia Lai', NULL, NULL, NULL, NULL, 1, '2022-05-05 09:08:53', '2022-04-20 05:04:08'),
+(5, 'nch', 'Nguyễn Chính Hưng', 1, '0338927456', 'nc.hung0806@gmail.com', 'Nhân viên', '1123123', 'Gia Lai', '2022-02-11', 'Gia Lai', 'gialai', 1, '1998-07-08', NULL, NULL, NULL, NULL, '123', 'hung', 'agribank', NULL, 1, '2022-05-05 09:08:53', '2022-04-23 02:42:10'),
+(6, 'HuTHzY', 'Kim Anh Tuấn Trần', 1, '0934177422', 'anhtuan199590@gmail.com', 'Nhân viên', '1123123', 'Gia Lai', '2022-04-21', 'Gia Lai', NULL, 1, '2022-04-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2022-05-05 09:08:53', '2022-04-23 02:51:04');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -289,13 +324,13 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `floors`
+-- Table structure for table `floors`
 --
 
 CREATE TABLE `floors` (
@@ -303,12 +338,12 @@ CREATE TABLE `floors` (
   `building_id` int(11) NOT NULL,
   `code` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `floors`
+-- Dumping data for table `floors`
 --
 
 INSERT INTO `floors` (`id`, `building_id`, `code`, `name`, `updated_at`, `created_at`) VALUES
@@ -396,12 +431,59 @@ INSERT INTO `floors` (`id`, `building_id`, `code`, `name`, `updated_at`, `create
 (82, 5, 'TA27', 'Tầng 27', '2022-04-23 07:56:48', '2022-04-23 07:56:48'),
 (83, 5, 'TA28', 'Tầng 28', '2022-04-23 07:56:48', '2022-04-23 07:56:48'),
 (84, 5, 'TA29', 'Tầng 29', '2022-04-23 07:56:48', '2022-04-23 07:56:48'),
-(85, 5, 'TA30', 'Tầng 30', '2022-04-23 07:56:48', '2022-04-23 07:56:48');
+(85, 5, 'TA30', 'Tầng 30', '2022-04-23 07:56:48', '2022-04-23 07:56:48'),
+(86, 6, 'TA1', 'Tầng 1', '2022-05-05 21:21:35', '2022-05-05 21:21:35'),
+(87, 6, 'TA2', 'Tầng 2', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(88, 6, 'TA3', 'Tầng 3', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(89, 6, 'TA4', 'Tầng 4', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(90, 6, 'TA5', 'Tầng 5', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(91, 6, 'TA6', 'Tầng 6', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(92, 6, 'TA7', 'Tầng 7', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(93, 6, 'TA8', 'Tầng 8', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(94, 6, 'TA9', 'Tầng 9', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(95, 6, 'TA10', 'Tầng 10', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(96, 6, 'TA11', 'Tầng 11', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(97, 6, 'TA12', 'Tầng 12', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(98, 6, 'TA13', 'Tầng 13', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(99, 6, 'TA14', 'Tầng 14', '2022-05-05 21:21:36', '2022-05-05 21:21:36'),
+(100, 6, 'TA15', 'Tầng 15', '2022-05-05 21:21:36', '2022-05-05 21:21:36');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `migrations`
+-- Table structure for table `invoice`
+--
+
+CREATE TABLE `invoice` (
+  `id` int(11) NOT NULL,
+  `id_contract` int(11) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `date_create` date NOT NULL,
+  `date_expired` date NOT NULL,
+  `amount_room` double NOT NULL DEFAULT '0',
+  `amount_electric` double NOT NULL DEFAULT '0',
+  `amount_water` double NOT NULL DEFAULT '0',
+  `amount_service` double NOT NULL DEFAULT '0',
+  `total` double NOT NULL DEFAULT '0',
+  `amount_paid` double NOT NULL DEFAULT '0',
+  `amount_rest` double NOT NULL DEFAULT '0',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`id`, `id_contract`, `code`, `name`, `date_create`, `date_expired`, `amount_room`, `amount_electric`, `amount_water`, `amount_service`, `total`, `amount_paid`, `amount_rest`, `updated_at`, `created_at`) VALUES
+(1, 3, 'HOADON-hd001-05/2022', 'Hóa đơn hợp đồng hd001 05/2022', '2022-05-06', '2022-05-06', 2500000, 98000000, 2500000, 100000, 103100000, 0, 0, '2022-05-06 01:59:20', '2022-05-06 01:59:20'),
+(2, 1, 'HOADON-HuTHzY-05/2022', 'Hóa đơn hợp đồng HuTHzY 05/2022', '2022-05-06', '2022-05-06', 10000000, 31500000, 25000, 100000, 41625000, 0, 0, '2022-05-06 02:23:43', '2022-05-06 02:23:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -411,7 +493,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -424,7 +506,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `model_has_permissions`
+-- Table structure for table `model_has_permissions`
 --
 
 CREATE TABLE `model_has_permissions` (
@@ -436,7 +518,7 @@ CREATE TABLE `model_has_permissions` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `model_has_roles`
+-- Table structure for table `model_has_roles`
 --
 
 CREATE TABLE `model_has_roles` (
@@ -446,21 +528,21 @@ CREATE TABLE `model_has_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `model_has_roles`
+-- Dumping data for table `model_has_roles`
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\Models\\Admin', 1),
-(1, 'App\\Models\\Admin', 6),
-(1, 'App\\Models\\Admin', 7),
 (2, 'App\\Models\\Admin', 3),
 (2, 'App\\Models\\Admin', 4),
-(2, 'App\\Models\\Admin', 5);
+(2, 'App\\Models\\Admin', 5),
+(2, 'App\\Models\\Admin', 6),
+(1, 'App\\Models\\Admin', 7);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -472,7 +554,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `permissions`
+-- Table structure for table `permissions`
 --
 
 CREATE TABLE `permissions` (
@@ -484,7 +566,7 @@ CREATE TABLE `permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `permissions`
+-- Dumping data for table `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
@@ -499,7 +581,7 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `personal_access_tokens`
+-- Table structure for table `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -508,7 +590,7 @@ CREATE TABLE `personal_access_tokens` (
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -517,7 +599,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -529,7 +611,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
@@ -539,7 +621,7 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `role_has_permissions`
+-- Table structure for table `role_has_permissions`
 --
 
 CREATE TABLE `role_has_permissions` (
@@ -548,25 +630,25 @@ CREATE TABLE `role_has_permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `role_has_permissions`
+-- Dumping data for table `role_has_permissions`
 --
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 1),
-(1, 2),
 (2, 1),
 (3, 1),
-(3, 2),
 (4, 1),
 (5, 1),
 (6, 1),
 (7, 1),
+(1, 2),
+(3, 2),
 (7, 2);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `rooms`
+-- Table structure for table `rooms`
 --
 
 CREATE TABLE `rooms` (
@@ -579,34 +661,36 @@ CREATE TABLE `rooms` (
   `price` double NOT NULL,
   `purpose` int(11) DEFAULT NULL,
   `acreage` int(11) NOT NULL,
-  `note` text DEFAULT NULL,
+  `note` text,
   `name_blog` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `asset` longtext DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `description` text,
+  `asset` longtext,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `rooms`
+-- Dumping data for table `rooms`
 --
 
 INSERT INTO `rooms` (`id`, `code`, `name`, `building_id`, `floor_id`, `type`, `price`, `purpose`, `acreage`, `note`, `name_blog`, `slug`, `avatar`, `description`, `asset`, `status`, `updated_at`, `created_at`) VALUES
-(1, 'p01', 'P-01', 2, 11, 1, 10000000, NULL, 70, NULL, 'Phòng master etown giá rẻ', 'phong-master-etown-gia-re', '/public/uploads/images/Landmark81banner.jpeg', '<p>Ph&ograve;ng gi&aacute; rẻ v&ocirc; c&ugrave;ng&nbsp;</p>\r\n\r\n<p>Tiện &iacute;ch:</p>\r\n\r\n<ul>\r\n	<li>B&atilde;i giữ xe rộng</li>\r\n	<li>Cửa v&acirc;n tay</li>\r\n	<li>M&aacute;y lạnh</li>\r\n</ul>', NULL, 2, '2022-04-26 04:06:26', '2022-04-23 02:32:37'),
-(2, 'p01', 'P-01', 2, 12, 1, 10000000, NULL, 50, NULL, 'Phòng master etown tầng 2 giá rẻ', 'phong-master-etown-tang-2-gia-re', '/public/uploads/images/tttmai_jnqb.jpg', '<p>Tiện &iacute;ch</p>\r\n\r\n<ul>\r\n	<li>B&atilde;i giữ xe</li>\r\n	<li>Nh&agrave; ăn</li>\r\n</ul>', NULL, 0, '2022-04-26 04:06:29', '2022-04-23 02:35:44'),
-(3, 'p01', 'P-01', 1, 1, 2, 10000000, NULL, 70, NULL, 'Phòng cho thuê ở Pearl Plaza giá rẻ', 'phong-cho-thue-o-pearl-plaza-gia-re', '/public/uploads/images/tttmai_jnqb.jpg', '<p>Ph&ograve;ng gi&aacute; rẻ</p>', NULL, 0, '2022-04-26 04:06:34', '2022-04-23 02:36:53'),
-(4, 'HuTHzY', 'P01', 3, 26, 1, 10000000, NULL, 50, NULL, 'Phòng studio Vincom quận 9 giá rẻ', 'phong-studio-vincom-quan-9-gia-re', '/public/uploads/images/tttmai_jnqb.jpg', '<p>Tiện &iacute;ch:</p>\r\n\r\n<ul>\r\n	<li>Nh&agrave; xe</li>\r\n	<li>Cửa v&acirc;n tay</li>\r\n	<li>Nước n&oacute;ng</li>\r\n</ul>', NULL, 2, '2022-04-26 04:06:37', '2022-04-23 02:48:22'),
-(5, '123123', 'P-02', 3, 26, 1, 150000000, NULL, 20, NULL, 'Phòng cho thuê ở Pearl Plaza giá rẻ 2', 'phong-cho-thue-o-pearl-plaza-gia-re-2', '/public/uploads/images/Landmark81banner.jpeg', '<p>Tiện &iacute;ch:</p>\r\n\r\n<p>Hồ Bơi</p>', NULL, 0, '2022-04-26 04:06:43', '2022-04-23 02:50:16'),
-(6, 'Vinhome', 'P01', 4, 36, 2, 12000000, NULL, 100, NULL, 'Vinhome Smart City', 'vinhome-smart-city', '/public/uploads/images/Landmark81banner.jpeg', NULL, NULL, 0, '2022-04-26 04:06:46', '2022-04-23 06:56:45'),
-(7, 'VH1', 'P01', 5, 57, 2, 12000000, NULL, 100, NULL, 'Vinhome Smart City', 'vinhome-smart-city-1', '/public/uploads/images/Landmark81banner.jpeg', NULL, NULL, 0, '2022-04-26 04:06:49', '2022-04-23 08:00:01');
+(1, 'p01', 'P-01', 2, 11, 1, 10000000, NULL, 70, NULL, 'Phòng master etown giá rẻ', 'phong-master-etown-gia-re', '/public/uploads/files/Landmark81banner.jpeg', '<p>Ph&ograve;ng gi&aacute; rẻ v&ocirc; c&ugrave;ng&nbsp;</p>\r\n\r\n<p>Tiện &iacute;ch:</p>\r\n\r\n<ul>\r\n	<li>B&atilde;i giữ xe rộng</li>\r\n	<li>Cửa v&acirc;n tay</li>\r\n	<li>M&aacute;y lạnh</li>\r\n</ul>', NULL, 2, '2022-04-23 02:34:06', '2022-04-23 02:32:37'),
+(2, 'p01', 'P-01', 2, 12, 1, 10000000, NULL, 50, NULL, 'Phòng master etown tầng 2 giá rẻ', 'phong-master-etown-tang-2-gia-re', '/public/uploads/files/tttmai_jnqb.jpg', '<p>Tiện &iacute;ch</p>\r\n\r\n<ul>\r\n	<li>B&atilde;i giữ xe</li>\r\n	<li>Nh&agrave; ăn</li>\r\n</ul>', NULL, 0, '2022-04-23 02:35:44', '2022-04-23 02:35:44'),
+(3, 'p01', 'P-01', 1, 1, 2, 10000000, NULL, 70, NULL, 'Phòng cho thuê ở Pearl Plaza giá rẻ', 'phong-cho-thue-o-pearl-plaza-gia-re', '/public/uploads/files/tttmai_jnqb.jpg', '<p>Ph&ograve;ng gi&aacute; rẻ</p>', NULL, 0, '2022-04-23 02:36:53', '2022-04-23 02:36:53'),
+(4, 'HuTHzY', 'P01', 3, 26, 1, 10000000, NULL, 50, NULL, 'Phòng studio Vincom quận 9 giá rẻ', 'phong-studio-vincom-quan-9-gia-re', '/public/uploads/files/tttmai_jnqb.jpg', '<p>Tiện &iacute;ch:</p>\r\n\r\n<ul>\r\n	<li>Nh&agrave; xe</li>\r\n	<li>Cửa v&acirc;n tay</li>\r\n	<li>Nước n&oacute;ng</li>\r\n</ul>', NULL, 2, '2022-04-23 02:49:07', '2022-04-23 02:48:22'),
+(5, '123123', 'P-02', 3, 26, 1, 150000000, NULL, 20, NULL, 'Phòng cho thuê ở Pearl Plaza giá rẻ 2', 'phong-cho-thue-o-pearl-plaza-gia-re-2', '/public/uploads/files/Landmark81banner.jpeg', '<p>Tiện &iacute;ch:</p>\r\n\r\n<p>Hồ Bơi</p>', NULL, 0, '2022-04-23 02:50:16', '2022-04-23 02:50:16'),
+(6, 'Vinhome', 'P01', 4, 36, 2, 12000000, NULL, 100, NULL, 'Vinhome Smart City', 'vinhome-smart-city', '/public/uploads/files/Landmark81banner.jpeg', NULL, NULL, 2, '2022-05-04 23:35:27', '2022-04-23 06:56:45'),
+(7, 'VH1', 'P01', 5, 57, 2, 12000000, NULL, 100, NULL, 'Vinhome Smart City', 'vinhome-smart-city-1', '/public/uploads/files/Landmark81banner.jpeg', NULL, NULL, 0, '2022-04-23 08:00:01', '2022-04-23 08:00:01'),
+(8, 'p002', 'P.02', 4, 36, 1, 10000000, NULL, 40, NULL, 'Phòng master etown tầng 2 giá rẻ bèo', 'phong-master-etown-tang-2-gia-re-beo', '/public/uploads/files/DJI_0030-fixed2-mini-20190727T100030844048.jpeg', NULL, NULL, 2, '2022-05-05 20:36:48', '2022-05-04 23:47:37'),
+(9, 'p001', 'P-01', 6, 86, 1, 2500000, NULL, 50, NULL, 'Phòng master etown tầng 2 giá rẻ nhất', 'phong-master-etown-tang-2-gia-re-nhat', '/public/uploads/files/DJI_0030-fixed2-mini-20190727T100030844048.jpeg', NULL, NULL, 2, '2022-05-05 22:23:16', '2022-05-05 21:48:42');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `service_index`
+-- Table structure for table `service_index`
 --
 
 CREATE TABLE `service_index` (
@@ -618,14 +702,14 @@ CREATE TABLE `service_index` (
   `index_to` int(11) DEFAULT NULL,
   `date_start` date NOT NULL,
   `date_end` date DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -640,109 +724,119 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `admins`
+-- Indexes for table `admins`
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `admin_info`
+-- Indexes for table `admin_info`
 --
 ALTER TABLE `admin_info`
   ADD PRIMARY KEY (`id`),
   ADD KEY `admin_id` (`admin_id`);
 
 --
--- Chỉ mục cho bảng `buildings`
+-- Indexes for table `buildings`
 --
 ALTER TABLE `buildings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `admin_id` (`admin_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `contract`
+-- Indexes for table `contract`
 --
 ALTER TABLE `contract`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `contract_customer`
+-- Indexes for table `contract_customer`
 --
 ALTER TABLE `contract_customer`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `contract_earnest`
+-- Indexes for table `contract_earnest`
 --
 ALTER TABLE `contract_earnest`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `contract_info`
+-- Indexes for table `contract_info`
 --
 ALTER TABLE `contract_info`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `customer`
+-- Indexes for table `contract_service_detail`
 --
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `admin_id` (`admin_id`);
+ALTER TABLE `contract_service_detail`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `failed_jobs`
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Chỉ mục cho bảng `floors`
+-- Indexes for table `floors`
 --
 ALTER TABLE `floors`
   ADD PRIMARY KEY (`id`),
   ADD KEY `building_id` (`building_id`);
 
 --
--- Chỉ mục cho bảng `migrations`
+-- Indexes for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `model_has_permissions`
+-- Indexes for table `model_has_permissions`
 --
 ALTER TABLE `model_has_permissions`
   ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
   ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Chỉ mục cho bảng `model_has_roles`
+-- Indexes for table `model_has_roles`
 --
 ALTER TABLE `model_has_roles`
   ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
   ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
--- Chỉ mục cho bảng `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Chỉ mục cho bảng `permissions`
+-- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
 
 --
--- Chỉ mục cho bảng `personal_access_tokens`
+-- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -750,21 +844,21 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Chỉ mục cho bảng `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`);
 
 --
--- Chỉ mục cho bảng `role_has_permissions`
+-- Indexes for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
   ADD PRIMARY KEY (`permission_id`,`role_id`),
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
--- Chỉ mục cho bảng `rooms`
+-- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
   ADD PRIMARY KEY (`id`),
@@ -772,178 +866,177 @@ ALTER TABLE `rooms`
   ADD KEY `floor_id` (`floor_id`);
 
 --
--- Chỉ mục cho bảng `service_index`
+-- Indexes for table `service_index`
 --
 ALTER TABLE `service_index`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `admins`
+-- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `admin_info`
+-- AUTO_INCREMENT for table `admin_info`
 --
 ALTER TABLE `admin_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `buildings`
+-- AUTO_INCREMENT for table `buildings`
 --
 ALTER TABLE `buildings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `contract`
+-- AUTO_INCREMENT for table `contract`
 --
 ALTER TABLE `contract`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `contract_customer`
+-- AUTO_INCREMENT for table `contract_customer`
 --
 ALTER TABLE `contract_customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
--- AUTO_INCREMENT cho bảng `contract_earnest`
+-- AUTO_INCREMENT for table `contract_earnest`
 --
 ALTER TABLE `contract_earnest`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `contract_info`
+-- AUTO_INCREMENT for table `contract_info`
 --
 ALTER TABLE `contract_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `customer`
+-- AUTO_INCREMENT for table `contract_service_detail`
+--
+ALTER TABLE `contract_service_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `floors`
+-- AUTO_INCREMENT for table `floors`
 --
 ALTER TABLE `floors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT cho bảng `migrations`
+-- AUTO_INCREMENT for table `invoice`
+--
+ALTER TABLE `invoice`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `permissions`
+-- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT cho bảng `personal_access_tokens`
+-- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `rooms`
+-- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT cho bảng `service_index`
+-- AUTO_INCREMENT for table `service_index`
 --
 ALTER TABLE `service_index`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `admin_info`
+-- Constraints for table `admin_info`
 --
 ALTER TABLE `admin_info`
   ADD CONSTRAINT `admin_info_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `buildings`
---
-ALTER TABLE `buildings`
-  ADD CONSTRAINT `buildings_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
-
---
--- Các ràng buộc cho bảng `customer`
---
-ALTER TABLE `customer`
-  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
-
---
--- Các ràng buộc cho bảng `floors`
+-- Constraints for table `floors`
 --
 ALTER TABLE `floors`
   ADD CONSTRAINT `floors_ibfk_1` FOREIGN KEY (`building_id`) REFERENCES `buildings` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `model_has_permissions`
+-- Constraints for table `model_has_permissions`
 --
 ALTER TABLE `model_has_permissions`
   ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `model_has_roles`
+-- Constraints for table `model_has_roles`
 --
 ALTER TABLE `model_has_roles`
   ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `role_has_permissions`
+-- Constraints for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
   ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `rooms`
+-- Constraints for table `rooms`
 --
 ALTER TABLE `rooms`
   ADD CONSTRAINT `rooms_ibfk_1` FOREIGN KEY (`building_id`) REFERENCES `buildings` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `rooms_ibfk_2` FOREIGN KEY (`floor_id`) REFERENCES `floors` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
