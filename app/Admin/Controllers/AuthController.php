@@ -24,6 +24,9 @@ class AuthController extends Controller
                 session()->forget('url-redirect');
                 return redirect($url)->with('success', 'Đăng nhập thành công');
             }
+            if(!auth()->guard('admin')->user()->hasPermissionTo('Bảng quản trị')){
+                return redirect()->route('admin.commission.index')->with('success','Đăng nhập thành công');
+            }
             return redirect()->route('dashboard.index')->with('success','Đăng nhập thành công');
         }else{
             return back()->with('error','Đăng nhập thất bại');

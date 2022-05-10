@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Artisan;
 
 class AdminHomeController extends Controller
 {
+
+    // ->middleware('permission:Bảng quản trị,admin')
+    public function __construct()
+    {
+        $this->middleware('permission:Bảng quản trị,admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +25,16 @@ class AdminHomeController extends Controller
     public function index()
     {
         // Artisan::call('schedule:run');
+        $admin = auth()->guard('admin')->user();
+        $building = Building::select('id', 'name');
+        //check admin full quyền
+        if(!$admin->hasRole(config('custom.role-admin'))){
+
+            $building = $building->whereAdminId('admin_id', $admin->id);
+
+        }
         //thực hiện truy vấn dữ liệu
-        $building = Building::select('id', 'name')->whereAdminId(auth()->guard('admin')->user()->id)->with(['room' => function($query) {
+        $building = $building->with(['room' => function($query) {
             $query->select('id', 'building_id', 'status');
             $query->with(['contract' => function($query) {
                 $query->select('id', 'id_room');
@@ -64,39 +78,36 @@ class AdminHomeController extends Controller
             }
             return collect($item->only('id', 'name'))->merge(['invoices' => $collect->values()->all()]);
         });
-
         // return $building[5]; 
         // return $building[5]['invoices'];
         // $room = Room::select('status')->get();
         // $room = $room->countBy('status');
         
         //Thống kê theo tháng
-        $statistic_all = collect()->range(0, now()->format('m') - 1);
-        $statistics_quarterly = collect()->range(0, 11);
+        $statistic_all = collect()->range(0, now()->format('m') - 1)->map(function ($item){
+            return 0;
+        });
+        $statistics_quarterly = collect()->range(0, 11)->map(function ($item){
+            return 0;
+        });
         $statistics_quarterly = $statistics_quarterly->map(function ($item) {
             return 0;
         });
 
         foreach($statistic_building as $key => $item){
             foreach($item['invoices'] as $key1 => $value){
-                if($key == 0){
-                    $statistic_all[$key1] = $value;
-                    $statistics_quarterly[$key1] = $value;
-                }
-                else{
                     $statistic_all[$key1] += $value;
                     $statistics_quarterly[$key1] += $value;
-                }
             }
         }
         $statistic_all = $statistic_all->all();
+        //Thống kê theo quý        
         $statistics_quarterly = $statistics_quarterly->chunk(3);
         $statistics_quarterly = $statistics_quarterly->map(function ($item) {
             return $item->sum();
         });
         $statistics_quarterly = $statistics_quarterly->all();
 
-        //Thống kê theo quý        
 
         return view('admin.home', compact('marco', 'statistic_building', 'statistic_all', 'statistics_quarterly'));
     }

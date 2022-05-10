@@ -19,6 +19,8 @@ use App\Admin\Controllers\CustomerManagerController;
 use App\Admin\Controllers\PermissionManagerController;
 use App\Admin\Controllers\ContractServiceDetailController;
 use App\Admin\Controllers\ExportPDF;
+use App\Admin\Controllers\CommissionController;
+use App\Admin\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,5 +110,15 @@ Route::group(['middleware' => ['admin']], function () {
     Route::group(['prefix' => 'pdf', 'as' => 'pdf.', 'middleware' => ['permission:Hồ sơ khách hàng,admin']], function(){
         Route::get('invoice/{invoice:id}', [ExportPDF::class, 'invoice'])->name('invoice');
     });
+    Route::group(['prefix' => 'hoa-hong', 'as' => 'admin.commission.'], function(){
+        Route::get('/', [CommissionController::class, 'index'])->name('index');
+        Route::put('/multiple', [CommissionController::class, 'multiple'])->name('multiple')->middleware('role:'.config('custom.role-admin').',admin');
+    });
+
+    Route::group(['prefix' => 'cai-dat', 'as' => 'admin.setting.', 'middleware' => ['role:'.config('custom.role-admin').',admin']], function(){
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::put('/update', [SettingController::class, 'update'])->name('update');
+    });
+
     Route::post('dang-xuat', [AuthController::class, 'logout'])->name('admin.logout');
 });

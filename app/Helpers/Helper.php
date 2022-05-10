@@ -192,3 +192,11 @@ if (!function_exists('formatStatusContractService')) {
         }
     }
 }
+if (!function_exists('statusCommission')) {
+    function statusCommission($status){
+        if($status == 1){
+            return '<span class="badge bg-success">Đã duyệt</span>';
+        }
+        return '<span class="badge bg-warning">Chưa duyệt</span>';
+    }
+}
