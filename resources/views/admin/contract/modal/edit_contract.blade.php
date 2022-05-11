@@ -3,12 +3,12 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="form-title">Thêm hợp đồng</h5>
+                <h5 class="modal-title" id="form-title">Sửa hợp đồng</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" onclick="closeModalRender()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form-edit-contract" action="{{ route('hop-dong.update',1) }}" method="post">
+            <form id="form-edit-contract" action="{{ route('hop-dong.update',$invoice->id) }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="border border-1 p-2">

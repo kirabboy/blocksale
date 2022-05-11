@@ -82,7 +82,7 @@ class ContractController extends Controller
                 'year' => date('Y'),
             ]);
         }
-        $room->status = 2;
+        // $room->status = 2;
         $room->save();
         $contracts = $room->contract();
         $current_contract = $contract;

@@ -26,7 +26,7 @@
                             <div class="form-group">
                                 <label for="">Tên hóa đơn <sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control" name="name"
-                                    value="Hóa đơn hợp đồng {{ $contract->code }} {{ date('m/Y') }}"
+                                    value="{{$invoice->name}}"
                                     placeholder="Tên hóa đơn" required>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Ngày lập <sup class="text-danger">*</sup></label>
-                                <input type="date" class="form-control" name="date_create" value=""
+                                <input type="date" class="form-control" name="date_create" value="{{date('Y-m-d',strtotime($invoice->date_create ))}}"
                                     placeholder="Ngày lập" required>
                             </div>
                         </div>
@@ -57,13 +57,13 @@
                             <div class="form-group">
                                 <label for="">Mã hóa đơn <sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control" name="code"
-                                    value="HOADON-{{ $contract->code }}-{{ date('m/Y') }}" placeholder="Mã hóa đơn"
+                                    value="{{$invoice->code}}" placeholder="Mã hóa đơn"
                                     required>
                             </div>
                             <div class="form-group">
                                 <label for="">Hạn thanh toán <sup class="text-danger">*</sup></label>
                                 <input type="date" class="form-control" name="date_expired"
-                                    placeholder="Hạn thanh toán" value="" required>
+                                    placeholder="Hạn thanh toán" value="{{date('Y-m-d',strtotime($invoice->date_expired))}}" required>
                             </div>
                         </div>
                     </div>
@@ -173,19 +173,19 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="">Tổng cộng</label>
-                                <input type="number" class="form-control text-right" name="total" value="" readonly>
+                                <input type="number" class="form-control text-right" name="total" value="{{$invoice->total}}" readonly>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="">Đã thanh toán</label>
-                                <input type="number" class="form-control text-right" name="amount_paid" value="0">
+                                <input type="number" class="form-control text-right" max="{{$invoice->total}}" name="amount_paid" value="{{$invoice->amount_paid}}">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="">Còn lại</label>
-                                <input type="number" class="form-control text-right" name="amount_rest" value="0"
+                                <input type="number" class="form-control text-right" name="amount_rest" value="{{$invoice->amount_rest}}"
                                     readonly>
                             </div>
                         </div>
@@ -201,9 +201,9 @@
     </div>
 </div>
 <script>
-    $('input[name="total"]').val(parseInt($('input[name="amount_room"]').val()) + parseInt($(
-            'input[name="amount_electric"]').val()) +
-        parseInt($('input[name="amount_water"]').val()) + parseInt($('input[name="amount_service"]').val()));
+    // $('input[name="total"]').val(parseInt($('input[name="amount_room"]').val()) + parseInt($(
+    //         'input[name="amount_electric"]').val()) +
+    //     parseInt($('input[name="amount_water"]').val()) + parseInt($('input[name="amount_service"]').val()));
     $('input[name="amount_paid"]').on('change', function() {
         $('input[name="amount_rest"]').val(parseInt($('input[name="total"]').val()) - parseInt($(
             'input[name="amount_paid"]').val()));

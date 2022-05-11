@@ -87,7 +87,6 @@ class InvoiceController extends Controller
         $contract = $invoice->contract()->with('contractinfo')->first();
         $service_detail = $contract->service_detail()->get();
         $room = $contract->room()->with('building')->first();
-
         return response()->json(['status' =>true, 'message' => view('admin.invoice.modal.edit_invoice', compact('invoice','room', 'contract','service_detail'))->render()]);
 
     }
@@ -99,9 +98,11 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InvoiceRequest $request, $id)
     {
-        //
+        $invoice = Invoice::whereId($id)->first();
+        $invoice->update($request->only('name', 'code', 'date_create', 'date_expried', 'amount_paid', 'amount_rest'));
+        return response()->json(['status' =>true, 'message' => 'Sửa hóa đơn thành công']);
     }
 
     /**

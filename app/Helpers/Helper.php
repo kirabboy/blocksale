@@ -23,10 +23,14 @@ if (!function_exists('getEarnestStatus')) {
 if (!function_exists('getContractStatus')) {
     function getContractStatus($status = 0)
     {
-        if($status == 1){
+        if($status == 0){
+            return 'Chờ duyệt';
+        }elseif($status == 1){
             return 'Hiệu lực';
-        }else{
+        }elseif($status == 2){
             return 'Hết hạn';
+        }elseif($status == 3){
+            return 'Đã hủy';
         }
     }
 }
