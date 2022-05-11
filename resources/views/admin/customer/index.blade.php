@@ -1,7 +1,6 @@
 @extends('admin.layouts.master')
-@section('title')
-Hồ sơ khách hàng
-@endsection
+@section('title', 'Hồ sơ khách hàng')
+
 @push('css')
 <style>
     .dropdown-toggle::after {
@@ -21,7 +20,7 @@ Hồ sơ khách hàng
                     <div class="col-sm-2">
                         <p class="m-0" style="line-height: 40px; font-size: 14px;">
                             <i class="nav-icon fas fa-users text-success"></i>
-                            Người dùng
+                            Hồ sơ khách hàng
                         </p>
                     </div>
                     <div class="col-sm-10 text-right">
