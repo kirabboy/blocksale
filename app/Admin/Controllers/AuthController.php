@@ -19,13 +19,13 @@ class AuthController extends Controller
 
     public function postLogin(Request $request){
         if(Auth::guard('admin')->attempt($request->only('username','password'))){
+            if(!auth()->guard('admin')->user()->hasPermissionTo('Bảng quản trị')){
+                return redirect()->route('admin.commission.index')->with('success','Đăng nhập thành công');
+            }
             if(session()->has('url-redirect')){
                 $url = session()->get('url-redirect');
                 session()->forget('url-redirect');
                 return redirect($url)->with('success', 'Đăng nhập thành công');
-            }
-            if(!auth()->guard('admin')->user()->hasPermissionTo('Bảng quản trị')){
-                return redirect()->route('admin.commission.index')->with('success','Đăng nhập thành công');
             }
             return redirect()->route('dashboard.index')->with('success','Đăng nhập thành công');
         }else{
