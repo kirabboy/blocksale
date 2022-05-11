@@ -132,7 +132,7 @@
                                         value="{{ $building->avatar }}">
                                     <img id="avatar" class="add-image-ckfinder pointer" data-preview="#avatar"
                                         data-input="input[name='avatar']" data-type=""
-                                        src="{{asset($building->avatar)}}" alt="" style="width: 100%">
+                                        src="{{asset($building->avatar)}}" onerror="this.onerror=null;this.src='{{ asset(config('custom.default-image')) }}';" alt="" style="width: 100%">
                                 </div>
                             </div>
                         </div>
