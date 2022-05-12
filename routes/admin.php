@@ -107,8 +107,9 @@ Route::group(['middleware' => ['admin']], function () {
 
     });
 
-    Route::group(['prefix' => 'pdf', 'as' => 'pdf.', 'middleware' => ['permission:Hồ sơ khách hàng,admin']], function(){
+    Route::group(['prefix' => 'pdf', 'as' => 'pdf.'], function(){
         Route::get('invoice/{invoice:id}', [ExportPDF::class, 'invoice'])->name('invoice');
+        Route::get('contract/{contract:id}', [ExportPDF::class, 'contract'])->name('contract');
     });
     Route::group(['prefix' => 'hoa-hong', 'as' => 'admin.commission.'], function(){
         Route::get('/', [CommissionController::class, 'index'])->name('index');
