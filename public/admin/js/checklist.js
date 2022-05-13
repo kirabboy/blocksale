@@ -13,8 +13,12 @@ $(document).on('change', 'input[name="checkAll"]', function(event) {
 		}
 		if($('input[name="id[]"]:checked').length > 0){
 			$("#deleteCustomer").attr('disabled', false);
+			$(".btn-change-status").attr('disabled', false);
+
 		}else{
 			$("#deleteCustomer").attr('disabled', true);
+			$(".btn-change-status").attr('disabled', true);
+
 		}
 });
 $(document).on('change', 'input[name="id[]"]', function(event) {
@@ -22,9 +26,11 @@ $(document).on('change', 'input[name="id[]"]', function(event) {
 	if($('input[name="id[]"]:checked').length > 0){
         $(".action-multiple").removeAttr('style');
         $("#deleteCustomer").attr('disabled', false);
+        $(".btn-change-status").attr('disabled', false);
     }else{
         $(".action-multiple").css('display', 'none');
 		$("#deleteCustomer").attr('disabled', true);
+		$(".btn-change-status").attr('disabled', true);
     }
 	if($(this).prop('checked') == false){
 		$('input[name="checkAll"]').prop('checked', false);

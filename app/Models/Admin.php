@@ -44,4 +44,7 @@ class Admin extends Authenticatable
 	public function admin_building(){
 		return $this->hasMany(Building::class, 'admin_id', 'id');
 	}
+	public function child(){
+		return $this->hasMany(Admin::class, 'parent_id', 'id');
+	}
 }

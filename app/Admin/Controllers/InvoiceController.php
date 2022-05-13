@@ -5,8 +5,10 @@ namespace App\Admin\Controllers;
 use App\Models\Room;
 use App\Models\Invoice;
 use App\Models\Contract;
+use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Admin\Requests\InvoiceRequest;
 
 class InvoiceController extends Controller
@@ -47,7 +49,14 @@ class InvoiceController extends Controller
      */
     public function store(InvoiceRequest $request)
     {        
-        $contract = Contract::whereId($request->id_contract)->first();
+        $contract = Contract::whereId($request->id_contract)->with(['contract_customer' => function($join) use($request){
+            $join->where('contract_customer.id_contract', '=',$request->id_contract )
+            ->where('contract_customer.is_representative', '=', 1)
+            ->with(['customer:id,fullname,phone,email']);
+        }])->with(['room' => function($join){
+            $join->select('id','building_id','name');
+            $join->with(['building:id,name,owner_phone']);
+        }])->with('contractinfo')->first();
         $service_detail = $contract->service_detail()->whereStatus(0)->get();
         $check = true;
         foreach ($service_detail as $item){
@@ -58,6 +67,7 @@ class InvoiceController extends Controller
         if($check){
             $invoice = Invoice::create($request->all());    
             $contract->service_detail()->whereStatus(0)->update(['status'=>1]);
+            $this->sendMailInvoice($contract, $invoice, $service_detail);
             return response()->json(['status' =>true, 'message' => 'Thêm hóa đơn thành công']);
         }else{
             return response()->json(['status' =>false, 'message' => 'Chỉ số điện nước chưa được chốt']);
@@ -114,5 +124,25 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function sendMailInvoice($contract , $invoice , $service_detail ){
+        $content = new \stdClass();
+        $content->subject = 'Hóa đơn tiền nhà tháng '. date('m-Y');
+        // $contract = Contract::whereId(1)->with(['contract_customer' => function($join){
+        //     $join->where('contract_customer.id_contract', '=',1 )
+        //     ->where('contract_customer.is_representative', '=', 1)
+        //     ->with(['customer:id,fullname,phone,email']);
+        // }])->with(['room' => function($join){
+        //     $join->select('id','building_id','name');
+        //     $join->with(['building:id,name,owner_phone']);
+        // }])->with('contractinfo')->first();
+        // $service_detail = $contract->service_detail()->get();
+
+        // return $contract->contract_customer[0]->customer->email;
+        $content->invoice = $invoice;
+        $content->contract = $contract;
+        $content->service_detail = $service_detail;
+        Mail::to( $contract->contract_customer[0]->customer->email)->send(new \App\Mail\InvoiceMail($content));
+        return 'sucesss';
     }
 }

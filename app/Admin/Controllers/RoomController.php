@@ -60,7 +60,7 @@ class RoomController extends Controller
         $contracts = $room->contract();
         $html_room_contract_history = view('admin.room.include.room_contract_history', compact('contracts'))->render();
         $html_service_detail = '';
-        $current_contract = $contracts->whereType(1)->whereStatus(1)->with('contractinfo')->first();
+        $current_contract = $contracts->whereType(1)->whereIn('status', [0,1])->with('contractinfo')->first();
         if($current_contract){
             $html_contract = view('admin.contract.include.show_quickly', compact('current_contract'))->render();
             $html_service_detail = view('admin.service_detail.show', compact('current_contract'))->render();
@@ -68,7 +68,7 @@ class RoomController extends Controller
             $html_contract = view('admin.contract.include.empty', compact('room'))->render();
         }
         $contracts = $room->contract();
-        $current_contract_earnest = $contracts->whereType(2)->whereStatus(1)->with('contractinfo')->with('customers')->first();
+        $current_contract_earnest = $contracts->whereType(2)->whereIn('status', [0,1])->with('contractinfo')->with('customers')->first();
         if($current_contract_earnest){
             $html_contract_earnest = view('admin.contract_earnest.include.show_quickly', compact('current_contract_earnest','contracts'))->render();
         }else{
@@ -88,7 +88,8 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        //
+        $room = Room::whereId($id)->with('building')->first();
+        return view('admin.room.modal.edit_room', compact('room'));
     }
 
     /**
@@ -98,9 +99,11 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoomRequest $request, $id)
     {
-        //
+        $room = Room::whereId($id)->first();
+        $room->update($request->all());
+        return response()->json(['status'=> true, 'room'=>$room]);
     }
 
     /**

@@ -45,7 +45,7 @@
                 <p class="m-0 mb-2 text-14">Mã</p>
             </div>
             <div class="col-6 col-sm-6">
-                <p class="m-0 mb-2 text-14"><strong>{{ $current_contract->name }}</strong></p>
+                <p class="m-0 mb-2 text-14"><strong>{{ $current_contract->code }}</strong></p>
             </div>
         </div>
         <div class="row">

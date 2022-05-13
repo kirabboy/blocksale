@@ -99,10 +99,10 @@ class CustomerController extends Controller
         $data = Customer::where('fullname','LIKE',"%".$search."%")->limit(25)->get();
         return $data;
     }
-    public function indexDatatableEdit(){
-        $customers_contract = Customer::join('contract_customer', function ($join) {
+    public function indexDatatableEdit(Request $request){
+        $customers_contract = Customer::join('contract_customer', function ($join) use ($request){
             $join->on( 'customer.id' , '=', 'contract_customer.id_customer')
-                 ->where('contract_customer.id_contract', '=', 1);
+                 ->where('contract_customer.id_contract', '=', $request->id);
         })->with('contract_customer')
         ->get()->toArray();
         $ids = Arr::pluck($customers_contract, 'id_customer');

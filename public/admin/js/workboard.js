@@ -108,12 +108,44 @@ $(document).on('click', '.btn-change-status-room', function() {
             $('#modal-form').modal('show');
         });
 });
+$(document).on('click', '.btn-edit-room', function() {
+    id_room = $(this).data('id_room');
+    $.ajax({
+            url: $(this).data('url'),
+            data: {},
+            type: 'GET'
+        })
+        .fail(function(data) {
+            console.log(data);
+        })
+        .done(function(response) {
+            $('#room-' + id_room).trigger('click');
+            $('.modal-area').empty().append(response);
+            $('#modal-form').modal('show');
+        });
+});
 $(document).on('click', '.btn-create-room', function() {
     $.ajax({
             url: $(this).data('url'),
             data: {
                 'id_contract': $(this).data('id_contract'),
             },
+            type: 'GET'
+        })
+        .fail(function(data) {
+            console.log(data);
+        })
+        .done(function(response) {
+            console.log(response);
+
+            $('.modal-area').empty().append(response);
+            $('#modalFormCreate').modal('show');
+        });
+});
+$(document).on('click', '.btn-edit-contract-earnest', function() {
+    $.ajax({
+            url: $(this).data('url'),
+            data: {},
             type: 'GET'
         })
         .fail(function(data) {

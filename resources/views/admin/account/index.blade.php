@@ -1,7 +1,6 @@
 @extends('admin.layouts.master')
-@section('title')
-Quản lý tài khoản Admin
-@endsection
+@section('title', 'Quản lý tài khoản Admin')
+
 @push('css')
 <link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 

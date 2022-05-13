@@ -49,6 +49,7 @@ class ContractEarnestController extends Controller
     {
         $request->is_earnest = 1;
         $contract_earnest = Contract::create($request->all());
+        $contract_earnest->update(['status' => 1]);
         ContractInfo::create([
             'id_contract' => $contract_earnest->id,
             'amount_earnest' => $request->amount_earnest,
@@ -57,7 +58,10 @@ class ContractEarnestController extends Controller
             'id_customer' => $request->id_customer,
             'id_contract' => $contract_earnest->id,
         ]);
-        $room = Room::whereId($request->id_room)->update(['status' => 1]);
+        $room = Room::whereId($request->id_room)->first();
+        if($room->status != 2){
+            $room = $room->update(['status' => 1]);
+        }
         return response()->json([
             'status' => 200,
             'message' => 'Thêm khách hàng thành công',
@@ -84,7 +88,10 @@ class ContractEarnestController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contract_earnest = Contract::whereId($id)->with('room')->with('contractinfo')->first();
+        $customers = Customer::get();
+        $customer = $contract_earnest->customers()->first();
+        return view('admin.contract_earnest.modal.edit_contract_earnest', compact('contract_earnest', 'customers', 'customer'));
     }
 
     /**
@@ -96,7 +103,17 @@ class ContractEarnestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $contract_earnest = Contract::whereId($id)->first();
+        ContractInfo::whereIdContract($id)->update([
+            'id_contract' => $contract_earnest->id,
+            'amount_earnest' => $request->amount_earnest,
+        ]);
+        $contract_earnest->contract_customer()->delete();
+        ContractCustomer::create([
+            'id_customer' => $request->id_customer,
+            'id_contract' => $id,
+        ]);
+        return response()->json(['status' => true, 'message'=>'Sửa hợp đồng thành công']);
     }
 
     /**

@@ -57,7 +57,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
     <script src="{{ asset('public/admin/toastr/toastr.min.js') }}"></script>
-    @if ((session('success')) || (session('error')))
+    @if ((session('success')) || (session('error') || $errors->any()))
         @include('admin.layouts.include.toastr');
     @endif
     @stack('script-plugin')

@@ -50,4 +50,5 @@ return [
     ],
     'currency' => 'đ',
     'shortcut-icon' => 'public/image/logo.png',
+    'role-admin' => 'Full Quyền',
 ];

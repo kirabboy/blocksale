@@ -78,6 +78,21 @@ if (!function_exists('badgeStatus')) {
     }
 }
 
+if (!function_exists('formatColorContract')) {
+    function formatColorContract($status = 0)
+    {
+        if($status == 0){
+            return 'text-danger';
+        }else if($status == 1){
+            return 'text-success';
+        }else if($status == 2){
+            return 'text-warning';
+        }else if($status == 3){
+            return 'text-secondary';
+        }
+    }
+}
+
 if (!function_exists('roomStatus')) {
     function roomStatus($status = 0)
     {
@@ -194,5 +209,13 @@ if (!function_exists('formatStatusContractService')) {
         }else if($status == 1){
             return 'Đã chốt';
         }
+    }
+}
+if (!function_exists('statusCommission')) {
+    function statusCommission($status){
+        if($status == 1){
+            return '<span class="badge bg-success">Đã duyệt</span>';
+        }
+        return '<span class="badge bg-warning">Chưa duyệt</span>';
     }
 }

@@ -3,6 +3,7 @@
     Hợp đồng
 @endsection
 @push('css')
+    <link rel="stylesheet" href="{{ asset('public/admin/css/contract.css') }}">
 @endpush
 @section('content')
     <div class="content-wrapper">
@@ -67,56 +68,49 @@
                                     <table class="table table-head-custom" id="table_hop_dong" style="width: 2150px;">
                                         <thead>
                                             <tr class="header-table-height">
-
                                                 <th class="text-12 text-uppercase" style="width: 10px">#</th>
                                                 <th class="text-12 text-uppercase" style="width: 10px">Mã</th>
                                                 <th class="text-12 text-uppercase" style="width: 80px">TÊN</th>
                                                 <th class="text-12 text-uppercase" style="width: 120px">Mã phòng thuê</th>
                                                 <th class="text-12 text-uppercase" style="width: 120px">Tên phòng thuê</th>
+                                                <th class="text-12 text-uppercase" style="width: 120px">Loại hợp đồng</th>
                                                 <th class="text-12 text-uppercase" style="width: 110px">Loại phòng thuê</th>
                                                 <th class="text-12 text-uppercase" style="width: 120px">Ngày bắt đầu</th>
                                                 <th class="text-12 text-uppercase" style="width: 80px">Ngày kết thúc</th>
                                                 <th class="text-12 text-uppercase" style="width: 150px">Ngày tính phí</th>
                                                 <th class="text-12 text-uppercase" style="width: 150px">Đặt cọc</th>
                                                 <th class="text-12 text-uppercase" style="width: 150px">Phí thuê nhà</th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">Người đại diện
-                                                </th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Người đại diện</th>
                                                 <th class="text-12 text-uppercase" style="width: 150px">Trạng thái</th>
                                             </tr>
                                         </thead>
-                                        {{-- <tfoot style="display: table-header-group">
-                                            <tr>
-                                                <th></th>
-                                                <th></th>
-                                                <th class="yes">Mã</th>
-                                                <th class="yes">Tên</th>
-                                                <th>
-                                                    <select class="custom-select" id="select_cong_viec_cha">
-                                                        <option selected>--Tất cả--</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                </th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th class="yes">Tiến độ</th>
-                                                <th class="yes">Người theo dõi</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </tfoot> --}}
                                         <tbody>
                                             @foreach ($contracts as $contract)
                                                 <tr>
-                                                    <td></td>
-                                                    <td>{{ $contract->code }}</td>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <button class="btn dropdown-toggle" type="button"
+                                                                id="dropdownMenuButton" data-toggle="dropdown"
+                                                                aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fas fa-ellipsis-h"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu"
+                                                                aria-labelledby="dropdownMenuButton">
+                                                                <span class="dropdown-item btn-edit-contract" role="button"
+                                                                    data-url="{{ route('hop-dong.edit', $contract->id) }}">Sửa
+                                                                    hợp đồng</span>
+                                                                <span class="dropdown-item btn-process-contract" 
+                                                                    data-url="{{ route('hop-dong.getProcess', $contract->id) }}">Kiểm duyệt hợp đồng</span>
+                                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="{{ formatColorContract($contract->status) }}">
+                                                        {{ $contract->code }}</td>
                                                     <td>{{ $contract->name }}</td>
                                                     <td> {{ $contract->room->code }} </td>
                                                     <td>{{ $contract->room->name }}</td>
+                                                    <td>{{ getContractType($contract->type) }}</td>
                                                     <td>{{ formatTypeRoom($contract->room->type) }}</td>
                                                     <td>{{ date('d/m/Y', strtotime($contract->time_start)) }}</td>
                                                     <td>{{ date('d/m/Y', strtotime($contract->time_end)) }}</td>
@@ -131,7 +125,7 @@
                                                             @endif
                                                         @endforeach
                                                     </td>
-                                                    <td>{{getContractStatus($contract->status)}}</td>
+                                                    <td>{{ getContractStatus($contract->status) }}</td>
 
                                                 </tr>
                                             @endforeach
@@ -162,4 +156,6 @@
 @endsection
 @push('script')
     <script src="{{ asset('public/admin/js/contract.js') }}"></script>
+    <script src="{{ asset('public/admin/js/create_contract.js') }}"></script>
+    <script src="{{ asset('public/admin/js/workboard.js') }}"></script>
 @endpush

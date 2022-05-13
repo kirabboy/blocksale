@@ -11,11 +11,15 @@
                 <span role="button" class="dropdown-item" data-room_id="{{ $room->id }}"
                     onclick="createContract(this)" data-url="{{ route('hop-dong.create') }}">Tạo hợp đồng</span>
                 <span role="button" class="dropdown-item" data-room_id="{{ $room->id }}"
-                    onclick="createInvoice(this)" data-id_room="{{$room->id}}" data-url="{{ route('hoa-don.create') }}">Xuất hóa đơn</span>
+                    onclick="createInvoice(this)" data-id_room="{{ $room->id }}"
+                    data-url="{{ route('hoa-don.create') }}">Xuất hóa đơn</span>
+                <span role="button" class="dropdown-item btn-edit-room" data-id_room={{$room->id}}
+                    data-url="{{ route('phong.edit', $room->id) }}">Sửa phòng</span>
             </div>
         </div>
-        <button id="room-{{ $room->id }}" data-url="{{ route('phong.show', $room) }}" onclick="getRoomInfo(this)"
+        <button id="room-{{ $room->id }}" data-url="{{ route('phong.show', $room) }}"
+            onclick="getRoomInfo(this)"
             class="btn-room btn {{ bgStatusOutline($room->status) }} p-1 text-12 text-center"><i
-                class="fas fa-door-open"></i> {{ $room->name }}</button>
+                class="fas fa-door-open"></i><span> {{ $room->name }}</span></button>
     </div>
 </div>

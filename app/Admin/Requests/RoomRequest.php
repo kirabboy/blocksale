@@ -30,16 +30,26 @@ class RoomRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'code' => ['required','unique:App\Models\Room,code','max:255'],
-            'name' => ['required'],
-            'name_blog' => ['required', 'unique:App\Models\Room,name_blog'],
-            'building_id' => ['required'],
-            'floor_id' => ['required'],
-            'type' => ['required'],
-            'acreage' => ['required'],
-            ''
-        ];
+        if($this->method() == 'POST'){
+            return [
+                'code' => ['required','max:255'],
+                'name' => ['required'],
+                'name_blog' => ['required', 'unique:App\Models\Room,name_blog'],
+                'building_id' => ['required'],
+                'floor_id' => ['required'],
+                'type' => ['required'],
+                'acreage' => ['required'],
+                ''
+            ];
+        }elseif($this->method() == 'PUT'){
+            return [
+                'code' => ['required','max:255'],
+                'name' => ['required'],
+                'type' => ['required'],
+                'acreage' => ['required'],
+                ''
+            ];
+        }
     }
 
     public function withValidator($validator){
@@ -53,7 +63,6 @@ class RoomRequest extends FormRequest
     public function messages()
     {
         return [
-            'code.unique' => 'Mã phòng đã tồn tại',
             'code.required' => 'Mã phòng không được bỏ trống',
             'name.required' => 'Tên phòng không được bỏ trống',
             'price.required' => 'Giá phòng không được bỏ trống',

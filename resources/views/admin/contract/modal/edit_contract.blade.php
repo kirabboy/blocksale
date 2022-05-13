@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="form-edit-contract" action="{{ route('hop-dong.update',$invoice->id) }}" method="post">
+            <form id="form-edit-contract" action="{{ route('hop-dong.update',$contract->id) }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="border border-1 p-2">
@@ -36,6 +36,15 @@
                                     <label for="">Ngày tính phí<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_charge" class="form-control"
                                         placeholder="Ngày tính phí" value="{{date('Y-m-d',strtotime($contract->time_charge))}}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Trạng thái<sup class="text-danger">*</sup></label>
+                                    <select class="form-control" name="status" id="" readonly>
+                                        <option value="0" {{$contract->status == 0 ? 'selected' : ''}}>Chờ duyệt</option>
+                                        <option value="1" {{$contract->status == 1 ? 'selected' : ''}}>Hiệu lực</option>
+                                        <option value="2" {{$contract->status == 2 ? 'selected' : ''}}>Hết hạn</option>
+                                        <option value="3" {{$contract->status == 3 ? 'selected' : ''}}>Đã hủy</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -190,7 +199,7 @@
             [25, 50, -1],
             [25, 50, "All"]
         ],
-        ajax: "{{ route('customer.indexDatatableEdit') }}",
+        ajax: "{{ route('customer.indexDatatableEdit',$contract->id) }}",
         columnDefs: [{
                 targets: 0,
                 type: "html",

@@ -37,4 +37,7 @@ class ContractCustomer extends Model
 		'is_representative',
 		'note',
 	];
+	public function customer(){
+        return $this->hasOne(Customer::class, 'id', 'id_customer');
+    }
 }

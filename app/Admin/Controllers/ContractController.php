@@ -4,12 +4,14 @@ namespace App\Admin\Controllers;
 
 use App\Models\Room;
 use App\Models\Contract;
+use App\Models\Customer;
 use App\Models\ContractInfo;
 use Illuminate\Http\Request;
 use App\Models\ContractCustomer;
 use App\Http\Controllers\Controller;
 use App\Models\ContractServiceDetail;
 use App\Admin\Requests\ContractRequest;
+use App\Admin\Controllers\CommissionController;
 
 class ContractController extends Controller
 {
@@ -83,7 +85,7 @@ class ContractController extends Controller
             ]);
         }
         // $room->status = 2;
-        $room->save();
+        // $room->save();
         $contracts = $room->contract();
         $current_contract = $contract;
         $html_contract = view('admin.contract.include.show_quickly', compact('current_contract'))->render();
@@ -113,7 +115,6 @@ class ContractController extends Controller
     public function edit($id)
     {
         $contract = Contract::whereId($id)->with('contractinfo')->with('room')->first();
-        
         return view('admin.contract.modal.edit_contract', compact('contract'));
     }
 
@@ -127,7 +128,7 @@ class ContractController extends Controller
     public function update(ContractRequest $request, $id)
     {
         $contract = Contract::whereId($id)->first();
-        $contract->update($request->only('code', 'name', 'time_start', 'time_end', 'time_charge', 'is_earnest', 'note'));
+        $contract = $contract->update($request->only('code', 'name', 'time_start', 'time_end', 'time_charge', 'is_earnest', 'note'));
         $contract_info = $contract->contractinfo()->first();
         $contract_info->update($request->only('number_room', 'price_room', 'note_room', 'number_electric',
          'price_electric', 'note_electric', 'number_water', 'price_water','note_water', 
@@ -161,5 +162,39 @@ class ContractController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getProcessContract(Request $request){
+        $contract = Contract::whereId($request->id_contract)->with('contractinfo')->with(['room' => function($join){
+            $join->select('id','building_id','name');
+            $join->with(['building:id,name']);
+        }])->first();
+        if($contract->status != 0){
+            return response()->json(['status' => false, 'message'=> 'Hợp đồng đã được kiểm duyệt']);
+        }else{
+            $customer = Customer::join('contract_customer', function ($join) use($contract) {
+                $join->on( 'customer.id' , '=', 'contract_customer.id_customer')
+                     ->where('contract_customer.is_representative', '=', 1)
+                     ->where('contract_customer.id_contract', '=', $contract->id);
+            })->first();
+            return response()->json(['status' => true, 'message' => view('admin.contract.modal.process_contract', compact('contract', 'customer'))->render()]);
+        }
+    }
+
+    public function runprocessContract($id, $status = 1){
+        $contract = Contract::whereId($id)->first();
+        if($status == 1){
+            $contract->status = $status;
+            $contract->save();
+            $commissionController = new CommissionController();
+            $result = $commissionController->add($contract->id);
+            return response()->json(['status' => true, 'message' => 'Duyệt hợp đồng thành công']);
+        }elseif($status == 3 ){
+            $contract->status = $status;
+            $contract->save();
+            return response()->json(['status' => false, 'message' => 'Hủy hợp đồng thành công']);        
+        }else{
+            return response()->json(['status' => false, 'message' => 'Hợp đồng đã được kiểm duyệt']);
+        }
     }
 }

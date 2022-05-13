@@ -66,6 +66,10 @@ class Contract extends Model
 	public function room(){
         return $this->hasOne(Room::class, 'id', 'id_room');
     }
+	
+	public function building(){
+        return $this->belongsToOne(Building::class, 'room', 'building_id', 'id_room');
+    }
 
 	public function customers(){
         return $this->belongsToMany(Customer::class, 'contract_customer', 'id_contract', 'id_customer')->withPivot(['is_representative','note']);

@@ -19,6 +19,8 @@ use App\Admin\Controllers\CustomerManagerController;
 use App\Admin\Controllers\PermissionManagerController;
 use App\Admin\Controllers\ContractServiceDetailController;
 use App\Admin\Controllers\ExportPDF;
+use App\Admin\Controllers\CommissionController;
+use App\Admin\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,12 +39,13 @@ Route::post('dang-nhap', [AuthController::class, 'postLogin'])->name('admin.post
 Route::get('/', function(){
     return redirect()->route('dashboard.index');
 });
+Route::get('/send-mail-test', [InvoiceController::class, 'sendMailInvoice']);
 
 Route::group(['middleware' => ['admin']], function () {
     Route::prefix('ho-so-khach-hang')->group(function(){
         Route::get('show-select', [CustomerController::class, 'showSelectCustomer'])->name('customer.showSelect');
         Route::get('get-datatable', [CustomerController::class, 'indexDatatable'])->name('customer.indexDatatable');
-        Route::get('get-datatable-edit', [CustomerController::class, 'indexDatatableEdit'])->name('customer.indexDatatableEdit');
+        Route::get('get-datatable-edit/{id}', [CustomerController::class, 'indexDatatableEdit'])->name('customer.indexDatatableEdit');
         Route::get('get-select-ajax', [CustomerController::class, 'dataAjax'])->name('customer.selectAjax');
         Route::get('get-customer-info', [CustomerController::class, 'getCustomerInfo'])->name('customer.getInfo');
 
@@ -51,6 +54,10 @@ Route::group(['middleware' => ['admin']], function () {
         Route::get('/get-change-status', [RoomController::class, 'getChangeStatus'])->name('phong.getChangeStatus');
         Route::post('/post-change-status', [RoomController::class, 'postChangeStatus'])->name('phong.postChangeStatus');
 
+    });
+    Route::prefix('hop-dong')->group(function(){
+        Route::get('/kiem-duyet/{id_contract}', [ContractController::class, 'getProcessContract'])->name('hop-dong.getProcess');
+        Route::get('/kiem-duyet/{id}/{status}', [ContractController::class, 'runProcessContract'])->name('hop-dong.runProcess');
     });
     Route::resources([
         '/dashboard' => AdminHomeController::class,
@@ -108,5 +115,15 @@ Route::group(['middleware' => ['admin']], function () {
     Route::group(['prefix' => 'pdf', 'as' => 'pdf.', 'middleware' => ['permission:Hồ sơ khách hàng,admin']], function(){
         Route::get('invoice/{invoice:id}', [ExportPDF::class, 'invoice'])->name('invoice');
     });
+    Route::group(['prefix' => 'hoa-hong', 'as' => 'admin.commission.'], function(){
+        Route::get('/', [CommissionController::class, 'index'])->name('index');
+        Route::put('/multiple', [CommissionController::class, 'multiple'])->name('multiple')->middleware('role:'.config('custom.role-admin').',admin');
+    });
+
+    Route::group(['prefix' => 'cai-dat', 'as' => 'admin.setting.', 'middleware' => ['role:'.config('custom.role-admin').',admin']], function(){
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::put('/update', [SettingController::class, 'update'])->name('update');
+    });
+
     Route::post('dang-xuat', [AuthController::class, 'logout'])->name('admin.logout');
 });

@@ -67,6 +67,6 @@ $(document).on('submit', '#form-edit-contract', function(e) {
             $('#nav_hop_dong_thue').empty().append(response['html_contract']);
             $('#nav_lich_su_hop_dong').empty().append(response['htm_room_contract_history']);
             $('#service-detail-area').empty().append(response['html_service_detail']);
-            $('#building-detail button.selected').removeClass('border-danger').addClass('border-success');
+            // $('#building-detail button.selected').removeClass('border-danger').addClass('border-success');
         });
 });

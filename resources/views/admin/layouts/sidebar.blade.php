@@ -96,7 +96,25 @@
                 </li>
                 @endif
                 @endif
+                <li class="nav-item">
+                    <a href="{{ route('admin.commission.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-medal"></i>
+                        <p>
+                            Hoa hồng
+                        </p>
+                    </a>
+                </li>
+                @role(config('custom.role-admin'), 'admin')
 
+                <li class="nav-item">
+                    <a href="{{ route('admin.setting.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-cog"></i>
+                        <p>
+                            Cài đặt
+                        </p>
+                    </a>
+                </li>
+                @endrole
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
