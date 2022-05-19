@@ -71,8 +71,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
+                                                <input type="hidden" name="type_water" value="{{$building->type_water}}" />
                                                 <label for="">Cách tính nước <sup class="text-danger">*</sup></label>
-                                                <select name="type_water" class="form-control" id="" disabled>
+                                                <select name="sel_type_water" class="form-control" id="" disabled>
                                                     <option value="1" {{$building->type_water ==1 ? 'selected' : ''}} >Theo tháng</option>
                                                     <option value="2"  {{$building->type_water ==2 ? 'selected' : ''}}>Theo m3</option>
                                                 </select>

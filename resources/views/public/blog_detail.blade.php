@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="room_info">
                                 <div class="title_info">
                                     <div class="_2-dFY"><span class="icon-nav-home-fill"
@@ -114,7 +114,7 @@
                                     </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="room_info">
                                 <div class="title_info">
                                     <div class="_2-dFY"><span class="icon-nav-home-fill"
