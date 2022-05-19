@@ -7,6 +7,9 @@
     <meta name="url-home" content="{{ url('/') }}">
     <title>@yield('title')</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset(config('custom.shortcut-icon')) }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/jquery.ui.slider.css" rel="stylesheet">
