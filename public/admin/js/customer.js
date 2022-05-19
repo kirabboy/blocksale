@@ -1,4 +1,3 @@
-
 $('#createCustomer').click(function() {
     $.ajax({
             url: $(this).data('route'),
@@ -16,7 +15,8 @@ $('#createCustomer').click(function() {
 });
 $(document).on('click', '.customer-edit', function(e) {
     e.preventDefault();
-    var that = $(this), route = that.data('route');
+    var that = $(this),
+        route = that.data('route');
     $.ajax({
             url: route,
             type: 'GET'
@@ -28,7 +28,7 @@ $(document).on('click', '.customer-edit', function(e) {
         })
         .done(function(response) {
             $('.modal-area').append(response);
-            
+
             $('#modalFormEdit').modal('show');
         });
 });
@@ -60,44 +60,46 @@ $(document).on('submit', '#mainFormCreate', function(e) {
             $('#modalFormCreate').modal('hide');
             // closeModalRender();
             $('#tableCustomer tbody').prepend(response.data);
+            $('select#customer').append('<option value="' + response.customer.id + '">' + response.customer.fullname + '</option>');
         });
 });
 
-$(document).on('submit', '#mainFormEdit', function (e) {
+$(document).on('submit', '#mainFormEdit', function(e) {
     e.preventDefault();
     var form = $(this),
         replace = '#tableCustomer tbody tr.item-' + form.find('input[name="id"]').val();
     var actionUrl = form.attr('action');
     $.ajax({
-        url: actionUrl,
-        type: 'PUT',
-        data: form.serialize(),
-    })
-    .fail(function (data) {
-        $.map(data.responseJSON.message, function(value) {
-            value.forEach(element => {
-                toastr.error(element, {
-                    timeOut: 5000
-                })
-            });
-        });
-    })
-    .done(function (response) {
-        toastr.success(response.message, {
-            timeOut: 5000
+            url: actionUrl,
+            type: 'PUT',
+            data: form.serialize(),
         })
-        $('#modalFormEdit').modal('hide');
-        // closeModalRender();
-        $(replace).replaceWith(response.data);
-    });
+        .fail(function(data) {
+            $.map(data.responseJSON.message, function(value) {
+                value.forEach(element => {
+                    toastr.error(element, {
+                        timeOut: 5000
+                    })
+                });
+            });
+        })
+        .done(function(response) {
+            toastr.success(response.message, {
+                timeOut: 5000
+            })
+            $('#modalFormEdit').modal('hide');
+            // closeModalRender();
+            $(replace).replaceWith(response.data);
+        });
 });
 
 $(document).on('click', '.customer-delete', function(e) {
     e.preventDefault();
-    if(!confirm('Bạn có chắc là muốn thực hiện ? ')){
+    if (!confirm('Bạn có chắc là muốn thực hiện ? ')) {
         return;
     }
-    var that = $(this), route = that.data('route');
+    var that = $(this),
+        route = that.data('route');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -168,7 +170,7 @@ $(document).ready(function() {
         columnDefs: [{
             orderable: false,
             // className: 'select-checkbox',
-            targets: [0,1]
+            targets: [0, 1]
         }],
         select: {
             selector: 'td:first-child',

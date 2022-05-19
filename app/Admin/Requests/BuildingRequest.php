@@ -45,7 +45,6 @@ class BuildingRequest extends FormRequest
                 'id' => ['required', 'exists:App\Models\Building,id'],
                 'code' => ['required', 'string', 'max:255'],
                 'name' => ['required', 'string', 'max:255'],
-                'type_water' => ['required'],
                 'price_room' => ['required', 'integer'],
                 'number_floor' => ['required', 'integer', 'min:1'],
                 'address' => ['required', 'string', 'max:255'],

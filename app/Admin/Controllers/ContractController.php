@@ -186,10 +186,16 @@ class ContractController extends Controller
         if($status == 1){
             $contract->status = $status;
             $contract->save();
+            $room = $contract->room()->first();
+            $room->status = 2;
+            $room->save();
             $commissionController = new CommissionController();
             $result = $commissionController->add($contract->id);
             return response()->json(['status' => true, 'message' => 'Duyệt hợp đồng thành công']);
         }elseif($status == 3 ){
+            $room = $contract->room()->first();
+            $room->status = 0;
+            $room->save();
             $contract->status = $status;
             $contract->save();
             return response()->json(['status' => false, 'message' => 'Hủy hợp đồng thành công']);        

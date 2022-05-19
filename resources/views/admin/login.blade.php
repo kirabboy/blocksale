@@ -12,8 +12,8 @@
                 <div class="col-md-6 col-12" id="particles-js">
                     <div class="card-block">
                         <div class="card card-login">
-                            <div class="card-header">
-                                <img src="{{ asset('public/admin/images/logo.png') }}" alt="">
+                            <div class="card-header text-center">
+                                <img class="w-50" src="{{ asset('public/admin/images/linhanhlogo.png') }}" alt="">
                             </div>
                             <div class="card-body">
                                 <h5 class="title">Chào mừng bạn trở lại,</h5>

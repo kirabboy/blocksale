@@ -1,4 +1,4 @@
-$(document).on('submit', '#mainFormCreate', function(e) {
+$(document).on('submit', '#mainFormCreateContractEarnest', function(e) {
     e.preventDefault();
 
     var form = $(this);

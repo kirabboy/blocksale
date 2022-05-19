@@ -1,4 +1,4 @@
-<div class="modal model-render fade modal-primary" id="modalFormCreate" tabindex="-1" role="dialog"
+<div class="modal model-render fade modal-primary" id="modal-form" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -8,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="mainFormCreate" action="{{ route('hop-dong-coc.store') }}" method="post">
+            <form id="mainFormCreateContractEarnest" action="{{ route('hop-dong-coc.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="border border-1 p-2">
@@ -64,6 +64,15 @@
                     <div class="border border-1 p-2">
                         <label class="font-weight-bold text-danger">2. Thông tin khách hàng</label>
                         <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-cyan" onclick="createCustomer(this)"
+                                    data-route="{{ route('admin.customer.create') }}">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Thêm mới
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Chọn khách hàng <sup class="text-danger">*</sup></label>
@@ -111,4 +120,26 @@
         </div>
     </div>
 </div>
+<div class="modal-area-customer">
+        
+</div>
 <script src="{{ asset('/public/admin/js/create_contract_earnest.js') }}"></script>
+<script src="{{ asset('/public/admin/js/customer.js') }}"></script>
+
+<script>
+    function createCustomer(e) {
+        $.ajax({
+                url: $(e).data('route'),
+                type: 'GET'
+            })
+            .fail(function(data) {
+                toastr.error('Vui lòng tải lại trang', {
+                    timeOut: 5000
+                })
+            })
+            .done(function(response) {
+                $('.modal-area-customer').append(response);
+                $('#modalFormCreate').modal('show');
+            });
+    }
+</script>

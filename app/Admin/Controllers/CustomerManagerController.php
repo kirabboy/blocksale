@@ -36,12 +36,14 @@ class CustomerManagerController extends Controller
         $data['admin_id'] = $admin_id;
         
         $customer = Customer::create($data);
+        $result = view('admin.customer.row', ['customer' => $customer])->render();
+
         $customer = (object) $customer->only('id', 'code', 'fullname', 'phone', 'email', 'identification_number');
         
-        $result = view('admin.customer.row', ['customer' => $customer])->render();
         return response()->json([
             'message' => 'Thêm khách hàng thành công',
-            'data' => $result
+            'data' => $result,
+            'customer' => $customer
         ]);
     }
 

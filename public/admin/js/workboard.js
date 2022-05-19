@@ -83,7 +83,7 @@ function createContractEarnest(e) {
             if (response) {
                 console.log(response);
                 $('.modal-area').append(response);
-                $('#modalFormCreate').modal('show');
+                $('#modal-form').modal('show');
             } else {
                 toastr.error('Hợp đồng đã tồn tại', {
                     timeOut: 5000

@@ -81,7 +81,7 @@ $(document).ready(function() {
     });
 });
 
-$(document).on('click', '.btn-process-contract', function() {
+$(document).on('click', '.btn-get-process-contract', function() {
     $.ajax({
             url: $(this).data('url'),
             data: {},
@@ -103,7 +103,8 @@ $(document).on('click', '.btn-process-contract', function() {
 
         });
 })
-$(document).on('click', '.btn-process-contract', function() {
+$(document).on('click', '.btn-process-contract', function(e) {
+    e.preventDefault();
     $.ajax({
             url: $(this).data('url'),
             data: {},
@@ -114,7 +115,6 @@ $(document).on('click', '.btn-process-contract', function() {
         })
         .done(function(response) {
             console.log(response);
-            $('#modal-form').modal('hide');
 
             if (response['status']) {
                 toastr.success(response['message'], {
@@ -125,6 +125,7 @@ $(document).on('click', '.btn-process-contract', function() {
                     timeOut: 5000
                 })
             }
+            $('#modal-form').modal('hide');
 
         });
 })
