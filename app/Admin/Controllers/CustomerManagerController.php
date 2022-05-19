@@ -11,9 +11,15 @@ class CustomerManagerController extends Controller
 {
     //
     public function index(){
-        $admin_id = auth()->guard('admin')->user()->id;
-        $customers = Customer::select('id', 'code', 'fullname', 'phone', 'email', 'identification_number')
-        ->whereAdminId($admin_id)->get();
+        $admin = auth()->guard('admin')->user();
+        $customers = Customer::select('id', 'code', 'fullname', 'phone', 'email', 'identification_number');
+        //check admin full quyền
+        if(!$admin->hasRole(config('custom.role-admin'))){
+
+            $customers = $customers->whereAdminId('admin_id', $admin->id);
+
+        }
+        $customers = $customers->get();
         return view('admin.customer.index', compact('customers'));
     }
 

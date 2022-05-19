@@ -76,7 +76,7 @@
                                     <span class="title">Thông tin liên hệ</span>
                                 </div>
                                 <div class="room_owner">
-                                    <img src="{{ asset('public/admin/image/profile.svg') }}"
+                                    <img src="{{ asset('public/admin/image/profile.svg') }}" onerror="this.onerror=null;this.src='{{ asset(config('custom.default-image')) }}';"
                                         alt="avatar" class="_1Ad8s">
                                     <div class="name_owner">
                                         <span>{{ optional($room->building)->owner }}</span>

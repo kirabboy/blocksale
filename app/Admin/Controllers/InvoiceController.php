@@ -55,7 +55,7 @@ class InvoiceController extends Controller
             ->with(['customer:id,fullname,phone,email']);
         }])->with(['room' => function($join){
             $join->select('id','building_id','name');
-            $join->with(['building:id,name,owner_phone']);
+            $join->with(['building:id,name,owner_phone,owner_email,owner']);
         }])->with('contractinfo')->first();
         $service_detail = $contract->service_detail()->whereStatus(0)->get();
         $check = true;
@@ -127,7 +127,7 @@ class InvoiceController extends Controller
     }
     public function sendMailInvoice($contract , $invoice , $service_detail ){
         $content = new \stdClass();
-        $content->subject = 'Hóa đơn tiền nhà tháng '. date('m-Y');
+        $content->subject = 'Hóa đơn tiền nhà tháng '. $service_detail[0]->month.'-'.$service_detail[0]->year;
         // $contract = Contract::whereId(1)->with(['contract_customer' => function($join){
         //     $join->where('contract_customer.id_contract', '=',1 )
         //     ->where('contract_customer.is_representative', '=', 1)

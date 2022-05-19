@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6 col-sm-6">
+            <div class="col-6 col-sm-6"> 
                 <p class="m-0 mb-2 text-14">Loại hợp đồng</p>
             </div>
             <div class="col-6 col-sm-6">

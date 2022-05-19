@@ -20,7 +20,7 @@
                     <div class="col-sm-2 text-right">
                         <form id="form-select-building" action="" method="get">
                             <select id="select-building" name="building" class="form-control" onchange="this.form.submit()"">
-                                                         @foreach ($buildings as $item)
+                                                                                  @foreach ($buildings as $item)
                                 <option value="{{ $item->id }}" {{ $building->id == $item->id ? 'selected' : '' }}>
                                     {{ $item->name }}</option>
                                 @endforeach
@@ -28,35 +28,36 @@
                         </form>
                     </div>
                     <div class="col-sm-8 text-right">
-                        <button class="btn btn-green btn-vien-trai">
-                            <i class="fa fa-search"></i> Tạo hợp đồng</button>
-                        <button class="btn btn-green btn-vien-trai btn-vien-phai" data-toggle="modal"
-                            data-target=".coc_giu_cho">
-                            <i class="fa fa-search"></i> Cọc giữ chỗ</button>
-                        <button class="btn btn-green btn-vien-trai btn-vien-phai" data-toggle="modal"
-                            data-target=".coc_giu_cho">
-                            <i class="fa fa-search"></i> Ghi chi số</button>
+                        <button class="btn btn-green btn-vien-trai" id="btn-tool-create-contract" data-room_id=""
+                            onclick="createContract(this)" data-url="{{ route('hop-dong.create') }}">
+                            <i class="fas fa-plus"></i> Tạo hợp đồng</button>
+                        <button class="btn btn-green btn-vien-trai btn-vien-phai" id="btn-tool-create-contract-earnest"
+                            onclick="createContractEarnest(this)" data-room_id=""
+                            data-url="{{ route('hop-dong-coc.create') }}">
+                            <i class="fas fa-plus-circle"></i> Cọc giữ chỗ</button>
+                        {{-- <button class="btn btn-green btn-vien-trai btn-vien-phai" id="btn-tool-create-service-detail">
+                            <i class="fas fa-percent"></i> Ghi chi số</button> --}}
 
                         <p class="m-1 d-sm-none"> </p>
 
-                        <button class="btn btn-green btn-vien-trai btn-vien-phai" data-toggle="modal"
-                            data-target=".coc_giu_cho">
-                            <i class="fa fa-search"></i> Xuất hóa đơn</button>
-                        <button class="btn btn-green btn-vien-trai btn-vien-phai" data-toggle="modal"
-                            data-target=".coc_giu_cho">
-                            <i class="fa fa-search"></i> Trả phòng</button>
-                        <button class="btn btn-green btn-vien-phai" data-toggle="modal" data-target=".coc_giu_cho">
-                            <i class="fa fa-search"></i> Chuyển phòng</button>
+                        <button class="btn btn-green btn-vien-trai btn-vien-phai" id="btn-tool-create-invoice"
+                            onclick="createInvoice(this)" data-id_room="" data-url="{{ route('hoa-don.create') }}">
+                            <i class="fas fa-file-invoice"></i> Xuất hóa đơn</button>
+                        {{-- <button class="btn btn-green btn-vien-trai btn-vien-phai btn-edit-room"
+                            id="btn-tool-cancel-contract" data-id_room=""
+                            data-url="{{ route('phong.edit', $room->id) }}">
+                            <i class="fas fa-door-open"></i> Sửa phòng</button> --}}
+                        {{-- <button class="btn btn-green btn-vien-phai" data-toggle="modal" data-target=".coc_giu_cho">
+                            <i class="fa fa-search"></i> Chuyển phòng</button> --}}
 
                         <p class="m-1 d-sm-none"> </p>
-
-                        <button class="btn btn-green" style="padding: 6px 15px;">
+                        {{-- <button class="btn btn-green" style="padding: 6px 15px;">
                             ...</button>
                         <button class="btn btn-green btn-vien-trai" style="padding: 9px 15px">
                             <i class="fa fa-search"></i></button>
                         <button class="btn btn-green btn-vien-phai"
                             style="padding: 9px 15px; background-color: #ffa800 !important;">
-                            <i class="fa fa-search"></i></button>
+                            <i class="fa fa-search"></i></button> --}}
                     </div>
                 </div>
             </div>
@@ -182,7 +183,7 @@
                             <!-- End tab đơn vị thuê -->
                         </div>
                         <div id="service-detail-area" class="p-2">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -198,5 +199,4 @@
     <script src={{ asset('/public/admin/js/create_contract.js') }}></script>
     <script src={{ asset('/public/admin/js/create_contract_service.js') }}></script>
     <script src={{ asset('/public/admin/js/invoice.js') }}></script>
-
 @endpush

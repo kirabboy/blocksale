@@ -101,7 +101,7 @@
                                                                     hợp đồng</span>
                                                                 <span class="dropdown-item btn-process-contract" 
                                                                     data-url="{{ route('hop-dong.getProcess', $contract->id) }}">Kiểm duyệt hợp đồng</span>
-                                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                                <a class="dropdown-item" href="{{ route('pdf.contract', $contract->id) }}" target="_blank">Xem hợp đồng</a>
                                                             </div>
                                                         </div>
                                                     </td>

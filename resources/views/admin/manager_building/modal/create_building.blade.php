@@ -126,7 +126,7 @@
                                 <label for="">Hình đại diện</label>
                                 <div class="form-group">
                                     <input type="text" class="form-control d-none" name="avatar"
-                                        value="/public/image/default-image.png">
+                                        value="/public/images/default-image.png">
                                     <img id="avatar" class="add-image-ckfinder pointer" data-preview="#avatar"
                                         data-input="input[name='avatar']" data-type=""
                                         src="{{asset('/public/image/default-image.png')}}" alt="" style="width: 100%">

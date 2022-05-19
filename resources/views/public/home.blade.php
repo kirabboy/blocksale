@@ -15,7 +15,7 @@
             <div class="col col-6 col-md-4 col-lg-2">
                 <div class="card img-fluid" style="width:100%">
                     <a href="{{ route('blog.building', $building->slug) }}">
-                        <img class="card-img-top" src="{{ asset($building->avatar) }}" alt="Card image"
+                        <img class="card-img-top" src="{{ asset($building->avatar) }}" onerror="this.onerror=null;this.src='{{ asset(config('custom.default-image')) }}';" alt="Card image"
                             style="width:100%">
                         <div class="card-img-overlay">
                             <h4 class="card-title">{{ $building->name }}</h4>

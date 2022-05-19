@@ -43,6 +43,7 @@ function createInvoice(e) {
 }
 
 function createContract(e) {
+
     $.ajax({
             url: $(e).data('url'),
             data: {
@@ -64,6 +65,7 @@ function createContract(e) {
             }
 
         });
+
 }
 
 function createContractEarnest(e) {
@@ -236,7 +238,16 @@ function getRoomInfo(e) {
             console.log(response);
         });
 }
+$(".btn-room").on('click', function() {
+    $('#btn-tool-create-contract').data('room_id', $(this).data('room_id'));
+    $('#btn-tool-create-contract-earnest').data('room_id', $(this).data('room_id'));
+    $('#btn-tool-create-invoice').data('id_room', $(this).data('room_id'));
+    $('#btn-tool-cancel-contract').data('id_room', $(this).data('room_id'));
+
+
+});
 $(".btn-room").first().trigger('click');
+
 
 $(document).on('submit', '#form-change-status-room', function(e) {
     e.preventDefault();
