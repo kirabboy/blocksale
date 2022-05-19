@@ -31,7 +31,7 @@ header .header-main.stuck {
 }
 
 header .header-main-content {
-    height: 75px;
+    height: 80px;
     align-items: center;
 }
 
@@ -49,7 +49,7 @@ header .header-main-content .logo {
 }
 
 header .header-main-content .logo img {
-    max-height: 50px;
+    max-height: 70px;
 }
 
 header .search-container {
