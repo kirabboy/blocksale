@@ -426,6 +426,9 @@
     .banner-header .noidung img {
         width: 100%;
     }
+    .banner-header .container-fluid .row:first-child .col{
+        justify-content: center !important;
+    }
 }
 
 .banner-header {
@@ -435,12 +438,12 @@
 }
 
 .banner-header .container-fluid {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 50px;
 }
 
 .banner-header .navbar-brand img {
-    height: 60px;
+    height: 100px;
 }
 
 .banner-header .container-fluid .row:first-child .col {
