@@ -11,7 +11,7 @@ Danh sách căn hộ
     <section class="detail-home">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 d-none d-md-block">
                     <div class="box_filter">
                         <form action="{{ url()->current() }}" method="get">
                             <nav class='animated bounceInDown'>
