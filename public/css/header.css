@@ -1,3 +1,6 @@
+#homepage{
+    margin-top: 80px;
+}
 header .header-top {
     background-color: #F7346F;
     height: 40px;
@@ -14,12 +17,10 @@ header .header-top .nav {
 
 header .header-main {
     position: fixed;
-    /* top: 40px; */
+    top: 0px;
     z-index: 10;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: #fff;
-    visibility: hidden;
-    opacity: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
@@ -98,4 +99,9 @@ header .form-dropdown {
 }
 .header-main ul.nav li a.nav-link.active {
     border-bottom: 2px solid #000;
+}
+@media only screen and (max-width: 768px) {
+    header .header-main-content .logo{
+        width:75px !important;
+    }
 }

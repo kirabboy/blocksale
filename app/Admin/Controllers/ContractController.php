@@ -32,6 +32,24 @@ class ContractController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function managerContractExpired(){
+        $contracts = Contract::whereStatus(1)->latest()->get();
+        $day = date('d');
+        $array = [];
+        foreach($contracts as $contract){ 
+            if(!$contract->invoices()->where('month',date('m'))->first()){
+                if(intval(date('d', strtotime($contract->time_charge)) - intval($day)) < 10){
+                    $contract->day_remaining = date('d', strtotime($contract->time_charge)) - $day;
+
+                    array_push($array, $contract);
+                }
+            }
+        }
+        return view('admin.contract.expired', ['contracts' => $array]);
+
+    }         
+
     public function create(Request $request)
     {
         //
@@ -128,7 +146,7 @@ class ContractController extends Controller
     public function update(ContractRequest $request, $id)
     {
         $contract = Contract::whereId($id)->first();
-        $contract = $contract->update($request->only('code', 'name', 'time_start', 'time_end', 'time_charge', 'is_earnest', 'note'));
+        Contract::whereId($id)->update($request->only('code', 'name', 'time_start', 'time_end', 'time_charge', 'is_earnest', 'note'));
         $contract_info = $contract->contractinfo()->first();
         $contract_info->update($request->only('number_room', 'price_room', 'note_room', 'number_electric',
          'price_electric', 'note_electric', 'number_water', 'price_water','note_water', 

@@ -69,6 +69,14 @@
                     </a>
                 </li>
                 @endif
+                @if(auth()->guard('admin')->user()->can('Hợp đồng'))
+                <li class="nav-item">
+                    <a href="{{ route('hop-dong.expired') }}" class="nav-link">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>Hợp đồng đến hạn thanh toán</p>
+                    </a>
+                </li>
+                @endif
                 @if(auth()->guard('admin')->user()->can('Vai trò') || auth()->guard('admin')->user()->can('Người dùng'))
 
                 <li class="nav-header text-uppercase">Quản lý tổ chức</li>

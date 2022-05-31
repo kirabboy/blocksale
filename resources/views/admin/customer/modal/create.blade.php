@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-4 form-group">
                             <label for="">Nghề nghiệp</label>
-                            <input type="text" name="job" class="form-control" placeholder="Nghề nghiệp">
+                            <input type="text" name="job" class="form-control" placeholder="Nghề nghiệp" required>
                         </div>
                         <div class="col-4 form-group">
                             <label for="">Giới tính</label>

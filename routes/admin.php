@@ -56,6 +56,7 @@ Route::group(['middleware' => ['admin']], function () {
 
     });
     Route::prefix('hop-dong')->group(function(){
+        Route::get('/hop-dong-den-han', [ContractController::class, 'managerContractExpired'])->name('hop-dong.expired');
         Route::get('/kiem-duyet/{id_contract}', [ContractController::class, 'getProcessContract'])->name('hop-dong.getProcess');
         Route::get('/kiem-duyet/{id}/{status}', [ContractController::class, 'runProcessContract'])->name('hop-dong.runProcess');
     });

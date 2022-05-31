@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <label for="">Tháng</label>
                                 <input type="number" class="form-control" name="month"
-                                    value="{{ $service_detail['0']->month }}" readonly>
+                                    value="{{ $invoice->month }}" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="">Phòng</label>
@@ -33,7 +33,7 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="">Năm</label>
-                                <input type="number" class="form-control" name="year" value="{{ date('Y') }}"
+                                <input type="number" class="form-control" name="year" value="{{$invoice->year}}"
                                     readonly>
                             </div>
                             <div class="form-group">

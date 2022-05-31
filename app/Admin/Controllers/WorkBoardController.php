@@ -22,6 +22,9 @@ class WorkBoardController extends Controller
         }else{
             $building = Building::whereAdminId($admin_id)->latest()->with('floor')->first();
         }
+        if($building == null){
+            return redirect()->route('admin.building.index');
+        }
         $buildings = Building::whereAdminId($admin_id)->latest()->get();
         $building->count = $building->room->countBy('status');
         $building->ratio = $building->count->sum() != 0 ? ($building->count['2'] ?? 0) / $building->count->sum() *100 : 0;

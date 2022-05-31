@@ -45,6 +45,8 @@ class Invoice extends Model
 
 	protected $fillable = [
 		'id_contract',
+		'month',
+		'year', 
 		'code',
 		'name',
 		'date_create',

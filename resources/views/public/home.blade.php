@@ -6,7 +6,11 @@
 @endpush
 @section('content')
 
-
+<section>
+    <div class="container-fluid">
+            <img src="{{ asset('public/image/banner.png') }}" alt="" width="100%">
+    </div>
+</section> 
 <section class="xu-huong">
     <div class="container-fluid">
         <h3>Tòa nhà</h3>

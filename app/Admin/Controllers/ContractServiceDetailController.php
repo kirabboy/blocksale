@@ -64,7 +64,9 @@ class ContractServiceDetailController extends Controller
      */
     public function show($id)
     {
-        //
+        $contract = Contract::whereId($id)->with('room')->first();
+        return view('admin.contract.service_detail', ['current_contract' => $contract]);
+
     }
 
     /**
