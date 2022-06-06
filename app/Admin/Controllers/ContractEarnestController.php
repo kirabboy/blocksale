@@ -47,27 +47,33 @@ class ContractEarnestController extends Controller
      */
     public function store(ContractEarnestRequest $request)
     {
-        $request->is_earnest = 1;
-        $contract_earnest = Contract::create($request->all());
-        $contract_earnest->update(['status' => 1]);
-        ContractInfo::create([
-            'id_contract' => $contract_earnest->id,
-            'amount_earnest' => $request->amount_earnest,
-        ]);
-        ContractCustomer::create([
-            'id_customer' => $request->id_customer,
-            'id_contract' => $contract_earnest->id,
-        ]);
         $room = Room::whereId($request->id_room)->first();
-        if($room->status != 2){
-            $room = $room->update(['status' => 1]);
+        $contract_earnest = $room->contract()->whereType(2)->whereStatus(1)->first();
+        if($contract_earnest == null){
+            $request->is_earnest = 1;
+            $contract_earnest = Contract::create($request->all());
+            $contract_earnest->update(['status' => 1]);
+            ContractInfo::create([
+                'id_contract' => $contract_earnest->id,
+                'amount_earnest' => $request->amount_earnest,
+            ]);
+            ContractCustomer::create([
+                'id_customer' => $request->id_customer,
+                'id_contract' => $contract_earnest->id,
+            ]);
+            if($room->status != 2){
+                $room->status = 1;
+                $room->save();
+            }
+            return response()->json([
+                'status' => 200,
+                'message' => 'Thêm hợp đồng thành công',
+                'data' => '',
+                'model' => $room,
+            ]);
         }
-        return response()->json([
-            'status' => 200,
-            'message' => 'Thêm khách hàng thành công',
-            'data' => '',
-        ]);
     }
+        
 
     /**
      * Display the specified resource.

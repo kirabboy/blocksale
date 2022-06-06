@@ -13,7 +13,7 @@
                     <div class="p-2">
                         <div class="row">
                             <div class="col-6">
-                                <label for="confirm_date"><input id="confirm_date" type="checkbox" name="confirm" value="1"> Chốt chỉ số</label>
+                                <label for="confirm_date"><input id="confirm_date" type="checkbox" name="confirm" value="1" {{$contract_service->is_confirm ? 'checked' : ''}}> Chốt chỉ số</label>
                             </div>
                             <div class="col-6">
                             </div>

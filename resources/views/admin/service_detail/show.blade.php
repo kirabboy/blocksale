@@ -34,7 +34,8 @@
                 </thead>
                 <tbody>
                     @foreach ($current_contract->service_detail()->whereStatus(0)->get()
-    as $item)
+    as $item)   
+
                         <tr>
                             <td>
                                 <i class="btn-edit-service-detail fas fa-edit text-success"
@@ -63,10 +64,10 @@
                                 {{ date('d/m/Y', strtotime($item->created_at)) }}
                             </td>
                             <td>
-                                {{ formatStatusContractService($item->status) }}
+                                {{ formatStatusContractService($item->is_confirm) }}
                             </td>
                             <td>
-                                @if ($item->status == 1)
+                                @if ($item->is_confirm == 1)
                                     {{ date('d/m/Y', strtotime($item->confirm_date)) }}
                                 @endif
                             </td>

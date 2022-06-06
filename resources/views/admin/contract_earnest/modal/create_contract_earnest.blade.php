@@ -1,4 +1,4 @@
-<div class="modal model-render fade modal-primary" id="modal-form" tabindex="-1" role="dialog"
+<div class="modal model-render fade modal-primary" id="modalFormCreate" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -30,7 +30,8 @@
                                 <div class="form-group">
                                     <label for="">Ngày bắt đầu<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_start" class="form-control"
-                                        placeholder="Ngày bắt đầu" required>
+                                        placeholder="Ngày bắt đầu" required
+                                        pattern="(?:30))|(?:(?:0[13578]|1[02])-31))/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tiền cọc<sup class="text-danger">*</sup></label>
@@ -52,7 +53,8 @@
                                 <div class="form-group">
                                     <label for="">Ngày kết thúc<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_end" class="form-control"
-                                        placeholder="Ngày kết thúc" required>
+                                        placeholder="Ngày kết thúc" required
+                                        pattern="(?:30))|(?:(?:0[13578]|1[02])-31))/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -66,7 +68,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <button type="button" class="btn btn-cyan" onclick="createCustomer(this)"
-                                    data-route="{{ route('admin.customer.create') }}">
+                                    data-route="{{ route('admin.customer.create') }}" data-is_contract="1">
                                     <i class="fas fa-plus-circle"></i>
                                     Thêm mới
                                 </button>
@@ -121,7 +123,7 @@
     </div>
 </div>
 <div class="modal-area-customer">
-        
+
 </div>
 <script src="{{ asset('/public/admin/js/create_contract_earnest.js') }}"></script>
 <script src="{{ asset('/public/admin/js/customer.js') }}"></script>
@@ -130,7 +132,10 @@
     function createCustomer(e) {
         $.ajax({
                 url: $(e).data('route'),
-                type: 'GET'
+                type: 'GET',
+                data: {
+                    'is_contract': $(e).data('is_contract'),
+                },
             })
             .fail(function(data) {
                 toastr.error('Vui lòng tải lại trang', {

@@ -1,7 +1,9 @@
 $('#createCustomer').click(function() {
     $.ajax({
             url: $(this).data('route'),
-            type: 'GET'
+            type: 'GET',
+
+
         })
         .fail(function(data) {
             toastr.error('Vui lòng tải lại trang', {
@@ -33,7 +35,7 @@ $(document).on('click', '.customer-edit', function(e) {
         });
 });
 
-$(document).on('submit', '#mainFormCreate', function(e) {
+$(document).on('submit', '#mainFormCreateCutomer', function(e) {
     e.preventDefault();
 
     var form = $(this);
@@ -60,7 +62,14 @@ $(document).on('submit', '#mainFormCreate', function(e) {
             $('#modalFormCreate').modal('hide');
             // closeModalRender();
             $('#tableCustomer tbody').prepend(response.data);
-            $('select#customer').append('<option value="' + response.customer.id + '">' + response.customer.fullname + '</option>');
+            if (response.is_contract) {
+                $('select#customer').append('<option value="' + response.customer.id + '">' + response.customer.fullname + '</option>');
+                $('select#customer').val(response.customer.id).trigger('change');
+            }
+            if (response.is_contract_table) {
+                console.log(response);
+                $('#table-customer tbody').prepend(response.data);
+            }
         });
 });
 

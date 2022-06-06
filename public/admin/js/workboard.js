@@ -57,7 +57,7 @@ function createContract(e) {
         .done(function(response) {
             if (response['status']) {
                 $('.modal-area').append(response['message']);
-                $('#modalFormCreate').modal('show');
+                $('#modalFormCreateContract').modal('show');
             } else {
                 toastr.error(response['message'], {
                     timeOut: 5000
@@ -83,7 +83,7 @@ function createContractEarnest(e) {
             if (response) {
                 console.log(response);
                 $('.modal-area').append(response);
-                $('#modal-form').modal('show');
+                $('#modalFormCreate').modal('show');
             } else {
                 toastr.error('Hợp đồng đã tồn tại', {
                     timeOut: 5000
@@ -306,4 +306,7 @@ $(document).on('click', '.btn-edit-contract', function() {
             $('.modal-area').empty().append(response);
             $('#modal-form').modal('show');
         });
+});
+$("#modalFormCreate").on('hide.bs.modal', function() {
+    $('.modal-area').empty();
 });

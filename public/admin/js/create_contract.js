@@ -23,7 +23,7 @@ $(document).on('submit', '#form-create-contract', function(e) {
         })
         .done(function(response) {
             console.log(response);
-            $('#modalFormCreate').modal('hide');
+            $('#modalFormCreateContract').modal('hide');
             toastr.success(response['message'], {
                 timeOut: 5000
             })

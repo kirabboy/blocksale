@@ -8,17 +8,15 @@
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header" style="border-bottom: 1px solid #d3d3d3; padding-bottom: 15px;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-2">
-                        <p class="m-0" style="line-height: 40px; font-size: 14px;">
-                            <i class="nav-icon fas fa-paper-plane text-success"></i>
-                            Danh sách hợp đồng
-                        </p>
-                    </div>
-                    <div class="col-sm-10 text-right">
-                        {{-- <button class="btn btn-green btn-vien-trai">
+        <div class="page-header d-flex justify-content-between align-items-center">
+            <h3 class="page-title">
+                <p class="m-0" style="line-height: 40px; font-size: 14px;">
+                    <i class="nav-icon fas fa-paper-plane text-success"></i>
+                    Danh sách hợp đồng
+                </p>
+            </h3>
+            <div class="page-header-tool d-flex">
+                {{-- <button class="btn btn-green btn-vien-trai">
                             <i class="fa fa-search"></i> Tải lại</button>
                         <button class="btn btn-green btn-vien-trai btn-vien-phai">
                             <i class="fa fa-search"></i> Thêm mới</button>
@@ -35,9 +33,15 @@
                             <i class="fa fa-search"></i> Trạng thái</button>
                         <button class="btn btn-green btn-vien-phai" style="background:rgb(255, 94, 94) !important">
                             <i class="fa fa-trash"></i> Xóa</button> --}}
-                    </div>
-                </div>
+                <span class="mr-3 d-flex align-items-center font-weight-bold"><i
+                        class="fas fa-circle text-danger mr-2"></i>Chờ duyệt </span>
+                <span class="mr-3 d-flex align-items-center font-weight-bold"><i
+                        class="fas fa-circle text-success mr-2"></i>Hiệu lực</span>
+                <span class="mr-3 d-flex align-items-center font-weight-bold"><i
+                        class="fas fa-circle text-secondary mr-2"></i>Đã hủy</span>
+
             </div>
+        </div>
         </section>
 
         <section id="content-main">
@@ -71,16 +75,27 @@
                                                 <th class="text-12 text-uppercase" style="width: 10px">#</th>
                                                 <th class="text-12 text-uppercase" style="width: 10px">Mã</th>
                                                 <th class="text-12 text-uppercase" style="width: 80px">TÊN</th>
-                                                <th class="text-12 text-uppercase" style="width: 120px">Mã phòng thuê</th>
-                                                <th class="text-12 text-uppercase" style="width: 120px">Tên phòng thuê</th>
-                                                <th class="text-12 text-uppercase" style="width: 120px">Loại hợp đồng</th>
-                                                <th class="text-12 text-uppercase" style="width: 110px">Loại phòng thuê</th>
-                                                <th class="text-12 text-uppercase" style="width: 120px">Ngày bắt đầu</th>
-                                                <th class="text-12 text-uppercase" style="width: 80px">Ngày kết thúc</th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">Ngày tính phí</th>
+                                                <th class="text-12 text-uppercase" style="width: 120px">Mã phòng thuê
+                                                </th>
+                                                <th class="text-12 text-uppercase" style="width: 120px">Tên phòng thuê
+                                                </th>
+                                                <th class="text-12 text-uppercase" style="width: 120px">Loại hợp đồng
+                                                </th>
+                                                <th class="text-12 text-uppercase" style="width: 110px">Loại phòng thuê
+                                                </th>
+                                                <th class="text-12 text-uppercase" style="width: 120px">Ngày bắt đầu
+                                                </th>
+                                                <th class="text-12 text-uppercase" style="width: 80px">Ngày kết thúc
+                                                </th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Ngày tính phí
+                                                </th>
                                                 <th class="text-12 text-uppercase" style="width: 150px">Đặt cọc</th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">Phí thuê nhà</th>
-                                                <th class="text-12 text-uppercase" style="width: 150px">Người đại diện</th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Phí thuê nhà
+                                                </th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Người đại diện
+                                                </th>
+                                                <th class="text-12 text-uppercase" style="width: 150px">Số điện thoại
+                                                </th>
                                                 <th class="text-12 text-uppercase" style="width: 150px">Trạng thái</th>
                                             </tr>
                                         </thead>
@@ -99,9 +114,12 @@
                                                                 <span class="dropdown-item btn-edit-contract" role="button"
                                                                     data-url="{{ route('hop-dong.edit', $contract->id) }}">Sửa
                                                                     hợp đồng</span>
-                                                                <span class="dropdown-item btn-get-process-contract" 
-                                                                    data-url="{{ route('hop-dong.getProcess', $contract->id) }}">Kiểm duyệt hợp đồng</span>
-                                                                <a class="dropdown-item" href="{{ route('pdf.contract', $contract->id) }}" target="_blank">Xem hợp đồng</a>
+                                                                <span class="dropdown-item btn-get-process-contract"
+                                                                    data-url="{{ route('hop-dong.getProcess', $contract->id) }}">Kiểm
+                                                                    duyệt hợp đồng</span>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('pdf.contract', $contract->id) }}"
+                                                                    target="_blank">Xem hợp đồng</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -115,7 +133,8 @@
                                                     <td>{{ date('d/m/Y', strtotime($contract->time_start)) }}</td>
                                                     <td>{{ date('d/m/Y', strtotime($contract->time_end)) }}</td>
                                                     <td>{{ date('d/m/Y', strtotime($contract->time_charge)) }}</td>
-                                                    <td>{{ formatPrice($contract->contractinfo->amount_earnest) }}</td>
+                                                    <td>{{ formatPrice($contract->contractinfo->amount_earnest) }}
+                                                    </td>
                                                     <td>{{ formatPrice($contract->contractinfo->price_room) }}</td>
 
                                                     <td>
@@ -125,6 +144,14 @@
                                                             @endif
                                                         @endforeach
                                                     </td>
+                                                    <td>
+                                                        @foreach ($contract->customers()->get() as $item)
+                                                            @if ($item->pivot->is_representative == 1)
+                                                                {{ $item->phone }}
+                                                            @endif
+                                                        @endforeach
+                                                    </td>
+
                                                     <td>{{ getContractStatus($contract->status) }}</td>
 
                                                 </tr>

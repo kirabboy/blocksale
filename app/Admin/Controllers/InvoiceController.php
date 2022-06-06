@@ -34,7 +34,11 @@ class InvoiceController extends Controller
 
         $contract = $room->contract()->with('contractinfo')->first();
         $service_detail = $contract->service_detail()->whereStatus(0)->get();
-        if(count($service_detail )>0){
+        if($contract->contractinfo->type_water == 2 ){
+            if(count($service_detail ) > 1){
+                return response()->json(['status' =>true, 'message' => view('admin.invoice.modal.create_invoice', compact('room', 'contract','service_detail'))->render()]);
+            }
+        }elseif(count($service_detail ) > 0){
             return response()->json(['status' =>true, 'message' => view('admin.invoice.modal.create_invoice', compact('room', 'contract','service_detail'))->render()]);
         }else{
             return response()->json(['status' =>false, 'message' => 'Bạn cần cập nhập chỉ số điện nước tháng trước khi xuất hóa đơn']);

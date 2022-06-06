@@ -8,11 +8,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="mainFormCreate" action="{{ route('admin.customer.store') }}" method="post">
+            <form id="mainFormCreateCutomer" action="{{ route('admin.customer.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-6 form-group">
+                            <input type="hidden" name="is_contract" value="{{$is_contract}}">
+                            <input type="hidden" name="is_contract_table" value="{{$is_contract_table}}">
+
                             <label for="">Mã <sup class="text-danger">*</sup></label>
                             <input type="text" name="code" class="form-control" placeholder="Mã khách hàng" required>
                         </div>
@@ -29,11 +32,11 @@
                             <input type="number" name="phone" class="form-control" placeholder="Số điện thoại" required>
                         </div>
                         <div class="col-4 form-group">
-                            <label for="">Nghề nghiệp</label>
+                            <label for="">Nghề nghiệp <sup class="text-danger">*</sup></label>
                             <input type="text" name="job" class="form-control" placeholder="Nghề nghiệp" required>
                         </div>
                         <div class="col-4 form-group">
-                            <label for="">Giới tính</label>
+                            <label for="">Giới tính <sup class="text-danger">*</sup></label>
                             <select name="gender" class="form-control" required>
                                 @foreach($gender as $key => $value)
                                 <option value="{{ $key }}">{{ $value }}</option>
@@ -41,8 +44,8 @@
                             </select>
                         </div>
                         <div class="col-4 form-group">
-                            <label for="">Ngày sinh</label>
-                            <input type="date" name="birthday" class="form-control" placeholder="Ngày sinh">
+                            <label for="">Ngày sinh <sup class="text-danger">*</sup></label>
+                            <input type="date" name="birthday" class="form-control" placeholder="Ngày sinh" pattern="(?:30))|(?:(?:0[13578]|1[02])-31))/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])">
                         </div>
                     </div>
                     <div class="row">
@@ -52,7 +55,7 @@
                         </div>
                         <div class="col-4 form-group">
                             <label for="">Ngày cấp <sup class="text-danger">*</sup></label>
-                            <input type="date" name="identification_time" class="form-control" required>
+                            <input type="date" name="identification_time" class="form-control" required pattern="(?:30))|(?:(?:0[13578]|1[02])-31))/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])">
                         </div>
                         <div class="col-4 form-group">
                             <label for="">Nơi cấp <sup class="text-danger">*</sup></label>

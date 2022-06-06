@@ -107,7 +107,15 @@ return [
     */
 
     'faker_locale' => 'en_US',
-
+    [
+        /*
+         Date Format 
+        */
+            // ...
+            'date_format' => 'd/m/Y',
+    'date_format_js' => 'dd/mm/yy',
+            // ...
+        ],
     /*
     |--------------------------------------------------------------------------
     | Encryption Key

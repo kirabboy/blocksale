@@ -1,4 +1,4 @@
-<div class="modal model-render fade modal-primary" id="modalFormCreate" tabindex="-1" role="dialog"
+<div class="modal model-render fade modal-primary" id="modalFormCreateContract" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -41,12 +41,12 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Mã hợp đồng<sup class="text-danger">*</sup></label>
-                                    <input type="text" name="code" class="form-control" placeholder="Mã hợp đồng"
+                                    <input type="text" name="code" class="form-control" value="{{$contract_earnest != null ? $contract_earnest->code : ''}}" placeholder="Mã hợp đồng"
                                         required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tên hợp đồng<sup class="text-danger">*</sup></label>
-                                    <input type="text" name="name" class="form-control" placeholder="Tên hợp đồng"
+                                    <input type="text" name="name" class="form-control" value="{{$contract_earnest != null ? $contract_earnest->name : ''}}" placeholder="Tên hợp đồng"
                                         required>
                                 </div>
                                 <div class="form-group">
@@ -58,11 +58,11 @@
                                     <label for="">Đặt cọc</label>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-2 justify-content-center d-flex">
-                                            <input type="checkbox" class="input-group-text" name="is_earnest" value="1">
+                                            <input type="checkbox" class="input-group-text" name="is_earnest" value="1" {{$contract_earnest != null ? 'checked' : ''}}>
                                         </div>
                                         <div class="col-10">
                                             <input type="number" class="form-control" name="amount_earnest"
-                                                placeholder="Tiền đặt cọc" value="0">
+                                                placeholder="Tiền đặt cọc" value="{{$contract_earnest != null ? $contract_earnest->contractinfo->amount_earnest : ''}}">
                                         </div>
                                     </div>
                                 </div>
@@ -76,6 +76,15 @@
                     </div>
                     <div class="border border-1 p-2 mt-3">
                         <label class="font-weight-bold text-danger">2. Thông tin khách hàng</label>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-cyan" onclick="createCustomer(this)"
+                                    data-route="{{ route('admin.customer.create') }}" data-is_contract_table="1">
+                                    <i class="fas fa-plus-circle"></i>
+                                    Thêm mới
+                                </button>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -189,6 +198,9 @@
         </div>
     </div>
 </div>
+<div class="modal-area-customer">
+
+</div>
 <script>
     $('#table-customer').DataTable({
 
@@ -205,7 +217,7 @@
                 targets: 0,
                 type: "html",
                 render: function(data, id, row) {
-                    return `<input type="checkbox" onclick="selectCustomer(this)" name="customer_ids[]" value="${row.id}" />`
+                    return `<input type="checkbox" class="select-customer" name="customer_ids[]" value="${row.id}" />`
                 }
 
             },
@@ -253,14 +265,41 @@
         ],
     });
 
-    function selectCustomer(e) {
-        if ($(e).is(":checked")) {
-            $('#representative' + $(e).val()).removeAttr('disabled');
+    $(document).on('click', '.select-customer', function() {
+        if ($(this).is(":checked")) {
+            $('#representative' + $(this).val()).removeAttr('disabled');
         } else {
-            $('#representative' + $(e).val()).attr('disabled', true);
+            $('#representative' + $(this).val()).attr('disabled', true);
         }
         $('#representative' + $('#table-customer input[type="checkbox"]:checked').val()).trigger('click');
 
 
+    });
+    $(".date-picker").datepicker({
+        dateFormat: 'dd/mm/yy',
+        inputFormat: 'dd/mm/yy',
+        outputFormat: 'yy/mm/dd',
+});
+</script>
+<script src="{{ asset('/public/admin/js/customer.js') }}"></script>
+
+<script>
+    function createCustomer(e) {
+        $.ajax({
+                url: $(e).data('route'),
+                type: 'GET',
+                data: {
+                    'is_contract_table': $(e).data('is_contract_table'),
+                },
+            })
+            .fail(function(data) {
+                toastr.error('Vui lòng tải lại trang', {
+                    timeOut: 5000
+                })
+            })
+            .done(function(response) {
+                $('.modal-area-customer').empty().append(response);
+                $('#modalFormCreate').modal('show');
+            });
     }
 </script>

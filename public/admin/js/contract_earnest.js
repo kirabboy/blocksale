@@ -21,7 +21,13 @@ $(document).on('submit', '#mainFormCreateContractEarnest', function(e) {
             toastr.success(response.message, {
                 timeOut: 5000
             })
-            closeModalRender();
+            if (response.model.status == 1) {
+                $('#building-detail button.selected').removeClass('border-danger').addClass('border-warning');
+
+            }
+            $('#room-' + response.model.id).trigger('click');
+
+            $('#modalFormCreate').modal('hide');
         });
 });
 
@@ -48,6 +54,6 @@ $(document).on('submit', '#form-update-contract-earneast', function(e) {
             toastr.success(response.message, {
                 timeOut: 5000
             })
-            closeModalRender();
+            $('#modalFormCreate').modal('hide');
         });
 });

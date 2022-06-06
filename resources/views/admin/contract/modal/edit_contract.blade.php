@@ -30,12 +30,12 @@
                                 <div class="form-group">
                                     <label for="">Ngày bắt đầu<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_start" class="form-control"
-                                        placeholder="Ngày bắt đầu" value="{{date('Y-m-d',strtotime($contract->time_start))}}" required>
+                                        placeholder="Ngày bắt đầu" value="{{date('Y-m-d',strtotime($contract->time_start))}}" required >
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ngày tính phí<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_charge" class="form-control"
-                                        placeholder="Ngày tính phí" value="{{date('Y-m-d',strtotime($contract->time_charge))}}" required>
+                                        placeholder="Ngày tính phí" value="{{date('Y-m-d',strtotime($contract->time_charge))}}" required >
                                 </div>
                                 <div class="form-group">
                                     <label for="">Trạng thái<sup class="text-danger">*</sup></label>
@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label for="">Ngày kết thúc<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_end" class="form-control"
-                                        placeholder="Ngày kết thúc"  value="{{date('Y-m-d',strtotime($contract->time_end))}}"required>
+                                        placeholder="Ngày kết thúc"  value="{{date('Y-m-d',strtotime($contract->time_end))}}"required >
                                 </div>
                                 <div class="form-group">
                                     <label for="">Đặt cọc</label>
@@ -156,9 +156,9 @@
                                                 <td><input type="number" class="form-control" name="number_water" value="{{$contract->contractinfo->number_water}}"></td>
                                                 <td><input type="number" class="form-control" name="price_water" value="{{$contract->contractinfo->price_water}}"
                                                         placeholder="Đơn giá"></td>
-                                                <td><select name="type_water" class="form-control" id="">
-                                                        <option value="1" @if($contract->contractinfo->type_water == 1) selected @endif>tháng</option>
-                                                        <option value="2" @if($contract->contractinfo->type_water == 2) selected @endif>m3</option>
+                                                <td><select name="type_water" class="form-control" id="" >
+                                                    @if($contract->contractinfo->type_water == 1) <option value="1" selected >tháng</option>@endif
+                                                    @if($contract->contractinfo->type_water == 2) <option value="2" selected >m3</option>@endif
                                                     </select></td>
                                                 <td><input type="text" class="form-control" name="note_water value="{{$contract->contractinfo->note_water}} placeholder="Ghi chú">
                                                 </td>

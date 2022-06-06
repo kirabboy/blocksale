@@ -29,7 +29,7 @@
                                 <div class="form-group">
                                     <label for="">Ngày bắt đầu<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_start" class="form-control"
-                                        placeholder="Ngày bắt đầu" value="{{date('Y-m-d',strtotime($contract_earnest->time_start))}}" required>
+                                        placeholder="Ngày bắt đầu" value="{{date('Y-m-d',strtotime($contract_earnest->time_start))}}" required pattern="(?:30))|(?:(?:0[13578]|1[02])-31))/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tiền cọc<sup class="text-danger">*</sup></label>
@@ -51,7 +51,14 @@
                                 <div class="form-group">
                                     <label for="">Ngày kết thúc<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_end" class="form-control"
-                                        placeholder="Ngày kết thúc" value="{{date('Y-m-d',strtotime($contract_earnest->time_end))}}" required>
+                                        placeholder="Ngày kết thúc" value="{{date('Y-m-d',strtotime($contract_earnest->time_end))}}" required pattern="(?:30))|(?:(?:0[13578]|1[02])-31))/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Trạng thái<sup class="text-danger">*</sup></label>
+                                    <select name="status" class="form-control" id="">
+                                        <option value="1" {{$contract_earnest->status == 1 ? 'selected' : '' }}>Hoạt động</option>
+                                        <option value="2" {{$contract_earnest->status == 2 ? 'selected' : '' }}>Ngừng</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-12">

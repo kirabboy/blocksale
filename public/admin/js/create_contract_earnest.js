@@ -10,17 +10,16 @@ $('#customer').change(function() {
             console.log(data);
         })
         .done(function(response) {
-            console.log(response);
             $('#id_number').val(response['identification_number']);
-            $('#id_date').val(yyyymmddToLocalDate(response['identification_date']));
             $('#id_place').val(response['identification_place']);
             $('#email').val(response['email']);
             $('#phone').val(response['phone']);
+            console.log(yyyymmddToLocalDate(response['identification_time']));
         });
 });
 
 function yyyymmddToLocalDate(isoString) {
-    const [year, month, day] = isoString.split('/');
+    const [year, month, day] = isoString.split('-');
     return new Date(year, month - 1, day);
 }
 $('#customer').select2({

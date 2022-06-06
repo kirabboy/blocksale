@@ -54,12 +54,16 @@ class ContractController extends Controller
     {
         //
         $room = Room::whereId($request->room_id)->first();
-        if($room->contract()->whereType(1)->whereStatus(1)->first()){
+        if($room->contract()->whereType(1)->whereStatus(0)->first()){
+            return response()->json(['status' => false, 'message'=> 'Phòng đã có hợp đồng đang chờ duyệt']);
+
+        }elseif($room->contract()->whereType(1)->whereStatus(1)->first()){
             return response()->json(['status' => false, 'message'=> 'Phòng đã có hợp đồng đang còn hiệu lực']);
         }elseif($room->status == 3){
             return response()->json(['status' => false, 'message'=> 'Phòng đã ngưng sử dụng']);
         }
-        return response()->json(['status' => true, 'message'=> view('admin.contract.modal.create_contract', compact('room'))->render()]);
+        $contract_earnest = $room->contract()->with('contractinfo')->whereType(2)->whereStatus(1)->first();
+        return response()->json(['status' => true, 'message'=> view('admin.contract.modal.create_contract', compact('room', 'contract_earnest'))->render()]);
     }
 
     /**
