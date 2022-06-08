@@ -147,7 +147,7 @@
                     <td>{{ number_format($invoice->contract->contractinfo->price_water) }}</td>
                     <td>tháng</td>
                     <td>
-                        {{ number_format($contract->contractinfo->number_water * $contract->contractinfo->price_water) }}
+                        {{ number_format($invoice->contract->contractinfo->number_water * $invoice->contract->contractinfo->price_water) }}
                     </td>
                 </tr>
                 @endif

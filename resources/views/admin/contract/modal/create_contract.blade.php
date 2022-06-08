@@ -70,6 +70,7 @@
                             </div>
                             <div class="col-12">
                                 <label for="">Mô tả hợp đồng</label>
+
                                 <textarea name="note" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
@@ -207,6 +208,7 @@
         // order: [
         //     [1, 'asc']
         // ],
+        order: [0,'desc'],
         responsive: true,
         lengthMenu: [
             [25, 50, -1],
@@ -217,7 +219,12 @@
                 targets: 0,
                 type: "html",
                 render: function(data, id, row) {
-                    return `<input type="checkbox" class="select-customer" name="customer_ids[]" value="${row.id}" />`
+                    if("{{$contract_earnest->customers()->first()->value('id')}}" == row.id){
+                        return `<input type="checkbox" class="select-customer" name="customer_ids[]" checked value="${row.id}" /><p style="visibility: hidden;display:none">0</p>`
+                    }else{
+                        return `<input type="checkbox" class="select-customer" name="customer_ids[]" value="${row.id}" />`
+
+                    }
                 }
 
             },
@@ -249,7 +256,13 @@
                 targets: 4,
                 type: "html",
                 render: function(data, id, row) {
-                    return `<input type="radio" id="representative${row.id}" name="is_representative" disabled value="${row.id}">`
+                    if("{{$contract_earnest->customers()->first()->value('id')}}" == row.id){
+                        return `<input type="radio" id="representative${row.id}" name="is_representative" checked value="${row.id}">`
+
+                    }else{
+                        return `<input type="radio" id="representative${row.id}" name="is_representative" disabled value="${row.id}">`
+
+                    }
                 }
 
             },
@@ -281,7 +294,6 @@
         outputFormat: 'yy/mm/dd',
 });
 </script>
-<script src="{{ asset('/public/admin/js/customer.js') }}"></script>
 
 <script>
     function createCustomer(e) {
@@ -299,7 +311,7 @@
             })
             .done(function(response) {
                 $('.modal-area-customer').empty().append(response);
-                $('#modalFormCreate').modal('show');
+                $('#modalFormCreateCustomer').modal('show');
             });
     }
 </script>

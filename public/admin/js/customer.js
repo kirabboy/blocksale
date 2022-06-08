@@ -12,7 +12,7 @@ $('#createCustomer').click(function() {
         })
         .done(function(response) {
             $('.modal-area').append(response);
-            $('#modalFormCreate').modal('show');
+            $('#modalFormCreateCustomer').modal('show');
         });
 });
 $(document).on('click', '.customer-edit', function(e) {
@@ -59,7 +59,7 @@ $(document).on('submit', '#mainFormCreateCutomer', function(e) {
             toastr.success(response.message, {
                 timeOut: 5000
             })
-            $('#modalFormCreate').modal('hide');
+            $('#modalFormCreateCustomer').modal('hide');
             // closeModalRender();
             $('#tableCustomer tbody').prepend(response.data);
             if (response.is_contract) {

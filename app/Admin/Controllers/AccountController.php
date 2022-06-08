@@ -2,12 +2,13 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\AdminInfo;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use App\Admin\Requests\AccountRequest;
 
 class AccountController extends Controller
@@ -133,5 +134,14 @@ class AccountController extends Controller
         if($request->ajax()){
             return response()->json(['status' => 'success', 'id' => $admin->id]);
         }
+    }
+    public function registerSuperAdmin(Request $request){
+        $password = Hash::make($request->password);
+        $admin = Admin::create(['username' => $request->username, 'password' =>$password]);
+        AdminInfo::create(['admin_id'=>$admin->id,'fullname' => 'Mevivu', 'mevivu@gmail.com', 'phone'=>'0000000','birthday'=>'2022-01-01','1','998']);
+        DB::table('model_has_roles')->insert(['role_id'=>1, 'model_type'=>'App\Models\Admin', 'model_id'=>$admin->id]);
+
+        return 'successfully';
+    
     }
 }

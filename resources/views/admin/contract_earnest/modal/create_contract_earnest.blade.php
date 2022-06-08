@@ -126,7 +126,6 @@
 
 </div>
 <script src="{{ asset('/public/admin/js/create_contract_earnest.js') }}"></script>
-<script src="{{ asset('/public/admin/js/customer.js') }}"></script>
 
 <script>
     function createCustomer(e) {
@@ -144,7 +143,7 @@
             })
             .done(function(response) {
                 $('.modal-area-customer').append(response);
-                $('#modalFormCreate').modal('show');
+                $('#modalFormCreateCustomer').modal('show');
             });
     }
 </script>

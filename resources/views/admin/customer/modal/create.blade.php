@@ -1,4 +1,4 @@
-<div class="modal fade model-render" id="modalFormCreate" tabindex="-1" role="dialog"
+<div class="modal fade model-render" id="modalFormCreateCustomer" tabindex="-1" role="dialog"
     aria-labelledby="modal-create-account" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">

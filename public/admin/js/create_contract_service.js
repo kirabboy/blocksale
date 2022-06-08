@@ -34,6 +34,7 @@ $(document).on('submit', '#form-create-contract-service', function(e) {
                     timeOut: 5000
                 });
             }
+            $('.modal-area').empty();
         });
 });
 $(document).on('submit', '#form-edit-contract-service', function(e) {
@@ -72,5 +73,6 @@ $(document).on('submit', '#form-edit-contract-service', function(e) {
                     timeOut: 5000
                 });
             }
+            $('.modal-area').empty();
         });
 });

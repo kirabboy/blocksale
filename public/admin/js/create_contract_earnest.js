@@ -14,14 +14,17 @@ $('#customer').change(function() {
             $('#id_place').val(response['identification_place']);
             $('#email').val(response['email']);
             $('#phone').val(response['phone']);
+            $('#id_date').val(yyyymmddToLocalDate(response['identification_time']));
+
             console.log(yyyymmddToLocalDate(response['identification_time']));
         });
 });
 
 function yyyymmddToLocalDate(isoString) {
     const [year, month, day] = isoString.split('-');
-    return new Date(year, month - 1, day);
+    return year + '-' + month + '-' + day;
 }
+
 $('#customer').select2({
     dropdownParent: $("#result-select2"),
     width: '100%',

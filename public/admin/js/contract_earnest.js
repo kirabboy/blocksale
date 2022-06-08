@@ -28,6 +28,7 @@ $(document).on('submit', '#mainFormCreateContractEarnest', function(e) {
             $('#room-' + response.model.id).trigger('click');
 
             $('#modalFormCreate').modal('hide');
+            $('.modal-area').empty();
         });
 });
 
@@ -55,5 +56,6 @@ $(document).on('submit', '#form-update-contract-earneast', function(e) {
                 timeOut: 5000
             })
             $('#modalFormCreate').modal('hide');
+            $('.modal-area').empty();
         });
 });

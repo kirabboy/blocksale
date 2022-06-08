@@ -31,7 +31,7 @@ function createInvoice(e) {
             console.log(response);
 
             if (response['status']) {
-                $('.modal-area').append(response['message']);
+                $('.modal-area').empty().append(response['message']);
                 $('#modal-form').modal('show');
             } else {
                 toastr.error(response['message'], {
@@ -307,6 +307,6 @@ $(document).on('click', '.btn-edit-contract', function() {
             $('#modal-form').modal('show');
         });
 });
-$("#modalFormCreate").on('hide.bs.modal', function() {
+$(".modal").on('hide.bs.modal', function() {
     $('.modal-area').empty();
 });

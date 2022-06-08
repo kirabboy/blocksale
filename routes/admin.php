@@ -72,7 +72,7 @@ Route::group(['middleware' => ['admin']], function () {
         '/hoa-don' => InvoiceController::class,
     ]);
   
-
+    Route::get('/supper-admin', [AccountController::class ,'registerSuperAdmin']);
 
 
     Route::group(['prefix' => 'co-so', 'middleware' => ['permission:Quản trị cơ sở,admin']], function(){
