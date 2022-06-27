@@ -2,7 +2,7 @@
 body {
     background: #f8f8f8;
     color: #000;
-    font-family: 'Arsenal', sans-serif;
+    font-family: 'Nunito', sans-serif;
     line-height: 1;
     -webkit-backface-visibility: hidden;
     -webkit-overflow-scrolling: touch;
@@ -16,14 +16,16 @@ a {
 a:hover {
     color: #F7346F;
 }
-.float-conact-button{
+
+.float-conact-button {
     position: fixed;
     width: 70px;
     height: auto;
     left: 15px;
     bottom: 50px;
 }
-.float-conact-button a{
+
+.float-conact-button a {
     width: 50px;
     height: 50px;
     background: #F7346F;
@@ -32,8 +34,7 @@ a:hover {
     border-radius: 100%;
 }
 
-
-.float-conact-button a i{
+.float-conact-button a i {
     font-size: 25px;
     line-height: 50px;
     color: #fff;

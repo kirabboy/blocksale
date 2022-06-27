@@ -182,6 +182,13 @@
     </div>
 @endsection
 @push('script')
+<script>
+    $(document).on('hide.bs.modal', '.modal', function() {
+
+        location.reload();
+
+});
+</script>
     <script src="{{ asset('public/admin/js/contract.js') }}"></script>
     <script src="{{ asset('public/admin/js/create_contract.js') }}"></script>
     <script src="{{ asset('public/admin/js/workboard.js') }}"></script>

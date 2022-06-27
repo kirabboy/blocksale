@@ -17,8 +17,8 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Tên phòng thuê <sup class="text-danger">*</sup></label>
-                                    <input type="text" name="" class="form-control" value="{{ $room->name }}"
-                                        placeholder="Tên phòng thuê" readonly>
+                                    <input type="text" name="" class="form-control"
+                                        value="{{ $room->name }}" placeholder="Tên phòng thuê" readonly>
                                     <input type="hidden" name="id_room" value="{{ $room->id }}" readonly>
                                 </div>
                                 <div class="form-group">
@@ -30,39 +30,43 @@
                                 <div class="form-group">
                                     <label for="">Ngày bắt đầu<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_start" class="form-control"
-                                        placeholder="Ngày bắt đầu" required>
+                                        placeholder="Ngày bắt đầu" value="{{date('Y-m-d')}}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ngày tính phí<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_charge" class="form-control"
-                                        placeholder="Ngày tính phí" required>
+                                        placeholder="Ngày tính phí" value="{{date('Y-m-d')}}" required>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="">Mã hợp đồng<sup class="text-danger">*</sup></label>
-                                    <input type="text" name="code" class="form-control" value="{{$contract_earnest != null ? $contract_earnest->code : ''}}" placeholder="Mã hợp đồng"
-                                        required>
+                                    <input type="text" name="code" class="form-control"
+                                        value="{{ $contract_earnest != null ? $contract_earnest->code : '' }}"
+                                        placeholder="Mã hợp đồng" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tên hợp đồng<sup class="text-danger">*</sup></label>
-                                    <input type="text" name="name" class="form-control" value="{{$contract_earnest != null ? $contract_earnest->name : ''}}" placeholder="Tên hợp đồng"
-                                        required>
+                                    <input type="text" name="name" class="form-control"
+                                        value="{{ $contract_earnest != null ? $contract_earnest->name : '' }}"
+                                        placeholder="Tên hợp đồng" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ngày kết thúc<sup class="text-danger">*</sup></label>
                                     <input type="date" name="time_end" class="form-control"
-                                        placeholder="Ngày kết thúc" required>
+                                        placeholder="Ngày kết thúc" value="{{date('Y-m-d')}}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Đặt cọc</label>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-2 justify-content-center d-flex">
-                                            <input type="checkbox" class="input-group-text" name="is_earnest" value="1" {{$contract_earnest != null ? 'checked' : ''}}>
+                                            <input type="checkbox" class="input-group-text" name="is_earnest"
+                                                value="1" {{ $contract_earnest != null ? 'checked' : '' }}>
                                         </div>
                                         <div class="col-10">
                                             <input type="number" class="form-control" name="amount_earnest"
-                                                placeholder="Tiền đặt cọc" value="{{$contract_earnest != null ? $contract_earnest->contractinfo->amount_earnest : ''}}">
+                                                placeholder="Tiền đặt cọc"
+                                                value="{{ $contract_earnest != null ? $contract_earnest->contractinfo->amount_earnest : '' }}">
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +169,8 @@
                                                     @else
                                                         m3
                                                     @endif
-                                                    <input type="hidden" name="type_water" value="{{$room->building()->value('type_water')}}">
+                                                    <input type="hidden" name="type_water"
+                                                        value="{{ $room->building()->value('type_water') }}">
 
                                                 </td>
                                                 <td><input type="text" class="form-control" name="note_water"
@@ -208,7 +213,7 @@
         // order: [
         //     [1, 'asc']
         // ],
-        order: [0,'desc'],
+        order: [0, 'desc'],
         responsive: true,
         lengthMenu: [
             [25, 50, -1],
@@ -219,12 +224,18 @@
                 targets: 0,
                 type: "html",
                 render: function(data, id, row) {
-                    if("{{$contract_earnest->customers()->first()->value('id')}}" == row.id){
-                        return `<input type="checkbox" class="select-customer" name="customer_ids[]" checked value="${row.id}" /><p style="visibility: hidden;display:none">0</p>`
-                    }else{
-                        return `<input type="checkbox" class="select-customer" name="customer_ids[]" value="${row.id}" />`
+                    @if ($contract_earnest != null)
 
-                    }
+                        if ("{{ $contract_earnest->customers()->first()->value('id') }}" == row.id) {
+                            return `<input type="checkbox" class="select-customer" name="customer_ids[]" checked value="${row.id}" /><p style="visibility: hidden;display:none">0</p>`
+
+                        } else {
+                            return `<input type="checkbox" class="select-customer" name="customer_ids[]" value="${row.id}" />`
+
+                        }
+                    @else
+                        return `<input type="checkbox" class="select-customer" name="customer_ids[]" value="${row.id}" />`
+                    @endif
                 }
 
             },
@@ -256,13 +267,17 @@
                 targets: 4,
                 type: "html",
                 render: function(data, id, row) {
-                    if("{{$contract_earnest->customers()->first()->value('id')}}" == row.id){
-                        return `<input type="radio" id="representative${row.id}" name="is_representative" checked value="${row.id}">`
+                    @if ($contract_earnest != null)
+                        if ("{{ $contract_earnest->customers()->first()->value('id') }}" == row.id) {
+                            return `<input type="radio" id="representative${row.id}" name="is_representative" checked value="${row.id}">`
 
-                    }else{
+                        } else {
+                            return `<input type="radio" id="representative${row.id}" name="is_representative" disabled value="${row.id}">`
+
+                        }
+                    @else
                         return `<input type="radio" id="representative${row.id}" name="is_representative" disabled value="${row.id}">`
-
-                    }
+                    @endif
                 }
 
             },
@@ -292,7 +307,7 @@
         dateFormat: 'dd/mm/yy',
         inputFormat: 'dd/mm/yy',
         outputFormat: 'yy/mm/dd',
-});
+    });
 </script>
 
 <script>

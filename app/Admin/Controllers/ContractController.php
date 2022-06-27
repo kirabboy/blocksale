@@ -63,6 +63,7 @@ class ContractController extends Controller
             return response()->json(['status' => false, 'message'=> 'Phòng đã ngưng sử dụng']);
         }
         $contract_earnest = $room->contract()->with('contractinfo')->whereType(2)->whereStatus(1)->first();
+       
         return response()->json(['status' => true, 'message'=> view('admin.contract.modal.create_contract', compact('room', 'contract_earnest'))->render()]);
     }
 
@@ -108,13 +109,21 @@ class ContractController extends Controller
         }
         // $room->status = 2;
         // $room->save();
+        $status = 0;
+        if(auth()->guard('admin')->user()->roles()->where('name',config('custom.role-admin'))->first()){
+            $room->status = 2;
+            $room->save();
+            $commissionController = new CommissionController();
+            $result = $commissionController->add($contract->id);
+            $status = 2;
+        }
         $contracts = $room->contract();
         $current_contract = $contract;
         $html_contract = view('admin.contract.include.show_quickly', compact('current_contract'))->render();
         $html_room =  view('admin.room.show', compact('room','current_contract'))->render();
         $html_room_contract_history = view('admin.room.include.room_contract_history', compact('contracts'))->render();
         $html_service_detail = view('admin.service_detail.show', ['current_contract' => $contract])->render();
-        return response()->json(['message' => 'Thêm hợp đồng thành công','html_room' => $html_room, 'html_service_detail'=>$html_service_detail, 'html_contract' => $html_contract, 'html_contract_history' => $html_room_contract_history]);
+        return response()->json(['message' => 'Thêm hợp đồng thành công','status'=>$status,'html_room' => $html_room, 'html_service_detail'=>$html_service_detail, 'html_contract' => $html_contract, 'html_contract_history' => $html_room_contract_history]);
     }
 
     /**
